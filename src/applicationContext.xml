@@ -189,7 +189,12 @@
 	<bean id="userAct" class="com.travel.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
-	
+	<bean id="portalService" class="com.travel.service.PortalService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="portalAct" class="com.travel.action.PortalAction" scope="prototype">
+		<property name="portalService" ref="portalService"></property>
+	</bean>
 	
 	
 </beans>

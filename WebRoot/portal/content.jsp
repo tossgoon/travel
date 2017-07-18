@@ -23,15 +23,13 @@
 <style type="text/css">
 body{
  font-family:"Microsoft Yahei";
- background-color:rgb(226,252,231);
 }
 .headlogo {
 	text-align: center;
 	width: 100%;
-	height: 361px;
+	height: 191px;
 	min-width: 1100px;
-	background-image: url(<%=contextPath%>/includes/image/bann.jpg);
-	margin:0 auto;
+	background-image: url(<%=contextPath%>/includes/image/logobk.png);
 }
 .navbarhead {
     text-align: center;
@@ -39,7 +37,6 @@ body{
 	min-width: 1100px;
 	background-color: rgb(2, 189, 115);
 	width:100%;
-	margin:0 auto;
 }
 .navbarhead li {
 	list-style-image: none;
@@ -57,28 +54,26 @@ body{
 	padding-top: 18px;
 	display: block; /* 作为一个块 */
 	padding-right: 15px; /* 设置块的属性 */
-	padding-bottom: 16px;
+	padding-bottom: 18px;
 	padding-left: 15px;
 }
 .navbarhead li a:hover {
 	background-color: rgb(1,135,82);
-	text-decoration:none;
+	text-decoration:underline;
 	color: #FFFFFF;
-
 }
 
 </style>
 </head>
 <body>
-
 	<div class="headlogo" id="logoindex">
-		<div style="width:900px;margin:0 auto;">
-			<img alt="" style="margin-top:100px;"
-				src="<%=contextPath%>/includes/image/logotitle.png">
+		<div style="width:1100px;margin:0 auto;">
+			<img alt="" style="margin-top:30px;"
+				src="<%=contextPath%>/includes/image/logofk.png">
 		</div>
 	</div>
 	<div class="navbarhead">
-		<ul style="margin:0 auto;width:1100px;">
+		<ul style="margin-left:auto;margin-right:auto;width:1100px;">
 			<li><a href="http://www.baidu.com">首页</a></li>
 			<li><a href="http://www.Code52.Net">保护区介绍</a></li>
 			<li><a href="http://www.yahoo.com">工作动态</a></li>

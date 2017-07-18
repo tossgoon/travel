@@ -229,9 +229,47 @@
  			<result name="success">/travel/user/userlist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
-		
-		
-		
 	</package>
+
+    <package name="portalpack" extends="struts-default,json-default"
+		namespace="/portal">
+		<global-results>
+			<result name="error">/user/error.jsp</result>
+			<result name="success">/user/success.jsp</result>
+		</global-results>
+
+		<action name="update" class="portalAct" method="update">
+			<result name="success" type="json"></result>
+			<result name="dcxxinfo">
+				/jkgis/dcxx/dcxxinfo.jsp
+			</result>
+		</action>
+
+		<action name="delete" class="userAct" method="delete">
+			<!-- <result name="success" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${user.username}+" 已删除.√"</param>
+				<param name="type">1</param>
+			</result> -->
+			<!-- <result name="error" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${user.username}" 删除出错.×"</param>
+				<param name="type">0</param>
+			</result> -->
+			<result name="success" type="json">
+			</result>
+			<result name="error" type="json">
+			</result>
+		</action>
+		<action name="add" class="portalAct" method="add">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="query" class="portalAct" method="query">
+ 			<result name="success">/travel/portal/portallist.jsp</result>
+			<!-- <result name="success" type="json"></result> -->
+		</action>
+	</package>
+
 
 </struts>    
