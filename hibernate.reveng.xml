@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="TB_KC_GC" schema="dbo" catalog="jkgis"></table>
+	<table name="tb_kc_gc2" schema="dbo" catalog="jkgis"></table>
+	<table name="TB_GC_Attachment" schema="dbo" catalog="jkgis"
+		class="GCAttach">
+	</table>
+	<table name="TB_KC_ZK" schema="dbo" catalog="jkgis" class="kczk"></table>
+	<table name="TB_KC_TC" schema="dbo" catalog="jkgis" class="Kctc"></table>
+	<table name="TB_KC_DCXX" schema="dbo" catalog="jkgis" class="Kcdcxx"></table>
+</hibernate-reverse-engineering>

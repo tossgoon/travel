@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="    
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- 数据库配置 -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver">
+		</property>
+		<property name="url"
+			value="jdbc:sqlserver://localhost:1433;DatabaseName=jkgis">
+		</property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="sa"></property>
+		<property name="dialect" value=" org.hibernate.dialect.SQLServer2008Dialect"></property>
+	</bean>
+	session工厂
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect
+					org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect
+				</prop>
+				下面这句话的意思是，根据java程序中配置的实体model，自动更新数据库的表结构
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		实体与数据库映射文件，在classpath:/com/jktech/pojo文件夹下
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/com/jktech/pojo</value>
+			</list>
+		</property>
+	</bean>
+ -->
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/travel">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="gis"></property>
+	</bean>
+	<!-- session工厂 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+<!-- 				下面这句话的意思是，根据java程序中配置的实体model，自动更新数据库的表结构 -->				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 实体与数据库映射文件，在classpath:/com/jktech/pojo文件夹下 -->
+		
+		<property name="mappingResources">
+			<list>
+				<value>com/travel/pojo/User.hbm.xml</value>
+			</list>
+		</property>
+		
+		<!-- <property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/com/travel/pojo</value>
+			</list>
+		</property> -->
+	</bean>
+
+ 
+ 
+	<!-- *****************事务配置信息 begin **************** -->
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务通知属性 -->
+	<tx:advice id="gisAdvice" transaction-manager="transactionManager">
+		<!-- 定义事务传播属性 -->
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="new*" propagation="REQUIRED" />
+			<tx:method name="set*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="change*" propagation="REQUIRED" />
+			<tx:method name="upload*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 面向切面方式，定义哪些类的哪些方法参与事务 -->
+	<aop:config>
+		<aop:pointcut id="gisServices"
+			expression="execution(*	com.travel.service.*.*(..))" />
+		<aop:advisor advice-ref="gisAdvice" pointcut-ref="gisServices" />
+	</aop:config>
+	<!-- *****************事务配置信息 over**************** -->
+
+	<!-- *****************配置bean begin**************** -->
+	<!-- <bean id="dao" class="com.jktech.dao.BaseDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="kcgcService" class="com.jktech.service.KcgcService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="kcgcAct" class="com.jktech.action.KcgcAction" scope="prototype">
+		<property name="kcgcService" ref="kcgcService"></property>
+	</bean>
+
+	<bean id="gccommentService" class="com.jktech.service.GcCommService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="gccommentAct" class="com.jktech.action.GcCommAction"
+		scope="prototype">
+		<property name="gcCommService" ref="gccommentService"></property>
+	</bean>
+
+	<bean id="gcattService" class="com.jktech.service.GcAttachService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="gcattAct" class="com.jktech.action.GcAttachAction"
+		scope="prototype">
+		<property name="gcAttachService" ref="gcattService"></property>
+	</bean>
+
+	<bean id="fileIOService" class="com.jktech.service.FileIOService">
+		<property name="gcAttachService" ref="gcattService"></property>
+		<property name="kcgcService" ref="kcgcService"></property>
+	</bean>
+	<bean id="attfileDownLoad" class="com.jktech.action.DownLoadAction"
+		scope="prototype">
+		<property name="fileIOService" ref="fileIOService"></property>
+	</bean>
+	
+	<bean id="attfileUpLoad" class="com.jktech.action.UpLoadAction"
+		scope="prototype">
+		<property name="fileIOService" ref="fileIOService"></property>
+	</bean>
+	<bean id="kczkService" class="com.jktech.service.KczkService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="kczkAct" class="com.jktech.action.KczkAction" scope="prototype">
+		<property name="kczkService" ref="kczkService"></property>
+	</bean>
+	
+	<bean id="kctcService" class="com.jktech.service.KctcService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="kctcAct" class="com.jktech.action.KctcAction" scope="prototype">
+		<property name="kctcService" ref="kctcService"></property>
+	</bean>
+	<bean id="kcdcxxService" class="com.jktech.service.KcdcxxService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="kcdcxxAct" class="com.jktech.action.KcdcxxAction" scope="prototype">
+		<property name="kcdcxxService" ref="kcdcxxService"></property>
+	</bean> -->
+	<bean id="dao" class="com.travel.dao.BaseDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userService" class="com.travel.service.UserService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="userAct" class="com.travel.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	
+	
+</beans>

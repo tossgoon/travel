@@ -1,0 +1,18 @@
+.git/
+.settings/
+.classpath
+.myhibernatedata
+.project
+*.class
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Log file
+*.log

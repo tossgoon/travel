@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+ "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.objectFactory" value="spring" /><!-- 
+
+	<package name="jkgisio" extends="struts-default,json-default">
+		<action name="download" class="attfileDownLoad">
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">fileInput</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			</result>
+			<result name="error">/jkgis/downloaderror.jsp</result>
+		</action>
+		<action name="upload" class="attfileUpLoad">
+			<result name="success" type="json"></result>
+		</action>
+	</package>
+	<package name="kcpack" extends="struts-default,json-default"
+		namespace="/kc">
+		<global-results>
+			<result name="error">/jkgis/error.jsp</result>
+			<result name="success">/jkgis/success.jsp</result>
+		</global-results>
+		<action name="query" class="kcgcAct" method="query">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="delete" class="kcgcAct" method="delete">
+			<result name="success" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${kcgc.name}+" 已删除.√"</param>
+				<param name="type">1</param>
+			</result>
+			<result name="error" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${kcgc.name}" 删除出错.×"</param>
+				<param name="type">0</param>
+			</result>
+		</action>
+		<action name="update" class="kcgcAct" method="update">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result name="invalid.token">/jkgis/kc/gcinfo.jsp</result>
+			<result name="success" type="redirect">/kc/update.action?param=0&amp;id=${kcgc.id}
+			</result>
+			<result name="success" type="json"></result>
+			<result name="gcinfo">
+				/jkgis/kc/gcinfo.jsp
+			</result>
+		</action>
+		<action name="updateCoordGCJ02" class="kcgcAct" method="updateCoordGCJ02">
+		</action>
+		<action name="add" class="kcgcAct" method="add">
+			<result name="addKcgc">/jkgis/kc/add.jsp</result>
+		</action>
+	</package>
+	<package name="gccommentpack" extends="struts-default,json-default"
+		namespace="/gccomment">
+		<global-results>
+			<result name="error">/jkgis/error.jsp</result>
+			<result name="success">/jkgis/kc/gcinfo.jsp</result>
+		</global-results>
+		<action name="query" class="gccommentAct" method="query">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="delete" class="gccommentAct" method="delete" />
+		<action name="update" class="gccommentAct" method="update">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="add" class="gccommentAct" method="add">
+			<result name="success" type="json"></result>
+		</action>
+	</package>
+	<package name="gcattpack" extends="struts-default,json-default"
+		namespace="/gcatt">
+		<global-results>
+			<result name="error">/jkgis/error.jsp</result>
+			<result name="success">/jkgis/kc/gcinfo.jsp</result>
+		</global-results>
+		<action name="query" class="gcattAct" method="query">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="delete" class="gcattAct" method="delete">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="update" class="gcattAct" method="update">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="add" class="gcattAct" method="add">
+			<result name="success">/jkgis/kc/add.jsp</result>
+		</action>
+	</package>
+	<package name="zkpack" extends="struts-default,json-default"
+		namespace="/zk">
+		<interceptors>
+			<interceptor name="preExcept"
+				class="com.jktech.interceptor.ExceptInterceptor">
+			</interceptor>
+		</interceptors>
+		<global-results>
+			<result name="error">/jkgis/error.jsp</result>
+			<result name="success">/jkgis/success.jsp</result>
+		</global-results>
+		<action name="query" class="kczkAct" method="query">
+			<result name="success">/jkgis/zk/zkinfo.jsp</result>
+			<result name="error">/jkgis/error.jsp</result>
+		</action>
+		<action name="delete" class="kczkAct" method="delete">
+			<result name="success" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${kczk.bianhao}
+					" 已删除.√"</param>
+				<param name="type">1</param>
+			</result>
+			<result name="error" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${kczk.bianhao} " 删除出错.×"</param>
+				<param name="type">0</param>
+			</result>
+		</action>
+		<action name="update" class="kczkAct" method="update">
+			<result name="success" type="json"></result>
+			<result name="zkinfo"> /jkgis/zk/zkinfo.jsp
+			</result>
+			<result name="input">/jkgis/zk/zkinfo.jsp</result>
+			<interceptor-ref name="preExcept"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="add" class="kczkAct" method="add">
+			<result name="addKczk">/jkgis/zk/add.jsp</result>
+		</action>
+	</package>
+	<package name="tcpack" extends="struts-default,json-default"
+		namespace="/tc">
+		<global-results>
+			<result name="error">/jkgis/error.jsp</result>
+			<result name="success">/jkgis/success.jsp</result>
+		</global-results>
+		<action name="query" class="kctcAct" method="query">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="delete" class="kctcAct" method="delete">
+			<result name="success" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${kctc.bianhao} " 已删除.√"</param>
+				<param name="type">1</param>
+			</result>
+			<result name="error" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${kctc.bianhao} " 删除出错.×"</param>
+				<param name="type">0</param>
+			</result>
+		</action>
+		<action name="update" class="kctcAct" method="update">
+			<result name="success" type="json"></result>
+			<result name="tcinfo"> /jkgis/tc/tcinfo.jsp
+			</result>
+		</action>
+		<action name="add" class="kctcAct" method="add">
+			<result name="addKctc">/jkgis/tc/add.jsp</result>
+		</action>
+	</package>
+	<package name="dcxxpack" extends="struts-default,json-default"
+		namespace="/dcxx">
+		<global-results>
+			<result name="error">/jkgis/error.jsp</result>
+			<result name="success">/jkgis/success.jsp</result>
+		</global-results>
+		<action name="update" class="kcdcxxAct" method="update">
+			<result name="success" type="json"></result>
+			<result name="dcxxinfo"> /jkgis/dcxx/dcxxinfo.jsp
+			</result>
+		</action>
+		<action name="add" class="kctcAct" method="add">
+			<result name="addKctc">/jkgis/tc/add.jsp</result>
+		</action>
+	</package>  -->
+
+	<package name="userpack" extends="struts-default,json-default"
+		namespace="/user">
+		<global-results>
+			<result name="error">/user/error.jsp</result>
+			<result name="success">/user/success.jsp</result>
+		</global-results>
+
+		<action name="update" class="userAct" method="update">
+			<result name="success" type="json"></result>
+			<result name="dcxxinfo">
+				/jkgis/dcxx/dcxxinfo.jsp
+			</result>
+		</action>
+
+		<action name="delete" class="userAct" method="delete">
+			<!-- <result name="success" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${user.username}+" 已删除.√"</param>
+				<param name="type">1</param>
+			</result> -->
+			<!-- <result name="error" type="redirect">
+				<param name="location">/jkgis/tipinfo.jsp</param>
+				<param name="info">${user.username}" 删除出错.×"</param>
+				<param name="type">0</param>
+			</result> -->
+			<result name="success" type="json">
+			</result>
+			<result name="error" type="json">
+			</result>
+		</action>
+
+		<!-- <action name="update" class="userAct" method="update">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+			<result name="invalid.token">/jkgis/kc/gcinfo.jsp</result>
+			<result name="success" type="redirect">/user/update.action?param=0&amp;id=${user.id}
+			</result>
+			<result name="success" type="json"></result>
+			<result name="userinfo" type="json">
+			</result>
+		</action> -->
+		<action name="add" class="userAct" method="add">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="query" class="userAct" method="query">
+ 			<result name="success">/travel/user/userlist.jsp</result>
+			<!-- <result name="success" type="json"></result> -->
+		</action>
+		
+		
+		
+	</package>
+
+</struts>    
