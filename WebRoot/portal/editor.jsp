@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
@@ -13,34 +14,96 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
-
+<link rel="stylesheet"
+	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="<%=contextPath%>includes/css/portal_head_modal.css">
+<style type="text/css">
+#portolinfo span {
+	float: right;
+}
+</style>
 </head>
 <body>
-
-<%@ include file="headmodal.jsp"%>
-
-	<div class="container">
-
+	<%@ include file="headmodal.jsp"%>
+	<div class="container" style="width:100%;">
 		<div class="row">
+			<div class="col-md-12" style="text-align:center;">
+				<label style="font-size:20px;font-weight:normal;margin-top:30px;">网站编辑：新增内容</label>
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
+					<div class="panel-heading">新增内容</div>
+					<div class="panel-body">
+						<s:form action="update?param=1" namespace="/kc" method="post"
+							role="form" theme="simple" id="formGcinfo">
+							<table id="portolinfo"
+								style="width:700px;margin:0 auto;border-collapse:separate; border-spacing:0px 10px;">
+								<tbody>
+									<tr>
+										<td><span style="float:right;">选择类型</span></td>
+										<td><s:select class="form-control" style="width:200px;"
+												list="{'','工作动态','政策法规','政务公开','科普知识','志愿者之家'}" label="选择类型"
+												name="kcgc.changdileibie"></s:select></td>
+									</tr>
 
-			<div class="col-md-9"></div>
-
+									<tr>
+										<td><span>主标题</span></td>
+										<td><s:textfield class="form-control" name="kcgc.danwei"></s:textfield></td>
+									</tr>
+									<tr>
+										<td><span>副标题</span></td>
+										<td><s:textfield class="form-control"
+												name="kcgc.jianshedanwei"></s:textfield></td>
+									</tr>
+									<tr>
+										<td><span>子标题</span></td>
+										<td><s:textfield class="form-control"
+												name="kcgc.shejidanwei"></s:textfield></td>
+									</tr>
+								</tbody>
+							</table>
+						</s:form>
+						<script id="editor" type="text/plain"
+							style="width:900px;height:600px;margin:0 auto;"></script>
+					</div>
+				</div>
+				<div style="margin:0 auto;margin-top:20px;width:1024px;">
+					<div style="float:right;">
+						<button type="button" class="btn btn-primary"
+							onclick="EditGCinfo(true)">保存数据</button>
+						<button type="button" style="margin-left:10px;margin-right:10px;"
+							class="btn btn-success" onclick="SaveGcInfo()">发布数据</button>
+						<button type="button" class="btn btn-warning" onclick="DeleteGC()">删除数据</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.config.js">  </script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.all.min.js">	</script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/lang/zh-cn/zh-cn.js">	</script>
 	
-	<script type="text/javascript">
+		<%@ include file="footmodal.jsp"%>
 
-    //实例化编辑器
-    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-    var ue = UE.getEditor('editor');
+	<script type="text/javascript" charset="utf-8"
+		src="<%=contextPath%>includes/js/ueditor/ueditor.config.js">
+		
 	</script>
-	
+	<script type="text/javascript" charset="utf-8"
+		src="<%=contextPath%>includes/js/ueditor/ueditor.all.min.js">
+		
+	</script>
+	<script type="text/javascript" charset="utf-8"
+		src="<%=contextPath%>includes/js/ueditor/lang/zh-cn/zh-cn.js">
+		
+	</script>
+
+	<script type="text/javascript">
+		//实例化编辑器
+		//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+		var ue = UE.getEditor('editor');
+	</script>
+
 </body>
 </html>
