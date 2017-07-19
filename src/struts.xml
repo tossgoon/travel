@@ -269,7 +269,9 @@
  			<result name="success">/travel/portal/portallist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
+		<action name="save" class="portalAct" method="save">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
 	</package>
-
-
 </struts>    

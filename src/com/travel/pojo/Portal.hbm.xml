@@ -34,5 +34,8 @@
         <property name="pictureurl" type="java.lang.String">
             <column name="pictureurl" length="500" />
         </property>
+        <property name="status" type="java.lang.String">
+            <column name="status" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

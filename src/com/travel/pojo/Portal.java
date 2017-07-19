@@ -19,8 +19,17 @@ public class Portal implements java.io.Serializable {
 	private String type;
 	private String foottitle;
 	private String pictureurl;
+	private String status;
 
 	// Constructors
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	/** default constructor */
 	public Portal() {
