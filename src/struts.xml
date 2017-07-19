@@ -266,7 +266,8 @@
 			<result name="success" type="json"></result>
 		</action>
 		<action name="query" class="portalAct" method="query">
- 			<result name="success">/travel/portal/portallist.jsp</result>
+		    <result name="portalinfo">/portal/portalshow.jsp</result>
+ 			<result name="success">/portal/portallist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
 		<action name="save" class="portalAct" method="save">

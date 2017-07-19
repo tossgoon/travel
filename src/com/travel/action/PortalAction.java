@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 
+import com.jktech.pojo.Kcgc;
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.pojo.Portal;
 import com.travel.service.PortalService;
@@ -120,10 +121,16 @@ public class PortalAction extends ActionSupport {
 	}
 
 	public String query() {
-		searchText = getParam("queryText");
-		portals = portalService.queryPortalByName(searchText, Portal.class);
-		// setUsers(userService.queryUserByName(searchText, User.class));
-		return SUCCESS;
+		if (getParam("id") != null) {
+			Integer id = Integer.parseInt(getParam("id"));
+			portal = portalService.getPortal(Portal.class, id);
+			return "portalinfo";
+		} else {
+			searchText = getParam("queryText");
+			portals = portalService.queryPortalByName(searchText, Portal.class);
+			// setUsers(userService.queryUserByName(searchText, User.class));
+			return SUCCESS;
+		}
 	}
 
 	public String getErrorMsg() {

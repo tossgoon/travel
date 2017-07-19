@@ -35,58 +35,10 @@
 		<hr />
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">新增内容</div>
-					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formPortalInfo">
-							<table id="portolinfo"
-								style="width:700px;margin:0 auto;border-collapse:separate; border-spacing:0px 10px;">
-								<tbody>
-									<tr>
-										<td><span>ID</span></td>
-										<td><input class="form-control" id="portalid" name="portal.id" readonly="readonly"></td>
-									</tr>
-									<tr>
-										<td><span>选择类型</span></td>
-										<td><s:select class="form-control" style="width:200px;" id="portaltype"
-												list="{'工作动态','政策法规','政务公开','科普知识','志愿者之家'}" label="选择类型"
-												name="portal.type"></s:select></td>
-									</tr>
-
-									<tr>
-										<td><span>主标题</span></td>
-										<td><s:textfield class="form-control" id="portaltitle" name="portal.title"></s:textfield></td>
-									</tr>
-									<tr>
-										<td><span>副标题</span></td>
-										<td><s:textfield class="form-control" id="portalsubtitle"
-												name="portal.subtitle"></s:textfield></td>
-									</tr>
-									<tr>
-										<td><span>子标题</span></td>
-										<td><s:textfield class="form-control" id="portalfoottitle"
-												name="portal.foottitle"></s:textfield></td>
-									</tr>
-								</tbody>
-							</table>
-						</s:form>
-						<script id="editor" type="text/plain"
-							style="width:900px;height:600px;margin:0 auto;"></script>
-					</div>
-				</div>
-				<div style="margin:0 auto;margin-top:20px;width:1024px;">
-					<div style="float:right;">
-						<button type="button" class="btn btn-primary"
-							onclick="SavePortal()">保存数据</button>
-						<button type="button" style="margin-left:10px;margin-right:10px;"
-							class="btn btn-success" onclick="PublishPortal()">发布数据</button>
-						<button type="button" class="btn btn-warning" onclick="DeletePortal()">删除数据</button>
-					</div>
-				</div>
+			   ${portal.content}
 			</div>
 		</div>
 	</div>
-	
 	
 		<%@ include file="footmodal.jsp"%>
 <script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>

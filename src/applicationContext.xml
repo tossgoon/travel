@@ -69,17 +69,17 @@
 		</property>
 		<!-- 实体与数据库映射文件，在classpath:/com/jktech/pojo文件夹下 -->
 		
-		<property name="mappingResources">
+	<!-- 	<property name="mappingResources">
 			<list>
 				<value>com/travel/pojo/User.hbm.xml</value>
 			</list>
-		</property>
+		</property> -->
 		
-		<!-- <property name="mappingDirectoryLocations">
+		 <property name="mappingDirectoryLocations">
 			<list>
 				<value>classpath:/com/travel/pojo</value>
 			</list>
-		</property> -->
+		</property> 
 	</bean>
 
  
