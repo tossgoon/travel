@@ -140,4 +140,11 @@ public class PortalAction extends ActionSupport {
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
+	
+	public String uploadFile()
+	{
+		
+		return SUCCESS;
+	}
+	
 }
