@@ -275,4 +275,11 @@
 			<result name="success" type="json"></result>
 		</action>
 	</package>
+	
+	<package name="fileio" extends="struts-default,json-default" namespace="/fileio">
+		<action name="upload" class="fileUpLoad">
+			<result name="success" type="json"></result>
+		</action>
+	</package>
+	
 </struts>    

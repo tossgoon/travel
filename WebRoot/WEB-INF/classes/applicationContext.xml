@@ -196,5 +196,13 @@
 		<property name="portalService" ref="portalService"></property>
 	</bean>
 	
+	<bean id="fileIOService" class="com.travel.service.FileIOService">
+	</bean>
+	
+	<bean id="fileUpLoad" class="com.travel.action.UpLoadAction"
+		scope="prototype">
+		<property name="fileIOService" ref="fileIOService"></property>
+	</bean>
+	
 	
 </beans>

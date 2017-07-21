@@ -78,7 +78,6 @@ public class GcAttachAction extends ActionSupport {
 				gcAttachService.updateGcAttach(gcAttach);
 				//
 				//HttpServletResponse response=ServletActionContext.getResponse();
-				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
