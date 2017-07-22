@@ -24,6 +24,13 @@ public class PortalAction extends ActionSupport {
 	private List<Portal> portals;
 	private String errorMsg;
 
+	
+	private List<Portal> portalWorkPics;//工作动态
+	private List<Portal> portalWorkList;//工作动态首页
+	private List<Portal> portalLawList;//政策法规
+	private List<Portal> portalAffairsList;//政务公开
+	private List<Portal> portalScienceList;//科普知识
+	
 	public PortalAction() {
 
 	}
@@ -59,6 +66,46 @@ public class PortalAction extends ActionSupport {
 
 	public void setPortals(List<Portal> portals) {
 		this.portals = portals;
+	}
+	
+	public List<Portal> getPortalWorkPics() {
+		return portalWorkPics;
+	}
+
+	public void setPortalWorkPics(List<Portal> portalWorkPics) {
+		this.portalWorkPics = portalWorkPics;
+	}
+
+	public List<Portal> getPortalWorkList() {
+		return portalWorkList;
+	}
+
+	public void setPortalWorkList(List<Portal> portalWorkList) {
+		this.portalWorkList = portalWorkList;
+	}
+
+	public List<Portal> getPortalLawList() {
+		return portalLawList;
+	}
+
+	public void setPortalLawList(List<Portal> portalLawList) {
+		this.portalLawList = portalLawList;
+	}
+
+	public List<Portal> getPortalAffairsList() {
+		return portalAffairsList;
+	}
+
+	public void setPortalAffairsList(List<Portal> portalAffairsList) {
+		this.portalAffairsList = portalAffairsList;
+	}
+
+	public List<Portal> getPortalScienceList() {
+		return portalScienceList;
+	}
+
+	public void setPortalScienceList(List<Portal> portalScienceList) {
+		this.portalScienceList = portalScienceList;
 	}
 
 	@JSON(serialize = false)
@@ -141,10 +188,15 @@ public class PortalAction extends ActionSupport {
 		this.errorMsg = errorMsg;
 	}
 	
-	public String uploadFile()
+	public String showfirst()
 	{
+		this.portalWorkPics=portalService.queryPortalOfPicturl(3);
 		
+		/*this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
+		this.portalScienceList=portalService.queryPortalByType("科普知识", 5);
+		this.portalScienceList=portalService.queryPortalByType("政策法规", 5);
+		this.portalAffairsList=portalService.queryPortalByType("政务公开", 5);*/
 		return SUCCESS;
+		//this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
 	}
-	
 }

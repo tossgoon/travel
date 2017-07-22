@@ -13,15 +13,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>网站</title>
 <link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" />
 
-
 <style type="text/css">
-#portolinfo span {
+#portolinfo tr td:first-child span {
 	float: right;
 }
 
@@ -30,7 +30,7 @@
 	width: 300px;
 	margin-left: 30px;
 	padding-left: 10px;
-	height: 220px;
+	height: 270px;
 	border-left: 1px solid #A9A9A9;
 	margin-top: 10px;
 	margin-bottom: 20px;
@@ -57,7 +57,7 @@
 										<tbody>
 											<tr>
 												<td><span>ID</span></td>
-												<td><input class="form-control" id="portalid" name="portal.id" readonly="readonly"></td>
+												<td><s:textfield class="form-control" id="portalid" name="portal.id"  readonly="true"></s:textfield></td>
 											</tr>
 											<tr>
 												<td><span>选择类型</span></td>
@@ -78,42 +78,33 @@
 												<td><span>子标题</span></td>
 												<td><s:textfield class="form-control" id="portalfoottitle" name="portal.foottitle"></s:textfield></td>
 											</tr>
-											
+											<tr>
+												<td><span>发布日期</span></td>
+												<td>
+												 <div class="input-group date form_date" data-date-format="yyyy-mm-dd hh:ii:ss" >
+												    <s:textfield class="form-control" id="pubdate">
+												    
+												     <s:param name="value" ><s:date name="portal.pubdate" format="yyyy-MM-dd HH:mm:ss" /></s:param> 
+												    
+												    </s:textfield>
+												       <span class="input-group-addon"> 
+												           <span class="glyphicon glyphicon-calendar"></span>
+												       </span>
+											       </div>
+											  </td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
 								<div  id="uploader">
-									<div style="margin-bottom:5px;"><label><input type="checkbox">首页图片:	</label>
+									<div style="margin-bottom:5px;"><label><input type="checkbox" id="isshowpicture" name="portal.isshowpicture">首页图片:	</label><label id="uploadmsg" style="margin-left:20px;"></label>
 									<s:textfield style="width:100%;" class="form-control input-sm" id="portalpictureurl" readonly="true" name="portal.pictureurl"></s:textfield>
 									</div>
 									<div id="filePicker" style="float:left;">选择...</div>
 									<a onclick="ResetUploader()" href="javascript:void(0);" style="float:left;margin:7px;">删除选择</a>
 									<button id="ctlBtn" type="button" class="btn btn-success" style="float:right;height:32px;">开始上传</button>
 									<div id="thelist" class="uploader-list" style="clear:both;"></div>
-									
 								</div>
-
-
-							<%-- <div id="uploader" class="wu-example">
-		<div class="queueList">
-			<div id="dndArea" class="placeholder">
-				<div id="filePicker"></div>
-				<p>或将照片拖到这里，单次最多可选300张</p>
-			</div>
-		</div>
-		<div class="statusBar" style="display:none;">
-			<div class="progress">
-				<span class="text">0%</span> <span class="percentage"></span>
-			</div>
-			<div class="info"></div>
-			<div class="btns">
-				<div id="filePicker2"></div>
-				<div class="uploadBtn">开始上传</div>
-			</div>
-		</div>
-	</div> --%>
-
-
 						</s:form>
 						<script id="editor" type="text/plain"
 							style="width:900px;height:600px;margin:0 auto;clear:both;"></script>
@@ -122,9 +113,9 @@
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
 						<button type="button" class="btn btn-primary"
-							onclick="SavePortal()">保存数据</button>
+							onclick="SavePortal('0')">保存数据</button>
 						<button type="button" style="margin-left:10px;margin-right:10px;"
-							class="btn btn-success" onclick="PublishPortal()">发布数据</button>
+							class="btn btn-success" onclick="SavePortal('1')">发布数据</button>
 						<button type="button" class="btn btn-warning" onclick="DeletePortal()">删除数据</button>
 					</div>
 				</div>
@@ -132,14 +123,10 @@
 		</div>
 	</div>
 
-
-
-	
-
-
 	<%@ include file="footmodal.jsp"%>
-    <script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -152,8 +139,9 @@
 		//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 		var ue = UE.getEditor('editor');
 		//保存数据
-		function SavePortal()
+		function SavePortal(status)
 		{
+			var isshowpic=$("#isshowpicture")[0].checked;
 			$.ajax({
 				type : "post",
 				url : "/travel/portal/save.action",
@@ -164,6 +152,10 @@
 					  "portal.title":$("#portaltitle").val(),
 					  "portal.subtitle":$("#portalsubtitle").val(),
 					  "portal.foottitle":$("#portalfoottitle").val(),
+					  "portal.isshowpicture":isshowpic,
+					  "portal.status":status,
+					  "portal.pubdate":$("#pubdate").val(),
+					  "portal.pictureurl":$("#portalpictureurl").val(),
 					  "portal.content":ue.getContent()
 					},
 					//$("#formPortalInfo").serialize(),
@@ -188,15 +180,12 @@
 			var options=$("#portaltype option:selected");
 			var portaltype=options.val();
 			if(portaltype=="工作动态"){
-				$("#trpicurl").show();
+				$("#uploader").show();
 			}
 			else{
-				$("#trpicurl").hide();
+				$("#uploader").hide();
 			}
 		}
-		
-		
-
 		var uploader;
 		$(function(){  
 			   /*init webuploader*/  
@@ -265,8 +254,19 @@
 			       $percent.css( 'width', percentage * 100 + '%' );  
 			   });  
 			   // 文件上传成功，给item添加成功class, 用样式标记上传成功。  
-			   uploader.on( 'uploadSuccess', function( file ) {  
-			       $( '#'+file.id ).addClass('upload-state-done');  
+			   uploader.on( 'uploadSuccess', function( file,response ) {  
+			       $( '#'+file.id ).addClass('upload-state-done'); 
+			       if(response.newFileName=="-1")
+			    	   {
+			    	     $("#uploadmsg").html("(× 上传失败，请重试)");
+			    	     $("#uploadmsg").css("font-color","#FF3030");
+			    	   }
+			       else
+			    	   {
+			    	     $("#uploadmsg").html("(√ 上传成功)");
+			    	     $("#uploadmsg").css("color","#008B00");
+			    	     $("#portalpictureurl").val(response.newFileName); 
+			    	   }
 			   });  
 			  
 			   // 文件上传失败，显示上传出错。  
@@ -282,12 +282,16 @@
 			   // 完成上传完了，成功或者失败，先删除进度条。  
 			   uploader.on( 'uploadComplete', function( file ) {  
 			       $( '#'+file.id ).find('.progress').remove();  
+			       ResetUploader();//恢复
 			   });  
 			   $btn.on( 'click', function() {  
 			        console.log("上传...");  
 			        uploader.upload();  
 			        console.log("上传成功");  
-			      });  
+			      });
+			   //根据参数判断
+			   $('.form_date').datetimepicker("setValue");
+			   
 			  }); 
 
 		/*关闭上传框窗口后恢复上传框初始状态*/
@@ -311,6 +315,27 @@
 			    // 更新状态等，重新计算文件总个数和总大小
 			    //updateStatus();
 			}
+		
+			//初始化日期控件
+			$('.form_date').datetimepicker({
+				language : 'zh-CN',
+				weekStart : 1,
+				todayBtn : 1,
+				autoclose : 1,
+				todayHighlight : 1,
+				startView : 0,
+				minView : 0,
+				forceParse : 0
+			});
+			function GetQueryString(name)
+			{
+			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if(r!=null)return  unescape(r[2]); return null;
+			}
+			
+			
+			//$('.form_date').datetimepicker("setValue");
 	</script>
 </body>
 </html>

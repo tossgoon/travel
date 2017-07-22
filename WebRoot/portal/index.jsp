@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,7 +14,6 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-
 <title>欢迎访问本站!</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -91,37 +92,39 @@ body{
 		</ul>
 	</div>
 
-	<div class="container" style="width:100%;">
+	<div class="container" style="width:100%;margin-top:5px;">
 		<div class="row">
-			<div class="col-md-offset-1 col-md-10 col-md-offset-1 ">
-				<div id="myCarousel" class="carousel slide" style="width:900px;margin:0 auto;">
+			<div class="col-md-8">
+				<div id="myCarousel" class="carousel slide"
+					style="width:600px;margin:0 auto;">
 					<!-- 轮播（Carousel）指标 -->
 					<ol class="carousel-indicators">
 						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 						<li data-target="#myCarousel" data-slide-to="1"></li>
 						<li data-target="#myCarousel" data-slide-to="2"></li>
+						<li data-target="#myCarousel" data-slide-to="3"></li>
+						<li data-target="#myCarousel" data-slide-to="4"></li>
 					</ol>
 					<!-- 轮播（Carousel）项目 -->
 					<div class="carousel-inner">
-						<div class="item active">
-							<img src="<%=contextPath%>/includes/image/slide1.png"
-								alt="First slide">
-						</div>
+						<c:forEach var="portal" items="${portalWorkPics}">
+							<div class="item">
+								<img src="${portal.pictureurl}"	alt="${portal.title}">
+							</div>
+						</c:forEach>
 						<div class="item">
-							<img src="<%=contextPath%>/includes/image/slide1.png"
-								alt="Second slide">
-						</div>
-						<div class="item">
-							<img src="<%=contextPath%>/includes/image/slide1.png"
-								alt="Third slide">
-						</div>
+								<img src="<%=contextPath%>/includes/image/bann.jpg"	alt="110">
+							</div>
 					</div>
+					
+					
 					<!-- 轮播（Carousel）导航 -->
-					<a class="carousel-control left"  href="#myCarousel"	data-slide="prev">&lsaquo;</a> 
-					<a class="carousel-control right" href="#myCarousel"   data-slide="next">&rsaquo;</a>
+					<a class="carousel-control left" href="#myCarousel"
+						data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
+						href="#myCarousel" data-slide="next">&rsaquo;</a>
 				</div>
-
 			</div>
+			<div class="col-md-4"><img src="<%=contextPath%>/includes/image/bann.jpg"	alt="110"></div>
 		</div>
 	</div>
 

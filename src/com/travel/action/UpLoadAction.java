@@ -100,7 +100,6 @@ public class UpLoadAction extends ActionSupport {
 	public String execute() throws Exception {
 		/*String tbtype = ServletActionContext.getRequest()
 				.getParameter("tbtype");*/
-		
 		String newName = fileIOService.uploadFile(fileFileName, file);
 		setNewFileName(newName);
 		return SUCCESS;

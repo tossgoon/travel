@@ -21,7 +21,7 @@
         </property>
         <property name="pubdate" type="java.sql.Timestamp">
             <column name="pubdate" length="19" />
-        </property>
+        </property> 
         <property name="user" type="java.lang.String">
             <column name="user" length="45" />
         </property>
@@ -36,6 +36,9 @@
         </property>
         <property name="status" type="java.lang.String">
             <column name="status" length="45" />
+        </property>
+        <property name="isshowpicture" type="java.lang.Boolean">
+            <column name="isshowpicture" length="1" />
         </property>
     </class>
 </hibernate-mapping>

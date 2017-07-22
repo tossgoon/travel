@@ -1,6 +1,8 @@
 package com.travel.pojo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Portal entity. @author MyEclipse Persistence Tools
@@ -20,6 +22,7 @@ public class Portal implements java.io.Serializable {
 	private String foottitle;
 	private String pictureurl;
 	private String status;
+	private boolean isshowpicture;
 
 	// Constructors
 
@@ -38,7 +41,7 @@ public class Portal implements java.io.Serializable {
 	/** full constructor */
 	public Portal(String title, String subtitle, String content,
 			Timestamp pubdate, String user, String type, String foottitle,
-			String pictureurl) {
+			String pictureurl,String status,boolean isshowpicture) {
 		this.title = title;
 		this.subtitle = subtitle;
 		this.content = content;
@@ -47,6 +50,8 @@ public class Portal implements java.io.Serializable {
 		this.type = type;
 		this.foottitle = foottitle;
 		this.pictureurl = pictureurl;
+		this.status=status;
+		this.isshowpicture=isshowpicture;
 	}
 
 	// Property accessors
@@ -88,7 +93,12 @@ public class Portal implements java.io.Serializable {
 	}
 
 	public void setPubdate(Timestamp pubdate) {
-		this.pubdate = pubdate;
+		/*Date date=new Date();//»ñµÃ
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String nowTime=sdf.format(date);
+		Timestamp dates=Timestamp.valueOf(nowTime);
+		this.pubdate = dates;*/
+		this.pubdate=pubdate;
 	}
 
 	public String getUser() {
@@ -121,6 +131,14 @@ public class Portal implements java.io.Serializable {
 
 	public void setPictureurl(String pictureurl) {
 		this.pictureurl = pictureurl;
+	}
+
+	public boolean getIsshowpicture() {
+		return isshowpicture;
+	}
+
+	public void setIsshowpicture(boolean isshowpicture) {
+		this.isshowpicture = isshowpicture;
 	}
 
 }

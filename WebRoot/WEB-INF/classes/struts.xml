@@ -245,7 +245,7 @@
 			</result>
 		</action>
 
-		<action name="delete" class="userAct" method="delete">
+		<action name="delete" class="portalAct" method="delete">
 			<!-- <result name="success" type="redirect">
 				<param name="location">/jkgis/tipinfo.jsp</param>
 				<param name="info">${user.username}+" 已删除.√"</param>
@@ -266,14 +266,19 @@
 			<result name="success" type="json"></result>
 		</action>
 		<action name="query" class="portalAct" method="query">
-		    <result name="portalinfo">/portal/portalshow.jsp</result>
+		    <result name="portalinfo">/portal/editor.jsp</result>
  			<result name="success">/portal/portallist.jsp</result>
+			<!-- <result name="success" type="json"></result> -->
+		</action>
+		<action name="showfirst" class="portalAct" method="showfirst">
+ 			<result name="success">/portal/index.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
 		<action name="save" class="portalAct" method="save">
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
+		
 	</package>
 	
 	<package name="fileio" extends="struts-default,json-default" namespace="/fileio">
