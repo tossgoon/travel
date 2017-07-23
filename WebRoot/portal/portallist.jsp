@@ -37,7 +37,7 @@
 				<td style="vertical-align: middle;">查询：
 				   <input type="text"	style="width: 300px;height: 30px;font-size: 16px" name="queryText"	value="${searchText}" />
 				   <input type="submit" value="查询"	style="width: 100px;height: 30px;font-size: 16px" />
-				   <input type="button" value="新增"  style="width: 100px;height: 30px;font-size: 16px"	onclick="window.location.href='/portal/editor.jsp'" />
+				   <input type="button" value="新增"  style="width: 100px;height: 30px;font-size: 16px"	onclick="window.location.href='/travel/portal/editor.jsp'" />
 				</td>
 			</tr>
 		</table>
@@ -58,7 +58,34 @@
 			<tr align="center" height="24px">
 				<td>${portal.id}</td>
 				<td>${portal.title}</td>
-				<td>${portal.type}</td>
+				<td>
+				     <c:choose>
+						<c:when test="${portal.type=='0'}">
+							保护区介绍
+						</c:when>
+						<c:when test="${portal.type=='1'}">
+							工作动态
+						</c:when>
+						<c:when test="${portal.type=='2'}">
+							政策法规
+						</c:when>
+						<c:when test="${portal.type=='3'}">
+							政务公开
+						</c:when>
+						<c:when test="${portal.type=='4'}">
+							志愿者之家
+						</c:when>
+						<c:when test="${portal.type=='5'}">
+							科普知识
+						</c:when>
+						<c:when test="${portal.type=='6'}">
+							联系我们
+						</c:when>
+						<c:otherwise>
+							其他
+						</c:otherwise>
+					</c:choose> 
+				</td>
 				<td>${portal.pubdate }</td>
 				<td width="120"><a
 					href="javascript:void(0)" onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp; <a

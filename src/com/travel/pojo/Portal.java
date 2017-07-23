@@ -23,6 +23,7 @@ public class Portal implements java.io.Serializable {
 	private String pictureurl;
 	private String status;
 	private boolean isshowpicture;
+	private String pubdatestr;
 
 	// Constructors
 
@@ -141,4 +142,13 @@ public class Portal implements java.io.Serializable {
 		this.isshowpicture = isshowpicture;
 	}
 
+	public String getPubdatestr() {
+		
+		if(pubdate!=null)
+		{
+			SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd " );
+			pubdatestr = sdf.format(pubdate);
+		}
+		return pubdatestr;
+	}
 }

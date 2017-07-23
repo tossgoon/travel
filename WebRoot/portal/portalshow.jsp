@@ -57,40 +57,7 @@
 	</script>
 
 	<script type="text/javascript">
-		//实例化编辑器
-		//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-		var ue = UE.getEditor('editor');
-		//保存数据
-		function SavePortal()
-		{
-			$.ajax({
-				type : "post",
-				url : "/travel/portal/save.action",
-				data : 
-					{
-					  "portal.id":$("#portalid").val(),
-					  "portal.type":$("#portaltype").val(),
-					  "portal.title":$("#portaltitle").val(),
-					  "portal.subtitle":$("#portalsubtitle").val(),
-					  "portal.foottitle":$("#portalfoottitle").val(),
-					  "portal.content":ue.getContent()
-					},
-					//$("#formPortalInfo").serialize(),
-				cache : false,
-				dataType : "json",
-				success : function(data) {
-					if (data.errorMsg == "0") {
-						//新增用户
-						alert("保存成功");
-					} else {
-						alert(data.errorMsg);
-					}
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
-				}
-			});
-		}
+		
 	</script>
 
 </body>

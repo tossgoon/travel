@@ -23,13 +23,14 @@ public class PortalAction extends ActionSupport {
 	private String searchText;
 	private List<Portal> portals;
 	private String errorMsg;
-
-	
-	private List<Portal> portalWorkPics;//工作动态
-	private List<Portal> portalWorkList;//工作动态首页
-	private List<Portal> portalLawList;//政策法规
-	private List<Portal> portalAffairsList;//政务公开
-	private List<Portal> portalScienceList;//科普知识
+	private List<Portal> portalIntroList;//保护区介绍 0
+	private List<Portal> portalWorkPics;//工作动态 1
+	private List<Portal> portalWorkList;//工作动态首页 1
+	private List<Portal> portalLawList;//政策法规 2
+	private List<Portal> portalAffairsList;//政务公开 3
+	private List<Portal> portalVolHomeList;//志愿者之家4
+	private List<Portal> portalScienceList;//科普知识5
+	private List<Portal> portalContactUsList;//联系我们6
 	
 	public PortalAction() {
 
@@ -108,6 +109,30 @@ public class PortalAction extends ActionSupport {
 		this.portalScienceList = portalScienceList;
 	}
 
+	public List<Portal> getPortalIntroList() {
+		return portalIntroList;
+	}
+
+	public void setPortalIntroList(List<Portal> portalIntroList) {
+		this.portalIntroList = portalIntroList;
+	}
+
+	public List<Portal> getPortalVolHomeList() {
+		return portalVolHomeList;
+	}
+
+	public void setPortalVolHomeList(List<Portal> portalVolHomeList) {
+		this.portalVolHomeList = portalVolHomeList;
+	}
+
+	public List<Portal> getPortalContactUsList() {
+		return portalContactUsList;
+	}
+
+	public void setPortalContactUsList(List<Portal> portalContactUsList) {
+		this.portalContactUsList = portalContactUsList;
+	}
+
 	@JSON(serialize = false)
 	protected String getParam(String key) {
 		return ServletActionContext.getRequest().getParameter(key);
@@ -179,6 +204,15 @@ public class PortalAction extends ActionSupport {
 			return SUCCESS;
 		}
 	}
+	
+	public String show()
+	{
+		if (getParam("id") != null) {
+			Integer id = Integer.parseInt(getParam("id"));
+			portal = portalService.getPortal(Portal.class, id);
+		}
+		return SUCCESS;
+	}
 
 	public String getErrorMsg() {
 		return errorMsg;
@@ -190,12 +224,14 @@ public class PortalAction extends ActionSupport {
 	
 	public String showfirst()
 	{
-		this.portalWorkPics=portalService.queryPortalOfPicturl(3);
-		
-		/*this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
-		this.portalScienceList=portalService.queryPortalByType("科普知识", 5);
-		this.portalScienceList=portalService.queryPortalByType("政策法规", 5);
-		this.portalAffairsList=portalService.queryPortalByType("政务公开", 5);*/
+		this.portalWorkPics=portalService.queryPortalOfPicturl(3);//首页照片(工作动态)
+		this.portalIntroList=portalService.queryPortalByType("0", 1);//保护区介绍
+		this.portalWorkList=portalService.queryPortalByType("1", 5);//工作动态
+		this.portalScienceList=portalService.queryPortalByType("2", 5);//政策法规
+		this.portalAffairsList=portalService.queryPortalByType("3", 5);//政务公开
+		this.portalVolHomeList=portalService.queryPortalByType("4", 5);//志愿者之家
+		this.portalScienceList=portalService.queryPortalByType("5", 5);//科普知识
+		this.portalScienceList=portalService.queryPortalByType("6", 5);//联系我们
 		return SUCCESS;
 		//this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
 	}

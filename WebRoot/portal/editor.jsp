@@ -13,16 +13,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>网站</title>
+<title>网站编辑</title>
 <link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" />
+<%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" /> --%>
 
 <style type="text/css">
 #portolinfo tr td:first-child span {
-	float: right;
+	 float: right;
 }
 
 #uploader {
@@ -35,6 +35,7 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 }
+
 </style>
 </head>
 <body>
@@ -52,18 +53,19 @@
 					<div class="panel-heading">新增内容</div>
 					<div class="panel-body">
 						<s:form role="form" theme="simple" id="formPortalInfo">
-								<div style="float:left;width:600px;">
+								<div style="float:left;width:600px;overflow:hidden">
 									<table id="portolinfo" style="border-collapse:separate; border-spacing:0px 10px;width:100%;">
 										<tbody>
 											<tr>
-												<td><span>ID</span></td>
+												<td style="width:120px;"><span>ID</span></td>
 												<td><s:textfield class="form-control" id="portalid" name="portal.id"  readonly="true"></s:textfield></td>
 											</tr>
 											<tr>
 												<td><span>选择类型</span></td>
-												<td><s:select class="form-control" id="portaltype" list="{'工作动态','政策法规','政务公开','科普知识','志愿者之家'}" label="选择类型"
-														name="portal.type" onchange="ChangeSelect()"></s:select></td>
-											</tr>
+											    <td><s:select class="form-control" id="portaltype"
+													list="#{'0':'保护区介绍','1':'工作动态','2':'政策法规','3':'政务公开','4':'志愿者之家','5':'科普知识','6':'联系我们'}"
+													label="选择类型" name="portal.type" onchange="ChangeSelect()"></s:select></td>
+										    </tr>
 
 											<tr>
 												<td><span>主标题</span></td>
@@ -112,6 +114,7 @@
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
+					    <a href="/travel/portal/editor.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" class="btn btn-primary"
 							onclick="SavePortal('0')">保存数据</button>
 						<button type="button" style="margin-left:10px;margin-right:10px;"
@@ -135,10 +138,8 @@
 	 --%>
 	
 	<script type="text/javascript">
-		//实例化编辑器
-		//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-		var ue = UE.getEditor('editor');
 		//保存数据
+		
 		function SavePortal(status)
 		{
 			var isshowpic=$("#isshowpicture")[0].checked;
@@ -175,11 +176,12 @@
 				}
 			});
 		}
+		//1代表工作区动态
 		function ChangeSelect()
 		{
 			var options=$("#portaltype option:selected");
 			var portaltype=options.val();
-			if(portaltype=="工作动态"){
+			if(portaltype=="1"){
 				$("#uploader").show();
 			}
 			else{
@@ -187,7 +189,13 @@
 			}
 		}
 		var uploader;
+		var ue = UE.getEditor('editor');
 		$(function(){  
+			   //初始化ueditor及内容,实例化编辑器
+		       //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+		       ue.ready(function() {//编辑器初始化完成再赋值  
+		            ue.setContent('${portal.content}');  //赋值给UEditor  
+		        });  
 			   /*init webuploader*/  
 			   var $list=$("#thelist");    //上传列表  
 			   var ratio = window.devicePixelRatio || 1;
@@ -294,7 +302,7 @@
 			   
 			  }); 
 
-		/*关闭上传框窗口后恢复上传框初始状态*/
+		   /*关闭上传框窗口后恢复上传框初始状态*/
 			function ResetUploader() {        
 				// 移除所有缩略图并将上传文件移出上传序列
 			    for (var i = 0; i < uploader.getFiles().length; i++) {
@@ -327,15 +335,15 @@
 				minView : 0,
 				forceParse : 0
 			});
-			function GetQueryString(name)
+			
+			/* function GetQueryString(name)
 			{
 			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			     var r = window.location.search.substr(1).match(reg);
 			     if(r!=null)return  unescape(r[2]); return null;
-			}
-			
-			
+			} */
 			//$('.form_date').datetimepicker("setValue");
+			
 	</script>
 </body>
 </html>

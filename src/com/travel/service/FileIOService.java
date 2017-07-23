@@ -20,13 +20,13 @@ public class FileIOService {
 
 	public String uploadFile(String fileName, File fileData) throws Exception {
 		String path = ServletActionContext.getServletContext().getRealPath(
-				"/uploadFiles");
+				"/").replace("\\webapps\\travel\\", "")+"\\uploadpic";
 		String filetype = fileName.substring(fileName.lastIndexOf("."));
 		// 生成文件名
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String newFileName = sdf.format(date) + filetype;
-		String fullFileName="\\uploadFiles\\"+newFileName;
+		String fullFileName="\\travel\\uploadpic\\"+newFileName;
 		InputStream is =null;
 		OutputStream os=null;
 		/*

@@ -59,32 +59,31 @@ public class PortalService<T> {
 		Session session=(Session) sessionFactory.openSession();//
 		Query query=session.createQuery(queryString);
 		query.setString(0, portalType);
-		query.setFirstResult(1);
+		query.setFirstResult(0);
 		query.setMaxResults(topnum);
 		@SuppressWarnings("unchecked")
 		List<T> result=(List<T>)query.list();
-		//session.close();
+		session.close();
 		//sessionFactory.close();
 		return result;
 	}
 	public List<T> queryPortalOfPicturl(int topnum)
 	{
 		//
-		String queryString = "from Portal p where p.isshowpicture=1";
-		return dao.getObjects(queryString);
+		//String queryString = "from Portal p where p.isshowpicture=1";
+		//return dao.getObjects(queryString);
 		
-		/*
-		String queryString = "from Portal p where p.type = '¹¤×÷¶¯Ì¬' and p.isshowpicture=1 order by pubdate desc";
+		String queryString = "from Portal p where p.type = '1' and p.isshowpicture=1 order by pubdate desc";
 		SessionFactory sessionFactory=dao.getHibernateTemplate().getSessionFactory();
 		Session session=(Session) sessionFactory.openSession();//
 		Query query=session.createQuery(queryString);
-		query.setFirstResult(1);
+		query.setFirstResult(0);
 		query.setMaxResults(topnum);
 		@SuppressWarnings("unchecked")
 		List<T> result=(List<T>)query.list();
-		//session.close();
+		session.close();
 		//sessionFactory.close();
-		return result;*/
+		return result;
 	}
 	
 }

@@ -10,7 +10,18 @@
 	String contextPath = request.getContextPath();
 %>
 
+<%
+java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+java.util.Date currDate = new java.util.Date();
+String currentDate = dateFormat.format(currDate);
+String currentTime = timeFormat.format(currDate);
+System.out.println(currentDate + "/当前日期");
+System.out.println(currentTime + "/当前时间");
+%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
 <base href="<%=basePath%>">
@@ -20,54 +31,92 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="保护区网站">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <style type="text/css">
-body{
- font-family:"Microsoft Yahei";
- background-color:rgb(226,252,231);
+body {
+	font-family: "Microsoft Yahei";
+	background-color: rgb(226, 252, 231);
 }
+
 .headlogo {
 	text-align: center;
 	width: 100%;
 	height: 361px;
-	min-width: 1100px;
+	min-width: 1174px;
 	background-image: url(<%=contextPath%>/includes/image/bann.jpg);
-	margin:0 auto;
+	margin: 0 auto;
 }
+
 .navbarhead {
-    text-align: center;
+	text-align: center;
 	height: 60px;
 	min-width: 1100px;
 	background-color: rgb(2, 189, 115);
-	width:100%;
-	margin:0 auto;
+	width: 100%;
+	margin: 0 auto;
 }
+
 .navbarhead li {
 	list-style-image: none;
 	list-style-type: none;
-	margin-right:5px;
+	margin-right: 5px;
 	float: left;
 }
 
 .navbarhead li a {
-    font-size:18px;
-    font-weight:bold;
+	font-size: 18px;
+	font-weight: bold;
 	color: #FFFFFF;
 	text-decoration: none;
 	margin: 0px;
 	padding-top: 18px;
-	display: block; /* 作为一个块 */
-	padding-right: 15px; /* 设置块的属性 */
+	display: block;
+	padding-right: 15px;
 	padding-bottom: 16px;
 	padding-left: 15px;
 }
-.navbarhead li a:hover {
-	background-color: rgb(1,135,82);
-	text-decoration:none;
-	color: #FFFFFF;
 
+.navbarhead li a:hover {
+	background-color: rgb(1, 135, 82);
+	text-decoration: none;
+	color: #FFFFFF;
 }
 
+.carousel-inner img {
+	margin: 0 auto;
+	width: auto;
+}
+
+#myCarousel {
+	width: 700px;
+	height: 438px;
+	margin: 0 auto;
+	float: left;
+}
+
+.maincontent {
+	width: 1174px;
+	margin: 0 auto;
+	margin-top: 6px;
+	background-color: #ffffff;
+}
+
+.title1 a {
+	font-size: 24px;
+	color: #2E2E2E;
+	text-decoration: none;
+	margin-left:20px;
+}
+
+.title1 a:hover {
+    color:#006400;
+	text-decoration: none;
+}
+
+.title2 {
+	margin-left:20px;
+}
 </style>
 </head>
 <body>
@@ -91,46 +140,81 @@ body{
 			<li><a href="http://www.google.com">联系我们</a></li>
 		</ul>
 	</div>
-
-	<div class="container" style="width:100%;margin-top:5px;">
-		<div class="row">
-			<div class="col-md-8">
-				<div id="myCarousel" class="carousel slide"
-					style="width:600px;margin:0 auto;">
-					<!-- 轮播（Carousel）指标 -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-						<li data-target="#myCarousel" data-slide-to="3"></li>
-						<li data-target="#myCarousel" data-slide-to="4"></li>
-					</ol>
-					<!-- 轮播（Carousel）项目 -->
-					<div class="carousel-inner">
-						<c:forEach var="portal" items="${portalWorkPics}">
+	<div style="padding-top:15px;padding-bottom:15px;width:100%;background-color:#ffffff;">
+	<label style="font-size:12px;font-weight:normal;margin-left:20%;"> <%=currentDate %></label>
+	<iframe name="sinaWeatherTool"
+		src="http://weather.news.sina.com.cn/chajian/iframe/weatherStyle1.html?city=%E5%BB%B6%E5%AE%89"
+		width="200" height="20" marginwidth="0" marginheight="0" hspace="0"
+		vspace="0" frameborder="0" scrolling="no" style="vertical-align:middle;background:none;"> </iframe></div>
+	<div class="maincontent">
+		<div id="myCarousel" class="carousel slide">
+			<!-- 轮播（Carousel）指标 -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<!-- 轮播（Carousel）项目 -->
+			<div class="carousel-inner">
+				<c:forEach var="portal" items="${portalWorkPics}" varStatus="status">
+					<c:choose>
+						<c:when test="${status.first}">
+								<div class="item active">
+								<img style="height:438px;width:100%;" src="${portal.pictureurl}"
+									alt="${portal.title}">
+								<div class="carousel-caption">${portal.title}</div>
+							</div>
+						</c:when>
+						<c:otherwise>
 							<div class="item">
-								<img src="${portal.pictureurl}"	alt="${portal.title}">
+								<img style="height:438px;width:100%;" src="${portal.pictureurl}"
+									alt="${portal.title}">
+								<div class="carousel-caption">${portal.title}</div>
 							</div>
-						</c:forEach>
-						<div class="item">
-								<img src="<%=contextPath%>/includes/image/bann.jpg"	alt="110">
-							</div>
-					</div>
-					
-					
-					<!-- 轮播（Carousel）导航 -->
-					<a class="carousel-control left" href="#myCarousel"
-						data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
-						href="#myCarousel" data-slide="next">&rsaquo;</a>
-				</div>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
-			<div class="col-md-4"><img src="<%=contextPath%>/includes/image/bann.jpg"	alt="110"></div>
+			<!-- 轮播（Carousel）导航 -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			<a class="carousel-control right" href="#myCarousel"
+				data-slide="next">&rsaquo;</a>
 		</div>
+		<div class="panel panel-success"
+			style="margin:0 auto;float:right;width:420px;">
+			<div class="panel-body">
+				<c:forEach var="portal" items="${portalIntroList}"
+					varStatus="status">
+					<c:if test="${status.first}">	
+					   ${portal.content}
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
 	</div>
+	<div class="maincontent" style="padding-top:20px;">
+		<c:forEach var="portal" items="${portalWorkList}" varStatus="status">
+			<p class="title1"><a href="/travel/portal/show.action?id=${portal.id}">${portal.title}</a></p>
+			<p class="title2"> ${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${portal.subtitle} </p>
+			<hr style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;'/>
+		</c:forEach>
+
+	</div>
+
+	
+
+	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+   <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
 
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript">
+		$(function() {
+			$("#myCarousel").carousel({
+				interval : 7000
+			});
+		});
 	</script>
 </body>
 </html>

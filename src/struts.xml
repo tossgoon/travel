@@ -278,6 +278,10 @@
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
+		<action name="show" class="portalAct" method="show">
+			<result name="error" type="json"></result>
+			<result name="success">/portal/portalshow.jsp</result>
+		</action>
 		
 	</package>
 	
