@@ -3,6 +3,8 @@ package com.travel.pojo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.base.MD5Util;
+
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
@@ -95,7 +97,12 @@ public class User implements java.io.Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		String md5OfPass="";//md5加密之后的密码
+		if(password!=null)
+		{
+			md5OfPass=MD5Util.getMD5(password);
+		}
+		this.password = md5OfPass;
 	}
 
 	public String getRemark() {

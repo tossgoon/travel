@@ -1,4 +1,5 @@
 package com.travel.action;
+
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -31,33 +32,38 @@ public class UserAction extends ActionSupport {
 	public String add() {
 		String result = "";
 		try {
+			User tuser = userService.queryUserByName(user.getLoginname());
+			if (tuser != null) {
+				setErrorMsg("1");// 有重名
+			} else {
+				user.setPassword("111111");
 				userService.addUser(user);
-				//throw new RuntimeException(""); 
+				// throw new RuntimeException("");
 				setErrorMsg("0");
-				result=SUCCESS;
+			}
+			result = SUCCESS;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			setErrorMsg("保存用户出错。"+e.getMessage());
-			result=ERROR;
+			setErrorMsg("保存用户出错。" + e.getMessage());
+			result = ERROR;
 		}
 		return result;
 	}
 
 	public String update() {
 		try {
-			//String param = getParam("param");
-				userService.updateUser(user);
-				setErrorMsg("0");
-				return SUCCESS;
+			userService.updateUserNoPassword(user);
+			setErrorMsg("0");
+			return SUCCESS;
 		} catch (Exception e) {
 			// TODO: handle exception
-			setErrorMsg("更新用户出错。"+e.getMessage());
+			setErrorMsg("更新用户出错。" + e.getMessage());
 			return ERROR;
 		}
 		// System.out.println(this);
 	}
-	
+
 	public String delete() {
 		try {
 			Integer param = Integer.parseInt(getParam("id"));
@@ -65,16 +71,16 @@ public class UserAction extends ActionSupport {
 			setErrorMsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
-			setErrorMsg("删除用户出错。"+e.getMessage());
+			setErrorMsg("删除用户出错。" + e.getMessage());
 			return ERROR;
 		}
 		return SUCCESS;
 	}
-	
+
 	public String query() {
 		searchText = getParam("queryText");
 		users = userService.queryUserByName(searchText, User.class);
-		//setUsers(userService.queryUserByName(searchText, User.class));
+		// setUsers(userService.queryUserByName(searchText, User.class));
 		return SUCCESS;
 	}
 
@@ -94,7 +100,7 @@ public class UserAction extends ActionSupport {
 		this.user = user;
 	}
 
-	@JSON(serialize=false)
+	@JSON(serialize = false)
 	public UserService<User> getUserService() {
 		return userService;
 	}
@@ -102,6 +108,7 @@ public class UserAction extends ActionSupport {
 	public void setUserService(UserService<User> userService) {
 		this.userService = userService;
 	}
+
 	public String getErrorMsg() {
 		return errorMsg;
 	}

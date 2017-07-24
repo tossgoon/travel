@@ -172,6 +172,13 @@
 		function InsertUser() {
 			isadd = true;
 			$("#modaltitle").html("新增用户");
+			$("#userid").val('');
+			$("#username").val('');
+			$("#loginname").val('');
+			$("#telephone").val('');
+			$("#department").val('');
+			$("#remark").val('');
+			$("#loginname").attr("readonly",false);
 			$("#usermodal").modal("show");
 		}
 		function EditUser(a) {
@@ -186,6 +193,7 @@
 			$("#userid").val(userid);
 			$("#username").val(username);
 			$("#loginname").val(loginname);
+			$("#loginname").attr("readonly",true);
 			$("#telephone").val(telephone);
 			$("#department").val(department);
 			$("#remark").val(remark);
@@ -240,6 +248,10 @@
 							$('#userlist').append(newrow);
 							$("#usermodal").modal("hide");
 						}
+						else if (data.errorMsg == "1") {
+							//新增用户
+							alert("用户名已存在。");
+						}
 						else{
 							alert(data.errorMsg);
 						}
@@ -285,11 +297,10 @@
 					+ user.loginname + "</td>" + "<td>" + user.telephone
 					+ "</td>" + "<td>" + user.department
 					+ "</td>" + "<td>" + user.remark + "</td>"
-					+ "<td><a href='javascript:void(0)' onclick='EditUser(this)'>编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+ "<td><a href='javascript:void(0)' onclick='EditUser(this)'>编辑</a>&nbsp;&nbsp;&nbsp;"
 					+ "<a href='javascript:void(0)' onclick=DeleteUserModal("+user.id+",this)>删除</a>" + "</td></tr>";
 			return newRow;
 		}
-	
 		
 	</script>
 </body>
