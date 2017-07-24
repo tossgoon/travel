@@ -28,52 +28,67 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/uploadifive/uploadifive.css" />
+<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
 </head>
 
 <body>
-	<s:form action="query" namespace="/user" method="post">
-		<table align="center">
-			<tr>
-				<td style="vertical-align: middle;">姓名查询：
-				   <input type="text"	style="width: 300px;height: 30px;font-size: 16px" name="queryText"	value="${searchText}" />
-				   <input type="submit" value="查询"	style="width: 100px;height: 30px;font-size: 16px" />
-				   <input type="button" value="新增"  style="width: 100px;height: 30px;font-size: 16px"	onclick="window.location.href='/user/add.action?param=0'" />
-				</td>
-			</tr>
-		</table>
-		<%-- <s:submit value="submit" /> --%>
-	</s:form>
+   <%@ include file="/portal/headmodal.jsp"%>
 
-	<table align="center" border="1" cellpadding="0" cellspacing="0"
-		bordercolor="#3366cc"  id="userlist">
-		<tr align="center" bgcolor="#3399cc" height="26px">
-			<td width="100">ID</td>
-			<td width="160">姓名</td>
-			<td width="160">用户名</td>
-			<td width="160">电话</td>
-			<td width="160">部门</td>
-			<td width="160">备注</td>
-			<td width="160">操作</td>
-		</tr>
+	<div class="container" style="width:100%;">
+		<div class="row">
+			<div class="col-md-12" style="text-align:center;">
+				<label style="font-size:20px;font-weight:normal;margin:30px;">后台管理：用户管理</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
+					<div class="panel-heading">用户管理</div>
+					<div class="panel-body">
+						<s:form action="query" namespace="/user" class="form-inline" method="post" theme="simple">
+							<div style="margin:0 auto;" class="form-group">
+								<label style="margin-top:5px;margin-left:100px;float:left;">  姓名查询： </label>
+								<input style="width: 300px;float:left;" class="form-control" type="text"  name="queryText" value="${searchText}" /> 
+								
+								<input type="submit" class="btn btn-primary" value="查询" style="margin-left:5px;float:left;width:80px;" />
+								<input value="新增用户" onclick="InsertUser()" type="button" class="btn btn-success" style="margin-left:5px;float:left;width:80px;" />
+							</div>
+						</s:form>
 
-		<c:forEach var="user" items="${users}">
-			<tr align="center" height="24px">
-				<td>${user.id}</td>
-				<td>${user.username}</td>
-				<td>${user.loginname}</td>
-				<td>${user.telephone }</td>
-				<td>${user.department }</td>
-				<td>${user.remark }</td>
-				<td width="120"><a
-					href="javascript:void(0)" onclick="EditUser(this)">编辑</a>&nbsp;&nbsp; <a
-					href="javascript:void(0)" onclick="DeleteUserModal(${user.id},this)">删除</a></td>
-			</tr>
-		</c:forEach>
-	</table>
+						<table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" id="userlist" style="margin-top:20px;clear:both;">
+							<tr align="center" bgcolor="#3399cc" height="26px">
+								<td width="100">ID</td>
+								<td width="160">姓名</td>
+								<td width="160">用户名</td>
+								<td width="160">电话</td>
+								<td width="160">部门</td>
+								<td width="160">备注</td>
+								<td width="160">操作</td>
+							</tr>
 
-	<hr />
-	<input value="新增用户" onclick="InsertUser()" type="button"
-		class="btn btn-success" style="margin:5px;float:right;width:80px;" />
+							<c:forEach var="user" items="${users}">
+								<tr align="center" height="24px">
+									<td>${user.id}</td>
+									<td>${user.username}</td>
+									<td>${user.loginname}</td>
+									<td>${user.telephone }</td>
+									<td>${user.department }</td>
+									<td>${user.remark }</td>
+									<td width="120"><a href="javascript:void(0)" onclick="EditUser(this)">编辑</a>&nbsp;&nbsp; <a href="javascript:void(0)"
+											onclick="DeleteUserModal(${user.id},this)">删除</a></td>
+								</tr>
+							</c:forEach>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+	</div>
+
 	<div class="modal fade" id="usermodal" role="dialog"
 		aria-labelledby="用户管理" data-backdrop="static">
 		<div class="modal-dialog">
