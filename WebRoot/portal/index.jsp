@@ -120,7 +120,6 @@ body {
 </style>
 </head>
 <body>
-
 	<div class="headlogo" id="logoindex">
 		<div style="width:900px;margin:0 auto;">
 			<img alt="" style="margin-top:100px;"
@@ -140,40 +139,24 @@ body {
 			<li><a href="http://www.google.com">联系我们</a></li>
 		</ul>
 	</div>
-	<div
-		style="padding-top:15px;padding-bottom:15px;width:100%;background-color:#ffffff;height:50px;">
-
+	<div style="padding-top:15px;padding-bottom:15px;width:100%;background-color:#ffffff;height:50px;">
 		<div style="width:1174px;margin:0 auto;">
-
-			<label
-				style="font-size:12px;font-weight:normal;margin-left:20%;float:left;"><%=currentDate%></label>
+			<label	style="font-size:12px;font-weight:normal;margin-left:20%;float:left;"><%=currentDate%></label>
 			<iframe name="sinaWeatherTool"
 				src="http://weather.news.sina.com.cn/chajian/iframe/weatherStyle1.html?city=%E5%BB%B6%E5%AE%89"
 				width="200" height="20" marginwidth="0" marginheight="0" hspace="0"
 				vspace="0" frameborder="0" scrolling="no"
 				style="vertical-align:middle;background:none;float:left;">
 			</iframe>
-			
-			
-			    
-				
-			
-			
-			<s:form method="post"	role="form" theme="simple" id="formLogin">
-			<input type="submit" class="btn btn-success" value="登陆" style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
-
-				<input	class="form-control input-sm" value="password" style="width:160px;float:right;margin-top:-5px;" /> 
+			<s:form method="post" action="login" namespace="/user" role="form" theme="simple" id="formLogin">
+			    ${errorMsg}
+			    <input type="submit"  class="btn btn-success" value="登陆" style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
+				<input	class="form-control input-sm" name="user.password" style="width:160px;float:right;margin-top:-5px;" /> 
 				<span	style="float:right;">密码:</span>
-			    <input	class="form-control input-sm" style="width:160px;float:right;margin-top:-5px;" />
+			    <input	class="form-control input-sm" name="user.loginname" style="width:160px;float:right;margin-top:-5px;" />
 				<span   style="float:right;">用户名:</span>
-				
-						</s:form>
-			
-			
-			
-
+			</s:form>
 		</div>
-
 	</div>
 	<div class="maincontent">
 		<div id="myCarousel" class="carousel slide">
@@ -228,12 +211,9 @@ body {
 			<p class="title2"> ${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${portal.subtitle} </p>
 			<hr style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;'/>
 		</c:forEach>
-
 	</div>
-
 	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
-
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript">
@@ -242,6 +222,24 @@ body {
 				interval : 7000
 			});
 		});
+		function DoLogin()
+		{
+			$.ajax({
+				url : '/travel/user/login.action',
+				type : 'POST',
+				// 提交数据给Action传入数据
+				data :  $("#formLogin").serialize(),
+				// 返回的数据类型
+				dataType : 'json',
+				// 成功是调用的方法
+				success : function(data) {
+						alert(data.errorMsg);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

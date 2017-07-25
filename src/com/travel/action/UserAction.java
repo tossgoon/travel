@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 
+import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.pojo.User;
 import com.travel.service.UserService;
@@ -19,7 +20,6 @@ public class UserAction extends ActionSupport {
 	private String searchText;
 	private List<User> users;
 	private String errorMsg;
-
 	public UserAction() {
 
 	}
@@ -36,7 +36,9 @@ public class UserAction extends ActionSupport {
 			if (tuser != null) {
 				setErrorMsg("1");// 有重名
 			} else {
-				user.setPassword("111111");
+				String md5OfPass="";//md5加密之后的密码
+				md5OfPass=MD5Util.getMD5("111111");
+				user.setPassword(md5OfPass);
 				userService.addUser(user);
 				// throw new RuntimeException("");
 				setErrorMsg("0");
@@ -84,6 +86,27 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String login() {
+		try {
+			User userresult = userService.queryUserByName(user.getLoginname());
+			if (userresult == null) {
+				setErrorMsg("用户不存在");
+				return INPUT;
+			} else {
+				User user1 = userService.queryUserByNamePassword(
+						user.getLoginname(), user.getPassword());
+				if (user1 != null) {
+					return SUCCESS;
+				} else {
+					setErrorMsg("密码错误。");
+					return INPUT;
+				}
+			}
+		} catch (Exception ex) {
+			setErrorMsg("删除用户出错。" + ex.getMessage());
+			return ERROR;
+		}
+	}
 	public List<User> getUsers() {
 		return users;
 	}

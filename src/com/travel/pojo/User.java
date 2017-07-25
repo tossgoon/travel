@@ -97,12 +97,15 @@ public class User implements java.io.Serializable {
 	}
 
 	public void setPassword(String password) {
+		/*
 		String md5OfPass="";//md5加密之后的密码
 		if(password!=null)
 		{
 			md5OfPass=MD5Util.getMD5(password);
 		}
 		this.password = md5OfPass;
+		*/
+		this.password=password;
 	}
 
 	public String getRemark() {

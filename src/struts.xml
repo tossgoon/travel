@@ -229,6 +229,16 @@
  			<result name="success">/travel/user/userlist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
+		<action name="login" class="userAct" method="login">
+			<result name="error" type="redirect">
+				<param name="actionName">/travel/portal/showfirst.action</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="namespace">/portal</param>
+				<param name="actionName">showfirst</param>
+			</result>
+			<result name="success">/travel/user/useroa.jsp</result>
+		</action>
 	</package>
 
     <package name="portalpack" extends="struts-default,json-default"
@@ -282,6 +292,8 @@
 			<result name="error" type="json"></result>
 			<result name="success">/portal/portalshow.jsp</result>
 		</action>
+		
+		
 		
 	</package>
 	
