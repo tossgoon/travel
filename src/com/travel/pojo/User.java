@@ -21,6 +21,7 @@ public class User implements java.io.Serializable {
 	private String remark;
 	private String loginname;
 	private String department;
+	private String usertype;
 
 	// Constructors
 
@@ -122,6 +123,14 @@ public class User implements java.io.Serializable {
 
 	public void setLoginname(String loginname) {
 		this.loginname = loginname;
+	}
+
+	public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
 
 }

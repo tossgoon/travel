@@ -2,12 +2,32 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
  "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.i18n.reload" value="false" />
-	<constant name="struts.objectFactory" value="spring" /><!-- 
+	<constant name="struts.objectFactory" value="spring" />
+	<package name="global" extends="struts-default">
+		<!-- 定义一个拦截器 -->
+		<interceptors>
+			<interceptor name="authority"
+				class="com.travel.interceptor.LoginInterceptor">
+			</interceptor>
+			<!-- 拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 定义默认拦截器 -->
+		<default-interceptor-ref name="mydefault" />
+		<!-- 定义全局处理结果 -->
+		<global-results>
+			<result name="login">/portal/showfirst.action</result>
+		</global-results>
+	</package>
 
-	<package name="jkgisio" extends="struts-default,json-default">
+
+
+	<!-- <package name="jkgisio" extends="struts-default,json-default">
 		<action name="download" class="attfileDownLoad">
 			<result name="success" type="stream">
 				<param name="contentType">text/plain</param>
@@ -178,9 +198,9 @@
 		<action name="add" class="kctcAct" method="add">
 			<result name="addKctc">/jkgis/tc/add.jsp</result>
 		</action>
-	</package>  -->
+	</package> -->
 
-	<package name="userpack" extends="struts-default,json-default"
+	<package name="userpack" extends="struts-default,json-default,global"
 		namespace="/user">
 		<global-results>
 			<result name="error">/user/error.jsp</result>
@@ -198,7 +218,7 @@
 			<!-- <result name="success" type="redirect">
 				<param name="location">/jkgis/tipinfo.jsp</param>
 				<param name="info">${user.username}+" 已删除.√"</param>
-				<param name="type">1</param>
+				<param name="type">1</param>  <interceptor-ref name="mydefault" />  
 			</result> -->
 			<!-- <result name="error" type="redirect">
 				<param name="location">/jkgis/tipinfo.jsp</param>
@@ -230,14 +250,22 @@
 			<!-- <result name="success" type="json"></result> -->
 		</action>
 		<action name="login" class="userAct" method="login">
-			<result name="error" type="redirect">
+		    <result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+			<result name="input" type="json"></result>
+			<!-- <result name="error" type="redirect">
 				<param name="actionName">/travel/portal/showfirst.action</param>
 			</result>
 			<result name="input" type="redirectAction">
 				<param name="namespace">/portal</param>
 				<param name="actionName">showfirst</param>
 			</result>
-			<result name="success">/travel/user/useroa.jsp</result>
+			<result name="success">/travel/user/useroa.jsp</result> -->
+		</action>
+		<action name="loginsuccess" class="userAct" method="loginsuccess">
+		  <result name="normal">/travel/user/useroa.jsp</result>
+		  <result name="admin">/portal/portallist.jsp</result>
+		
 		</action>
 	</package>
 

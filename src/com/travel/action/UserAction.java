@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 
 import com.base.MD5Util;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.pojo.User;
 import com.travel.service.UserService;
@@ -96,6 +97,8 @@ public class UserAction extends ActionSupport {
 				User user1 = userService.queryUserByNamePassword(
 						user.getLoginname(), user.getPassword());
 				if (user1 != null) {
+					setErrorMsg("0");
+					ActionContext.getContext().getSession().put("loginname", user.getLoginname());//½«
 					return SUCCESS;
 				} else {
 					setErrorMsg("ÃÜÂë´íÎó¡£");
@@ -107,6 +110,27 @@ public class UserAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+	
+	public String loginsuccess(){
+		try {
+			if(user!=null){
+				if(user.getUsertype()=="9"){
+					return "admin";
+				}
+				else{
+					return "normal";
+				}
+			}
+			else{
+				setErrorMsg("ÓÃ»§Î´µÇÂ½¡£");
+				return ERROR;
+			}
+		} catch (Exception ex) {
+			setErrorMsg("·ÃÎÊ³ö´í¡£" + ex.getMessage());
+			return ERROR;
+		}
+	}
+	
 	public List<User> getUsers() {
 		return users;
 	}

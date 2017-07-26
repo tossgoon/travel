@@ -31,5 +31,8 @@
         <property name="department" type="java.lang.String">
             <column name="department" length="500" />
         </property>
+         <property name="usertype" type="java.lang.String">
+            <column name="usertype" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

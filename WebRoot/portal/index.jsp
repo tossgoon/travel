@@ -149,13 +149,16 @@ body {
 				style="vertical-align:middle;background:none;float:left;">
 			</iframe>
 			<s:form method="post" action="login" namespace="/user" role="form" theme="simple" id="formLogin">
-			    ${errorMsg}
-			    <input type="submit"  class="btn btn-success" value="登陆" style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
+			    <input type="button" onclick="DoLogin()"  class="btn btn-success" value="登陆" style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
 				<input	class="form-control input-sm" name="user.password" style="width:160px;float:right;margin-top:-5px;" /> 
 				<span	style="float:right;">密码:</span>
-			    <input	class="form-control input-sm" name="user.loginname" style="width:160px;float:right;margin-top:-5px;" />
+			    <input	class="form-control input-sm" id="loginname" name="user.loginname" style="width:160px;float:right;margin-top:-5px;" />
 				<span   style="float:right;">用户名:</span>
 			</s:form>
+			<div style="float:right;display:none;" id="divwelcome" >
+			   <span id="labelwelcome"></span>
+			   <a href="/travel/user/loginsuccess.action"> &gt;&gt;点击进入OA </a>
+			</div>
 		</div>
 	</div>
 	<div class="maincontent">
@@ -224,6 +227,7 @@ body {
 		});
 		function DoLogin()
 		{
+			var loginname=$("#loginname").val();
 			$.ajax({
 				url : '/travel/user/login.action',
 				type : 'POST',
@@ -233,7 +237,15 @@ body {
 				dataType : 'json',
 				// 成功是调用的方法
 				success : function(data) {
+					var result=data.errorMsg;
+					if(result=="0"){
+						$("#labelwelcome").html("欢迎登陆,"+loginname+"。");
+						$("#divwelcome").show();
+						$("#formLogin").hide();
+					}
+					else{
 						alert(data.errorMsg);
+					}
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
 					alert(XMLHttpRequest.status);
