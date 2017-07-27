@@ -22,41 +22,53 @@
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 
-   <!-- 定义ueditor拦截器 -->
-     <!-- ueditor start-->
+	<!-- 定义ueditor拦截器 -->
+	<!-- ueditor start -->
 	<filter>
-	    <filter-name>struts2</filter-name>
-	    <filter-class>com.travel.filter.UeditorFilter</filter-class>
-	</filter>
-	<filter-mapping>
-	    <filter-name>struts2</filter-name>
-	    <url-pattern>/*</url-pattern>
-	    <dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-	<!-- ueditor end -->
-
-	<!-- 定义Struts2的核心控制器 -->
-	<!-- <filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<filter-class>com.travel.filter.UeditorFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<!-- ueditor end -->
 
-<!-- 	<jsp-config>
-		<jsp-property-group>
-			<description>html encoding</description>
-			<display-name>JSPConfiguration</display-name>
-			<url-pattern>*.html</url-pattern>
-			<el-ignored>true</el-ignored>
-			<page-encoding>UTF-8</page-encoding>
-			<scripting-invalid>false</scripting-invalid>
-			<include-prelude></include-prelude>
-			<include-coda></include-coda>
-		</jsp-property-group>
-	</jsp-config>   -->
- 
+    <!-- 过滤器用来过滤jsp文件，需要登陆后才可访问 -->
+	<filter>
+		<filter-name>SessionInvalidate</filter-name>
+		<filter-class>com.travel.interceptor.LoginFilter</filter-class>  <!-- //过滤器核心类的class地址 -->
+		<init-param>
+			<param-name>checkSessionKey</param-name>  <!-- //session中需要检查的key -->
+			<param-value>loginname</param-value>
+		</init-param>
+		<init-param>
+			<param-name>redirectURL</param-name>  <!-- //重定向后的地址 -->
+			<param-value>/travel/visitor/first.action</param-value>
+		</init-param>
+		<init-param>
+			<param-name>notCheckURLList</param-name>  <!-- //不需要过滤的jsp -->
+			<param-value>/portal/index.jsp,/portal/portalshow.jsp</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>SessionInvalidate</filter-name>  <!-- //需要过滤的文件 -->
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+
+	<!-- 定义Struts2的核心控制器 -->
+	<!-- <filter> <filter-name>struts2</filter-name> <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>struts2</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
+
+	<!-- <jsp-config> <jsp-property-group> <description>html encoding</description> 
+		<display-name>JSPConfiguration</display-name> <url-pattern>*.html</url-pattern> 
+		<el-ignored>true</el-ignored> <page-encoding>UTF-8</page-encoding> <scripting-invalid>false</scripting-invalid> 
+		<include-prelude></include-prelude> <include-coda></include-coda> </jsp-property-group> 
+		</jsp-config> -->
+
 </web-app>

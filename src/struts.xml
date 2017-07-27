@@ -5,7 +5,7 @@
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.i18n.reload" value="false" />
 	<constant name="struts.objectFactory" value="spring" />
-	<package name="global" extends="struts-default">
+	<package name="usercheck" extends="struts-default">
 		<!-- 定义一个拦截器 -->
 		<interceptors>
 			<interceptor name="authority"
@@ -21,11 +21,9 @@
 		<default-interceptor-ref name="mydefault" />
 		<!-- 定义全局处理结果 -->
 		<global-results>
-			<result name="login">/portal/showfirst.action</result>
+			<result name="login">/visitor/first.action</result>
 		</global-results>
 	</package>
-
-
 
 	<!-- <package name="jkgisio" extends="struts-default,json-default">
 		<action name="download" class="attfileDownLoad">
@@ -200,11 +198,11 @@
 		</action>
 	</package> -->
 
-	<package name="userpack" extends="struts-default,json-default,global"
+	<package name="userpack" extends="struts-default,json-default,usercheck"
 		namespace="/user">
 		<global-results>
-			<result name="error">/user/error.jsp</result>
-			<result name="success">/user/success.jsp</result>
+			<result name="error">/travel/error.jsp</result>
+			<result name="success">/travel/success.jsp</result>
 		</global-results>
 
 		<action name="update" class="userAct" method="update">
@@ -249,27 +247,18 @@
  			<result name="success">/travel/user/userlist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
-		<action name="login" class="userAct" method="login">
-		    <result name="error" type="json"></result>
-			<result name="success" type="json"></result>
-			<result name="input" type="json"></result>
-			<!-- <result name="error" type="redirect">
-				<param name="actionName">/travel/portal/showfirst.action</param>
-			</result>
-			<result name="input" type="redirectAction">
-				<param name="namespace">/portal</param>
-				<param name="actionName">showfirst</param>
-			</result>
-			<result name="success">/travel/user/useroa.jsp</result> -->
-		</action>
+		
 		<action name="loginsuccess" class="userAct" method="loginsuccess">
 		  <result name="normal">/travel/user/useroa.jsp</result>
 		  <result name="admin">/portal/portallist.jsp</result>
-		
+		 <!--  <result name="login" type="redirectAction">
+		      <param name="actionName">first</param>
+		      <param name="namespace">/visitor</param>
+		  </result> -->
 		</action>
 	</package>
 
-    <package name="portalpack" extends="struts-default,json-default"
+    <package name="portalpack" extends="struts-default,json-default,usercheck"
 		namespace="/portal">
 		<global-results>
 			<result name="error">/user/error.jsp</result>
@@ -308,22 +297,41 @@
  			<result name="success">/portal/portallist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
-		<action name="showfirst" class="portalAct" method="showfirst">
- 			<result name="success">/portal/index.jsp</result>
-			<!-- <result name="success" type="json"></result> -->
-		</action>
 		<action name="save" class="portalAct" method="save">
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
-		<action name="show" class="portalAct" method="show">
+	</package>
+	
+	<package name="visitor" extends="struts-default,json-default"	namespace="/visitor">
+	   <action name="first" class="portalAct" method="showfirst">
+		  <result name="success">/portal/index.jsp</result>
+		  <!-- <result name="success" type="json"></result> -->
+	   </action>
+	   <action name="show" class="portalAct" method="show">
 			<result name="error" type="json"></result>
 			<result name="success">/portal/portalshow.jsp</result>
 		</action>
-		
-		
-		
-	</package>
+	   <action name="login" class="userAct" method="login">
+		    <result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+			<result name="input" type="json"></result> 
+			
+			<!-- <result name="error" type="chain">
+		      <param name="actionName">first</param>
+		      <param name="namespace">/visitor</param>
+		    </result> 
+			<result name="success" type="chain">
+		      <param name="actionName">first</param>
+		      <param name="namespace">/visitor</param>
+		    </result> 
+		    <result name="input" type="chain">
+		      <param name="actionName">first</param>
+		      <param name="namespace">/visitor</param>
+		    </result>  -->	
+		</action>
+   </package>
+	
 	
 	<package name="fileio" extends="struts-default,json-default" namespace="/fileio">
 		<action name="upload" class="fileUpLoad">

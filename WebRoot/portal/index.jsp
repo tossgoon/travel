@@ -139,7 +139,7 @@ body {
 			<li><a href="http://www.google.com">联系我们</a></li>
 		</ul>
 	</div>
-	<div style="padding-top:15px;padding-bottom:15px;width:100%;background-color:#ffffff;height:50px;">
+	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:70px;">
 		<div style="width:1174px;margin:0 auto;">
 			<label	style="font-size:12px;font-weight:normal;margin-left:20%;float:left;"><%=currentDate%></label>
 			<iframe name="sinaWeatherTool"
@@ -148,17 +148,28 @@ body {
 				vspace="0" frameborder="0" scrolling="no"
 				style="vertical-align:middle;background:none;float:left;">
 			</iframe>
-			<s:form method="post" action="login" namespace="/user" role="form" theme="simple" id="formLogin">
-			    <input type="button" onclick="DoLogin()"  class="btn btn-success" value="登陆" style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
-				<input	class="form-control input-sm" name="user.password" style="width:160px;float:right;margin-top:-5px;" /> 
-				<span	style="float:right;">密码:</span>
-			    <input	class="form-control input-sm" id="loginname" name="user.loginname" style="width:160px;float:right;margin-top:-5px;" />
-				<span   style="float:right;">用户名:</span>
-			</s:form>
-			<div style="float:right;display:none;" id="divwelcome" >
-			   <span id="labelwelcome"></span>
-			   <a href="/travel/user/loginsuccess.action"> &gt;&gt;点击进入OA </a>
-			</div>
+
+			<c:if test="${sessionScope.loginname==null}">
+				<s:form method="post" action="login" namespace="/visitor" role="form"
+					theme="simple" id="formLogin">
+					<input type="button"  class="btn btn-success" onclick="DoLogin()"
+						value="登陆"
+						style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
+					<input class="form-control input-sm" name="user.password"
+						style="width:160px;float:right;margin-top:-5px;" />
+					<span style="float:right;">密码:</span>
+					<input class="form-control input-sm" id="loginname"
+						name="user.loginname"
+						style="width:160px;float:right;margin-top:-5px;" />
+					<span style="float:right;">用户名:</span>
+				</s:form>
+			</c:if>
+
+			<c:if test="${sessionScope.loginname!=null}">
+				<div style="float:right;" id="divwelcome">
+					<span id="labelwelcome">欢迎登陆,${sessionScope.loginname}。</span> <a href="/travel/user/loginsuccess.action"> &gt;&gt;点击进入OA </a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 	<div class="maincontent">
@@ -229,7 +240,7 @@ body {
 		{
 			var loginname=$("#loginname").val();
 			$.ajax({
-				url : '/travel/user/login.action',
+				url : '/travel/visitor/login.action',
 				type : 'POST',
 				// 提交数据给Action传入数据
 				data :  $("#formLogin").serialize(),
@@ -239,9 +250,11 @@ body {
 				success : function(data) {
 					var result=data.errorMsg;
 					if(result=="0"){
-						$("#labelwelcome").html("欢迎登陆,"+loginname+"。");
-						$("#divwelcome").show();
-						$("#formLogin").hide();
+						//$("#labelwelcome").html("欢迎登陆,"+loginname+"。");
+						//$("#divwelcome").show();
+						//$("#formLogin").hide();
+						$("#formLogin").html("<a href='/travel/user/loginsuccess.action' style='float:right'> &gt;&gt;点击进入OA </a>"+"<span id='labelwelcome' style='float:right;'>欢迎登陆,"+loginname+"。</span> ");
+						//window.location.reload();
 					}
 					else{
 						alert(data.errorMsg);

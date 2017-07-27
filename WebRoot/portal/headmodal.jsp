@@ -7,7 +7,7 @@
 	</div>
 	<div class="navbarhead">
 		<ul style="margin-left:auto;margin-right:auto;width:1100px;">
-			<li><a href="/travel/portal/index.jsp">首页</a></li>
+			<li><a href="/travel/visitor/first.action">首页</a></li>
 			<li><a href="/travel/portal/query.action">保护区介绍</a></li>
 			<li><a href="http://www.yahoo.com">工作动态</a></li>
 			<li><a href="http://www.google.com">政策法规</a></li>

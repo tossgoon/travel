@@ -6,8 +6,10 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
 
 import com.jktech.pojo.Kcgc;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.travel.pojo.Portal;
+import com.travel.pojo.User;
 import com.travel.service.PortalService;
 
 public class PortalAction extends ActionSupport {
@@ -235,4 +237,5 @@ public class PortalAction extends ActionSupport {
 		return SUCCESS;
 		//this.portalWorkList=portalService.queryPortalByType("¹¤×÷¶¯Ì¬", 5);
 	}
+	
 }
