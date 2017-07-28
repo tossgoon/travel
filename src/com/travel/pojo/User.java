@@ -13,6 +13,10 @@ public class User implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3910337591207289366L;
 	private Integer id;
 	private String username;
 	private String telephone;

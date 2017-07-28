@@ -139,7 +139,6 @@
 	
 	<script type="text/javascript">
 		//保存数据
-		
 		function SavePortal(status)
 		{
 			var isshowpic=$("#isshowpicture")[0].checked;

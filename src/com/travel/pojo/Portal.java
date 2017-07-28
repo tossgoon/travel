@@ -12,6 +12,10 @@ public class Portal implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -38007605746601753L;
 	private Integer id;
 	private String title;
 	private String subtitle;
