@@ -81,6 +81,11 @@ public class UserAction extends ActionSupport {
 	}
 
 	public String query() {
+		if(getParam("param")!=null)
+		{
+			users = userService.queryUserByName("", User.class);
+			return "getalluser";
+		}
 		searchText = getParam("queryText");
 		users = userService.queryUserByName(searchText, User.class);
 		// setUsers(userService.queryUserByName(searchText, User.class));
@@ -98,7 +103,8 @@ public class UserAction extends ActionSupport {
 						user.getLoginname(), user.getPassword());
 				if (user1 != null) {
 					setErrorMsg("0");
-					ActionContext.getContext().getSession().put("loginname", user.getLoginname());//将
+					ActionContext.getContext().getSession().put("userid", user1.getId());//将用户id存储到loginname中
+					ActionContext.getContext().getSession().put("loginname", user1.getLoginname());//将用户姓名存储到loginname中
 					return SUCCESS;
 				} else {
 					setErrorMsg("密码错误。");

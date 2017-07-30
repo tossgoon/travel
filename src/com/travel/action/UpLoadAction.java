@@ -1,6 +1,8 @@
 package com.travel.action;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
@@ -21,12 +23,13 @@ public class UpLoadAction extends ActionSupport {
 	//private File fileData;
 	//private String fileDataFileName;// 文件名称
 	//private String fileDataContentType;// 文件MIME类型
+	
+	/*--单文件上传--*/
 	private String newFileName;
-	private File file;
+	private File file;//单文件的上传；对于多个文件上传，也是一个文件一个文件上传的
+	private String fileFileName;//
+	/*--多文件上传--*/
 
-	private String fileFileName;
-    
-    
 	public String getFileFileName() {
 		return fileFileName;
 	}
@@ -91,8 +94,10 @@ public class UpLoadAction extends ActionSupport {
 	public String execute() throws Exception {
 		/*String tbtype = ServletActionContext.getRequest()
 				.getParameter("tbtype");*/
+		//newFileNameList=new ArrayList();
 		String newName = fileIOService.uploadFile(fileFileName, file);
 		setNewFileName(newName);
+		//this.newFileNameList.add(newName);
 		return SUCCESS;
 	}
 }

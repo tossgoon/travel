@@ -66,11 +66,9 @@
 													list="#{'0':'保护区介绍','1':'工作动态','2':'政策法规','3':'政务公开','4':'志愿者之家','5':'科普知识','6':'联系我们'}"
 													label="选择类型" name="portal.type" onchange="ChangeSelect()"></s:select></td>
 										    </tr>
-
 											<tr>
 												<td><span>主标题</span></td>
 												<td><s:textfield class="form-control" id="portaltitle" name="portal.title"></s:textfield></td>
-												
 											</tr>
 											<tr>
 												<td><span>副标题</span></td>
@@ -85,9 +83,7 @@
 												<td>
 												 <div class="input-group date form_date" data-date-format="yyyy-mm-dd hh:ii:ss" >
 												    <s:textfield class="form-control" id="pubdate">
-												    
 												     <s:param name="value" ><s:date name="portal.pubdate" format="yyyy-MM-dd HH:mm:ss" /></s:param> 
-												    
 												    </s:textfield>
 												       <span class="input-group-addon"> 
 												           <span class="glyphicon glyphicon-calendar"></span>
@@ -273,6 +269,8 @@
 			    	     $("#uploadmsg").html("(√ 上传成功)");
 			    	     $("#uploadmsg").css("color","#008B00");
 			    	     $("#portalpictureurl").val(response.newFileName); 
+			    	     //$('#uploader-demo').append('<input  type="text" name="fileUrl" value="'+data.name+'"/>');
+			    	     //$( '#'+file.id ).addClass('upload-state-done');
 			    	   }
 			   });  
 			  

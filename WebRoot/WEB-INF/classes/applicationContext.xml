@@ -195,12 +195,25 @@
 	<bean id="portalAct" class="com.travel.action.PortalAction" scope="prototype">
 		<property name="portalService" ref="portalService"></property>
 	</bean>
-	
 	<bean id="fileIOService" class="com.travel.service.FileIOService">
 	</bean>
-	
 	<bean id="fileUpLoad" class="com.travel.action.UpLoadAction"
 		scope="prototype">
 		<property name="fileIOService" ref="fileIOService"></property>
+	</bean>
+	
+	<bean id="oaService" class="com.travel.service.OaService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="oaAct" class="com.travel.action.OaAction" scope="prototype">
+		<property name="oaService" ref="oaService"></property>
+		<property name="oaFileService" ref="oaFileService"></property>
+		<property name="oaReceiverService" ref="oaReceiverService"></property>
+	</bean>
+	<bean id="oaFileService" class="com.travel.service.OaFileService">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="oaReceiverService" class="com.travel.service.OaReceiverService">
+		<property name="dao" ref="dao"></property>
 	</bean>
 </beans>

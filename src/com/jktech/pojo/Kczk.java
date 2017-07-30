@@ -36,8 +36,6 @@ public class Kczk  implements java.io.Serializable {
      private Double latMars;
      private Double lngMars;
      //private byte[] shape;
-
-
     // Constructors
 
     /** default constructor */

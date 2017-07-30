@@ -1,6 +1,8 @@
 package com.travel.pojo;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Oa entity. @author MyEclipse Persistence Tools
@@ -19,7 +21,8 @@ public class Oa implements java.io.Serializable {
 	private String content;
 	private Timestamp pubdate;
 	private Integer creater;
-	private String status;
+	private Boolean status;
+	private Set<Oafile> oafiles = new HashSet<Oafile>();
 
 	// Constructors
 
@@ -28,11 +31,14 @@ public class Oa implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Oa(String title, String content, Timestamp pubdate, Integer creater) {
+	public Oa(String title, String content, Timestamp pubdate, Integer creater,
+			Boolean status, Set<Oafile> oafiles) {
 		this.title = title;
 		this.content = content;
 		this.pubdate = pubdate;
 		this.creater = creater;
+		this.status = status;
+		this.oafiles = oafiles;
 	}
 
 	// Property accessors
@@ -77,12 +83,20 @@ public class Oa implements java.io.Serializable {
 		this.creater = creater;
 	}
 
-	public String getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Set<Oafile> getOafiles() {
+		return oafiles;
+	}
+
+	public void setOafiles(Set<Oafile> oafiles) {
+		this.oafiles = oafiles;
 	}
 
 }
