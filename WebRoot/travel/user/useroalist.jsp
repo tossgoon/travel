@@ -46,95 +46,51 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">OA管理</div>
+			<div class="col-md-6">
+				<div class="panel panel-default" style="width:524px;margin:0 auto;">
+					<div class="panel-heading">我的发送</div>
 					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formOa" action="save" namespace="/oa"
-							style="width:100%;margin:0 auto;">
-							<s:hidden class="form-control" id="oaid" name="oa.id"
-								readonly="true"></s:hidden>
-							<table id="oainfo"
-								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
-								<tr>
-									<td><span>接收人</span></td>
-									<td colspan="3"><div class="input-group" style="width:800px;">
-											<input type="text" class="form-control" value="${oa}"	 id="receivers" readonly="readonly"> 
-											<span	class="input-group-btn">
-												<button class="btn btn-default" type="button"  data-toggle="modal" data-target="#userModal">选择...</button>
-											</span>
-										</div>
-										<!-- /input-group -->
-									</td>
-								</tr>
-								<tr>
-									<td><span>标题</span></td>
-									<td colspan="3"><s:textfield class="form-control" id="oatitle" name="oa.title"></s:textfield></td>
-								</tr>
-								<tr>
-									<td valign="top"><span>内容</span></td>
-									<td colspan="3"><s:textarea class="form-control"
-											style="resize: none;margin-bottom:10px;width:800px;"
-											rows="10" id="oacontent" name="oa.content"></s:textarea></td>
-								</tr>
-								<tr>
-									<td><span>发布日期</span></td>
-									<td style="width:260px;">
-										<div class="input-group date form_date"	data-date-format="yyyy-mm-dd hh:ii:ss">
-											<s:textfield class="form-control" id="oapubdate" name="oa.pubdate" >
-												<s:param name="value">
-													<s:date name="oapubdate" format="yyyy-MM-dd HH:mm:ss" />
-												</s:param>
-											</s:textfield>
-											<span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</td>
-									<td></td>
-									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox name="oa.status" id="chksend" onclick="return false"/>是否已发布</label> </td>
-								</tr>
-								<tr>
-								<td colspan="4"><hr style="border:1px solid;"/></td>
-								</tr>
-
-								<tr>
-									<td colspan="2"  style="font-size:14px;text-align:center;">附件上传</td><td colspan="2" style="font-size:14px;text-align:center;">已上传</td>
-								</tr>
-
-								<tr> 
-								    <td colspan="2"  valign="top"><div id="uploader"	style="width:300px;">
-										<div id="filePicker" style="float:left;font-size:14px;">选择...</div>
-											<a onclick="ResetUploader()" href="javascript:void(0);"	style="float:left;margin:7px;font-size:14px;">重置</a>
-											<button id="ctlBtn" type="button" class="btn btn-success" style="float:right;height:32px;font-size:14px;">开始上传</button>
-											<div id="thelist" class="uploader-list" style="clear:both;"></div>
-										</div>
-								    </td>
-									<td colspan="2"  valign="top">
-									<table style="width:100%;margin:0 auto;font-size:14px;" class="table">
-											<thead>
-												<tr>
-												    <th  style="display: none"> id</th>
-													<th  width="200" style="text-align:center;">名称</th>
-													<th  style="display: none">路径</th>
-													<th  width="100" style="text-align:center;">操作</th>
-												</tr>
-											</thead>
-											<tbody id="tbattach">
-											  <s:iterator value="oa.oafiles"  var="oafile">
-											     <tr>
-											        <td  style="display: none"> <s:property value="#oafile.id"/>   </td>
-													<td  width="200" style="text-align:center;"><s:property  value="#oafile.filename"/></td>
-													<td  style="display: none"><s:property value="#oafile.filepath"/></td>
-													<td  width="100" style="text-align:center;"><a href='javascript:void(0)' onclick='DeleteAtt(this)'>删除</a></td>
-											     </tr>
-											  </s:iterator>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-							</table>
+						<s:form action="querysend" namespace="/oa" class="form-inline" method="post" theme="simple">
+							<div style="margin:0 auto;" class="form-group">
+								<label style="margin-top:5px;margin-left:100px;float:left;">标题查询： </label>
+								<input style="width: 300px;float:left;" class="form-control" type="text"  name="queryText" value="${searchText}" /> 
+								
+								<input type="submit" class="btn btn-primary" value="查询" style="margin-left:5px;float:left;width:80px;" />
+								<a type="button" href="/travel/travel/user/useroa.jsp" class="btn btn-success" style="margin-left:5px;float:left;width:80px;">新增</a>
+							</div>
 						</s:form>
+
+						<table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" id="userlist" style="margin-top:20px;clear:both;">
+							<tr align="center" bgcolor="#3399cc" height="26px">
+								<td>ID</td>
+								<td width="160">标题</td>
+								<td width="100">发布日期</td>
+								<td width="100">状态</td>
+								<td width="100">操作</td>
+							</tr>
+
+							<c:forEach var="oa" items="${oasendlist}">
+								<tr align="center" height="24px">
+									<td>${oa.id}</td>
+									<td>${oa.title}</td>
+									<td>${oa.pubdate}</td>
+									<td> 
+                        				<c:if test="${oa.status!=true}">
+											未发布
+										</c:if>
+										<c:if test="${oa.status==true}">
+											已发布
+										</c:if>
+									</td>
+									<td>
+									    <c:if test="${oa.status!=true}">
+											<a href="/travel/oa/modify.action" style="margin-right:10px;">更改</a>
+											<a href="javascript:void(0)" onclick="DeleteOa()">删除</a>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
 					</div>
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
@@ -278,10 +234,9 @@
 				}
 			});
 		}
-		function DeleteOa() {
-			if ($("#oaid").val() != null&&$("#oaid").val() !="") {
+		function DeleteOa(id,a) {
 				$.ajax({
-					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
+					url : '/travel/oa/delete.action?id=' +id,
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -291,11 +246,7 @@
 					success : function(data) {
 						if (data.errorMsg == "0") {
 							//删除oa
-							$("#oaid").val('');
-							$("#oatitle").val('');
-							$("#oacontent").val('');
-							$("#tbattach tr").empty();
-							ResetUploader();
+							$(a).parent.parent().remove();
 							alert("删除完成");
 						} else {
 							alert(data.errorMsg);
@@ -305,7 +256,7 @@
 						alert(XMLHttpRequest.status);
 					}
 				});
-			}
+			
 		}
 		var uploader;
 		$(function() {

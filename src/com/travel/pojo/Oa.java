@@ -2,6 +2,7 @@ package com.travel.pojo;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,7 +23,7 @@ public class Oa implements java.io.Serializable {
 	private Timestamp pubdate;
 	private Integer creater;
 	private Boolean status;
-	private Set<Oafile> oafiles = new HashSet<Oafile>();
+	private Set<Oafile> oafiles ;
 
 	// Constructors
 

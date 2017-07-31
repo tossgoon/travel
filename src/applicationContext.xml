@@ -180,16 +180,16 @@
 	<bean id="kcdcxxAct" class="com.jktech.action.KcdcxxAction" scope="prototype">
 		<property name="kcdcxxService" ref="kcdcxxService"></property>
 	</bean> -->
-	<bean id="dao" class="com.travel.dao.BaseDao">
+	<bean id="dao" class="com.travel.dao.BaseDao"  scope="prototype">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="userService" class="com.travel.service.UserService">
+	<bean id="userService" class="com.travel.service.UserService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
 	</bean>
 	<bean id="userAct" class="com.travel.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
-	<bean id="portalService" class="com.travel.service.PortalService">
+	<bean id="portalService" class="com.travel.service.PortalService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
 	</bean>
 	<bean id="portalAct" class="com.travel.action.PortalAction" scope="prototype">
@@ -197,23 +197,23 @@
 	</bean>
 	<bean id="fileIOService" class="com.travel.service.FileIOService">
 	</bean>
-	<bean id="fileUpLoad" class="com.travel.action.UpLoadAction"
-		scope="prototype">
+	<bean id="fileUpLoad" class="com.travel.action.UpLoadAction" scope="prototype">
 		<property name="fileIOService" ref="fileIOService"></property>
 	</bean>
 	
-	<bean id="oaService" class="com.travel.service.OaService">
+	<bean id="oaService" class="com.travel.service.OaService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
-	</bean>
+	</bean> 
 	<bean id="oaAct" class="com.travel.action.OaAction" scope="prototype">
 		<property name="oaService" ref="oaService"></property>
 		<property name="oaFileService" ref="oaFileService"></property>
 		<property name="oaReceiverService" ref="oaReceiverService"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
-	<bean id="oaFileService" class="com.travel.service.OaFileService">
+	<bean id="oaFileService" class="com.travel.service.OaFileService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
 	</bean>
-	<bean id="oaReceiverService" class="com.travel.service.OaReceiverService">
+	<bean id="oaReceiverService" class="com.travel.service.OaReceiverService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
 	</bean>
 </beans>
