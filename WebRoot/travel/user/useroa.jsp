@@ -54,12 +54,12 @@
 							style="width:100%;margin:0 auto;">
 							<s:hidden class="form-control" id="oaid" name="oa.id"
 								readonly="true"></s:hidden>
-							<table id="oainfo"
-								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
+							<table id="oainfo"	style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
 								<tr>
 									<td><span>接收人</span></td>
-									<td colspan="3"><div class="input-group" style="width:800px;">
-											<input type="text" class="form-control" value="${oa}"	 id="receivers" readonly="readonly"> 
+									<td colspan="3">
+									   <div class="input-group" style="width:800px;" >
+											<input type="text" class="form-control" value="${oareceivernames}"	 id="receivers" readonly="readonly"> 
 											<span	class="input-group-btn">
 												<button class="btn btn-default" type="button"  data-toggle="modal" data-target="#userModal">选择...</button>
 											</span>
@@ -140,7 +140,7 @@
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
 					    <a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
-						<c:if test="${oa.status!=1}">
+						<c:if test="${oa.status!=true}">
 							<button type="button" id="btnsave" class="btn btn-primary" onclick="SaveOa(0)">保存数据</button>
 							<button type="button" id="btnsend" style="margin-left:10px;margin-right:10px;"
 								class="btn btn-success"  onclick="SaveOa(1)">发布数据</button>
@@ -310,6 +310,7 @@
 		var uploader;
 		$(function() {
 			//初始化日期控件
+			receiverids='${oareceivers}';//初始化
 			$('.form_date').datetimepicker({
 				language : 'zh-CN',
 				weekStart : 1,
@@ -467,6 +468,8 @@
 			$(delrow).remove();
 		}
 		function InitAllUsers(){
+			var recs=receiverids.split(";");
+			
 			$.ajax({
 				url : '/travel/user/query.action?param=1',
 				type : 'GET',
@@ -477,7 +480,21 @@
 				// 成功是调用的方法
 				success : function(data) {
 					$.each(data.users, function(index,user){
-					    var row="<tr style='text-align:center;'> <td><input type='checkbox' /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
+						var isin=false;
+						for(var i=0;i<recs.length;i++){
+						   if(recs[i]==user.id){
+							   isin=true;
+							   break;
+						   }	
+						}
+						var row="";
+						if(isin){
+							 var row="<tr style='text-align:center;'> <td><input type='checkbox' checked='true' /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
+						}
+						else{
+							 var row="<tr style='text-align:center;'> <td><input type='checkbox'  /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
+						}
+					   
 					    $("#tbuser").append(row);
 					});
 				},

@@ -1,6 +1,7 @@
 package com.travel.pojo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class Oa implements java.io.Serializable {
 	private Integer creater;
 	private Boolean status;
 	private Set<Oafile> oafiles ;
+	private String pubdatestr;
 
 	// Constructors
 
@@ -99,5 +101,22 @@ public class Oa implements java.io.Serializable {
 	public void setOafiles(Set<Oafile> oafiles) {
 		this.oafiles = oafiles;
 	}
+	
+
+	public String getPubdatestr() {
+		if(pubdate!=null)
+		{
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");  
+			pubdatestr=sdf.format(pubdate);
+		}
+		return pubdatestr;
+	}
+
+	public void setPubdatestr(String pubdatestr) {
+		this.pubdatestr = pubdatestr;
+	}
+
+
+
 
 }

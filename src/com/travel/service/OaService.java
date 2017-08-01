@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.travel.dao.BaseDao;
+import com.travel.pojo.Oa;
 
 public class OaService<T> {
 
@@ -22,6 +23,21 @@ public class OaService<T> {
 
 	public void updateOa(T Oa) throws Exception {
 		dao.updateObject(Oa);
+	}
+	
+	public void updateOaWithoutUser(Oa oa) throws Exception{
+		String queryString = "update Oa oa set oa.content=?,oa.pubdate=?,oa.status=?,oa.title=? where oa.id=?";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setString(0, oa.getContent());
+		query.setDate(1, oa.getPubdate());
+		query.setBoolean(2, oa.getStatus());
+		query.setString(3, oa.getTitle());
+		query.setInteger(4, oa.getId());
+		query.executeUpdate();
+		session.close();
 	}
 
 	public void deleteOa(int id, Class<T> Oa) throws Exception {

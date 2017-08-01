@@ -52,6 +52,16 @@ public class OaReceiverService<T> {
 		String queryString = "from Oareceiver oareceiver where oareceiver.oaid =" + oaid;
 		return dao.getObjects(queryString);
 	}
+	public void deleteReceiversByOa(int oaid,Class<T> clazz) throws Exception
+	{
+		String queryString = "delete from Oareceiver f where f.oaid = ? ";
+		SessionFactory sessionFactory=dao.getHibernateTemplate().getSessionFactory();
+		Session session=(Session) sessionFactory.openSession();//
+		Query query=session.createQuery(queryString);
+		query.setInteger(0, oaid);
+		query.executeUpdate();
+		session.close();
+	}
 
 	/*public List<T> queryPortalByType(String portalType,int topnum)
 	{

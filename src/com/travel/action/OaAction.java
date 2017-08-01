@@ -34,8 +34,8 @@ public class OaAction extends ActionSupport {
 	private List<Oa> oareceivelist;
 	// private List<String>oafilelist=new ArrayList();
 	private String oafilestr;
-	private String oareceivers;// 接收人id
-	private String oareceivernames;// 接收人姓名
+	private String oareceivers="";// 接收人id
+	private String oareceivernames="";// 接收人姓名
 	private OaFileService<Oafile> oaFileService;
 	private OaReceiverService<Oareceiver> oaReceiverService;
 	private UserService<User> userService;
@@ -152,11 +152,14 @@ public class OaAction extends ActionSupport {
 
 	public String update() {
 		try {
-			oaService.updateOa(oa);
+			oaService.updateOaWithoutUser(oa);
 			// 先删除旧的附件
 			this.oaFileService.deleteOafileByOaid(oa.getId(), Oafile.class);
 			// 再增加oa附件
 			AddOaFiles(oafilestr);
+			//先删除旧的接收人
+			this.oaReceiverService.deleteReceiversByOa(oa.getId(), Oareceiver.class);
+			AddOaReceivers();// 增加接收人
 			setErrorMsg("0");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -177,7 +180,6 @@ public class OaAction extends ActionSupport {
 			
 			Set<Oafile> set=new HashSet<Oafile>();         
 	        set.addAll(oafilelist);//给set填充   
-			
 			oa.setOafiles(set);
 			// 获取oa接收人
 			List<Oareceiver> receiverlist = this.oaReceiverService.queryOaReceiverByOaid(id, Oareceiver.class);
@@ -187,10 +189,10 @@ public class OaAction extends ActionSupport {
 				User user = userService.getUser(User.class, userid);
 				this.oareceivernames += user.getUsername() + ";";
 			}
-			if(oareceivers.endsWith(";")){
+			if(oareceivers!=null&&  oareceivers.endsWith(";")){
 				oareceivers=oareceivers.substring(0,oareceivers.length()-1);
 			}
-			if(oareceivernames.endsWith(";")){
+			if(oareceivernames!=null&&oareceivernames.endsWith(";")){
 				oareceivernames=oareceivernames.substring(0,oareceivernames.length()-1);
 			}
 			this.setOareceivers(oareceivers);
@@ -246,6 +248,7 @@ public class OaAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
 
 	public String getErrorMsg() {
 		return errorMsg;
