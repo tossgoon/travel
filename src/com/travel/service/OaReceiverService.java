@@ -45,7 +45,7 @@ public class OaReceiverService<T> {
 	}
 	
 	public List<T> queryOaReceiverByUserid(int userid, Class<T> clazz) {
-		String queryString = "from Oareceiver oareceiver where oareceiver.userid =" + userid;
+		String queryString = "from Oareceiver oareceiver where oareceiver.userid =" + userid+" order by isread asc,id desc ";
 		return dao.getObjects(queryString);
 	}
 	public List<T> queryOaReceiverByOaid(int oaid, Class<T> clazz) {

@@ -248,15 +248,6 @@
  			<result name="success">/travel/user/userlist.jsp</result>
 			 <result name="getalluser" type="json"></result> 
 		</action>
-		
-		<action name="loginsuccess" class="userAct" method="loginsuccess">
-		  <result name="normal">/travel/user/useroalist.jsp</result>
-		  <result name="admin">/portal/portallist.jsp</result>
-		 <!--  <result name="login" type="redirectAction">
-		      <param name="actionName">first</param>
-		      <param name="namespace">/visitor</param>
-		  </result> -->
-		</action>
 	</package>
 
     <package name="portalpack" extends="struts-default,json-default,usercheck"
@@ -375,10 +366,21 @@
 			<!-- <result name="success" type="json"></result> -->
 		</action>
 		
+		<action name="queryreceive" class="oaAct" method="queryreceive">
+ 			<result name="success">/travel/user/useroalist.jsp</result>
+ 			<result name="error">/travel/user/error.jsp</result>
+		</action>
+		
 		<action name="save" class="oaAct" method="save">
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
+		
+		<action name="loginsuccess" class="oaAct" method="loginsuccess">
+		  <result name="normal">/travel/user/useroalist.jsp</result>
+		  <result name="admin">/portal/portallist.jsp</result>
+		</action>
+		
 	</package>
 	
 	<package name="fileio" extends="struts-default,json-default" namespace="/fileio">

@@ -30,8 +30,8 @@ public class OaAction extends ActionSupport {
 	private OaService<Oa> oaService;
 	private String searchText;
 	private List<Oa> oalist;
-	private List<Oa> oasendlist;
-	private List<Oa> oareceivelist;
+	private List<Oa> oasendlist;//发送列表
+	private List<Oa> oareceivelist;//接收列表
 	// private List<String>oafilelist=new ArrayList();
 	private String oafilestr;
 	private String oareceivers="";// 接收人id
@@ -227,8 +227,37 @@ public class OaAction extends ActionSupport {
 					.get("userid");
 			oasendlist = oaService.queryOaByName(userid, Oa.class, searchText);
 		}
-		else {
-
+		return SUCCESS;
+	}
+	
+	public String queryreceive()
+	{
+		searchText = "";
+		if (getParam("queryText") != null) {
+			searchText = getParam("queryText");
+		}
+		if (ActionContext.getContext().getSession().get("userid") != null) {
+			Integer userid = (Integer) ActionContext.getContext().getSession().get("userid");
+			List<Oareceiver> receiverList=this.oaReceiverService.queryOaReceiverByUserid(userid, Oareceiver.class);
+			this.oareceivelist=new ArrayList<Oa>();
+			if(receiverList!=null)
+			{
+				for(int i=0;i<receiverList.size();i++)
+				{
+					Oa oa=new Oa();
+					Oareceiver oares=receiverList.get(i);
+					oa=oaService.getOa(Oa.class, oares.getOaid());
+					if(oares.getIsread()!=null&&oares.getIsread()){
+						oa.setIsread(true);
+					}
+					else{
+						oa.setIsread(false);
+					}
+					User user= this.userService.getUser(User.class, oa.getCreater());
+					oa.setSenduser(user.getUsername());
+					oareceivelist.add(oa);
+				}
+			}
 		}
 		return SUCCESS;
 	}
@@ -249,6 +278,29 @@ public class OaAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String loginsuccess(){
+		try {
+			if (ActionContext.getContext().getSession().get("userid") != null){
+				Integer	userid = (Integer) ActionContext.getContext().getSession().get("userid");
+				User user=this.userService.getUser(User.class, userid);
+				if(user.getUsertype()=="9"){
+					return "admin";
+				}
+				else{
+					querysend();
+					queryreceive();
+					return "normal";
+				}
+			}
+			else{
+				setErrorMsg("用户未登陆。");
+				return ERROR;
+			}
+		} catch (Exception ex) {
+			setErrorMsg("访问出错。" + ex.getMessage());
+			return ERROR;
+		}
+	}
 
 	public String getErrorMsg() {
 		return errorMsg;

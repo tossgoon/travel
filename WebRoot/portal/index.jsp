@@ -167,7 +167,7 @@ body {
 
 			<c:if test="${sessionScope.loginname!=null}">
 				<div style="float:right;" id="divwelcome">
-					<span id="labelwelcome">欢迎登陆,${sessionScope.loginname}。</span> <a href="/travel/user/loginsuccess.action"> &gt;&gt;点击进入OA </a>
+					<span id="labelwelcome">欢迎登陆,${sessionScope.loginname}。</span> <a href="/travel/oa/loginsuccess.action"> &gt;&gt;点击进入OA </a>
 				</div>
 			</c:if>
 		</div>
@@ -253,7 +253,7 @@ body {
 						//$("#labelwelcome").html("欢迎登陆,"+loginname+"。");
 						//$("#divwelcome").show();
 						//$("#formLogin").hide();
-						$("#formLogin").html("<a href='/travel/user/loginsuccess.action' style='float:right'> &gt;&gt;点击进入OA </a>"+"<span id='labelwelcome' style='float:right;'>欢迎登陆,"+loginname+"。</span> ");
+						$("#formLogin").html("<a href='/travel/oa/loginsuccess.action' style='float:right'> &gt;&gt;点击进入OA </a>"+"<span id='labelwelcome' style='float:right;'>欢迎登陆,"+loginname+"。</span> ");
 						//window.location.reload();
 					}
 					else{

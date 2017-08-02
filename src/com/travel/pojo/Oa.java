@@ -26,6 +26,8 @@ public class Oa implements java.io.Serializable {
 	private Boolean status;
 	private Set<Oafile> oafiles ;
 	private String pubdatestr;
+	private Boolean isread;
+	private String senduser;
 
 	// Constructors
 
@@ -114,6 +116,22 @@ public class Oa implements java.io.Serializable {
 
 	public void setPubdatestr(String pubdatestr) {
 		this.pubdatestr = pubdatestr;
+	}
+
+	public Boolean getIsread() {
+		return isread;
+	}
+
+	public void setIsread(Boolean isread) {
+		this.isread = isread;
+	}
+
+	public String getSenduser() {
+		return senduser;
+	}
+
+	public void setSenduser(String senduser) {
+		this.senduser = senduser;
 	}
 
 

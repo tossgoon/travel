@@ -117,26 +117,6 @@ public class UserAction extends ActionSupport {
 		}
 	}
 	
-	public String loginsuccess(){
-		try {
-			if(user!=null){
-				if(user.getUsertype()=="9"){
-					return "admin";
-				}
-				else{
-					return "normal";
-				}
-			}
-			else{
-				setErrorMsg("用户未登陆。");
-				return ERROR;
-			}
-		} catch (Exception ex) {
-			setErrorMsg("访问出错。" + ex.getMessage());
-			return ERROR;
-		}
-	}
-	
 	public List<User> getUsers() {
 		return users;
 	}

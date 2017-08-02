@@ -16,5 +16,8 @@
         <property name="oaid" type="java.lang.Integer">
             <column name="oaid" />
         </property>
+         <property name="isread" type="java.lang.Boolean">
+            <column name="isread" sql-type="tinyint(1)"/>
+        </property>
     </class>
 </hibernate-mapping>
