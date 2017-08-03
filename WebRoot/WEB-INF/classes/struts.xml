@@ -248,6 +248,11 @@
  			<result name="success">/travel/user/userlist.jsp</result>
 			 <result name="getalluser" type="json"></result> 
 		</action>
+		<action name="querypage" class="userAct" method="queryByPage">
+ 			<result name="success">/travel/user/userlist.jsp</result>
+			 <result name="error" type="json"></result> 
+		</action>
+		
 	</package>
 
     <package name="portalpack" extends="struts-default,json-default,usercheck"
@@ -378,7 +383,12 @@
 		
 		<action name="loginsuccess" class="oaAct" method="loginsuccess">
 		  <result name="normal">/travel/user/useroalist.jsp</result>
-		  <result name="admin">/portal/portallist.jsp</result>
+		  <!-- <result name="admin">/portal/portallist.jsp</result> -->
+		   <!-- <result name="admin" type="redirect">/travel/user/querypage</result>   -->
+		   <result name="admin" type="redirectAction">
+		      <param name="actionName">querypage</param>
+		      <param name="namespace">/user</param>
+		    </result> 
 		</action>
 		
 	</package>

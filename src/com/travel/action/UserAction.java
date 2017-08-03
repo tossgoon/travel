@@ -8,8 +8,10 @@ import org.apache.struts2.json.annotations.JSON;
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.page.SplitPage;
 import com.travel.pojo.User;
 import com.travel.service.UserService;
+
 
 public class UserAction extends ActionSupport {
 	/**
@@ -21,6 +23,7 @@ public class UserAction extends ActionSupport {
 	private String searchText;
 	private List<User> users;
 	private String errorMsg;
+	private SplitPage page;
 	public UserAction() {
 
 	}
@@ -91,6 +94,20 @@ public class UserAction extends ActionSupport {
 		// setUsers(userService.queryUserByName(searchText, User.class));
 		return SUCCESS;
 	}
+	
+	public String queryByPage() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// Ã¿Ò³ÐÐÊý
+			pagenum = Integer.parseInt(getParam("pagenum"));// Ò³Âë
+		}
+		users = userService.queryUserByPage(User.class, pagesize, pagenum);
+		int num = userService.getUserCount();
+		page = new SplitPage(num);
+		page.setCurrentPage(pagenum);
+		return SUCCESS;
+	}
 
 	public String login() {
 		try {
@@ -148,5 +165,13 @@ public class UserAction extends ActionSupport {
 
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
+	}
+
+	public SplitPage getPage() {
+		return page;
+	}
+
+	public void setPage(SplitPage page) {
+		this.page = page;
 	}
 }

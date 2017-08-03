@@ -68,6 +68,32 @@ public class UserService<T> {
 		return dao.getObjects(queryString);
 	}
 	
+	public int getUserCount(){
+		String queryString="select count(*) from User as user";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> queryUserByPage(Class<T> clazz,int pagesize,int pagenum){
+		String queryString="from User u order by u.id";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		List<User>list=(List<User>)query.list();
+		session.close();
+		return list;
+	}
+	
 	public T queryUserByName(String loginname){
 		if (loginname == null )
 			return null;

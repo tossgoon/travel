@@ -283,7 +283,8 @@ public class OaAction extends ActionSupport {
 			if (ActionContext.getContext().getSession().get("userid") != null){
 				Integer	userid = (Integer) ActionContext.getContext().getSession().get("userid");
 				User user=this.userService.getUser(User.class, userid);
-				if(user.getUsertype()=="9"){
+				if( user.getUsertype().equals("9")){
+					//
 					return "admin";
 				}
 				else{
