@@ -9,6 +9,20 @@
 	
 	String rootPath = application.getRealPath( "/" );
 	
-	out.write( new ActionEnter( request, rootPath ).exec() );
+	//String action=request.getParameter("action");
+	//out.println(action);
+	//out.print
 	
+	//out.write( new ActionEnter( request, rootPath ).exec() );
+	//以下为修改内容
+	String action=request.getParameter("action");
+	//out.println(action);  
+	String result=new ActionEnter( request, rootPath ).exec();
+	//out.println(result);  
+	if(action!=null&&(action.equals("uploadimage")) ){
+		//rootPath=rootPath.replace("\\", "/");
+		result=result.replace("../", "");
+	}
+	out.write(result);
+	//out.write( new ActionEnter( request, rootPath ).exec() );
 %>

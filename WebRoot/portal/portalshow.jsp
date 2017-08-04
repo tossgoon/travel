@@ -29,11 +29,12 @@
 	<div class="container" style="width:100%;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin-top:30px;">网站编辑：新增内容</label>
+				<label style="font-size:20px;font-weight:normal;margin-top:30px;"> ${portal.title}</label>
 			</div>
 		</div>
 		<hr />
 		<div class="row">
+		
 			<div class="col-md-12">
 			   ${portal.content}
 			</div>

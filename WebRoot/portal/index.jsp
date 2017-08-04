@@ -106,16 +106,35 @@ body {
 	font-size: 18px;
 	color: #2E2E2E;
 	text-decoration: none;
-	margin-left:20px;
+	margin-left: 20px;
 }
 
 .title1 a:hover {
-    color:#006400;
+	color: #006400;
 	text-decoration: none;
 }
 
 .title2 {
-	margin-left:20px;
+	margin-left: 20px;
+}
+
+.titlepanel {
+	font-size: 18px;
+	padding-left: 20px;
+}
+
+.titlepaneldiv {
+	border-bottom: 3px solid #1C86EE;
+	width: 120px;
+	position: relative;
+	top: 1px;
+	padding-bottom: 12px;
+	font-weight: bold;
+}
+
+.panelcontent {
+	border-top: 1px solid #A8A8A8;
+	padding-top:12px;
 }
 </style>
 </head>
@@ -221,11 +240,27 @@ body {
 	</div>
 	<div class="maincontent" style="padding-top:20px;">
 		<c:forEach var="portal" items="${portalWorkList}" varStatus="status">
+			<p class="title1"><a href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a></p>
+			<p class="title2"> ${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${portal.subtitle} </p>
+			<hr style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;'/>
+		</c:forEach>
+	</div>
+	
+	<div class="maincontent" style="padding-top:20px;">
+	
+	<div class="titlepaneldiv"><span class="titlepanel">政策法规</span></div>
+	<div class="panelcontent">
+	<c:forEach var="portal" items="${portalLawList}" varStatus="status">
 			<p class="title1"><a href="/travel/portal/show.action?id=${portal.id}">${portal.title}</a></p>
 			<p class="title2"> ${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${portal.subtitle} </p>
 			<hr style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;'/>
 		</c:forEach>
 	</div>
+		
+	</div>
+	
+	
+	<%@ include file="footmodal.jsp"%>
 	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
