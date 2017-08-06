@@ -1,9 +1,9 @@
 	<%@page pageEncoding="UTF-8"%>  
-	<div class="headlogo" id="logoindex" style="background-image:url(<%=contextPath%>/includes/image/logobk.png)">
-		<div style="width:1100px;margin:0 auto;">
+	<div class="headlogo" id="logoindex" style="background-image:url(<%=contextPath%>/includes/image/logobk1.jpg)">
+		<%-- <div style="width:1100px;margin:0 auto;">
 			<img alt="" style="margin-top:30px;"
 				src="<%=contextPath%>/includes/image/logofk.png">
-		</div>
+		</div> --%>
 	</div>
 	<div class="navbarhead">
 		<ul style="margin-left:auto;margin-right:auto;width:1100px;">

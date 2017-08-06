@@ -39,10 +39,19 @@
 
 <body>
    <%@ include file="/portal/headmodal.jsp"%>
+
 	<div class="container" style="width:100%;">
 		<div class="row">
+			<div class="col-md-12" style="text-align:left;margin-top:20px;">
+				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
+					<span>当前位置：OA管理>>用户工作箱</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">OA管理：用户工作箱</label>
+				<label style="font-size:20px;font-weight:normal;margin:30px;">OA管理：用户工作箱2</label>
 			</div>
 		</div>
 		<div class="row">
@@ -50,26 +59,29 @@
 				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
 					<div class="panel-heading">OA管理</div>
 					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formOa" action="save" namespace="/oa"
-							style="width:100%;margin:0 auto;">
+						<s:form role="form" theme="simple" id="formOa" action="save"
+							namespace="/oa" style="width:100%;margin:0 auto;">
 							<s:hidden class="form-control" id="oaid" name="oa.id"
 								readonly="true"></s:hidden>
-							<table id="oainfo"	style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
+							<table id="oainfo"
+								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
 								<tr>
 									<td><span>接收人</span></td>
 									<td colspan="3">
-									   <div class="input-group" style="width:800px;" >
-											<input type="text" class="form-control" value="${oareceivernames}"	 id="receivers" readonly="readonly"> 
-											<span	class="input-group-btn">
-												<button class="btn btn-default" type="button"  data-toggle="modal" data-target="#userModal">选择...</button>
+										<div class="input-group" style="width:800px;">
+											<input type="text" class="form-control"
+												value="${oareceivernames}" id="receivers"
+												readonly="readonly"> <span class="input-group-btn">
+												<button class="btn btn-default" type="button"
+													data-toggle="modal" data-target="#userModal">选择...</button>
 											</span>
-										</div>
-										<!-- /input-group -->
+										</div> <!-- /input-group -->
 									</td>
 								</tr>
 								<tr>
 									<td><span>标题</span></td>
-									<td colspan="3"><s:textfield class="form-control" id="oatitle" name="oa.title"></s:textfield></td>
+									<td colspan="3"><s:textfield class="form-control"
+											id="oatitle" name="oa.title"></s:textfield></td>
 								</tr>
 								<tr>
 									<td valign="top"><span>内容</span></td>
@@ -80,8 +92,10 @@
 								<tr>
 									<td><span>发布日期</span></td>
 									<td style="width:260px;">
-										<div class="input-group date form_date"	data-date-format="yyyy-mm-dd hh:ii:ss">
-											<s:textfield class="form-control" id="oapubdate" name="oa.pubdate" >
+										<div class="input-group date form_date"
+											data-date-format="yyyy-mm-dd hh:ii:ss">
+											<s:textfield class="form-control" id="oapubdate"
+												name="oa.pubdate">
 												<s:param name="value">
 													<s:date name="oapubdate" format="yyyy-MM-dd HH:mm:ss" />
 												</s:param>
@@ -92,43 +106,53 @@
 										</div>
 									</td>
 									<td></td>
-									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox name="oa.status" id="chksend" onclick="return false"/>是否已发布</label> </td>
+									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox
+												name="oa.status" id="chksend" onclick="return false" />是否已发布</label>
+									</td>
 								</tr>
 								<tr>
-								<td colspan="4"><hr style="border:1px solid;"/></td>
+									<td colspan="4"><hr style="border:1px solid;" /></td>
 								</tr>
 
 								<tr>
-									<td colspan="2"  style="font-size:14px;text-align:center;">附件上传</td><td colspan="2" style="font-size:14px;text-align:center;">已上传</td>
+									<td colspan="2" style="font-size:14px;text-align:center;">附件上传</td>
+									<td colspan="2" style="font-size:14px;text-align:center;">已上传</td>
 								</tr>
 
-								<tr> 
-								    <td colspan="2"  valign="top"><div id="uploader"	style="width:300px;">
-										<div id="filePicker" style="float:left;font-size:14px;">选择...</div>
-											<a onclick="ResetUploader()" href="javascript:void(0);"	style="float:left;margin:7px;font-size:14px;">重置</a>
-											<button id="ctlBtn" type="button" class="btn btn-success" style="float:right;height:32px;font-size:14px;">开始上传</button>
+								<tr>
+									<td colspan="2" valign="top"><div id="uploader"
+											style="width:300px;">
+											<div id="filePicker" style="float:left;font-size:14px;">选择...</div>
+											<a onclick="ResetUploader()" href="javascript:void(0);"
+												style="float:left;margin:7px;font-size:14px;">重置</a>
+											<button id="ctlBtn" type="button" class="btn btn-success"
+												style="float:right;height:32px;font-size:14px;">开始上传</button>
 											<div id="thelist" class="uploader-list" style="clear:both;"></div>
-										</div>
-								    </td>
-									<td colspan="2"  valign="top">
-									<table style="width:100%;margin:0 auto;font-size:14px;" class="table">
+										</div></td>
+									<td colspan="2" valign="top">
+										<table style="width:100%;margin:0 auto;font-size:14px;"
+											class="table">
 											<thead>
 												<tr>
-												    <th  style="display: none"> id</th>
-													<th  width="200" style="text-align:center;">名称</th>
-													<th  style="display: none">路径</th>
-													<th  width="100" style="text-align:center;">操作</th>
+													<th style="display: none">id</th>
+													<th width="200" style="text-align:center;">名称</th>
+													<th style="display: none">路径</th>
+													<th width="100" style="text-align:center;">操作</th>
 												</tr>
 											</thead>
 											<tbody id="tbattach">
-											  <s:iterator value="oa.oafiles"  var="oafile">
-											     <tr>
-											        <td  style="display: none"> <s:property value="#oafile.id"/>   </td>
-													<td  width="200" style="text-align:center;"><s:property  value="#oafile.filename"/></td>
-													<td  style="display: none"><s:property value="#oafile.filepath"/></td>
-													<td  width="100" style="text-align:center;"><a href='javascript:void(0)' onclick='DeleteAtt(this)'>删除</a></td>
-											     </tr>
-											  </s:iterator>
+												<s:iterator value="oa.oafiles" var="oafile">
+													<tr>
+														<td style="display: none"><s:property
+																value="#oafile.id" /></td>
+														<td width="200" style="text-align:center;"><s:property
+																value="#oafile.filename" /></td>
+														<td style="display: none"><s:property
+																value="#oafile.filepath" /></td>
+														<td width="100" style="text-align:center;"><a
+															href='javascript:void(0)' onclick='DeleteAtt(this)'>删除</a></td>
+													</tr>
+												</s:iterator>
 											</tbody>
 										</table>
 									</td>
@@ -139,19 +163,22 @@
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-					    <a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
+						<a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
 						<c:if test="${oa.status!=true}">
-							<button type="button" id="btnsave" class="btn btn-primary" onclick="SaveOa(0)">保存数据</button>
-							<button type="button" id="btnsend" style="margin-left:10px;margin-right:10px;"
-								class="btn btn-success"  onclick="SaveOa(1)">发布数据</button>
-							<button type="button" id="btndel" class="btn btn-warning"onclick="DeleteOa()">删除数据</button>
+							<button type="button" id="btnsave" class="btn btn-primary"
+								onclick="SaveOa(0)">保存数据</button>
+							<button type="button" id="btnsend"
+								style="margin-left:10px;margin-right:10px;"
+								class="btn btn-success" onclick="SaveOa(1)">发布数据</button>
+							<button type="button" id="btndel" class="btn btn-warning"
+								onclick="DeleteOa()">删除数据</button>
 						</c:if>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="height:610px;width:460px;">

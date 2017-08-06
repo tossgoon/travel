@@ -8,8 +8,9 @@ public class SplitPage {
 		// TODO Auto-generated constructor stub
 		
 	}
-	public SplitPage(int totalRows){
+	public SplitPage(int totalRows,int pageRow){
 		this.totalRow=totalRows;
+		this.pageRow=pageRow;
 		this.totalPage = this.totalRow / this.pageRow
 				+ ((this.totalRow % this.pageRow == 0) ? 0 : 1);
 	}

@@ -79,6 +79,12 @@
 												<td><s:textfield class="form-control" id="portalfoottitle" name="portal.foottitle"></s:textfield></td>
 											</tr>
 											<tr>
+												<td><span>状态</span></td>
+												<td><s:select class="form-control" id="portalstatus"
+													list="#{'0':'未发布','1':'已发布'}"
+													label="选择状态" name="portal.status"></s:select></td>
+											</tr>
+											<tr>
 												<td><span>发布日期</span></td>
 												<td>
 												 <div class="input-group date form_date" data-date-format="yyyy-mm-dd hh:ii:ss" >
@@ -112,9 +118,7 @@
 					<div style="float:right;">
 					    <a href="/travel/portal/editor.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" class="btn btn-primary"
-							onclick="SavePortal('0')">保存数据</button>
-						<button type="button" style="margin-left:10px;margin-right:10px;"
-							class="btn btn-success" onclick="SavePortal('1')">发布数据</button>
+							onclick="SavePortal()">保存数据</button>
 						<button type="button" class="btn btn-warning" onclick="DeletePortal()">删除数据</button>
 					</div>
 				</div>
@@ -135,7 +139,7 @@
 	
 	<script type="text/javascript">
 		//保存数据
-		function SavePortal(status)
+		function SavePortal()
 		{
 			var isshowpic=$("#isshowpicture")[0].checked;
 			$.ajax({
@@ -149,7 +153,7 @@
 					  "portal.subtitle":$("#portalsubtitle").val(),
 					  "portal.foottitle":$("#portalfoottitle").val(),
 					  "portal.isshowpicture":isshowpic,
-					  "portal.status":status,
+					  "portal.status":$("#portalstatus").val(),
 					  "portal.pubdate":$("#pubdate").val(),
 					  "portal.pictureurl":$("#portalpictureurl").val(),
 					  "portal.content":ue.getContent()

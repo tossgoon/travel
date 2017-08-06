@@ -290,6 +290,7 @@ public class OaAction extends ActionSupport {
 				else{
 					querysend();
 					queryreceive();
+					
 					return "normal";
 				}
 			}

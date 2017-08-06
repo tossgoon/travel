@@ -36,6 +36,14 @@
 
 	<div class="container" style="width:100%;">
 		<div class="row">
+			<div class="col-md-12" style="text-align:left;margin-top:20px;">
+				<div
+					style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
+					<span>当前位置：OA管理>>用户管理</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
 				<label style="font-size:20px;font-weight:normal;margin:30px;">后台管理：用户管理</label>
 			</div>
@@ -90,10 +98,10 @@
 
 					<div class="panel-footer">
 						<a id="firstpage" href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a> 
-						<a id="lastpage"  href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }>" >上一页</a> 
+						<a id="lastpage"  href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
 						<a id="nextpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
-						<a id="endpage" href="/travel/user/querypage.action?pagesize=10&pagenum=1" >最后一页</a>
-						<label id="pagecount"> ${page.currentPage-1 }/${page.totalPage }</label>
+						<a id="endpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
+						<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 						<input value="新增用户" onclick="InsertUser()" type="button"
 									class="btn btn-primary"	style="margin-right:20px;margin-top:-6px; float:right;width:90px;" />
 					</div>

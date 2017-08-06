@@ -26,7 +26,7 @@
 </head>
 <body>
 	<%@ include file="headmodal.jsp"%>
-	<div class="container" style="width:100%;">
+	<div class="container" style="width:1024px;margin:0 auto;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
 				<label style="font-size:20px;font-weight:normal;margin-top:30px;"> ${portal.title}</label>
@@ -34,7 +34,6 @@
 		</div>
 		<hr />
 		<div class="row">
-		
 			<div class="col-md-12">
 			   ${portal.content}
 			</div>

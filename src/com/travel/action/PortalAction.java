@@ -229,11 +229,11 @@ public class PortalAction extends ActionSupport {
 		this.portalWorkPics=portalService.queryPortalOfPicturl(3);//首页照片(工作动态)
 		this.portalIntroList=portalService.queryPortalByType("0", 1);//保护区介绍
 		this.portalWorkList=portalService.queryPortalByType("1", 5);//工作动态
-		this.portalScienceList=portalService.queryPortalByType("2", 5);//政策法规
+		this.portalLawList=portalService.queryPortalByType("2", 5);//政策法规
 		this.portalAffairsList=portalService.queryPortalByType("3", 5);//政务公开
 		this.portalVolHomeList=portalService.queryPortalByType("4", 5);//志愿者之家
 		this.portalScienceList=portalService.queryPortalByType("5", 5);//科普知识
-		this.portalScienceList=portalService.queryPortalByType("6", 5);//联系我们
+		this.portalContactUsList=portalService.queryPortalByType("6", 5);//联系我们
 		return SUCCESS;
 		//this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
 	}

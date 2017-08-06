@@ -104,7 +104,7 @@ public class UserAction extends ActionSupport {
 		}
 		users = userService.queryUserByPage(User.class, pagesize, pagenum);
 		int num = userService.getUserCount();
-		page = new SplitPage(num);
+		page = new SplitPage(num,pagesize);
 		page.setCurrentPage(pagenum);
 		return SUCCESS;
 	}

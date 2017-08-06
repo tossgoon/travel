@@ -6,23 +6,15 @@
 
     request.setCharacterEncoding( "utf-8" );
 	response.setHeader("Content-Type" , "text/html");
-	
 	String rootPath = application.getRealPath( "/" );
-	
-	//String action=request.getParameter("action");
-	//out.println(action);
-	//out.print
-	
 	//out.write( new ActionEnter( request, rootPath ).exec() );
+	
 	//以下为修改内容
 	String action=request.getParameter("action");
-	//out.println(action);  
 	String result=new ActionEnter( request, rootPath ).exec();
-	//out.println(result);  
 	if(action!=null&&(action.equals("uploadimage")) ){
-		//rootPath=rootPath.replace("\\", "/");
+		//返回的结果字符串为json类型的数据，其中URL就包括在里面，直接把url改成你想要的格式
 		result=result.replace("../", "");
 	}
 	out.write(result);
-	//out.write( new ActionEnter( request, rootPath ).exec() );
 %>
