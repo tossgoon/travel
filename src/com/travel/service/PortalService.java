@@ -59,8 +59,10 @@ public class PortalService<T> {
 		Session session=(Session) sessionFactory.openSession();//
 		Query query=session.createQuery(queryString);
 		query.setString(0, portalType);
-		query.setFirstResult(0);
-		query.setMaxResults(topnum);
+		if(topnum>0){
+			query.setFirstResult(0);
+			query.setMaxResults(topnum);
+		}
 		@SuppressWarnings("unchecked")
 		List<T> result=(List<T>)query.list();
 		session.close();

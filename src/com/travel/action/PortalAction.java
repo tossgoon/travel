@@ -33,6 +33,7 @@ public class PortalAction extends ActionSupport {
 	private List<Portal> portalVolHomeList;//志愿者之家4
 	private List<Portal> portalScienceList;//科普知识5
 	private List<Portal> portalContactUsList;//联系我们6
+	private List<Portal> pictureList;//图片赏析7
 	
 	public PortalAction() {
 
@@ -234,8 +235,17 @@ public class PortalAction extends ActionSupport {
 		this.portalVolHomeList=portalService.queryPortalByType("4", 5);//志愿者之家
 		this.portalScienceList=portalService.queryPortalByType("5", 5);//科普知识
 		this.portalContactUsList=portalService.queryPortalByType("6", 5);//联系我们
+		this.setPictureList(portalService.queryPortalByType("7", 0));//图片赏析
 		return SUCCESS;
 		//this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
+	}
+
+	public List<Portal> getPictureList() {
+		return pictureList;
+	}
+
+	public void setPictureList(List<Portal> pictureList) {
+		this.pictureList = pictureList;
 	}
 	
 }

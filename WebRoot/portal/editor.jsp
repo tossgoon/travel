@@ -63,7 +63,7 @@
 											<tr>
 												<td><span>选择类型</span></td>
 											    <td><s:select class="form-control" id="portaltype"
-													list="#{'0':'保护区介绍','1':'工作动态','2':'政策法规','3':'政务公开','4':'志愿者之家','5':'科普知识','6':'联系我们'}"
+													list="#{'0':'保护区介绍','1':'工作动态','2':'政策法规','3':'政务公开','4':'志愿者之家','5':'科普知识','6':'联系我们','7':'图片赏析'}"
 													label="选择类型" name="portal.type" onchange="ChangeSelect()"></s:select></td>
 										    </tr>
 											<tr>
@@ -180,7 +180,7 @@
 		{
 			var options=$("#portaltype option:selected");
 			var portaltype=options.val();
-			if(portaltype=="1"){
+			if(portaltype=="1"||portaltype=="7"){
 				$("#uploader").show();
 			}
 			else{

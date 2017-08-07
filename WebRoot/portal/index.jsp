@@ -100,6 +100,7 @@ body {
 	margin: 0 auto;
 	float: left;
 }
+
 .rightpanel {
 	margin: 0 auto;
 	float: right;
@@ -109,7 +110,6 @@ body {
 .maincontent {
 	width: 1174px;
 	margin: 0 auto;
-
 	background-color: #ffffff;
 }
 
@@ -141,7 +141,7 @@ body {
 	top: 1px;
 	padding-bottom: 12px;
 	font-weight: bold;
-	padding-top:30px;
+	padding-top: 30px;
 }
 
 .panelcontent {
@@ -172,19 +172,50 @@ body {
 	border-bottom: 1px dotted;
 	font-size: 16px;
 }
-.morea{
-font-size:12px;
-float:right;
-margin-top:-15px;
+
+.morea {
+	font-size: 12px;
+	float: right;
+	margin-top: -15px;
 }
-.testfont{
-font-size:40px;font-weight:bold;margin-top:100px;
-font-family:KaiTi;
-color:red;
+
+.testfont {
+	font-size: 40px;
+	font-weight: bold;
+	margin-top: 100px;
+	font-family: KaiTi;
+	color: red;
 }
-.testfont1{
-font-size:20px;font-weight:bold;margin-top:10px;
-color:#FF7F00;
+
+.testfont1 {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+	color: #FF7F00;
+}
+/* 滚动图片 */
+#demo {
+	background: #FFF;
+	overflow: hidden;
+	border: 1px dashed #CCC;
+	width: 800px;
+}
+
+#demo img {
+	border: 3px solid #F2F2F2;
+}
+
+#indemo {
+	float: left;width: 800%;
+
+}
+
+#demo1 {
+	float: left;
+}
+
+#demo2 {
+	float: left;
 }
 </style>
 </head>
@@ -420,16 +451,32 @@ color:#FF7F00;
 	      <div class="titlepaneldiv">
 				<span class="titlepanel">图片赏析</span>
 			</div>
-			<a class="morea" href="#"> 更多&gt;&gt; </a>
-	        <div class="panelcontent">
-	            <img alt="" style="width:300px;height:200px;margin-left:90px;" 
+	        <div class="panelcontent" id="demo" style="overflow: hidden;border: 1px dashed #CCC;	width: 100%;">
+	        
+	        <div id="indemo">
+				<div id="demo1">
+				    <c:forEach var="portal" items="${pictureList}">
+						<c:if test="${not empty portal.pictureurl}">
+						  <a href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						</c:if>
+					</c:forEach>
+					<%-- <a href="#"><img
+						src="<%=contextPath%>/includes/image/chick1.jpg" border="0" style="width:300px;height:200px;"  /></a> --%>
+				</div>
+				<div id="demo2"></div>
+			</div>
+	        
+	            <%-- <img alt="" style="width:300px;height:200px;margin-left:90px;" 
 							src="<%=contextPath%>/includes/image/chick1.jpg">
 				<img alt="" style="width:300px;height:200px;margin-left:20px;"
 							src="<%=contextPath%>/includes/image/chick2.jpg">
 							<img alt="" style="width:300px;height:200px;margin-left:20px;"
-							src="<%=contextPath%>/includes/image/chick3.jpg">
-							
-			</div>
+							src="<%=contextPath%>/includes/image/chick3.jpg"> --%>
+
+
+			
+
+		</div>
 	</div>
 
 	<div class="maincontent" id="themap" style="height:600px;margin-top:15px;border:1px solid;">
@@ -444,14 +491,13 @@ color:#FF7F00;
 			</div>
 	</div>
 
-
-
 	<%@ include file="footmodal.jsp"%>
 	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=3ad53ae8a26edf19caf8573cbdbb9b15"></script> 
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script src="<%=contextPath%>/includes/js/travel/rolling.js"></script>
 	<script type="text/javascript">
 	
 	    var map;
