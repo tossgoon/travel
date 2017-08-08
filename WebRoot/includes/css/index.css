@@ -14,21 +14,21 @@
 }
 
 .item1 {
-	background-image: url('/travel/includes/image/head_bg1.jpg');
+	background-image: url('/travel/includes/image/bann1.jpg');
 	background-repeat: repeat-y;
 	margin: 0 auto;
 	height: 100%;
 }
 
 .item2 {
-	background-image: url('/travel/includes/image/head_bg2.jpg');
+	background-image: url('/travel/includes/image/bann2.jpg');
 	background-repeat: repeat-y;
 	margin: 0 auto;
 	height: 100%;
 }
 
 .item3 {
-	background-image: url('/travel/includes/image/head_bg3.jpg');
+	background-image: url('/travel/includes/image/bann3.jpg');
 	background-repeat: repeat-y;
 	height: 100%;
 	margin: 0 auto;

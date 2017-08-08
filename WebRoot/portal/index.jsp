@@ -221,27 +221,22 @@ body {
 </head>
 <body>
 	<div class="headlogo" id="logoindex">
-		<div style="width:900px;margin:0 auto;">
-			<img alt="" style="margin-top:100px;"
-				src="<%=contextPath%>/includes/image/logotitle1.png"> 
-				
+		
+			<img alt="" style="position:absolute;z-index:9;" src="<%=contextPath%>/includes/image/logotitle.png"> 
 				<!-- <label class="testfont">延安黄龙山褐马鸡国家级自然保护区</label>
 				<label class="testfont1">Yanan HuangLongShan HemaJi GuojiaBaoHuQu</label> -->
+		
+		<div class="login-content">
+			<div class="bg_item bg_item1">
+				<div class="item1"></div>
+			</div>
+			<div class="bg_item bg_item2">
+				<div class="item2"></div>
+			</div>
+			<div class="bg_item bg_item3">
+				<div class="item3"></div>
+			</div>
 		</div>
-		
-		<!-- <div class="bg_item bg_item1">
-			<div class="item1"></div>
-		</div>
-		<div class="bg_item bg_item2">
-			<div class="item2"></div>
-		</div>
-		<div class="bg_item bg_item3">
-			<div class="item3"></div>
-		</div> -->
-		
-		
-		
-		
 	</div>
 	<div class="navbarhead">
 		<ul style="margin:0 auto;width:1100px;">
