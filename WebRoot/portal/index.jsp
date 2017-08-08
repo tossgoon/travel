@@ -222,7 +222,7 @@ body {
 <body>
 	<div class="headlogo" id="logoindex">
 		
-			<img alt="" style="position:absolute;z-index:9;" src="<%=contextPath%>/includes/image/logotitle.png"> 
+			<img alt="" style="position:absolute;z-index:9;top:200px;left:25%;" src="<%=contextPath%>/includes/image/logotitle.png"> 
 				<!-- <label class="testfont">延安黄龙山褐马鸡国家级自然保护区</label>
 				<label class="testfont1">Yanan HuangLongShan HemaJi GuojiaBaoHuQu</label> -->
 		
