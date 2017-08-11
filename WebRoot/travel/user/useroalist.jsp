@@ -91,7 +91,7 @@
 										</c:if>
 									</td>
 									<td>
-											<a href="/travel/oa/modify.action?id=${oa.id}" style="margin-right:10px;">查看</a>
+											<a href="/travel/oa/query.action?oaid=${oa.id}" style="margin-right:10px;">查看</a>
 									</td>
 								</tr>
 							</c:forEach>

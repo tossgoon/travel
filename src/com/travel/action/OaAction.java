@@ -39,6 +39,7 @@ public class OaAction extends ActionSupport {
 	private OaFileService<Oafile> oaFileService;
 	private OaReceiverService<Oareceiver> oaReceiverService;
 	private UserService<User> userService;
+	private String oasender;//发送人姓名
 
 	public Oa getOa() {
 		return oa;
@@ -261,6 +262,23 @@ public class OaAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	public String query() {
+		if (getParam("oaid") != null) {
+			Integer oaid = Integer.parseInt(getParam("oaid"));
+			this.oa = this.oaService.getOa(Oa.class, oaid);
+			// 获取oa附件
+			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(
+					oaid, Oafile.class);
+			Set<Oafile> set = new HashSet<Oafile>();
+			set.addAll(oafilelist);// 给set填充
+			oa.setOafiles(set);
+			//设置oa发送人
+			User senduser=this.userService.getUser(User.class, oa.getCreater());
+			this.oasender=senduser.getUsername();
+		}
+		return SUCCESS;
+	}
 
 	public String queryByCreater() {
 		try {
@@ -378,6 +396,14 @@ public class OaAction extends ActionSupport {
 
 	public void setOareceivelist(List<Oa> oareceivelist) {
 		this.oareceivelist = oareceivelist;
+	}
+
+	public String getOasender() {
+		return oasender;
+	}
+
+	public void setOasender(String oasender) {
+		this.oasender = oasender;
 	}
 
 }

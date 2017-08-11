@@ -376,6 +376,11 @@
  			<result name="error">/travel/user/error.jsp</result>
 		</action>
 		
+		<action name="query" class="oaAct" method="query">
+ 			<result name="success">/travel/user/oaview.jsp</result>
+ 			<result name="error">/travel/user/error.jsp</result>
+		</action>
+		
 		<action name="save" class="oaAct" method="save">
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>

@@ -133,8 +133,4 @@ public class Oa implements java.io.Serializable {
 	public void setSenduser(String senduser) {
 		this.senduser = senduser;
 	}
-
-
-
-
 }
