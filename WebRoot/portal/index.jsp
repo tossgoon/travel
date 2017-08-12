@@ -34,6 +34,7 @@ System.out.println(currentTime + "/当前时间");
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/css/index.css" />
+
 <style type="text/css">
 body {
 	font-family: "Microsoft Yahei";
@@ -43,10 +44,10 @@ body {
 .headlogo {
 	text-align: center;
 	width: 100%;
-	height: 541px;
+	height: 550px;
 	min-width: 1174px;
-	background-image: url(<%=contextPath%>/includes/image/bann4.jpg);
 	margin: 0 auto;
+	background-image: url(<%=contextPath%>/includes/image/bann3.jpg);
 }
 
 .navbarhead {
@@ -221,11 +222,9 @@ body {
 </head>
 <body>
 	<div class="headlogo" id="logoindex">
-		
-			<img alt="" style="position:absolute;z-index:9;top:200px;left:25%;" src="<%=contextPath%>/includes/image/logotitle.png"> 
+		<img alt="" style="position:absolute;z-index:9;top:200px;left:25%;" src="<%=contextPath%>/includes/image/logotitle.png"> 
 				<!-- <label class="testfont">延安黄龙山褐马鸡国家级自然保护区</label>
 				<label class="testfont1">Yanan HuangLongShan HemaJi GuojiaBaoHuQu</label> -->
-		
 		<div class="login-content">
 			<div class="bg_item bg_item1">
 				<div class="item1"></div>
@@ -370,14 +369,9 @@ body {
 						style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
 				</c:forEach>
 			</div>
-
-
-
 		</div>
 		<div class="rightpanel">
-
 			<div class="panel panel-success">
-
 				<div class="panel-body">
 					<div class="subtitlediv">
 						<span class="subtitle">保护区介绍</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
@@ -405,17 +399,21 @@ body {
 						</div>
 					</c:forEach>
 					<div style="width:100%;text-align:center;margin-top:10px;">
-						<img alt="" style="width:80%;"
-							src="<%=contextPath%>/includes/image/chick1.jpg">
+						<!-- <video src="\travel\uploadpic\intro.mp4" style="width:90%;"  controls autobuffer></video> -->
+						<video width="80%"  controls="controls" autoplay="autoplay">
+						
+						  <%--  <source src="\travel\uploadpic\intro2.mp4" type="video/mp4" /> --%>
+						  <%--  <source src="<%=contextPath%>/includes/image/movie.ogg" type="video/ogg" /> --%>
+						   <source src="<%=contextPath%>/includes/image/intro3.mp4" type="video/mp4" />
+						</video>
+						 
 					</div>
-
 				</div>
 			</div>
-			
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">森林防火</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
+						<span class="subtitle">保护区防护</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
 							更多&gt;&gt; </a>
 					</div>
 					<div class='sublist'>
@@ -482,13 +480,14 @@ body {
 			</div>
 	        <div class="panelcontent" style="margin:0 auto;text-align:center;">
 	          <a style="margin-right:10px;">国家林业局</a>
-						  <a style="margin-right:10px;">陕西省林业局</a><a style="margin-right:10px;">延安市林业局</a><a style="margin-right:10px;">中国林业网</a><a style="margin-right:10px;">中国森林防火网</a><a style="margin-right:10px;">中国林业信息网</a>
+						  <a style="margin-right:10px;">陕西省林业厅</a><a style="margin-right:10px;">延安市林业局</a><a style="margin-right:10px;">中国林业网</a><a style="margin-right:10px;">中国森林防火网</a><a style="margin-right:10px;">中国林业信息网</a>
 			</div>
 	</div>
 
 	<%@ include file="footmodal.jsp"%>
 	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
+    <script src="http://html5media.googlecode.com/svn/trunk/src/html5media.min.js"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=3ad53ae8a26edf19caf8573cbdbb9b15"></script> 
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>

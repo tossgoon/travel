@@ -58,7 +58,7 @@
 }
 .login-content {
 	position: relative;
-	height: 480px;
+	height: 550px;
 }
 @-webkit-keyframes imageAnimation { 
     0% { opacity: 0;-webkit-animation-timing-function: ease-in; }
