@@ -91,8 +91,8 @@ public class PortalService<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Portal> queryPortalByPage(int pagesize,int pagenum){
-		String queryString="from Portal p order by p.pubdate desc";
+	public List<Portal> queryPortalByPage(int pagesize,int pagenum,String type){
+		String queryString="from Portal p where p.type = '"+type+"' order by p.pubdate desc";
 		SessionFactory sessionFactory = dao.getHibernateTemplate()
 				.getSessionFactory();
 		Session session = (Session) sessionFactory.openSession();//
@@ -104,8 +104,8 @@ public class PortalService<T> {
 		return list;
 	}
 	
-	public int getPortalCount(){
-		String queryString="select count(*) from Portal as portal";
+	public int getPortalCount(String type){
+		String queryString="select count(*) from Portal as p where p.type='"+type+"'";
 		SessionFactory sessionFactory = dao.getHibernateTemplate()
 				.getSessionFactory();
 		Session session = (Session) sessionFactory.openSession();//

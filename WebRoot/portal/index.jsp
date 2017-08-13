@@ -238,16 +238,17 @@ body {
 		</div>
 	</div>
 	<div class="navbarhead">
-		<ul style="margin:0 auto;width:1100px;">
+		<ul style="margin:0 auto;width:1150px;">
 			<li><a href="javascript:void(0)">首页</a></li>
 			<li><a href="/travel/visitor/show.action?id=24">保护区介绍</a></li>
-			<li><a href="http://www.yahoo.com">工作动态</a></li>
-			<li><a href="http://www.google.com">政策法规</a></li>
-			<li><a href="http://www.google.com">政务公开</a></li>
-			<li><a href="http://www.google.com">志愿者之家</a></li>
-			<li><a href="http://www.google.com">科普知识</a></li>
-			<li><a href="http://www.google.com">地理位置</a></li>
-			<li><a href="http://www.google.com">联系我们</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1">工作动态</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3">政务公开</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=4">志愿者之家</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
+			<li><a href="#">地理位置</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=6">联系我们</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
 		</ul>
 	</div>
 	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:60px;">
@@ -267,7 +268,7 @@ body {
 					<input type="button"  class="btn btn-success" onclick="DoLogin()"
 						value="登陆"
 						style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
-					<input class="form-control input-sm" name="user.password"
+					<input class="form-control input-sm" name="user.password" type="password"
 						style="width:160px;float:right;margin-top:-5px;" />
 					<span style="float:right;">密码:</span>
 					<input class="form-control input-sm" id="loginname"

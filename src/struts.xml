@@ -298,10 +298,7 @@
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
-		<action name="querypage" class="portalAct" method="queryByPage">
- 			<result name="success">/portal/portallistshow.jsp</result>
-			 <result name="error" type="json"></result> 
-		</action>
+		
 	</package>
 	
 	<package name="visitor" extends="struts-default,json-default"	namespace="/visitor">
@@ -330,6 +327,10 @@
 		      <param name="actionName">first</param>
 		      <param name="namespace">/visitor</param>
 		    </result>  -->	
+		</action>
+		<action name="querypage" class="portalAct" method="queryByPage">
+ 			<result name="success">/portal/portallistshow.jsp</result>
+			 <result name="error" type="json"></result> 
 		</action>
    </package>
 	

@@ -64,13 +64,47 @@ body {
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div
 					style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：首页>>工作动态</span>
+					<span>当前位置：首页&gt;&gt;
+					<c:choose>
+						 <c:when test="${ptype=='0'}">
+							保护区介绍
+						</c:when>
+						<c:when test="${ptype=='1'}">
+							工作动态
+						</c:when>
+						<c:when test="${ptype=='2'}">
+							政策法规
+						</c:when>
+						<c:when test="${ptype=='3'}">
+							政务公开
+						</c:when>
+						<c:when test="${ptype=='4'}">
+							志愿者之家
+						</c:when>
+						<c:when test="${ptype=='5'}">
+							科普知识
+						</c:when>
+						<c:when test="${ptype=='6'}">
+							联系我们
+						</c:when>
+						<c:when test="${ptype=='7'}">
+							图片赏析
+						</c:when>
+						<c:when test="${ptype=='8'}">
+							保护区防护
+						</c:when>
+						 <c:otherwise>
+                                                         其他
+    					</c:otherwise>
+					</c:choose>
+
+					</span>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
+				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
 					<div class="panel-body">
 						<c:forEach var="portal" items="${portals}">
 							<p class="title1">
@@ -85,19 +119,17 @@ body {
 					</div>
 
 					<div class="panel-footer">
-						<a id="firstpage" href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a> 
-						<a id="lastpage"  href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
-						<a id="nextpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
-						<a id="endpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
+						<a id="firstpage" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=${ptype}">第一页</a> 
+						<a id="lastpage"  href="/travel/visitor/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }&type=${ptype}" >上一页</a> 
+						<a id="nextpage" href="/travel/visitor/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }&type=${ptype}" >下一页</a>
+						<a id="endpage" href="/travel/visitor/querypage.action?pagesize=10&pagenum=${page.totalPage }&type=${ptype}" >最后一页</a>
 						<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
-						<input value="新增用户" onclick="InsertUser()" type="button"
-									class="btn btn-primary"	style="margin-right:20px;margin-top:-6px; float:right;width:90px;" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+    <%@ include file="footmodal.jsp"%>
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script
@@ -110,7 +142,6 @@ body {
 		var delUserid;//当前删除的用户ID
 		var delrow;//要删除的行
 		$(function() {
-
 		});
 		function InsertUser() {
 			isadd = true;

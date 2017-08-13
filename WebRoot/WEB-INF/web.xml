@@ -50,7 +50,7 @@
 		</init-param>
 		<init-param>
 			<param-name>notCheckURLList</param-name>  <!-- //不需要过滤的jsp -->
-			<param-value>/portal/index.jsp,/portal/portalshow.jsp</param-value>
+			<param-value>/portal/index.jsp,/portal/portalshow.jsp,/portal/portallistshow.jsp</param-value>
 		</init-param>
 	</filter>
 

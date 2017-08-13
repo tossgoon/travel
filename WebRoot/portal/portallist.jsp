@@ -84,6 +84,9 @@
 						<c:when test="${portal.type=='7'}">
 							图片赏析
 						</c:when>
+						<c:when test="${portal.type=='8'}">
+							保护区防护
+						</c:when>
 						<c:otherwise>
 							其他
 						</c:otherwise>

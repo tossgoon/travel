@@ -28,14 +28,24 @@ public class PortalAction extends ActionSupport {
 	private String errorMsg;
 	private List<Portal> portalIntroList;//保护区介绍 0
 	private List<Portal> portalWorkPics;//工作动态 1
-	private List<Portal> portalWorkList;//工作动态首页 1
+	private List<Portal> portalWorkList;//工作动态首页 1(带图片)
 	private List<Portal> portalLawList;//政策法规 2
 	private List<Portal> portalAffairsList;//政务公开 3
 	private List<Portal> portalVolHomeList;//志愿者之家4
 	private List<Portal> portalScienceList;//科普知识5
 	private List<Portal> portalContactUsList;//联系我们6
 	private List<Portal> pictureList;//图片赏析7
+	private List<Portal> portalProtectList;//保护区防护8
 	private SplitPage page;
+	private String ptype;
+	public SplitPage getPage() {
+		return page;
+	}
+
+	public void setPage(SplitPage page) {
+		this.page = page;
+	}
+
 	public PortalAction() {
 
 	}
@@ -225,8 +235,42 @@ public class PortalAction extends ActionSupport {
 			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
 			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
 		}
-		this.portals=portalService.queryPortalByPage(pagesize, pagenum);
-		int num = portalService.getPortalCount();
+		if(getParam("type")!=null)
+		{
+			ptype=getParam("type");
+			/*if(type.equals("0")){
+				this.portalType="保护区介绍";
+			}
+			else if(type.equals("1")){
+				this.portalType="工作动态";
+			}
+			else if(type.equals("2")){
+				this.portalType="政策法规";
+			}
+			else if(type.equals("3")){
+				this.portalType="政务公开";
+			}
+			else if(type.equals("4")){
+				this.portalType="志愿者之家";
+			}
+			else if(type.equals("5")){
+				this.portalType="科普知识";
+			}
+			else if(type.equals("6")){
+				this.portalType="联系我们";
+			}
+			else if(type.equals("7")){
+				this.portalType="图片赏析";
+			}
+			else {
+				this.portalType="其他";
+			}*/
+		}
+		else{
+			ptype="0";
+		}
+		this.portals=portalService.queryPortalByPage(pagesize, pagenum, ptype);
+		int num = portalService.getPortalCount(ptype);
 		page = new SplitPage(num,pagesize);
 		page.setCurrentPage(pagenum);
 		return SUCCESS;
@@ -251,6 +295,7 @@ public class PortalAction extends ActionSupport {
 		this.portalScienceList=portalService.queryPortalByType("5", 5);//科普知识
 		this.portalContactUsList=portalService.queryPortalByType("6", 5);//联系我们
 		this.setPictureList(portalService.queryPortalByType("7", 0));//图片赏析
+		this.portalProtectList=portalService.queryPortalByType("8", 5);//保护区防护
 		return SUCCESS;
 		//this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
 	}
@@ -262,5 +307,20 @@ public class PortalAction extends ActionSupport {
 	public void setPictureList(List<Portal> pictureList) {
 		this.pictureList = pictureList;
 	}
-	
+
+	public String getPtype() {
+		return ptype;
+	}
+
+	public void setPtype(String ptype) {
+		this.ptype = ptype;
+	}
+
+	public List<Portal> getPortalProtectList() {
+		return portalProtectList;
+	}
+
+	public void setPortalProtectList(List<Portal> portalProtectList) {
+		this.portalProtectList = portalProtectList;
+	}
 }
