@@ -27,10 +27,18 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/uploadifive/uploadifive.css" />
+<link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css">
 </head>
 
 <body>
+ <%@ include file="headmodal.jsp"%>
+ 
+       <div class="row" >
+				<div style="width:1024px;margin:0 auto;text-align:left;border-bottom:1px solid #000080;padding-bottom:12px;padding-left:20px;">
+					<span>后台管理：<a href="/travel/user/query.action">用户管理&nbsp;&nbsp;</a> /&nbsp;&nbsp; 网站管理</span>
+				</div>
+		</div>
+ 
 	<s:form action="query" namespace="/portal" method="post">
 		<table align="center">
 			<tr>
@@ -44,6 +52,22 @@
 		<%-- <s:submit value="submit" /> --%>
 	</s:form>
 
+<ul id="myTab" class="nav nav-tabs">
+	<li class="active">
+		<a href="#introduce" data-toggle="tab">
+			 保护区介绍
+		</a>
+	</li>
+	<li><a href="#work" data-toggle="tab">工作动态</a></li>
+	<li><a href="#law" data-toggle="tab">政策法规</a></li>
+	<li><a href="#affair" data-toggle="tab">政务公开</a></li>
+	<li><a href="#protect" data-toggle="tab">保护区防护</a></li>
+	<li><a href="#volhome" data-toggle="tab">志愿者之家</a></li>
+	<li><a href="#sci" data-toggle="tab">科普知识</a></li>
+	<li><a href="#contact" data-toggle="tab">联系我们</a></li>
+	<li><a href="#pic" data-toggle="tab">图片赏析</a></li>
+</ul>
+	
 	<table align="center" border="1" cellpadding="0" cellspacing="0"
 		bordercolor="#3366cc"  id="userlist">
 		<tr align="center" bgcolor="#3399cc" height="26px">
@@ -95,55 +119,10 @@
 				<td>${portal.pubdate }</td>
 				<td width="120"><a
 					href="javascript:void(0)" onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp; <a
-					href="javascript:void(0)" onclick="DeletePoral(${portal.id},this)">删除</a></td>
+					href="javascript:void(0)" onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
 			</tr>
 		</c:forEach>
 	</table>
-
-	<div class="modal fade" id="usermodal" role="dialog"
-		aria-labelledby="用户管理" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<label id="modaltitle"></label>
-				</div>
-				<div class="modal-body" style="height:170px;">
-					<div style="width:100%;">
-
-						<s:form method="post"
-							role="form" theme="simple" id="formUser">
-
-							<table style="font-size:14px;width:100%;">
-								<tr style="display: none">
-									<td><input type="hidden" id="userid" name="user.id"> id</td>
-								</tr>
-								<tr>
-									<td>姓名</td>
-									<td><input class="form-control" id="username" name="user.username"></td>
-									<td style="float:right;line-height: 30px;">用户名</td>
-									<td><input class="form-control" id="loginname" name="user.loginname"></td>
-								</tr>
-								<tr>
-									<td>电话</td>
-									<td><input class="form-control" id="telephone" name="user.telephone"></td>
-								    <td style="float:right;line-height: 30px;">部门</td>
-									<td><input class="form-control" id="department" name="user.department"></td>
-								</tr>
-								<tr>
-									<td>备注</td>
-									<td colspan="3"><textarea style="resize: none;margin-bottom:10px;" class="form-control" rows="3" id="remark" name="user.remark"></textarea></td>
-								</tr>
-							</table>
-						</s:form>
-					</div>
-				</div>
-				<div class="modal-footer form-horizontal">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="SaveUser()">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
    <div class="modal fade" id="deleteModal" role="dialog"
 		aria-labelledby="删除内容" data-backdrop="static">
@@ -164,8 +143,7 @@
 			</div>
 		</div>
 	</div>
-
-
+	<%@ include file="footmodal.jsp"%>
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script src="<%=contextPath%>includes/js/uploadifive/jquery.uploadifive.min.js"></script>
@@ -175,33 +153,7 @@
 		var updaterow;//更新的行
 		var delPortalid;//当前删除的用户ID
 		var delrow;//要删除的行
-		$(function() {
-
-		});
-		function InsertUser() {
-			isadd = true;
-			$("#modaltitle").html("新增用户");
-			$("#usermodal").modal("show");
-		}
-		function EditUser(a) {
-			isadd = false;
-			updaterow = $(a).parent().parent();//$("#table1 tr:first td:first").find("input").val()
-			var userid = $(updaterow).find("td").eq(0)[0].innerText;//id
-			var username = $(updaterow).find("td").eq(1)[0].innerText;//姓名
-			var loginname = $(updaterow).find("td").eq(2)[0].innerText;//用户名
-			var telephone = $(updaterow).find("td").eq(3)[0].innerText;//电话
-			var department = $(updaterow).find("td").eq(4)[0].innerText;//部门
-			var remark = $(updaterow).find("td").eq(5)[0].innerText;//备注
-			$("#userid").val(userid);
-			$("#username").val(username);
-			$("#loginname").val(loginname);
-			$("#telephone").val(telephone);
-			$("#department").val(department);
-			$("#remark").val(remark);
-			$("#modaltitle").html("编辑用户");
-			$("#usermodal").modal("show");
-		}
-		function DeletePoral(portalid,a)
+		function DeletePoralDlg(portalid,a)
 		{
 			delPortalid=portalid;
 			delrow = $(a).parent().parent();//删除用户所在行

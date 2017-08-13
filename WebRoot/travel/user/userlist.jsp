@@ -34,40 +34,22 @@
 <body>
 	<%@ include file="/portal/headmodal.jsp"%>
 
-	<div class="container" style="width:100%;">
-		<div class="row">
-			<div class="col-md-12" style="text-align:left;margin-top:20px;">
-				<div
-					style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理>>用户管理</span>
+	<div class="container" style="width:100%;margin:0 auto;text-align:center;">
+		<div class="row" >
+			<div class="col-md-12" style="width:100%;text-align:center;margin:0 auto;margin-top:20px;">
+				<div style="width:1024px;margin:0 auto;text-align:left;border-bottom:1px solid #000080;padding-bottom:12px;padding-left:20px;">
+					<span>后台管理：<a href="/travel/portal/query.action">网站管理&nbsp;&nbsp;</a> /&nbsp;&nbsp; 用户管理</span>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">后台管理：用户管理</label>
-			</div>
-		</div>
-		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading" >用户管理  </div>
-					<div class="panel-body">
-						<%-- <s:form action="query" namespace="/user" class="form-inline"
-							method="post" theme="simple">
-							<div style="margin:0 auto;" class="form-group">
-								<label style="margin-top:5px;margin-left:100px;float:left;">
-									姓名查询： </label> <input style="width: 300px;float:left;"
-									class="form-control" type="text" name="queryText"
-									value="${searchText}" /> <input type="submit"
-									class="btn btn-primary" value="查询"
-									style="margin-left:5px;float:left;width:80px;" /> 
-							</div>
-						</s:form> --%>
-
-						<table align="center" border="1" cellpadding="0" cellspacing="0"
+			
+			<div class="panel-heading" >  <span style="font-size:18px;">用户管理</span>    </div>
+			
+			<table align="center" border="1" cellpadding="0" cellspacing="0"
 							bordercolor="#3366cc" id="userlist"
-							style="margin-top:20px;clear:both;">
+							style="margin-top:20px;">
 							<tr align="center" bgcolor="#3399cc" height="26px">
 								<td width="100">ID</td>
 								<td width="160">姓名</td>
@@ -94,9 +76,7 @@
 							</c:forEach>
 						</table>
 
-					</div>
-
-					<div class="panel-footer">
+					<div>
 						<a id="firstpage" href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a> 
 						<a id="lastpage"  href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
 						<a id="nextpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
@@ -105,7 +85,6 @@
 						<input value="新增用户" onclick="InsertUser()" type="button"
 									class="btn btn-primary"	style="margin-right:20px;margin-top:-6px; float:right;width:90px;" />
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>

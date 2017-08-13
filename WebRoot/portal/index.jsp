@@ -244,11 +244,12 @@ body {
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1">工作动态</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3">政务公开</a></li>
+			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=4">志愿者之家</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
-			<li><a href="#">地理位置</a></li>
+			<li><a href="/travel/portal/webgis.jsp">地理位置</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=6">联系我们</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
+			
 		</ul>
 	</div>
 	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:60px;">
@@ -399,14 +400,14 @@ body {
 								${portal.title} </a>
 						</div>
 					</c:forEach>
-					<div style="width:100%;text-align:center;margin-top:10px;">
+					<div style="width:100%;text-align:center;margin-top:10px;height:230px;">
 						<!-- <video src="\travel\uploadpic\intro.mp4" style="width:90%;"  controls autobuffer></video> -->
 						<%-- <video width="80%"  controls="controls" autoplay="autoplay">
 						   <source src="\travel\uploadpic\movie.ogg" type="video/mp4" />
 						   <source src="<%=contextPath%>/includes/image/movie.ogg" type="video/ogg" />
 						   <source src="<%=contextPath%>/includes/image/intro3.mp4" type="video/mp4" />
 						</video> --%>
-						<embed  type="application/x-shockwave-flash" align="9" width="90%" src="http://player.youku.com/player.php/sid/XMTc1NDU0NTY5Ng==/v.swf" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed>
+						<embed  type="application/x-shockwave-flash" align="9" width="100%" height="230px;" src="http://player.youku.com/player.php/sid/XMTc1NDU0NTY5Ng==/v.swf" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed>
 					</div>
 				</div>
 			</div>
@@ -416,24 +417,12 @@ body {
 						<span class="subtitle">保护区防护</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
 							更多&gt;&gt; </a>
 					</div>
-					<div class='sublist'>
-							<a href="#">防火检查工作进展顺利 </a>
-						</div>
+					<c:forEach var="portal" items="${portalProtectList}">
 						<div class='sublist'>
-							<a href="#">防火检查大检查工作正在有序开展 </a>
+							<a href="/travel/visitor/show.action?id=${portal.id}">
+								${portal.title} </a>
 						</div>
-						<div class='sublist'>
-							<a href="#">加大森林防火力度 </a>
-						</div>
-						<div class='sublist'>
-							<a href="#">加强重点时段防火 </a>
-						</div>
-						<div class='sublist'>
-							<a href="#">加强重点时段防火 </a>
-						</div>
-                        <div class='sublist'>
-							<a href="#">加强重点时段防火 </a>
-						</div>
+					</c:forEach>
 				</div>
 			</div>
 			
@@ -465,23 +454,24 @@ body {
 							src="<%=contextPath%>/includes/image/chick2.jpg">
 							<img alt="" style="width:300px;height:200px;margin-left:20px;"
 							src="<%=contextPath%>/includes/image/chick3.jpg"> --%>
-
-
-			
-
 		</div>
 	</div>
 
 	<div class="maincontent" id="themap" style="height:600px;margin-top:15px;border:1px solid;">
 	</div>
-	<div class="maincontent"  >
+	<div class="maincontent" style="padding-bottom:10px;">
 	      <div class="titlepaneldiv">
 				<span class="titlepanel">友情链接</span>
 			</div>
-	        <div class="panelcontent" style="margin:0 auto;text-align:center;">
-	          <a style="margin-right:10px;">国家林业局</a>
-						  <a style="margin-right:10px;">陕西省林业厅</a><a style="margin-right:10px;">延安市林业局</a><a style="margin-right:10px;">中国林业网</a><a style="margin-right:10px;">中国森林防火网</a><a style="margin-right:10px;">中国林业信息网</a>
-			</div>
+		<div class="panelcontent" style="margin:0 auto;text-align:center;">
+			<a style="margin-right:12px;" href="http://www.forestry.gov.cn/"target="_blank">国家林业局</a> 
+			<a style="margin-right:12px;" href="http://www.snly.gov.cn/" target="_blank">陕西省林业厅</a>
+			<a style="margin-right:12px;" href="http://www.yaslyj.gov.cn/"	target="_blank">延安市林业局</a>
+			<a style="margin-right:12px;" href="http://www.slfh.gov.cn/slfhw/default.aspx" target="_blank">中国森林防火网</a>
+			<a style="margin-right:12px;" href="http://www.lknet.ac.cn/" target="_blank">中国林业信息网</a>
+			<a style="margin-right:12px;" href="http://www.shaanxi.gov.cn/" target="_blank">陕西省人民政府</a>
+			<a style="margin-right:12px;" href="http://www.yanan.gov.cn/" target="_blank">延安市人民政府</a>
+		</div>
 	</div>
 
 	<%@ include file="footmodal.jsp"%>
@@ -492,7 +482,6 @@ body {
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/travel/rolling.js"></script>
 	<script type="text/javascript">
-	
 	    var map;
 		$(function() {
 			$("#myCarousel").carousel({

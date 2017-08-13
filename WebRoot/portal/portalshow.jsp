@@ -13,16 +13,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="<%=contextPath%>includes/css/portal_head_modal.css">
-<style type="text/css">
-#portolinfo span {
-	float: right;
-}
-</style>
+<title>详细信息</title>
+<link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css">
 </head>
 <body>
 	<%@ include file="headmodal.jsp"%>
@@ -41,24 +34,7 @@
 	</div>
 	
 		<%@ include file="footmodal.jsp"%>
-<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
+    <script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="<%=contextPath%>includes/js/ueditor/ueditor.config.js">
-		
-	</script>
-	<script type="text/javascript" charset="utf-8"
-		src="<%=contextPath%>includes/js/ueditor/ueditor.all.min.js">
-		
-	</script>
-	<script type="text/javascript" charset="utf-8"
-		src="<%=contextPath%>includes/js/ueditor/lang/zh-cn/zh-cn.js">
-		
-	</script>
-
-	<script type="text/javascript">
-		
-	</script>
-
 </body>
 </html>
