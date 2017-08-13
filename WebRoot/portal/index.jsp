@@ -239,8 +239,8 @@ body {
 	</div>
 	<div class="navbarhead">
 		<ul style="margin:0 auto;width:1100px;">
-			<li><a href="http://www.baidu.com">首页</a></li>
-			<li><a href="http://www.Code52.Net">保护区介绍</a></li>
+			<li><a href="javascript:void(0)">首页</a></li>
+			<li><a href="/travel/visitor/show.action?id=24">保护区介绍</a></li>
 			<li><a href="http://www.yahoo.com">工作动态</a></li>
 			<li><a href="http://www.google.com">政策法规</a></li>
 			<li><a href="http://www.google.com">政务公开</a></li>
@@ -400,13 +400,12 @@ body {
 					</c:forEach>
 					<div style="width:100%;text-align:center;margin-top:10px;">
 						<!-- <video src="\travel\uploadpic\intro.mp4" style="width:90%;"  controls autobuffer></video> -->
-						<video width="80%"  controls="controls" autoplay="autoplay">
-						
-						  <%--  <source src="\travel\uploadpic\intro2.mp4" type="video/mp4" /> --%>
-						  <%--  <source src="<%=contextPath%>/includes/image/movie.ogg" type="video/ogg" /> --%>
+						<%-- <video width="80%"  controls="controls" autoplay="autoplay">
+						   <source src="\travel\uploadpic\movie.ogg" type="video/mp4" />
+						   <source src="<%=contextPath%>/includes/image/movie.ogg" type="video/ogg" />
 						   <source src="<%=contextPath%>/includes/image/intro3.mp4" type="video/mp4" />
-						</video>
-						 
+						</video> --%>
+						<embed  type="application/x-shockwave-flash" align="9" width="90%" src="http://player.youku.com/player.php/sid/XMTc1NDU0NTY5Ng==/v.swf" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed>
 					</div>
 				</div>
 			</div>
@@ -487,7 +486,6 @@ body {
 	<%@ include file="footmodal.jsp"%>
 	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
-    <script src="http://html5media.googlecode.com/svn/trunk/src/html5media.min.js"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=3ad53ae8a26edf19caf8573cbdbb9b15"></script> 
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>

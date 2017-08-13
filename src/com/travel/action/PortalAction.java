@@ -8,6 +8,7 @@ import org.apache.struts2.json.annotations.JSON;
 import com.jktech.pojo.Kcgc;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.page.SplitPage;
 import com.travel.pojo.Portal;
 import com.travel.pojo.User;
 import com.travel.service.PortalService;
@@ -34,7 +35,7 @@ public class PortalAction extends ActionSupport {
 	private List<Portal> portalScienceList;//科普知识5
 	private List<Portal> portalContactUsList;//联系我们6
 	private List<Portal> pictureList;//图片赏析7
-	
+	private SplitPage page;
 	public PortalAction() {
 
 	}
@@ -216,7 +217,21 @@ public class PortalAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-
+	
+	public String queryByPage() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		this.portals=portalService.queryPortalByPage(pagesize, pagenum);
+		int num = portalService.getPortalCount();
+		page = new SplitPage(num,pagesize);
+		page.setCurrentPage(pagenum);
+		return SUCCESS;
+	}
+	
 	public String getErrorMsg() {
 		return errorMsg;
 	}

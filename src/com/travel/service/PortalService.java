@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.travel.dao.BaseDao;
+import com.travel.pojo.Portal;
+import com.travel.pojo.User;
 
 
 public class PortalService<T> {
@@ -86,6 +88,32 @@ public class PortalService<T> {
 		session.close();
 		//sessionFactory.close();
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Portal> queryPortalByPage(int pagesize,int pagenum){
+		String queryString="from Portal p order by p.pubdate desc";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		List<Portal>list=(List<Portal>)query.list();
+		session.close();
+		return list;
+	}
+	
+	public int getPortalCount(){
+		String queryString="select count(*) from Portal as portal";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
 	}
 	
 }

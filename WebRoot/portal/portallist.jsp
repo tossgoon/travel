@@ -81,6 +81,9 @@
 						<c:when test="${portal.type=='6'}">
 							联系我们
 						</c:when>
+						<c:when test="${portal.type=='7'}">
+							图片赏析
+						</c:when>
 						<c:otherwise>
 							其他
 						</c:otherwise>
