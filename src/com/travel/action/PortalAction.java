@@ -213,7 +213,16 @@ public class PortalAction extends ActionSupport {
 			return "portalinfo";
 		} else {
 			searchText = getParam("queryText");
-			portals = portalService.queryPortalByName(searchText, Portal.class);
+			this.portalIntroList=portalService.queryPortalByType("0", 0);//保护区介绍
+			this.portalWorkList=portalService.queryPortalByType("1", 0);//工作动态
+			this.portalLawList=portalService.queryPortalByType("2", 0);//政策法规
+			this.portalAffairsList=portalService.queryPortalByType("3", 0);//政务公开
+			this.portalVolHomeList=portalService.queryPortalByType("4", 0);//志愿者之家
+			this.portalScienceList=portalService.queryPortalByType("5", 0);//科普知识
+			this.portalContactUsList=portalService.queryPortalByType("6", 0);//联系我们
+			this.setPictureList(portalService.queryPortalByType("7", 0));//图片赏析
+			this.portalProtectList=portalService.queryPortalByType("8", 0);//保护区防护
+			//portals = portalService.queryPortalByName(searchText, Portal.class);
 			// setUsers(userService.queryUserByName(searchText, User.class));
 			return SUCCESS;
 		}

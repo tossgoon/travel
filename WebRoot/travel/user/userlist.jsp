@@ -162,6 +162,7 @@
 		</div>
 	</div>
 
+<%@ include file="/portal/footmodal.jsp"%>
 
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>

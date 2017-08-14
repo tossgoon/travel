@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
 
+
 <style type="text/css">
 body {
 	font-family: "Microsoft Yahei";
@@ -46,13 +47,11 @@ body {
 .title2 {
 	margin-left: 20px;
 }
-
 </style>
 
 </head>
 <body>
 	<%@ include file="/portal/headmodal.jsp"%>
-	
 	<div class="container" style="width:100%;margin:0 auto;text-align:center;margin-top:20px;">
 		<div class="row">
 			<div class="col-md-12" style="margin:0 auto;">
@@ -121,7 +120,6 @@ body {
 			</div>
 		</div>
 	</div>
-	
 	
     <%@ include file="footmodal.jsp"%>
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>

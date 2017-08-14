@@ -26,20 +26,256 @@
 	-->
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" /> --%>
 <link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>includes/css/portaltab.css">
 </head>
 
 <body>
  <%@ include file="headmodal.jsp"%>
- 
-       <div class="row" >
-				<div style="width:1024px;margin:0 auto;text-align:left;border-bottom:1px solid #000080;padding-bottom:12px;padding-left:20px;">
-					<span>后台管理：<a href="/travel/user/query.action">用户管理&nbsp;&nbsp;</a> /&nbsp;&nbsp; 网站管理</span>
+
+	<div  style="width:100%;margin:0 auto;text-align:center;margin-top:20px;">
+		
+
+		<div class="panel panel-default" style="width:1024px;margin:0 auto;">
+		
+		<div class="panel-heading" style="text-align:left;">
+			<span>后台管理：<a href="/travel/user/query.action">用户管理&nbsp;&nbsp;</a>
+				/&nbsp;&nbsp; 网站管理
+			</span>
+    </div>
+		
+		
+			<div class="panel-body"><div style="margin-top:20px;width:1024px;" >  <span style="font-size:18px;">网站管理</span>  </div>
+		<div style="width:1024px;margin:0 auto;margin-top:20px;text-align:left;">
+			<div class="menu1box">
+				<ul id="menu1">
+					<li class="hover" onmouseover="setTab(1,0)"><a
+						href="javascript:void(0)">保护区介绍</a></li>
+					<li onmouseover="setTab(1,1)"><a href="javascript:void(0)">工作动态</a></li>
+					<li onmouseover="setTab(1,2)"><a href="javascript:void(0)">政策法规</a></li>
+					<li onmouseover="setTab(1,3)"><a href="javascript:void(0)">政务公开</a></li>
+					<li onmouseover="setTab(1,4)"><a href="javascript:void(0)">保护区防护</a></li>
+					<li onmouseover="setTab(1,5)"><a href="javascript:void(0)">志愿者之家</a></li>
+					<li onmouseover="setTab(1,6)"><a href="javascript:void(0)">科普知识</a></li>
+					<li onmouseover="setTab(1,7)"><a href="javascript:void(0)">联系我们</a></li>
+					<li onmouseover="setTab(1,8)"><a href="javascript:void(0)">图片赏析</a></li>
+				</ul>
+			</div>
+
+			<div class="main1box">
+				<div class="main" id="main1">
+					<ul class="block">
+						<li>
+						    <table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalIntroList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalWorkList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalLawList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalAffairsList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalProtectList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalVolHomeList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalScienceList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${portalContactUsList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
+					<ul>
+						<li><table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" >
+								<tr align="center" bgcolor="#3399cc" height="26px">
+									<td width="80">ID</td>
+									<td width="200">标题</td>
+									<td width="120">时间</td>
+									<td width="120">操作</td>
+								</tr>
+
+								<c:forEach var="portal" items="${pictureList}">
+									<tr align="center" height="24px">
+										<td>${portal.id}</td>
+										<td>${portal.title}</td>
+										<td>${portal.pubdate }</td>
+										<td width="120"><a href="javascript:void(0)"
+											onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp;
+											<a href="javascript:void(0)"
+											onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
+									</tr>
+								</c:forEach>
+							</table></li>
+					</ul>
 				</div>
+			</div>
 		</div>
- 
-	<s:form action="query" namespace="/portal" method="post">
+		</div>
+			<div class="panel-footer">
+			<a class="btn btn-success"	href="/travel/portal/editor.jsp">新增数据</a>
+		</div>
+		</div>
+	</div>
+	
+	<%-- 	<s:form action="query" namespace="/portal" method="post">
 		<table align="center">
 			<tr>
 				<td style="vertical-align: middle;">查询：
@@ -49,80 +285,9 @@
 				</td>
 			</tr>
 		</table>
-		<%-- <s:submit value="submit" /> --%>
+		<s:submit value="submit" />
 	</s:form>
-
-<ul id="myTab" class="nav nav-tabs">
-	<li class="active">
-		<a href="#introduce" data-toggle="tab">
-			 保护区介绍
-		</a>
-	</li>
-	<li><a href="#work" data-toggle="tab">工作动态</a></li>
-	<li><a href="#law" data-toggle="tab">政策法规</a></li>
-	<li><a href="#affair" data-toggle="tab">政务公开</a></li>
-	<li><a href="#protect" data-toggle="tab">保护区防护</a></li>
-	<li><a href="#volhome" data-toggle="tab">志愿者之家</a></li>
-	<li><a href="#sci" data-toggle="tab">科普知识</a></li>
-	<li><a href="#contact" data-toggle="tab">联系我们</a></li>
-	<li><a href="#pic" data-toggle="tab">图片赏析</a></li>
-</ul>
-	
-	<table align="center" border="1" cellpadding="0" cellspacing="0"
-		bordercolor="#3366cc"  id="userlist">
-		<tr align="center" bgcolor="#3399cc" height="26px">
-			<td width="80">ID</td>
-			<td width="200">标题</td>
-			<td width="80">类型</td>
-			<td width="120">时间</td>
-			<td width="120">操作</td>
-		</tr>
-
-		<c:forEach var="portal" items="${portals}">
-			<tr align="center" height="24px">
-				<td>${portal.id}</td>
-				<td>${portal.title}</td>
-				<td>
-				     <c:choose>
-						<c:when test="${portal.type=='0'}">
-							保护区介绍
-						</c:when>
-						<c:when test="${portal.type=='1'}">
-							工作动态
-						</c:when>
-						<c:when test="${portal.type=='2'}">
-							政策法规
-						</c:when>
-						<c:when test="${portal.type=='3'}">
-							政务公开
-						</c:when>
-						<c:when test="${portal.type=='4'}">
-							志愿者之家
-						</c:when>
-						<c:when test="${portal.type=='5'}">
-							科普知识
-						</c:when>
-						<c:when test="${portal.type=='6'}">
-							联系我们
-						</c:when>
-						<c:when test="${portal.type=='7'}">
-							图片赏析
-						</c:when>
-						<c:when test="${portal.type=='8'}">
-							保护区防护
-						</c:when>
-						<c:otherwise>
-							其他
-						</c:otherwise>
-					</c:choose> 
-				</td>
-				<td>${portal.pubdate }</td>
-				<td width="120"><a
-					href="javascript:void(0)" onclick="window.location.href='/travel/portal/query.action?id=${portal.id}'">编辑</a>&nbsp;&nbsp; <a
-					href="javascript:void(0)" onclick="DeletePoralDlg(${portal.id},this)">删除</a></td>
-			</tr>
-		</c:forEach>
-	</table>
+ --%>
 
    <div class="modal fade" id="deleteModal" role="dialog"
 		aria-labelledby="删除内容" data-backdrop="static">
@@ -143,7 +308,8 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="footmodal.jsp"%>
+	
+<%@ include file="footmodal.jsp"%>
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script src="<%=contextPath%>includes/js/uploadifive/jquery.uploadifive.min.js"></script>
@@ -184,6 +350,15 @@
 					alert(XMLHttpRequest.status);
 				}
 			});
+		}
+		
+		function setTab(m, n) {
+			var tli = document.getElementById("menu" + m).getElementsByTagName("li");
+			var mli = document.getElementById("main" + m).getElementsByTagName("ul");
+			for (i = 0; i < tli.length; i++) {
+				tli[i].className = i == n ? "hover" : "";
+				mli[i].style.display = i == n ? "block" : "none";
+			}
 		}
 	</script>
 </body>
