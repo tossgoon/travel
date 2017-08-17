@@ -96,7 +96,7 @@ body {
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default" style="width:1024px;text-align:left;margin:0 auto;padding-top:20px;">
-					<div class="panel-body">
+					<div class="panel-body" style="height:500px;">
 						<c:forEach var="portal" items="${portals}">
 							<p class="title1">
 								<a href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
@@ -110,10 +110,10 @@ body {
 					</div>
 
 					<div class="panel-footer">
-						<a id="firstpage" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=${ptype}">第一页</a> 
-						<a id="lastpage"  href="/travel/visitor/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }&type=${ptype}" >上一页</a> 
-						<a id="nextpage" href="/travel/visitor/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }&type=${ptype}" >下一页</a>
-						<a id="endpage" href="/travel/visitor/querypage.action?pagesize=10&pagenum=${page.totalPage }&type=${ptype}" >最后一页</a>
+						<a id="firstpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=${ptype}">第一页</a> 
+						<a id="lastpage"  href="/travel/visitor/querypage.action?pagesize=7&pagenum=${page.currentPage-1 }&type=${ptype}" >上一页</a> 
+						<a id="nextpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=${page.currentPage+1 }&type=${ptype}" >下一页</a>
+						<a id="endpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=${page.totalPage }&type=${ptype}" >最后一页</a>
 						<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 					</div>
 				</div>

@@ -134,6 +134,17 @@ public class UserAction extends ActionSupport {
 		}
 	}
 	
+	public String signout() {
+		try {
+			ActionContext.getContext().getSession().remove("userid");//将用户id存储到loginname中
+			ActionContext.getContext().getSession().remove("loginname");//将用户姓名存储到loginname中
+			return SUCCESS;
+		} catch (Exception ex) {
+			setErrorMsg("删除用户出错。" + ex.getMessage());
+			return ERROR;
+		}
+	}
+	
 	public List<User> getUsers() {
 		return users;
 	}

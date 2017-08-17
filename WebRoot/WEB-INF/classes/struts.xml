@@ -298,7 +298,10 @@
 			<result name="error" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
-		
+		<action name="querypage" class="portalAct" method="queryByPage">
+ 			<result name="success">/portal/portallist.jsp</result>
+			 <result name="error" type="json"></result> 
+		</action>
 	</package>
 	
 	<package name="visitor" extends="struts-default,json-default"	namespace="/visitor">
@@ -310,6 +313,15 @@
 			<result name="error" type="json"></result>
 			<result name="success">/portal/portalshow.jsp</result>
 		</action>
+		
+		<action name="loginout" class="userAct" method="signout">
+		    <result name="error" type="json"></result>
+			<result name="success" type="redirectAction">
+		      <param name="actionName">first</param>
+		      <param name="namespace">/visitor</param>
+		    </result> 
+		</action>
+		
 	   <action name="login" class="userAct" method="login">
 		    <result name="error" type="json"></result>
 			<result name="success" type="json"></result>
@@ -403,10 +415,18 @@
 		
 	</package>
 	
-	<package name="fileio" extends="struts-default,json-default" namespace="/fileio">
+	<package name="fileio"  extends="struts-default,json-default,usercheck" namespace="/fileio">
 		<action name="upload" class="fileUpLoad">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
+		</action>
+		<action name="download" class="fileDownLoad">
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">fileInput</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			</result>
+			<result name="error">/jkgis/downloaderror.jsp</result>
 		</action>
 	</package>
 	

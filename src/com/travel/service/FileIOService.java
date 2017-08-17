@@ -18,14 +18,17 @@ import com.travel.pojo.Oafile;
 
 public class FileIOService {
 
-	private Oafile oafile;
-
+	private String filepath;
 	public FileIOService() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public InputStream getFileInput() throws FileNotFoundException {
-		return ServletActionContext.getServletContext().getResourceAsStream(oafile.getFilepath());
+		String realpath=ServletActionContext.getServletContext().getRealPath(filepath).replace("\\webapps\\travel\\travel","");
+		//InputStream ist=ServletActionContext.getServletContext().getResourceAsStream(realpath);
+		//InputStream ist=new FileInputStream(realpath);
+		InputStream	ist=ServletActionContext.getServletContext().getResourceAsStream("uploadFiles/20170729162413408.jpg");
+		return ist;
 	}
 
 	public String uploadFile(String fileName, File fileData) throws Exception {
@@ -77,11 +80,11 @@ public class FileIOService {
 		return fullFileName;
 	}
 
-	public Oafile getOafile() {
-		return oafile;
+	public String getFilepath() {
+		return filepath;
 	}
 
-	public void setOafile(Oafile oafile) {
-		this.oafile = oafile;
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 }

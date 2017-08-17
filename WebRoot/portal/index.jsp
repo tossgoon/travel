@@ -248,7 +248,7 @@ body {
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=4">志愿者之家</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
 			<li><a href="/travel/portal/webgis.jsp">地理位置</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=6">联系我们</a></li>
+			<li><a href="/travel/visitor/show.action?id=50">联系我们</a></li>
 			
 		</ul>
 	</div>
@@ -281,7 +281,9 @@ body {
 
 			<c:if test="${sessionScope.loginname!=null}">
 				<div style="float:right;" id="divwelcome">
-					<span id="labelwelcome">欢迎登陆,${sessionScope.loginname}。</span> <a href="/travel/oa/loginsuccess.action"> &gt;&gt;点击进入OA </a>
+					<span id="labelwelcome">欢迎登陆,${sessionScope.loginname}。</span> 
+					<a href="/travel/oa/loginsuccess.action"> &gt;&gt;点击进入OA  </a>
+					<a style="margin-left:10px;" href="/travel/visitor/loginout.action"> 退出登陆  </a>
 				</div>
 			</c:if>
 		</div>
@@ -327,7 +329,7 @@ body {
 				<div class="titlepaneldiv">
 					<span class="titlepanel" style="padding-top:30px;">工作动态</span>
 				</div>
-				<a class="morea" href="#"> 更多&gt;&gt; </a>
+				<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalWorkList}" varStatus="status">
 					<p class="title1">
@@ -342,7 +344,7 @@ body {
 			<div class="titlepaneldiv">
 				<span class="titlepanel">政策法规</span>
 			</div>
-			<a class="morea" href="#"> 更多&gt;&gt; </a>
+			<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalLawList}">
 					<p class="title1">
@@ -358,7 +360,7 @@ body {
 			<div class="titlepaneldiv">
 				<span class="titlepanel">政务公开</span>
 			</div>
-			<a class="morea" href="#"> 更多&gt;&gt; </a>
+			<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalAffairsList}">
 					<p class="title1">
@@ -376,7 +378,7 @@ body {
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">保护区介绍</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
+						<span class="subtitle">保护区介绍</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/show.action?id=24">
 							更多&gt;&gt; </a>
 					</div>
 					<c:forEach var="portal" items="${portalIntroList}"
@@ -391,7 +393,7 @@ body {
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">科普知识</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
+						<span class="subtitle">科普知识</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">
 							更多&gt;&gt; </a>
 					</div>
 					<c:forEach var="portal" items="${portalScienceList}">
@@ -414,7 +416,7 @@ body {
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">保护区防护</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="#">
+						<span class="subtitle">保护区防护</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">
 							更多&gt;&gt; </a>
 					</div>
 					<c:forEach var="portal" items="${portalProtectList}">
@@ -514,7 +516,7 @@ body {
 						//$("#labelwelcome").html("欢迎登陆,"+loginname+"。");
 						//$("#divwelcome").show();
 						//$("#formLogin").hide();
-						$("#formLogin").html("<a href='/travel/oa/loginsuccess.action' style='float:right'> &gt;&gt;点击进入OA </a>"+"<span id='labelwelcome' style='float:right;'>欢迎登陆,"+loginname+"。</span> ");
+						$("#formLogin").html("<a style='margin-left:10px;float:right;' href='/travel/visitor/loginout.action'> 退出登陆  </a>   <a href='/travel/oa/loginsuccess.action' style='float:right'> &gt;&gt;点击进入OA </a>"+"<span id='labelwelcome' style='float:right;'>欢迎登陆,"+loginname+"。</span> ");
 						//window.location.reload();
 					}
 					else{

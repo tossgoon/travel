@@ -200,7 +200,11 @@
 	<bean id="fileUpLoad" class="com.travel.action.UpLoadAction" scope="prototype">
 		<property name="fileIOService" ref="fileIOService"></property>
 	</bean>
-	
+	<bean id="fileDownLoad" class="com.travel.action.DownLoadAction"
+		scope="prototype">
+		<property name="fileIOService" ref="fileIOService"></property>
+		<property name="oaFileService" ref="oaFileService"></property>
+	</bean>
 	<bean id="oaService" class="com.travel.service.OaService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
 	</bean> 

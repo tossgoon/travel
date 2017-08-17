@@ -211,7 +211,8 @@ public class PortalAction extends ActionSupport {
 			Integer id = Integer.parseInt(getParam("id"));
 			portal = portalService.getPortal(Portal.class, id);
 			return "portalinfo";
-		} else {
+		}
+		else {
 			searchText = getParam("queryText");
 			this.portalIntroList=portalService.queryPortalByType("0", 0);//保护区介绍
 			this.portalWorkList=portalService.queryPortalByType("1", 0);//工作动态

@@ -38,7 +38,7 @@
 		<div class="row" >
 			<div class="col-md-12" style="width:100%;text-align:center;margin:0 auto;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;text-align:left;border-bottom:1px solid #000080;padding-bottom:12px;padding-left:20px;">
-					<span>后台管理：<a href="/travel/portal/query.action">网站管理&nbsp;&nbsp;</a> /&nbsp;&nbsp; 用户管理</span>
+					<span>后台管理：<a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站管理&nbsp;&nbsp;</a> /&nbsp;&nbsp; 用户管理</span>
 				</div>
 			</div>
 		</div>
@@ -47,10 +47,9 @@
 			
 			<div class="panel-heading" >  <span style="font-size:18px;">用户管理</span>    </div>
 			
-			<table align="center" border="1" cellpadding="0" cellspacing="0"
-							bordercolor="#3366cc" id="userlist"
+			<table align="center" class="table table-hover" id="userlist" style="width:80%;"
 							style="margin-top:20px;">
-							<tr align="center" bgcolor="#3399cc" height="26px">
+							<tr align="center"  height="26px">
 								<td width="100">ID</td>
 								<td width="160">姓名</td>
 								<td width="160">用户名</td>
