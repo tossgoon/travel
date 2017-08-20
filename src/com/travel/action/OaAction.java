@@ -40,6 +40,7 @@ public class OaAction extends ActionSupport {
 	private OaReceiverService<Oareceiver> oaReceiverService;
 	private UserService<User> userService;
 	private String oasender;//发送人姓名
+	private String errormsg;
 
 	public Oa getOa() {
 		return oa;
@@ -171,6 +172,18 @@ public class OaAction extends ActionSupport {
 		// System.out.println(this);
 	}
 
+	public String setread() throws Exception{
+		if (getParam("id") != null) {
+			Integer id = Integer.parseInt(getParam("id"));
+			oaReceiverService.setread(id);
+			setErrormsg("0");
+		}
+		else{
+			setErrormsg("事务不存在");
+		}
+		return SUCCESS;
+	}
+	
 	public String modify() {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
@@ -256,6 +269,7 @@ public class OaAction extends ActionSupport {
 					}
 					User user= this.userService.getUser(User.class, oa.getCreater());
 					oa.setSenduser(user.getUsername());
+					oa.setRecid(oares.getId());
 					oareceivelist.add(oa);
 				}
 			}
@@ -276,6 +290,23 @@ public class OaAction extends ActionSupport {
 			//设置oa发送人
 			User senduser=this.userService.getUser(User.class, oa.getCreater());
 			this.oasender=senduser.getUsername();
+		}
+		else if (getParam("oarecid") != null) {
+			Integer oarecid = Integer.parseInt(getParam("oarecid"));
+			Oareceiver rec= this.oaReceiverService.getOaReceiver(Oareceiver.class, oarecid);
+			
+			this.oa = this.oaService.getOa(Oa.class, rec.getOaid());
+			// 获取oa附件
+			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(
+					oa.getId(), Oafile.class);
+			Set<Oafile> set = new HashSet<Oafile>();
+			set.addAll(oafilelist);// 给set填充
+			oa.setOafiles(set);
+			//设置oa发送人
+			User senduser=this.userService.getUser(User.class, oa.getCreater());
+			this.oasender=senduser.getUsername();
+			oa.setRecid(rec.getId());
+			oa.setIsread(rec.getIsread());
 		}
 		return SUCCESS;
 	}
@@ -306,9 +337,8 @@ public class OaAction extends ActionSupport {
 					return "admin";
 				}
 				else{
-					querysend();
+					//querysend();
 					queryreceive();
-					
 					return "normal";
 				}
 			}
@@ -404,6 +434,14 @@ public class OaAction extends ActionSupport {
 
 	public void setOasender(String oasender) {
 		this.oasender = oasender;
+	}
+
+	public String getErrormsg() {
+		return errormsg;
+	}
+
+	public void setErrormsg(String errormsg) {
+		this.errormsg = errormsg;
 	}
 
 }

@@ -25,7 +25,6 @@
         <property name="status" type="java.lang.Boolean">
             <column name="status" sql-type="tinyint(1)"/>
         </property>
-        
         <set name="oafiles" inverse="true">
             <key>
                 <column name="oaid" />

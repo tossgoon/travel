@@ -12,8 +12,6 @@ import java.util.Date;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.jktech.pojo.GcAttach;
-import com.jktech.pojo.Kcgc;
 import com.travel.pojo.Oafile;
 
 public class FileIOService {

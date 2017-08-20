@@ -13,6 +13,15 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
+	<!--自定义下载Servlet，需要放在struts2配置的前面，而且后缀还要自定义 -->
+	<!-- <servlet>
+		<servlet-name>DownLoadServlet</servlet-name>
+		<servlet-class>com.travel.servlet.DownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DownLoadServlet</servlet-name>
+		<url-pattern>/travel/download.do</url-pattern>
+	</servlet-mapping> -->
 	<!-- 对Spring容器进行实例化 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -14,13 +14,13 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户管理</title>
+<title>我的发送</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="用户管理">
+<meta http-equiv="description" content="我的发送">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -33,127 +33,90 @@
 #oainfo tr td:first-child span {
 	 float: right;
 }
-
+body{
+background-color: rgb(226, 252, 231);
+}
 </style>
 </head>
 
 <body>
    <%@ include file="/portal/headmodal.jsp"%>
-	<div class="container" style="width:1024px;margin:0 auto;">
+	<div class="container" style="width:1024px;margin:0 auto;background-color:#ffffff;margin-top:20px;">
+		
 		<div class="row">
-			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">OA管理：用户工作箱</label>
+			<div class="col-md-12" style="text-align:left;margin-top:20px;">
+				<div style="width:100%;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
+					<span>当前位置：OA管理>>我的工作箱>>我的发送/&nbsp;&nbsp;<a href="/travel/oa/queryreceive.action">我的事务</a>
+					  </span>
+				</div>
 			</div>
 		</div>
-
-		<div class="row" style="background-color:#F5F5F5">
-
+		
+		<div class="row">
+			<div class="col-md-12" style="text-align:center;">
+				<label style="font-size:20px;font-weight:normal;margin:30px;">用户工作箱：我的发送</label>
+			</div>
+		</div>
+		<div class="row" >
+		
+		<div class="col-md-12" style="text-align:center;">
+		
 			<div class="panel panel-default">
 				<div class="panel-body">
-
-                     <ul id="myTab" class="nav nav-tabs" style="width:100%;">
-				<li class="active"><a href="#receiver" data-toggle="tab"> 我的事项
-				</a></li>
-				<li><a href="#send" data-toggle="tab">我的发送</a></li>
-				
-			</ul>
-			<div id="myTabContent" class="tab-content" style="width:100%;">
-				<div class="tab-pane fade in active" id="receiver">
-				   <table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" id="userlist" style="margin-top:20px;clear:both;width:100%;">
-							<tr align="center" bgcolor="#3399cc" height="26px">
-								<td>ID</td>
-								<td width="260">标题</td>
-								<td width="100">发送人</td>
-								<td width="100">发布日期</td>
-								<td width="100">状态</td>
-								<td width="100">查看</td>
-							</tr>
-
-							<c:forEach var="oa" items="${oareceivelist}" >
-								<tr align="center" height="24px" style="font-size:14px;">
-									<td>${oa.id}</td>
-									
-									<c:if test="${oa.isread!=true}">
-										<td style='font-weight:bold;'>${oa.title}</td>
-									</c:if>
-									<c:if test="${oa.isread==true}">
-											<td>${oa.title}</td>
-									</c:if>
-									<td>${oa.senduser}</td>
-									
-									<td>${oa.pubdatestr}</td>
-									<td> 
-                        				<c:if test="${oa.isread!=true}">
-											未读
-										</c:if>
-										<c:if test="${oa.isread==true}">
-											已读
-										</c:if>
-									</td>
-									<td>
-											<a href="/travel/oa/query.action?oaid=${oa.id}" style="margin-right:10px;">查看</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-				</div>
-				<div class="tab-pane fade" id="send">
-				    <s:form action="querysend" namespace="/oa" class="form-inline" method="post" theme="simple">
+					
+						<s:form action="querysend" namespace="/oa" class="form-inline"
+							method="post" theme="simple">
 							<span style="float:left;margin-left:30px;margin-top:5px;">标题：</span>
-							<div class="input-group" style="width:360px;float:left;margin-bottom:20px;">
+							<div class="input-group"
+								style="width:360px;float:left;margin-bottom:20px;">
 								<input class="form-control" type="text" name="queryText"
 									value="${searchText}" /> <span class="input-group-btn">
 									<input type="submit" class="btn btn-default" value="查询" />
 								</span>
 							</div>
 							<!-- /input-group -->
-							<div	style="margin-left:5px;float:left;margin-left:20px;">
-								<a href="/travel/travel/user/useroa.jsp" type="button" class="btn btn-primary">新增</a>
+							<div style="margin-left:5px;float:left;margin-left:20px;">
+								<a href="/travel/travel/user/useroa.jsp" type="button"
+									class="btn btn-primary">新增</a>
 							</div>
 						</s:form>
 
-						<table align="center" border="1" cellpadding="0" cellspacing="0" bordercolor="#3366cc" id="userlist" style="margin-top:20px;clear:both;width:100%;">
-							<tr align="center" bgcolor="#3399cc" height="26px">
-								<td>ID</td>
+						<table align="center" class="table" cellpadding="0" cellspacing="0"
+							 id="userlist"
+							style="margin-top:20px;clear:both;width:100%;">
+							<tr align="center"  height="26px">
+								<td width="50">ID</td>
 								<td width="260">标题</td>
 								<td width="100">发布日期</td>
 								<td width="100">状态</td>
 								<td width="100">操作</td>
 							</tr>
 
-							<c:forEach var="oa" items="${oasendlist}" >
+							<c:forEach var="oa" items="${oasendlist}">
 								<tr align="center" height="24px" style="font-size:14px;">
 									<td>${oa.id}</td>
 									<td>${oa.title}</td>
 									<td>${oa.pubdatestr}</td>
-									<td> 
-                        				<c:if test="${oa.status!=true}">
+									<td><c:if test="${oa.status!=true}">
 											未发布
-										</c:if>
-										<c:if test="${oa.status==true}">
+										</c:if> <c:if test="${oa.status==true}">
 											已发布
-										</c:if>
-									</td>
-									<td>
-									    <c:if test="${oa.status!=true}">
-											<a href="/travel/oa/modify.action?id=${oa.id}" style="margin-right:10px;">更改</a>
-											<a href="javascript:void(0)" onclick="DeleteOa(${oa.id},this)">删除</a>
-										</c:if>
-									</td>
+										</c:if></td>
+									<td><c:if test="${oa.status!=true}">
+											<a href="/travel/oa/modify.action?id=${oa.id}"
+												style="margin-right:10px;">更改</a>
+											<a href="javascript:void(0)"
+												onclick="DeleteOa(${oa.id},this)">删除</a>
+										</c:if></td>
 								</tr>
 							</c:forEach>
 						</table>
+					</div>
 				</div>
 			</div>
-                </div>
-			</div>
-
-			
 		</div>
-
-
 	</div>
-	
+	<%@ include file="/portal/footmodal.jsp"%>
 	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="height:610px;width:460px;">

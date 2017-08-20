@@ -44,25 +44,30 @@
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理>>用户工作箱</span>
+					<span>当前位置：OA管理>>我的事务 /&nbsp;&nbsp;<a href="/travel/oa/loginsuccess.action">我的工作箱&nbsp;&nbsp;</a>
+					  </span>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">OA管理：用户工作箱</label>
+				<label style="font-size:20px;font-weight:normal;margin:30px;">我的事务</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">OA管理</div>
+					<div class="panel-heading">我的事务</div>
 					<div class="panel-body">
 						<s:form role="form" theme="simple" id="formOa" action="save"
 							namespace="/oa" style="width:100%;margin:0 auto;">
 							<s:hidden class="form-control" id="oaid" name="oa.id"
 								readonly="true"></s:hidden>
+								
+							<s:hidden class="form-control" id="oarecid" name="oa.recid"
+								readonly="true"></s:hidden>	
+								
 							<table id="oainfo"
 								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
 								<tr>
@@ -99,6 +104,16 @@
 									</td>
 								</tr>
 								<tr>
+								<td><span>状态:</span></td>
+								<td><c:if test="${oa.isread!=true}">
+											<label id="oareadst" style="margin-left:20px;margin-right:20px;font-size:14px;">未读 </label>
+											<a id="asetread"  onclick="setread()" href="javascript:void(0);">标为已读</a>
+										</c:if> <c:if test="${oa.isread==true}">
+											已读
+										</c:if></td>
+								</tr>
+								
+								<tr>
 									<td colspan="4"><hr style="border:1px solid;" /></td>
 								</tr>
 
@@ -124,9 +139,9 @@
 																value="#oafile.id" /></td>
 														<td width="200" style="text-align:center;"><s:property
 																value="#oafile.filename" /></td>
-														<td width="200" style="text-align:center;">
+														<%-- <td width="200" style="text-align:center;">
 														      <s:property	value="#oafile.filepath" />
-														</td>
+														</td> --%>
 														<td width="100" style="text-align:center;"><a
 															href=' <s:property	value="#oafile.filepath" />'  download="<s:property	value="#oafile.filename" />">下载</a></td>		
 														<%-- <td width="100" style="text-align:center;"><a
@@ -317,6 +332,33 @@
 			//根据参数判断
 		});
 		
+		function setread(){
+			if ($("#oarecid").val() != null&&$("#oarecid").val() !="") {
+				$.ajax({
+					url : '/travel/oa/setread.action?id=' + $("#oarecid").val(),
+					type : 'POST',
+					// 提交数据给Action传入数据
+					//data : {userid:delUserid},
+					// 返回的数据类型
+					dataType : 'json',
+					// 成功是调用的方法
+					success : function(data) {
+						if (data.errormsg == "0") {
+							//删除oa
+							$("#oareadst").text('已读');
+							$("#asetread").hide();
+							
+							alert("完成");
+						} else {
+							alert(data.errormsg);
+						}
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.status);
+					}
+				});
+			}
+		}
 		
 	</script>
 </body>

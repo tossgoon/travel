@@ -28,6 +28,7 @@ public class Oa implements java.io.Serializable {
 	private String pubdatestr;
 	private Boolean isread;
 	private String senduser;
+	private Integer recid;
 
 	// Constructors
 
@@ -132,5 +133,13 @@ public class Oa implements java.io.Serializable {
 
 	public void setSenduser(String senduser) {
 		this.senduser = senduser;
+	}
+
+	public Integer getRecid() {
+		return recid;
+	}
+
+	public void setRecid(Integer recid) {
+		this.recid = recid;
 	}
 }

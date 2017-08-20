@@ -26,6 +26,17 @@ public class OaReceiverService<T> {
 	public void updateOaReceiver(T OaReceiver) throws Exception {
 		dao.updateObject(OaReceiver);
 	}
+	
+	public void setread(int id) throws Exception{
+		String querystring="update Oareceiver oar set oar.isread=true where oar.id=?";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(querystring);
+		query.setInteger(0, id);
+		query.executeUpdate();
+		session.close();
+	}
 
 	public void deleteOaReceiver(int id, Class<T> OaReceiver) throws Exception {
 		T oaReceiver = dao.getObject(OaReceiver, id);
@@ -48,6 +59,7 @@ public class OaReceiverService<T> {
 		String queryString = "from Oareceiver oareceiver where oareceiver.userid =" + userid+" order by isread asc,id desc ";
 		return dao.getObjects(queryString);
 	}
+	
 	public List<T> queryOaReceiverByOaid(int oaid, Class<T> clazz) {
 		String queryString = "from Oareceiver oareceiver where oareceiver.oaid =" + oaid;
 		return dao.getObjects(queryString);

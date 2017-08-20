@@ -360,6 +360,10 @@
 		<action name="modify" class="oaAct" method="modify">
 			<result name="success">/travel/user/useroa.jsp</result>
 		</action>
+		
+		<action name="setread" class="oaAct" method="setread">
+			<result name="success"  type="json"></result>
+		</action>
 
 		<action name="delete" class="oaAct" method="delete">
 			<!-- <result name="success" type="redirect">
@@ -384,12 +388,12 @@
 		
 		<action name="querysend" class="oaAct" method="querysend">
 		    <result name="oainfo">/travel/user/useroa.jsp</result>
- 			<result name="success">/travel/user/useroalist.jsp</result>
+ 			<result name="success">/travel/user/oasend.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
 		
 		<action name="queryreceive" class="oaAct" method="queryreceive">
- 			<result name="success">/travel/user/useroalist.jsp</result>
+ 			<result name="success">/travel/user/oareceive.jsp</result>
  			<result name="error">/travel/user/error.jsp</result>
 		</action>
 		
@@ -404,7 +408,7 @@
 		</action>
 		
 		<action name="loginsuccess" class="oaAct" method="loginsuccess">
-		  <result name="normal">/travel/user/useroalist.jsp</result>
+		  <result name="normal">/travel/user/oareceive.jsp</result>
 		  <!-- <result name="admin">/portal/portallist.jsp</result> -->
 		   <!-- <result name="admin" type="redirect">/travel/user/querypage</result>   -->
 		   <result name="admin" type="redirectAction">

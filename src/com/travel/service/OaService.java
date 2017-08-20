@@ -25,6 +25,8 @@ public class OaService<T> {
 		dao.updateObject(Oa);
 	}
 	
+
+	
 	public void updateOaWithoutUser(Oa oa) throws Exception{
 		String queryString = "update Oa oa set oa.content=?,oa.pubdate=?,oa.status=?,oa.title=? where oa.id=?";
 		SessionFactory sessionFactory = dao.getHibernateTemplate()

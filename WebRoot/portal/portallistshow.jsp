@@ -55,7 +55,7 @@ body {
 	<div class="container" style="width:100%;margin:0 auto;text-align:center;margin-top:20px;">
 		<div class="row">
 			<div class="col-md-12" style="margin:0 auto;">
-				<div	style="width:1024px;margin:0 auto;padding-top:20px;text-align:left;background-color:#ffffff;border-bottom:1px solid #228B22;padding-bottom:12px;">
+				<div	style="width:1024px;margin:0 auto;padding-top:20px;text-align:left;background-color:#ffffff;border-bottom:1px solid #228B22;padding-left:20px;padding-bottom:12px;">
 					<span>当前位置：首页&gt;&gt;
 					<c:choose>
 						 <c:when test="${ptype=='0'}">

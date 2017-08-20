@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
@@ -33,151 +34,92 @@
 #oainfo tr td:first-child span {
 	 float: right;
 }
-
+body{
+background-color: rgb(226, 252, 231);
+}
 </style>
 </head>
 
 <body>
    <%@ include file="/portal/headmodal.jsp"%>
-
-	<div class="container" style="width:100%;">
+	<div class="container" style="width:1024px;margin:0 auto;background-color:#ffffff;margin-top:20px;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理>>用户工作箱</span>
+					  <span>当前位置：OA管理>>我的工作箱>>我的事务/&nbsp;&nbsp;<a href="/travel/oa/querysend.action">我的发送</a>
+					  </span>
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">用户工作箱：新增事务</label>
+				<label style="font-size:20px;font-weight:normal;margin:30px;">我的工作箱：我的事务</label>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">OA管理：新增事务</div>
-					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formOa" action="save"
-							namespace="/oa" style="width:100%;margin:0 auto;">
-							<s:hidden class="form-control" id="oaid" name="oa.id"
-								readonly="true"></s:hidden>
-							<table id="oainfo"
-								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
-								<tr>
-									<td><span>接收人</span></td>
-									<td colspan="3">
-										<div class="input-group" style="width:800px;">
-											<input type="text" class="form-control"
-												value="${oareceivernames}" id="receivers"
-												readonly="readonly"> <span class="input-group-btn">
-												<button class="btn btn-default" type="button"
-													data-toggle="modal" data-target="#userModal">选择...</button>
-											</span>
-										</div> <!-- /input-group -->
-									</td>
-								</tr>
-								<tr>
-									<td><span>标题</span></td>
-									<td colspan="3"><s:textfield class="form-control"
-											id="oatitle" name="oa.title"></s:textfield></td>
-								</tr>
-								<tr>
-									<td valign="top"><span>内容</span></td>
-									<td colspan="3"><s:textarea class="form-control"
-											style="resize: none;margin-bottom:10px;width:800px;"
-											rows="10" id="oacontent" name="oa.content"></s:textarea></td>
-								</tr>
-								<tr>
-									<td><span>发布日期</span></td>
-									<td style="width:260px;">
-										<div class="input-group date form_date"
-											data-date-format="yyyy-mm-dd hh:ii:ss">
-											<s:textfield class="form-control" id="oapubdate">
-												<s:param name="value">
-													<s:date name="oa.pubdate" format="yyyy-MM-dd HH:mm:ss" />
-												</s:param>
-											</s:textfield>
-											<span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</td>
-									<td></td>
-									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox
-												name="oa.status" id="chksend" onclick="return false" />是否已发布</label>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4"><hr style="border:1px solid;" /></td>
-								</tr>
-
-								<tr>
-									<td colspan="2" style="font-size:14px;text-align:center;">附件上传</td>
-									<td colspan="2" style="font-size:14px;text-align:center;">已上传</td>
-								</tr>
-
-								<tr>
-									<td colspan="2" valign="top"><div id="uploader"
-											style="width:300px;">
-											<div id="filePicker" style="float:left;font-size:14px;">选择...</div>
-											<a onclick="ResetUploader()" href="javascript:void(0);"
-												style="float:left;margin:7px;font-size:14px;">重置</a>
-											<button id="ctlBtn" type="button" class="btn btn-success"
-												style="float:right;height:32px;font-size:14px;">开始上传</button>
-											<div id="thelist" class="uploader-list" style="clear:both;"></div>
-										</div></td>
-									<td colspan="2" valign="top">
-										<table style="width:100%;margin:0 auto;font-size:14px;"
-											class="table">
-											<thead>
-												<tr>
-													<th style="display: none">id</th>
-													<th width="200" style="text-align:center;">名称</th>
-													<th style="display: none">路径</th>
-													<th width="100" style="text-align:center;">操作</th>
-												</tr>
-											</thead>
-											<tbody id="tbattach">
-												<s:iterator value="oa.oafiles" var="oafile">
-													<tr>
-														<td style="display: none"><s:property
-																value="#oafile.id" /></td>
-														<td width="200" style="text-align:center;"><s:property
-																value="#oafile.filename" /></td>
-														<td style="display: none"><s:property
-																value="#oafile.filepath" /></td>
-														<td width="100" style="text-align:center;"><a
-															href='javascript:void(0)' onclick='DeleteAtt(this)'>删除</a></td>
-													</tr>
-												</s:iterator>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-							</table>
+		<div class="col-md-12" style="text-align:center;">
+		
+			<div class="panel panel-default">
+				<div class="panel-body">
+						<s:form action="queryreceive" namespace="/oa" class="form-inline"
+							method="post" theme="simple">
+							<span style="float:left;margin-left:30px;margin-top:5px;">标题：</span>
+							<div class="input-group"
+								style="width:360px;float:left;margin-bottom:20px;">
+								<input class="form-control" type="text" name="queryText"
+									value="${searchText}" /> <span class="input-group-btn">
+									<input type="submit" class="btn btn-default" value="查询" />
+								</span>
+							</div>
 						</s:form>
-					</div>
-				</div>
-				<div style="margin:0 auto;margin-top:20px;width:1024px;">
-					<div style="float:right;">
-						<a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
-						<c:if test="${oa.status!=true}">
-							<button type="button" id="btnsave" class="btn btn-primary"
-								onclick="SaveOa(0)">保存数据</button>
-							<button type="button" id="btnsend"
-								style="margin-left:10px;margin-right:10px;"
-								class="btn btn-success" onclick="SaveOa(1)">发布数据</button>
-							<button type="button" id="btndel" class="btn btn-warning"
-								onclick="DeleteOa()">删除数据</button>
-						</c:if>
-					</div>
+						
+						<table align="center"  cellpadding="0" cellspacing="0"
+							 id="userlist" class="table"
+							style="margin-top:20px;clear:both;width:100%;">
+							<tr align="center" >
+								<td width="50">ID</td>
+								<td width="260">标题</td>
+								<td width="100">发送人</td>
+								<td width="100">发布日期</td>
+								<td width="100">状态</td>
+								<td width="100">查看</td>
+							</tr>
+
+							<c:forEach var="oa" items="${oareceivelist}">
+							
+						  <c:if test="${fn:contains(oa.title,searchText)}">
+							
+								<tr align="center" height="24px" style="font-size:14px;">
+									<td>${oa.id}</td>
+
+									<c:if test="${oa.isread!=true}">
+										<td style='font-weight:bold;'>${oa.title}</td>
+									</c:if>
+									<c:if test="${oa.isread==true}">
+										<td>${oa.title}</td>
+									</c:if>
+									<td>${oa.senduser}</td>
+
+									<td>${oa.pubdatestr}</td>
+									<td><c:if test="${oa.isread!=true}">
+											未读
+										</c:if> <c:if test="${oa.isread==true}">
+											已读
+										</c:if></td>
+									<td><a href="/travel/oa/query.action?oarecid=${oa.recid}"
+										style="margin-right:10px;">查看</a></td>
+								</tr>
+								
+								</c:if>
+							</c:forEach>
+						</table>
+					
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
-
+		<%@ include file="/portal/footmodal.jsp"%>
 	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="height:610px;width:460px;">
@@ -304,10 +246,11 @@
 				}
 			});
 		}
-		function DeleteOa() {
-			if ($("#oaid").val() != null&&$("#oaid").val() !="") {
+		
+		function DeleteOa(id, a) {
+			if (confirm('是否删除?')) {
 				$.ajax({
-					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
+					url : '/travel/oa/delete.action?id=' + id,
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -317,12 +260,8 @@
 					success : function(data) {
 						if (data.errorMsg == "0") {
 							//删除oa
-							$("#oaid").val('');
-							$("#oatitle").val('');
-							$("#oacontent").val('');
-							$("#tbattach tr").empty();
-							ResetUploader();
-							alert("删除完成");
+							var delrow = $(a).parent().parent();//删除用户所在行
+							$(delrow).remove();
 						} else {
 							alert(data.errorMsg);
 						}
@@ -331,12 +270,11 @@
 						alert(XMLHttpRequest.status);
 					}
 				});
-			}
+			} 
 		}
 		var uploader;
 		$(function() {
 			//初始化日期控件
-			receiverids='${oareceivers}';//初始化
 			$('.form_date').datetimepicker({
 				language : 'zh-CN',
 				weekStart : 1,
@@ -355,9 +293,11 @@
 			var $btn = $("#ctlBtn"); //开始上传  
 			if (!WebUploader.Uploader.support()) {
 				alert('Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
-				throw new Error('WebUploader does not support the browser you are using.');
+				throw new Error(
+						'WebUploader does not support the browser you are using.');
 			}
-			uploader = WebUploader.create({
+			uploader = WebUploader
+					.create({
 						// 选完文件后，是否自动上传。  
 						auto : false,
 						// swf文件路径  
@@ -494,8 +434,6 @@
 			$(delrow).remove();
 		}
 		function InitAllUsers(){
-			var recs=receiverids.split(";");
-			
 			$.ajax({
 				url : '/travel/user/query.action?param=1',
 				type : 'GET',
@@ -506,21 +444,7 @@
 				// 成功是调用的方法
 				success : function(data) {
 					$.each(data.users, function(index,user){
-						var isin=false;
-						for(var i=0;i<recs.length;i++){
-						   if(recs[i]==user.id){
-							   isin=true;
-							   break;
-						   }	
-						}
-						var row="";
-						if(isin){
-							 var row="<tr style='text-align:center;'> <td><input type='checkbox' checked='true' /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
-						}
-						else{
-							 var row="<tr style='text-align:center;'> <td><input type='checkbox'  /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
-						}
-					   
+					    var row="<tr style='text-align:center;'> <td><input type='checkbox' /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
 					    $("#tbuser").append(row);
 					});
 				},
