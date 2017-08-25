@@ -305,16 +305,21 @@ body {
 						<c:choose>
 							<c:when test="${status.first}">
 								<div class="item active">
+									<a target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
 									<img style="height:438px;width:100%;"
 										src="${portal.pictureurl}" alt="${portal.title}">
-									<div class="carousel-caption">${portal.title}</div>
+									 <div class="carousel-caption">${portal.title}</div>
+									</a>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="item">
+								<a target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
 									<img style="height:438px;width:100%;"
 										src="${portal.pictureurl}" alt="${portal.title}">
 									<div class="carousel-caption">${portal.title}</div>
+									</a>
+									
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -369,8 +374,7 @@ body {
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						${portal.subtitle}</p>
-					<hr
-						style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
+					<hr	style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
 				</c:forEach>
 			</div>
 		</div>

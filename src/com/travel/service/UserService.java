@@ -42,6 +42,19 @@ public class UserService<T> {
 		query.executeUpdate();
 		session.close();
 	}
+	
+	public void updateUserPassword(User user)
+			throws Exception {
+		String queryString = "update User u set u.password=? where u.id=?";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setString(0, user.getPassword());
+		query.setInteger(1, user.getId());
+		query.executeUpdate();
+		session.close();
+	}
 
 	public void deleteUser(int id, Class<T> User) throws Exception {
 		T user = dao.getObject(User, id);

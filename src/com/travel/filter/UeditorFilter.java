@@ -19,10 +19,10 @@ public class UeditorFilter extends StrutsPrepareAndExecuteFilter {
         String url = request.getRequestURI();           
         System.out.println(url);           
         if (url.contains("/ueditor/jsp/")) {               
-            System.out.println("使用自定义过滤器");               
+            //System.out.println("使用自定义过滤器");               
             chain.doFilter(req, res);           
         }else{               
-            System.out.println("使用默认过滤器");               
+            //System.out.println("使用默认过滤器");               
             super.doFilter(req, res, chain);           
         }   
     }  

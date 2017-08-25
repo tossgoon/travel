@@ -100,8 +100,15 @@
 										</tbody>
 									</table>
 								</div>
-								<div  id="uploader">
-									<div style="margin-bottom:5px;"><label><input type="checkbox" id="isshowpicture" name="portal.isshowpicture">首页图片:	</label><label id="uploadmsg" style="margin-left:20px;"></label>
+								<div  id="uploader">d
+									<div style="margin-bottom:5px;"><label>
+									<input type="checkbox" id="isshowpicture"
+										<c:if test="${portal.isshowpicture==true}">
+									        checked="true" 
+									    </c:if>
+										name="portal.isshowpicture">
+
+										首页图片:	</label><label id="uploadmsg" style="margin-left:20px;"></label>
 									<s:textfield style="width:100%;" class="form-control input-sm" id="portalpictureurl" readonly="true" name="portal.pictureurl"></s:textfield>
 									</div>
 									<div id="filePicker" style="float:left;">选择...</div>

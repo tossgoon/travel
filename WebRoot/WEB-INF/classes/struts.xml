@@ -208,8 +208,14 @@
 
 		<action name="update" class="userAct" method="update">
 			<result name="success" type="json"></result>
-			<result name="dcxxinfo">
-				/jkgis/dcxx/dcxxinfo.jsp
+			<result name="error">
+				/travel/error.jsp
+			</result>
+		</action>
+		
+		<action name="updatepass" class="userAct" method="updateUserPass">
+			<result name="success" type="json"></result>
+			<result name="error"  type="json">
 			</result>
 		</action>
 
@@ -258,14 +264,14 @@
     <package name="portalpack" extends="struts-default,json-default,usercheck"
 		namespace="/portal">
 		<global-results>
-			<result name="error">/user/error.jsp</result>
+			<result name="error">/travel/error.jsp</result>
 			<result name="success">/user/success.jsp</result>
 		</global-results>
 
 		<action name="update" class="portalAct" method="update">
 			<result name="success" type="json"></result>
-			<result name="dcxxinfo">
-				/jkgis/dcxx/dcxxinfo.jsp
+			<result name="error">
+				/travel/error.jsp
 			</result>
 		</action>
 
@@ -349,7 +355,7 @@
 	<package name="oapack" extends="struts-default,json-default,usercheck"
 		namespace="/oa">
 		<global-results>
-			<result name="error">/user/error.jsp</result>
+			<result name="error">/travel/error.jsp</result>
 			<result name="success">/user/success.jsp</result>
 		</global-results>
 
@@ -416,7 +422,6 @@
 		      <param name="namespace">/user</param>
 		    </result> 
 		</action>
-		
 	</package>
 	
 	<package name="fileio"  extends="struts-default,json-default,usercheck" namespace="/fileio">
@@ -430,7 +435,7 @@
 				<param name="inputName">fileInput</param>
 				<param name="contentDisposition">attachment;filename="${fileName}"</param>
 			</result>
-			<result name="error">/jkgis/downloaderror.jsp</result>
+			<result name="error">/travel/error.jsp</result>
 		</action>
 	</package>
 	

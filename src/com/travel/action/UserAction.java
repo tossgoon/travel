@@ -69,6 +69,31 @@ public class UserAction extends ActionSupport {
 		}
 		// System.out.println(this);
 	}
+	
+	public String updateUserPass(){
+		try {
+			String oldpassword=getParam("oldpass");
+			String newpassword=getParam("newpass");
+			Integer userid = (Integer) ActionContext.getContext().getSession().get("userid");//用户ID
+			User muser=this.userService.getUser(User.class, userid);
+			String md5oldpass=MD5Util.getMD5(oldpassword);//加密后的旧密码
+			if(md5oldpass.equals(muser.getPassword()))
+			{
+				String md5newpass=MD5Util.getMD5(newpassword);//加密后的新密码
+				muser.setPassword(md5newpass);
+				this.userService.updateUserPassword(muser);
+				setErrorMsg("0");
+			}
+			else{
+				setErrorMsg("原密码输入错误");
+			}
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			setErrorMsg("更新用户出错。" + e.getMessage());
+			return ERROR;
+		}
+	}
 
 	public String delete() {
 		try {
