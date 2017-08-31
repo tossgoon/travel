@@ -134,7 +134,7 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String login() {
+	public String login2() {
 		try {
 			User userresult = userService.queryUserByName(user.getLoginname());
 			if (userresult == null) {
@@ -151,6 +151,34 @@ public class UserAction extends ActionSupport {
 				} else {
 					setErrorMsg("密码错误。");
 					return INPUT;
+				}
+			}
+		} catch (Exception ex) {
+			setErrorMsg("删除用户出错。" + ex.getMessage());
+			return ERROR;
+		}
+	}
+	
+	public String login() {
+		try {
+			User userresult = userService.queryUserByName(user.getLoginname());
+			if (userresult == null) {
+				setErrorMsg("用户不存在");
+				return ERROR;
+			} else {
+				User user1 = userService.queryUserByNamePassword(
+						user.getLoginname(), user.getPassword());
+				if (user1 != null) {
+					setErrorMsg("0");
+					ActionContext.getContext().getSession().put("userid", user1.getId());//将用户id存储到loginname中
+					ActionContext.getContext().getSession().put("loginname", user1.getLoginname());//将用户姓名存储到loginname中
+					if(user1.getUsertype().equals("9")){
+						return "admin";
+					}
+					return "normal";
+				} else {
+					setErrorMsg("密码错误。");
+					return ERROR;
 				}
 			}
 		} catch (Exception ex) {

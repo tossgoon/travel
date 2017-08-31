@@ -329,10 +329,15 @@
 		</action>
 		
 	   <action name="login" class="userAct" method="login">
-		    <result name="error" type="json"></result>
-			<result name="success" type="json"></result>
-			<result name="input" type="json"></result> 
-			
+			<result name="error">/travel/user/login.jsp</result>
+			<result name="admin" type="redirectAction">
+		      <param name="actionName">querypage</param>
+		      <param name="namespace">/user</param>
+		    </result> 
+		    <result name="normal" type="redirectAction">
+		      <param name="actionName">loginsuccess</param>
+		      <param name="namespace">/oa</param>
+		    </result> 
 			<!-- <result name="error" type="chain">
 		      <param name="actionName">first</param>
 		      <param name="namespace">/visitor</param>
@@ -348,6 +353,10 @@
 		</action>
 		<action name="querypage" class="portalAct" method="queryByPage">
  			<result name="success">/portal/portallistshow.jsp</result>
+			 <result name="error" type="json"></result> 
+		</action>
+		<action name="searchpage" class="portalAct" method="searchByPage">
+ 			<result name="success">/portal/searchlist.jsp</result>
 			 <result name="error" type="json"></result> 
 		</action>
    </package>

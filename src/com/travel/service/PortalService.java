@@ -104,6 +104,21 @@ public class PortalService<T> {
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Portal> searchPortalByPage(int pagesize,int pagenum,String keywords){
+		String queryString="from Portal p where p.title like:param or p.content like:param order by p.pubdate desc";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setString("param", "%" + keywords + "%");
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		List<Portal>list=(List<Portal>)query.list();
+		session.close();
+		return list;
+	}
+	
 	public int getPortalCount(String type){
 		String queryString="select count(*) from Portal as p where p.type='"+type+"'";
 		SessionFactory sessionFactory = dao.getHibernateTemplate()
@@ -115,5 +130,20 @@ public class PortalService<T> {
 		session.close();
 		return num;
 	}
+	
+	public int getPortalSearchCount(String keywords){
+		String queryString="select count(*) from Portal as p where p.title like:param or p.content like:param";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setString("param", "%" + keywords + "%");
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
+	}
+	
+	
 	
 }

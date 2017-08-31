@@ -1,7 +1,7 @@
 	<%@page pageEncoding="UTF-8"%>  
-	<div class="headlogo" id="logoindex" style="background-image:url(<%=contextPath%>/includes/image/normalbg.png)">
+	<div class="headlogo" id="logoindex" style="background-image:url(<%=contextPath%>/includes/image/topbackground.png);background-repeat: repeat-x;">
 		<div style="width:1100px;margin:0 auto;">
-			<img alt="" style="margin-top:30px;"
+			<img alt="" style="margin-top:30px;width:900px;"
 				src="<%=contextPath%>/includes/image/logotitle.png">
 		</div> 
 	</div>
@@ -13,9 +13,10 @@
 			<li><a href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=2">政策法规</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=3">政务公开</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=8">保护区防护</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=4">志愿者之家</a></li>
+<!-- 			<li><a href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=4">志愿者之家</a></li> -->
 			<li><a href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=5">科普知识</a></li>
 			<li><a href="/travel/portal/webgis.jsp">地理位置</a></li>
 			<li><a href="/travel/visitor/show.action?id=50">联系我们</a></li>
+			<li><a href="/travel/travel/user/login.jsp">OA办公系统</a></li>
 		</ul>
 	</div>

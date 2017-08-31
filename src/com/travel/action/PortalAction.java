@@ -38,6 +38,7 @@ public class PortalAction extends ActionSupport {
 	private List<Portal> portalProtectList;//保护区防护8
 	private SplitPage page;
 	private String ptype;
+	private String keywords;
 	public SplitPage getPage() {
 		return page;
 	}
@@ -286,6 +287,27 @@ public class PortalAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String searchByPage() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		//关键字
+		if(getParam("keywords")!=null){
+			keywords=getParam("keywords");
+		}
+		else{
+			keywords="";
+		}
+		this.portals=portalService.searchPortalByPage(pagesize, pagenum, keywords);
+		int num = portalService.getPortalSearchCount(keywords);
+		page = new SplitPage(num,pagesize);
+		page.setCurrentPage(pagenum);
+		return SUCCESS;
+	}
+	
 	public String getErrorMsg() {
 		return errorMsg;
 	}
@@ -332,5 +354,13 @@ public class PortalAction extends ActionSupport {
 
 	public void setPortalProtectList(List<Portal> portalProtectList) {
 		this.portalProtectList = portalProtectList;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 }

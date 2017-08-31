@@ -31,7 +31,7 @@ String contextPath = request.getContextPath() + "/";
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-7">
-					<label class="navbar-brand">jkjy网络连接测试记录 Ping </label>
+					<label class="navbar-brand"> </label>
 				</div>
 				<div class="col-xs-5">
 					<ul class="nav navbar-nav navbar-right">

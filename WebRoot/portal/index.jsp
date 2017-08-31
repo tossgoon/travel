@@ -30,7 +30,7 @@ System.out.println(currentTime + "/当前时间");
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="保护区网站">
+<meta http-equiv="description" content="延安黄龙山褐马鸡国家级自然保护区">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/css/index.css" />
@@ -133,11 +133,13 @@ body {
 .titlepanel {
 	font-size: 18px;
 	padding-left: 20px;
+	border-left:5px solid #018752;
+	margin-left:20px;
 }
 
 .titlepaneldiv {
-	border-bottom: 3px solid #018752;
-	width: 120px;
+	border-bottom: 3px solid #36648B;
+	width: 130px;
 	position: relative;
 	top: 1px;
 	padding-bottom: 12px;
@@ -218,14 +220,21 @@ body {
 #demo2 {
 	float: left;
 }
+#logoindex a{
+color:#ffffff;
+}
 </style>
 </head>
 <body>
 	<div class="headlogo" id="logoindex">
-		<img alt="" style="position:absolute;z-index:9;top:200px;left:25%;" src="<%=contextPath%>/includes/image/logotitle.png"> 
-				<!-- <label class="testfont">延安黄龙山褐马鸡国家级自然保护区</label>
-				<label class="testfont1">Yanan HuangLongShan HemaJi GuojiaBaoHuQu</label> -->
+		<div style="position:absolute;z-index:10;top:16px;right:16px;font-color:#fff;">
+			<a href="#" style="font-color:#fff;" onClick="window.external.AddFavorite('http://219.144.50.146:8088/travel/visitor/first.action','延安黄龙山褐马鸡国家级自然保护区')">加入收藏</a>
+			| <a href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://219.144.50.146:8088/travel/visitor/first.action');">设为首页</a>
+		</div>
+
+		<img alt="" style="position:absolute;z-index:9;top:200px;left:16%;width:1000px;" src="<%=contextPath%>/includes/image/logotitle.png"> 
 		<div class="login-content">
+		    
 			<div class="bg_item bg_item1">
 				<div class="item1"></div>
 			</div>
@@ -245,16 +254,14 @@ body {
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3">政务公开</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=4">志愿者之家</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
 			<li><a href="/travel/portal/webgis.jsp">地理位置</a></li>
 			<li><a href="/travel/visitor/show.action?id=50">联系我们</a></li>
-			
+			<li><a href="/travel/travel/user/login.jsp">OA办公系统</a></li>
 		</ul>
 	</div>
 	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:60px;">
 		<div style="width:1174px;margin:0 auto;">
-			
 			<label	style="font-size:12px;font-weight:normal;margin-left:20%;float:left;">今日天气：<%=currentDate%></label>
 			<iframe name="sinaWeatherTool"
 				src="http://weather.news.sina.com.cn/chajian/iframe/weatherStyle1.html?city=%E5%BB%B6%E5%AE%89"
@@ -263,7 +270,16 @@ body {
 				style="vertical-align:middle;background:none;float:left;">
 			</iframe>
 
-			<c:if test="${sessionScope.loginname==null}">
+			<s:form role="form" class="input-group" theme="simple"	id="formSearch" action="searchpage" namespace="/visitor"
+				style="width:220px;float:right;margin-right:60px;">
+				<input type="text" class="form-control input-sm" name="keywords"
+					placeholder="输入内容进行查询...">
+				<span class="input-group-btn"> <button	class="btn btn-default  btn-sm" type="submit">查询</button>
+				</span>
+			</s:form>
+			<!-- /input-group -->
+
+			<%-- <c:if test="${sessionScope.loginname==null}">
 				<s:form method="post" action="login" namespace="/visitor" role="form"
 					theme="simple" id="formLogin">
 					<input type="button"  class="btn btn-success" onclick="DoLogin()"
@@ -285,7 +301,8 @@ body {
 					<a href="/travel/oa/loginsuccess.action"> &gt;&gt;点击进入OA  </a>
 					<a style="margin-left:10px;" href="/travel/visitor/loginout.action"> 退出登陆  </a>
 				</div>
-			</c:if>
+			</c:if> --%>
+			
 		</div>
 	</div>
 	<div class="maincontent">
@@ -332,7 +349,7 @@ body {
 			</div>
 			
 				<div class="titlepaneldiv">
-					<span class="titlepanel" style="padding-top:30px;">工作动态</span>
+					<span class="titlepanel" >工作动态</span>
 				</div>
 				<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
@@ -385,12 +402,17 @@ body {
 						<span class="subtitle">保护区介绍</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/show.action?id=24">
 							更多&gt;&gt; </a>
 					</div>
-					<c:forEach var="portal" items="${portalIntroList}"
+					
+					<p style='font-size:16px;m'><label style='padding-left:30px;'>陕西省延安黄龙山褐马鸡国家级自然保护区</label>是以保护褐马鸡及其自然栖息地、产卵场的林地、河道、溪流、溶洞等自然环境为主，以保护该区域其他动植物资源为辅。开展褐马鸡人工救护、科研、繁殖以促进自然增殖的，集生物多样性保护、科学研究、学术交流、宣教展览为一体的国家级自然保护区.....
+					</p>
+					<div style="text-align:center;margin:0 auto;"><img alt="褐马鸡" style="width:350px;" src="<%=contextPath%>/includes/image/chickshow.jpg"></div>
+					
+					<%-- <c:forEach var="portal" items="${portalIntroList}"
 						varStatus="status">
 						<c:if test="${status.first}">	
 					   ${portal.content}
 					</c:if>
-					</c:forEach>
+					</c:forEach> --%>
 				</div>
 			</div>
 
@@ -488,7 +510,8 @@ body {
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/travel/rolling.js"></script>
 	<script type="text/javascript">
-	    var map;
+	    var map;//地图
+	    var marker;//标记
 		$(function() {
 			$("#myCarousel").carousel({
 				interval : 7000
@@ -499,8 +522,19 @@ body {
 			    //dragEnable:false,
 			    zoomEnable:false,
 			    layers: [new AMap.TileLayer.Satellite(),new AMap.TileLayer.RoadNet()],
-			    center: [109.753373,35.732862]//new AMap.LngLat(116.39,39.9)
+			    center: [109.803373,35.600862]//new AMap.LngLat(116.39,39.9)
 			});
+			
+			marker = new AMap.Marker({
+				icon : '/travel/includes/image/redmarker.png',//24px*24px
+		        position: map.getCenter()
+		    });
+		    marker.setMap(map);
+		    // 设置label标签
+		    marker.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
+		        offset: new AMap.Pixel(-100, -30),//修改label相对于maker的位置
+		        content: "<label style='font-size:14px;'>延安黄龙山褐马鸡国家级自然保护区</label>"
+		    });
 		});
 		
 		function DoLogin()
