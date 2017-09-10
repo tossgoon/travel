@@ -14,13 +14,13 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户管理</title>
+<title>部门编辑</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="用户管理">
+<meta http-equiv="description" content="部门编辑">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -41,122 +41,50 @@ background-color:#f2f2f2;
 </head>
 
 <body>
-   <%@ include file="/oaadmin/oahead.jsp"%>
-  	<div class="contentstyle">
+    <%@ include file="/oaadmin/oahead.jsp"%>
+    <div style="width:100%;text-align:center;">
 	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt;<a href="/travel/oa/querysend.action">发文管理</a>&gt;&gt; 发文编辑    </span>
+					<span>当前位置：OA后台管理&gt;&gt; 部门编辑    </span>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">用户工作箱：发文编辑</label>
-			</div>
-		</div>
+		
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">OA管理：发文编辑</div>
+				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
+					<div class="panel-heading">OA管理：部门编辑</div>
 					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formOa" action="save"
-							namespace="/oa" style="width:100%;margin:0 auto;">
-							<s:hidden class="form-control" id="oaid" name="oa.id"
-								readonly="true"></s:hidden>
-							<table id="oainfo"
-								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
+						<s:form role="form" theme="simple" id="formOa" action="save" namespace="/dept" style="width:100%;margin:0 auto;">
+							<table id="oainfo"	style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
 								<tr>
-									<td><span>接收人</span></td>
-									<td colspan="3">
-										<div class="input-group" style="width:800px;">
-											<input type="text" class="form-control"
-												value="${oareceivernames}" id="receivers"
-												readonly="readonly"> <span class="input-group-btn">
-												<button class="btn btn-default" type="button"
-													data-toggle="modal" data-target="#userModal">选择...</button>
-											</span>
-										</div> <!-- /input-group -->
-									</td>
+									<td><span>ID</span></td>
+									<td colspan="3"><s:textfield class="form-control"
+											id="deptid" name="dept.id"   readonly="true"></s:textfield></td>
 								</tr>
 								<tr>
-									<td><span>标题</span></td>
+									<td><span>名称</span></td>
+									<td colspan="3"><s:textfield class="form-control"
+											id="deptname" name="dept.deptname"></s:textfield></td>
+								</tr>
+								<%-- <tr>
+									<td><span>位置</span></td>
 									<td colspan="3"><s:textfield class="form-control"
 											id="oatitle" name="oa.title"></s:textfield></td>
-								</tr>
+								</tr> --%>
 								<tr>
-									<td valign="top"><span>内容</span></td>
+									<td valign="top"><span>职责</span></td>
 									<td colspan="3"><s:textarea class="form-control"
 											style="resize: none;margin-bottom:10px;width:800px;"
-											rows="10" id="oacontent" name="oa.content"></s:textarea></td>
+											rows="10" id="deptfuntion" name="dept.funtion"></s:textarea></td>
 								</tr>
 								<tr>
-									<td><span>发布日期</span></td>
-									<td style="width:260px;">
-										<div class="input-group date form_date"
-											data-date-format="yyyy-mm-dd hh:ii:ss">
-											<s:textfield class="form-control" id="oapubdate">
-												<s:param name="value">
-													<s:date name="oa.pubdate" format="yyyy-MM-dd HH:mm:ss" />
-												</s:param>
-											</s:textfield>
-											<span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</td>
-									<td></td>
-									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox
-												name="oa.status" id="chksend" onclick="return false" />是否已发布</label>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4"><hr style="border:1px solid;" /></td>
-								</tr>
-
-								<tr>
-									<td colspan="2" style="font-size:14px;text-align:center;">附件上传</td>
-									<td colspan="2" style="font-size:14px;text-align:center;">已上传</td>
-								</tr>
-
-								<tr>
-									<td colspan="2" valign="top"><div id="uploader"
-											style="width:300px;">
-											<div id="filePicker" style="float:left;font-size:14px;">选择...</div>
-											<a onclick="ResetUploader()" href="javascript:void(0);"
-												style="float:left;margin:7px;font-size:14px;">重置</a>
-											<button id="ctlBtn" type="button" class="btn btn-success"
-												style="float:right;height:32px;font-size:14px;">开始上传</button>
-											<div id="thelist" class="uploader-list" style="clear:both;"></div>
-										</div></td>
-									<td colspan="2" valign="top">
-										<table style="width:100%;margin:0 auto;font-size:14px;"
-											class="table">
-											<thead>
-												<tr>
-													<th style="display: none">id</th>
-													<th width="200" style="text-align:center;">名称</th>
-													<th style="display: none">路径</th>
-													<th width="100" style="text-align:center;">操作</th>
-												</tr>
-											</thead>
-											<tbody id="tbattach">
-												<s:iterator value="oa.oafiles" var="oafile">
-													<tr>
-														<td style="display: none"><s:property
-																value="#oafile.id" /></td>
-														<td width="200" style="text-align:center;"><s:property
-																value="#oafile.filename" /></td>
-														<td style="display: none"><s:property
-																value="#oafile.filepath" /></td>
-														<td width="100" style="text-align:center;"><a
-															href='javascript:void(0)' onclick='DeleteAtt(this)'>删除</a></td>
-													</tr>
-												</s:iterator>
-											</tbody>
-										</table>
-									</td>
+									<td valign="top"><span>备注</span></td>
+									<td colspan="3"><s:textarea class="form-control"
+											style="resize: none;margin-bottom:10px;width:800px;"
+											rows="10" id="deptremark" name="dept.remark"></s:textarea></td>
 								</tr>
 							</table>
 						</s:form>
@@ -164,42 +92,15 @@ background-color:#f2f2f2;
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
-						<c:if test="${oa.status!=true}">
-							<button type="button" id="btnsave" class="btn btn-primary"
-								onclick="SaveOa(0)">保存数据</button>
-							<button type="button" id="btnsend"
-								style="margin-left:10px;margin-right:10px;"
-								class="btn btn-success" onclick="SaveOa(1)">发布数据</button>
-							<button type="button" id="btndel" class="btn btn-warning"
-								onclick="DeleteOa()">删除数据</button>
-							</c:if>
-						</div>
+						<a href="/travel/dept/deptedit.jsp" class="btn btn-default">新增数据</a>
+						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveDept()">保存数据</button>
+						<button type="button" id="btndel" class="btn btn-warning"	onclick="DeleteDept()">删除数据</button>
 					</div>
 				</div>
 			</div>
 		</div>
-    </div>
-	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content" style="height:610px;width:460px;">
-			    <div class="panel-heading">选择用户</div>
-				<div class="modal-body">
-					<table class="table">
-						<thead><tr><th style='text-align:center;'>选择</th><th  style='display:none;'>id</th><th style='text-align:center;'>姓名</th><th style='text-align:center;'>部门</th></tr></thead>
-						<tbody id="tbuser">
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer form-horizontal">
-				    <button type="button" class="btn btn-default" style="float:left;" onclick="SelectAll()">全选</button>
-				    <button type="button" class="btn btn-default" style="float:left;" onclick="ReSelect()">反选</button>
-				    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="SelectUser()">确定</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				</div>
-			</div>
-		</div>
 	</div>
+</div>
 	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
@@ -238,65 +139,25 @@ background-color:#f2f2f2;
 			}
 			$("#receivers").val(receivernames);
 		}
-		function SaveOa(status) {
+		function SaveDept() {
 			//获取oafiles
-			//var oafiles=[];
-			if(status==1){
-				if(receiverids==""){
-					alert("请选择用户");
-					return;
-				}
-			}
-			var oafilestr = "";
-			$("#tbattach").find("tr").each(function() {
-				var filename = $(this).find("td").eq(1)[0].innerText;
-				var filepath = $(this).find("td").eq(2)[0].innerText;
-				//var row="{'filename':'"+filename+"','filepath':'"+filepath+"'},";
-				/* var row={
-						filename:filename,
-						filepath:filepath
-				}; */
-				var rowstr = filename + "*" + filepath + "?";
-				//oafiles.push(row);
-				oafilestr = oafilestr + rowstr;
-			});
-			if (oafilestr.substr(oafilestr.length - 1, 1) == "?") {
-				oafilestr = oafilestr.substr(0, oafilestr.length - 1);
-			}
-			/* if(oafiles.substr(oafiles.length-1,1)==","){
-				oafiles=oafiles.substr(0,oafiles.length-1);
-			}
-			oafiles=oafiles+"]"; */
 			$.ajax({
 				type : "post",
-				url : "/travel/oa/save.action",
+				url : "/travel/dept/savedept.action",
 				data : {
-					"oa.id" : $("#oaid").val(),
-					"oa.title" : $("#oatitle").val(),
-					"oa.content" : $("#oacontent").val(),
-					"oa.pubdate" : $("#oapubdate").val(),
-					"oa.status" : status == 1 ? true : false,
-				    "oareceivers":receiverids,
-					"oafilestr" : oafilestr
-				//,"oa.oafiles":oafiles
+					"dept.id" : $("#deptid").val(),
+					"dept.deptname" : $("#deptname").val(),
+					"dept.funtion" : $("#deptfuntion").val(),
+					"dept.remark" : $("#deptremark").val()
 				},
 				//$("#formOa").serialize(), 
 				cache : false,
 				dataType : "json",
 				success : function(data) {
-					if (data.errorMsg == "0") {
-						//新增用户
-						if (status == 0) {
-							$("#oaid").val(data.oa.id);
-							alert("保存成功");
-						} else {
-							$("#oaid").val(data.oa.id);
-							$('#btnsave').attr('disabled', "true");
-							$('#btnsend').attr('disabled', "true");
-							$('#btndel').attr('disabled', "true");
-							$("#chksend").attr("checked", "true");
-							alert("发布成功");
-						}
+				if (data.errorMsg == "0") {
+						//新增部门
+						$("#deptid").val(data.dept.id);
+						alert("保存成功");
 					} else {
 						alert(data.errorMsg);
 					}
@@ -307,7 +168,7 @@ background-color:#f2f2f2;
 			});
 		}
 		function DeleteOa() {
-			if ($("#oaid").val() != null&&$("#oaid").val() !="") {
+			if ($("#oaid").val() != null && $("#oaid").val() != "") {
 				$.ajax({
 					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
 					type : 'POST',
@@ -338,32 +199,35 @@ background-color:#f2f2f2;
 		var uploader;
 		$(function() {
 			//初始化日期控件
-			receiverids='${oareceivers}';//初始化
+			//receiverids='${oareceivers}';//初始化
 			$('.form_date').datetimepicker({
 				language : 'zh-CN',
 				weekStart : 1,
 				todayBtn : 1,
 				autoclose : 1,
 				todayHighlight : 1,
-				startView : 0,
-				minView : 0,
+				startView : 2,
+				minView : 2,
 				forceParse : 0
 			});
 			//初始化所有人
-			InitAllUsers();
+			//InitAllUsers();
 			//初始化ueditor及内容,实例化编辑器
 			/*init webuploader*/
 			var $list = $("#thelist"); //上传列表  
 			var $btn = $("#ctlBtn"); //开始上传  
 			if (!WebUploader.Uploader.support()) {
 				alert('Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
-				throw new Error('WebUploader does not support the browser you are using.');
+				throw new Error(
+						'WebUploader does not support the browser you are using.');
 			}
-			uploader = WebUploader.create({
+			uploader = WebUploader
+					.create({
 						// 选完文件后，是否自动上传。  
 						auto : false,
 						// swf文件路径  
-						swf : '<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+						swf : '
+	<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
 			       server: '/travel/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
@@ -447,7 +311,6 @@ background-color:#f2f2f2;
 			});
 			$btn.on('click', function() {
 				uploader.upload();
-				
 				$("#ctlBtn").addClass('disabled');
 			});
 			//根据参数判断
@@ -497,6 +360,7 @@ background-color:#f2f2f2;
 		}
 		function InitAllUsers(){
 			var recs=receiverids.split(";");
+			
 			$.ajax({
 				url : '/travel/user/query.action?param=1',
 				type : 'GET',

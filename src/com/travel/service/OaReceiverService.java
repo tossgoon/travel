@@ -60,6 +60,11 @@ public class OaReceiverService<T> {
 		return dao.getObjects(queryString);
 	}
 	
+	public List<T> queryOaReceiverByUseridDeal(int userid, Class<T> clazz) {
+		String queryString = "from Oareceiver oareceiver where oareceiver.userid =" + userid+" and oareceiver.isread=false order by isread asc,id desc ";
+		return dao.getObjects(queryString);
+	}
+	
 	public List<T> queryOaReceiverByOaid(int oaid, Class<T> clazz) {
 		String queryString = "from Oareceiver oareceiver where oareceiver.oaid =" + oaid;
 		return dao.getObjects(queryString);

@@ -7,7 +7,7 @@ body {
 	font-family: "Microsoft Yahei";
 }
 
-ul {
+#menu1box ul {
 	list-style: none;
 }
 
@@ -37,29 +37,27 @@ ul {
 	border-bottom: 1px solid #333;
 }
 
-#menu1 li.hover {
+#menu1 li.mhover {
 	background: #fff;
 	border-left: 1px solid #333;
-	border-top: 2px solid #FF7F00;
+	border-top: 1px solid #333;
 	border-right: 1px solid #333;
 	border-bottom: 1px solid #fff;
 	z-index: 1;
 }
 
-.main1box {
+/* .main1box {
 	clear: both; 
 	z-index: 0;
-	margin-top: -1px;
-}
+ 	margin-top: -1px; 
+} */
 
 #main1 ul {
 	display: none;
 }
-
 #main1 ul.block {
 	display: block;
 }
-
 .topdiv{
 	width:100%;
 	height:90%;

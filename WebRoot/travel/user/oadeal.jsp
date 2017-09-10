@@ -35,9 +35,6 @@
 #oainfo tr td:first-child span {
 	 float: right;
 }
-body{
-background-color: rgb(226, 252, 231);
-}
 td,th{
 text-align:center;
 }
@@ -46,59 +43,58 @@ text-align:center;
 
 <body>
    <%@ include file="/oaadmin/oahead.jsp"%>
-   <div class="toptool">
-			<span>当前位置：OA系统>>收文管理
+   		<div class="toptool">
+			<span>当前位置：OA系统&gt;&gt;待办事项
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
-	</div>
-	
+		</div>
 		<div class="contentstyle">
-		<div class="maincontent" style="margin-top:30px;">
+		<div class="maincontent">
 			<div class="leftpanel" style="border-right:1px solid;">
 				<ul>
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
-					<li><a href="/travel/oa/querydeal.action">待办事务</a></li>
+					<li  class="activeli"><a href="javascript:void(0)">待办事务</a></li>
 					<li><a href="/travel/travel/user/oaorg.jsp">组织架构</a></li>
 					<li><a href="/travel/travel/user/oadepartment.jsp">部门信息</a></li>
 					<li><a href="/travel/travel/user/oaaddress.jsp">办公通讯录</a></li>
 					<li><a href="/travel/travel/user/oadaily.jsp">日程安排</a></li>
 					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
-					<li  class="activeli"><a href="javascript:void(0)">收文管理</a></li>
+					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li>
 					<li><a href="/travel/travel/user/oafilelist.jsp">资料中心</a></li>
 					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="border:none;">
-			        <h3 >我的工作箱：收文管理</h3>
+			        <h3 >我的工作箱：待办事项</h3>
 			        <hr>
-					<s:form action="queryreceive" namespace="/oa" class="form-inline"
+					<%-- <s:form action="queryreceive" namespace="/oa" class="form-inline"
 							method="post" theme="simple">
 							<span style="float:left;margin-left:30px;margin-top:5px;">标题：</span>
 							<input class="form-control" type="text" name="queryText" style="float:left;width:300px;"	value="${searchText}" /> 
 							<input type="submit" class="btn btn-default" style="float:left;height:36px;" value="查询" />
-					</s:form>
+					</s:form> --%>
 						
 					<table align="center"  cellpadding="0" cellspacing="0"
 							 id="userlist" class="table"
 							style="margin-top:20px;clear:both;width:100%;">
 							<thead>
 							<tr align="center">
-								<th width="50">ID</th>
+								<th width="50" style="display:none;">ID</th>
 								<th width="260">标题</th>
 								<th width="100">发送人</th>
 								<th width="100">发布日期</th>
 								<th width="100">状态</th>
 								<th width="100">查看</th>
 							</tr>
-</thead>
-<tbody>
+							</thead>
+							<tbody>
+
 							<c:forEach var="oa" items="${oareceivelist}">
 							
 						  <c:if test="${fn:contains(oa.title,searchText)}">
 							
 								<tr align="center" height="24px" style="font-size:14px;">
-									<td>${oa.id}</td>
-
+									<td  style="display:none;">${oa.id}</td>
 									<c:if test="${oa.isread!=true}">
 										<td style='font-weight:bold;'>${oa.title}</td>
 									</c:if>
@@ -140,6 +136,10 @@ text-align:center;
 			</div>
 			<div style="clear:both;"></div>
 		</div>
+
+
+
+
 		
 	</div>
 	

@@ -14,28 +14,24 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>我的发送</title>
+<title>OA系统-个人信息</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="我的发送">
+<meta http-equiv="description" content="OA系统">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+</head>
 <style type="text/css">
-#oainfo tr td:first-child span {
-	 float: right;
-}
 body{
-background-color: rgb(226, 252, 231);
+	background-color: #f2f2f2;
 }
 td{
 text-align:center;
@@ -43,21 +39,23 @@ text-align:center;
 th{
 text-align:center;
 }
+ tr td:first-child span {
+	 float: right;
+}
+.inputstyle{
+width:360px;float:left;
+}
 </style>
-</head>
-
 <body>
-   <%@ include file="/oaadmin/oahead.jsp"%>
+	<%@ include file="/oaadmin/oahead.jsp"%>
    <div class="toptool">
-			<span>当前位置：OA系统>>发文管理
+			<span>当前位置：OA系统>>个人信息
 			</span> 
-			
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
-	
 		<div class="contentstyle">
-		<div class="maincontent" style="margin-top:30px;">
-			<div class="leftpanel" style="border-right:1px solid;">
+		<div class="maincontent">
+			<div class="leftpanel" style="border-right:1px solid #111111;">
 				<ul>
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li><a href="/travel/oa/querydeal.action">待办事务</a></li>
@@ -65,89 +63,64 @@ text-align:center;
 					<li><a href="/travel/travel/user/oadepartment.jsp">部门信息</a></li>
 					<li><a href="/travel/travel/user/oaaddress.jsp">办公通讯录</a></li>
 					<li><a href="/travel/travel/user/oadaily.jsp">日程安排</a></li>
-					<li  class="activeli"><a href="javascript:void(0)">发文管理</a></li>
+					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
 					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li>
 					<li><a href="/travel/travel/user/oafilelist.jsp">资料中心</a></li>
-					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
+					<li class="activeli"><a href="javascript:void(0)">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="border:none;">
-			     <h3 >我的工作箱：发文管理</h3>
-			     <hr>
-			   <s:form action="querysend" namespace="/oa" class="form-inline"
-							method="post" theme="simple">
-							<span style="float:left;margin-left:30px;margin-top:5px;">标题：</span>
-							<input style="width:300px;float:left;" class="form-control" type="text" name="queryText"	value="${searchText}" />
-							<input style="float:left;height:33px;width:90px;" type="submit" class="btn btn-default" value="查询" />
-							<a href="/travel/travel/user/useroa.jsp" style="float:left;height:33px;width:90px;margin-left:10px;" type="button"	class="btn btn-primary">新增</a>
-						</s:form>
-						<table style="width:90%;text-align:center;" class="table table-hover" >
-							<thead>
-							<tr>
-								<th width="50">ID</th>
-								<th width="260">标题</th>
-								<th width="100">发布日期</th>
-								<th width="100">状态</th>
-								<th width="100">操作</th>
-							</tr>
-							</thead><tbody>
-							<c:forEach var="oa" items="${oasendlist}">
-								<tr>
-									<td>${oa.id}</td>
-									<td>${oa.title}</td>
-									<td>${oa.pubdatestr}</td>
-									<td><c:if test="${oa.status!=true}">
-											未发布
-										</c:if> <c:if test="${oa.status==true}">
-											已发布
-										</c:if></td>
-									<td><c:if test="${oa.status!=true}">
-											<a href="/travel/oa/modify.action?id=${oa.id}"
-												style="margin-right:10px;">更改</a>
-											<a href="javascript:void(0)"
-												onclick="DeleteOa(${oa.id},this)">删除</a>
-										</c:if></td>
-								</tr>
-							</c:forEach></tbody>
-						</table>
-					
+			   <h3>个人信息</h3>
+			   <hr>
+			   <s:form role="form" theme="simple" id="formPortalInfo">
+				<table style="width:80%;text-align:center;border-collapse:separate; border-spacing:0px 10px;" >
+					<tbody>
+						<tr>
+							<td style="width:120px;"><span>姓名</span></td>
+							<td><s:textfield class="form-control inputstyle"  id="portalid"
+									name="portal.id" readonly="true"></s:textfield></td>
+						</tr>
+						<tr>
+							<td style="width:120px;"><span>登陆名</span></td>
+							<td><s:textfield class="form-control inputstyle" id="portalid"
+									name="portal.id" readonly="true"></s:textfield></td>
+						</tr>
+						<tr>
+							<td><span>生日</span></td>
+							<td><s:textfield class="form-control inputstyle" id="portaltitle"
+									name="portal.title"></s:textfield></td>
+						</tr>
+						<tr>
+							<td><span>办公电话</span></td>
+							<td><s:textfield class="form-control inputstyle" id="portaltitle"
+									name="portal.title"></s:textfield></td>
+						</tr>
+						<tr>
+							<td><span>手机号</span></td>
+							<td><s:textfield class="form-control inputstyle" id="portaltitle"
+									name="portal.title"></s:textfield></td>
+						</tr>
+						<tr>
+							<td><span>邮箱</span></td>
+							<td><s:textfield class="form-control inputstyle" id="portaltitle"
+									name="portal.title"></s:textfield></td>
+						</tr>
+						<tr>
+							<td><span>备注</span></td>
+							<td><s:textfield class="form-control inputstyle" id="portaltitle"
+									name="portal.title"></s:textfield></td>
+						</tr>
 						
-						
+					</tbody>
+				</table>
+				</s:form>
+				<div><a href="javascript:void(0)">保存信息</a> <a style="margin-left:20px;" onclick="ShowpassModal()" href="javascript:void(0)">修改密码</a></div>
 			</div>
 			<div style="clear:both;"></div>
-	 </div>
-	 </div>
-	<%-- <div class="container" style="width:1024px;margin:0 auto;background-color:#ffffff;margin-top:20px;">
-		
-		<div class="row">
-			<div class="col-md-12" style="text-align:left;margin-top:20px;">
-				<div style="width:100%;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理>>我的工作箱>>我的发送/&nbsp;&nbsp;<a href="/travel/oa/queryreceive.action">我的事务</a>
-					  </span>
-					   <span style="float:right;"><a href="javascript:void(0)" onclick="ShowpassModal()">修改密码</a></span>
-				</div>
-			</div>
+			
 		</div>
 		
-		<div class="row">
-			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">用户工作箱：我的发送</label>
-			</div>
-		</div>
-		<div class="row" >
-		
-		<div class="col-md-12" style="text-align:center;">
-		
-			<div class="panel panel-default">
-				<div class="panel-body">
-					
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> --%>
-	<%@ include file="/portal/footmodal.jsp"%>
+	</div>
 	<div class="modal fade" id="userinfo" role="dialog" aria-labelledby="修改密码" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="width:460px;">
@@ -175,10 +148,13 @@ text-align:center;
 			</div>
 		</div>
 	</div>
-	
+<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
+	
 	//弹出修改密码对话框
 	function ShowpassModal(){
 		//弹出修改密码对话框

@@ -39,6 +39,9 @@ System.out.println(currentTime + "/当前时间");
 body {
 	font-family: "Microsoft Yahei";
 	background-color: rgb(226, 252, 231);
+	position: absolute;
+	width: 100%;
+	min-height: 100%;
 }
 
 .headlogo {
@@ -336,7 +339,6 @@ color:#ffffff;
 										src="${portal.pictureurl}" alt="${portal.title}">
 									<div class="carousel-caption">${portal.title}</div>
 									</a>
-									
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -347,7 +349,6 @@ color:#ffffff;
 					data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
 					href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div>
-			
 				<div class="titlepaneldiv">
 					<span class="titlepanel" >工作动态</span>
 				</div>
@@ -375,8 +376,7 @@ color:#ffffff;
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						${portal.subtitle}</p>
-					<hr
-						style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
+					<hr	style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
 				</c:forEach>
 			</div>
 			<div class="titlepaneldiv">
@@ -453,7 +453,6 @@ color:#ffffff;
 					</c:forEach>
 				</div>
 			</div>
-			
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -484,10 +483,9 @@ color:#ffffff;
 							src="<%=contextPath%>/includes/image/chick3.jpg"> --%>
 		</div>
 	</div>
-
 	<div class="maincontent" id="themap" style="height:600px;margin-top:15px;border:1px solid;">
 	</div>
-	<div class="maincontent" style="padding-bottom:10px;">
+	<div class="maincontent" style="padding-bottom:120px;">
 	      <div class="titlepaneldiv">
 				<span class="titlepanel">友情链接</span>
 			</div>

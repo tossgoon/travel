@@ -23,6 +23,12 @@
 <link rel="stylesheet"
 	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <style type="text/css">
+body{
+ 	font-family:"Microsoft Yahei";
+ 	position: absolute;
+	width: 100%;
+	min-height: 100%;
+}
 .txtstyle {
 	font-size: 16px;
 	text-align:center;
@@ -51,6 +57,7 @@ float: right;
 			src="<%=contextPath%>/includes/image/oatitle2.png">
 	</div>
 	<div style="width:100%;background-color:#EFF4FA;height:140px;position:absolute;top:250px;z-index:-1;">
+	<p style="margin:50px;">为了更好的用户体验，请您使用谷歌浏览器或搜狗及360等现代浏览器的<strong>极速模式</strong>浏览。</p>
 	</div>
 	<s:form method="post" action="login" namespace="/visitor" role="form"
 		theme="simple" id="formLogin">
@@ -59,7 +66,7 @@ float: right;
 			cellspacing="10">
 			<tr>
 				<td colspan="2" style="background-color:#EFF4FA;border-bottom:1px solid;margin:0 auto;text-algin:center;height:50px;">
-				<p class="txtstyle" style="padding-top:10px;">OA系 统 用 户 登 录</p>
+				<p class="txtstyle" style="padding-top:10px;">OA办公系统用户登录</p>
 				</td>
 			</tr>
 
@@ -88,7 +95,7 @@ float: right;
 	<div style="clear:both;" >
 	
 	</div>
-	<div style="margin-top:90px;"></div>
+	<div style="margin-top:90px;margin-bottom:120px;"></div>
 	<%@ include file="/portal/footmodal.jsp"%>
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>

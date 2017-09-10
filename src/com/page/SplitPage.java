@@ -34,16 +34,13 @@ public class SplitPage {
 		return refreshTime;
 	}
 
-
 	public void setRefreshTime(Timestamp refreshTime) {
 		this.refreshTime = refreshTime;
 	}
 
-
 	public int getPageRow() {
 		return pageRow;
 	}
-
 	
 	/**
 	 * 重新设置每页显示的记录数

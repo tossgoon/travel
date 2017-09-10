@@ -23,25 +23,28 @@ String contextPath = request.getContextPath() + "/";
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-  </head>
+	<style type="text/css">
+	.divimg {
+		width: 1540px;
+		height: 964px;
+		background-image: url(/travel/includes/image/index.jpg);
+		border: 1px solid;
+		margin: 0 auto;
+	}
+
+	body {
+		background-image: url(/travel/includes/image/index.jpg);
+		text-align: center;
+	}
+</style>
+
+</head>
 <body>
 
-	<div class="navbar navbar-inverse"
-		style="width:100%;border-radius:0;margin-bottom:0px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-7">
-					<label class="navbar-brand"> </label>
-				</div>
-				<div class="col-xs-5">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="net/iprecord.jsp" style="float:right;">所有记录</a>
-							<a href="net/userrecord.jsp" style="float:right;">在线统计</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div style="margin:0 auto;90%;margin-top:200px;"><img alt="" src="/travel/includes/image/indextitle2.png"></div>
+	<div style="width:1200px;height:800px;"></div>
+	<a href="/travel/visitor/first.action" style="font-size:20px;background-color:#ffffff;">点击登陆</a>
+	
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 </body>

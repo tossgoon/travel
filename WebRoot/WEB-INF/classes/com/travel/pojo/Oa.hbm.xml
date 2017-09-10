@@ -31,6 +31,8 @@
             </key>
             <one-to-many class="com.travel.pojo.Oafile" />
         </set>
-        
+        <property name="type" type="java.lang.Integer">
+            <column name="type" />
+        </property>
     </class>
 </hibernate-mapping>

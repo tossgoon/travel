@@ -12,6 +12,7 @@ public class Oareceiver implements java.io.Serializable {
 	private Integer userid;
 	private Integer oaid;
 	private Boolean isread;
+	private String sender;
 
 	// Constructors
 
@@ -58,5 +59,14 @@ public class Oareceiver implements java.io.Serializable {
 	public void setIsread(Boolean isread) {
 		this.isread = isread;
 	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
 
 }

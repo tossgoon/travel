@@ -14,7 +14,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户管理</title>
+<title>部门管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -29,33 +29,48 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/uploadifive/uploadifive.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<style type="text/css">
+body{
+	background-color: #F2F2F2;
+}
+</style>
 </head>
 
 <body>
-	<%@ include file="/portal/headmodal.jsp"%>
+	<%@ include file="/oaadmin/oahead.jsp"%>
+    <div class="toptool">
+			<span>当前位置：OA后台管理>>资料中心（正在完善.....）
+			</span> 
+			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+	</div>
+	<div style="width:100%;text-align:center;">
 
-	<div class="container" style="width:100%;margin:0 auto;text-align:center;">
-		<div class="row" >
-			<div class="col-md-12" style="width:100%;text-align:center;margin:0 auto;margin-top:20px;">
-				<div style="width:1024px;margin:0 auto;text-align:left;border-bottom:1px solid #000080;padding-bottom:12px;padding-left:20px;">
-					<span>后台管理：<a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站管理&nbsp;&nbsp;</a> /&nbsp;&nbsp; 用户管理</span>
-				</div>
-			</div>
+	<div class="maincontent" >
+		<div class="leftpanel">
+			<ul>
+				<li><a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
+				<li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li>
+				<li><a href="/travel/user/querypage.action">用户管理</a></li>
+				<li><a href="/travel/oaadmin/notifylist.jsp">通知公告</a></li>
+				<li  class="activeli"><a href="javascript:void(0)">资料中心</a></li>
+				<li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li>
+			</ul>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-			
-			<div class="panel-heading" >  <span style="font-size:18px;">用户管理</span>    </div>
-			
-			<table align="center" class="table table-hover" id="userlist" style="width:80%;"
-							style="margin-top:20px;">
-							<tr align="center"  height="26px">
+		<div class="rightpanel">
+			<div style="margin:20px;">
+							<span style="font-size:18px;">资料中心</span>
+							<input value="新增资料" onclick="InsertUser()" type="button"
+								class="btn btn-primary"
+								style="margin-right:20px; float:right;width:90px;" />
+						</div>
+						<div style="height:400px;">
+						<table align="center" class="table table-hover" id="userlist"
+							style="width:100%;" style="margin-top:20px;">
+							<tr align="center" height="26px">
 								<td width="100">ID</td>
-								<td width="160">姓名</td>
-								<td width="160">用户名</td>
-								<td width="160">电话</td>
-								<td width="160">部门</td>
-								<td width="160">备注</td>
+								<td width="160">文件名称</td>
+								<td width="160">类型</td>
 								<td width="160">操作</td>
 							</tr>
 
@@ -74,22 +89,21 @@
 								</tr>
 							</c:forEach>
 						</table>
-
-					<div>
-						<a id="firstpage" href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a> 
-						<a id="lastpage"  href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
-						<a id="nextpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
-						<a id="endpage" href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
-						<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
-						<input value="新增用户" onclick="InsertUser()" type="button"
-									class="btn btn-primary"	style="margin-right:20px;margin-top:-6px; float:right;width:90px;" />
-					</div>
-			</div>
+						</div>
+						<div style="margin-top:10px;">
+							<a id="firstpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
+							<a id="lastpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
+							<a id="nextpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
+							<a id="endpage"		href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
+							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
+							
+						</div>
 		</div>
+		<div style="clear:both;"></div>
 	</div>
-
+</div>
 	<div class="modal fade" id="usermodal" role="dialog"
-		aria-labelledby="用户管理" data-backdrop="static">
+		aria-labelledby="部门管理" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -160,6 +174,7 @@
 			</div>
 		</div>
 	</div>
+	
 
 <%@ include file="/portal/footmodal.jsp"%>
 

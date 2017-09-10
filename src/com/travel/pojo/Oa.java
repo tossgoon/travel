@@ -29,6 +29,7 @@ public class Oa implements java.io.Serializable {
 	private Boolean isread;
 	private String senduser;
 	private Integer recid;
+	private Integer type;
 
 	// Constructors
 
@@ -141,5 +142,13 @@ public class Oa implements java.io.Serializable {
 
 	public void setRecid(Integer recid) {
 		this.recid = recid;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 }

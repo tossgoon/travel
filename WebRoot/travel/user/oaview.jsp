@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	 float: right;
@@ -38,21 +39,20 @@
 </head>
 
 <body>
-   <%@ include file="/portal/headmodal.jsp"%>
-
+   <%@ include file="/oaadmin/oahead.jsp"%>
+   	<div class="contentstyle">
 	<div class="container" style="width:100%;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理>>我的事务 /&nbsp;&nbsp;<a href="/travel/oa/loginsuccess.action">我的工作箱&nbsp;&nbsp;</a>
+					<span>当前位置：OA管理&gt;&gt;<a href="/travel/oa/queryreceive.action">收文管理</a>&gt;&gt;收文详情
 					  </span>
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">我的事务</label>
+				<label style="font-size:20px;font-weight:normal;margin:30px;">收文详情</label>
 			</div>
 		</div>
 		<div class="row">
@@ -159,7 +159,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="height:610px;width:460px;">
@@ -180,7 +180,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>

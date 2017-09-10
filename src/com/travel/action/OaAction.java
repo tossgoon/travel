@@ -12,6 +12,7 @@ import org.apache.struts2.json.annotations.JSON;
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.page.SplitPage;
 import com.travel.pojo.Oa;
 import com.travel.pojo.Oafile;
 import com.travel.pojo.Oareceiver;
@@ -41,6 +42,16 @@ public class OaAction extends ActionSupport {
 	private UserService<User> userService;
 	private String oasender;//发送人姓名
 	private String errormsg;
+	private List<Oa> notifyList;
+	private List<Oa> sendNotifyList;
+	private SplitPage page;
+	public SplitPage getPage() {
+		return page;
+	}
+
+	public void setPage(SplitPage page) {
+		this.page = page;
+	}
 
 	public Oa getOa() {
 		return oa;
@@ -106,6 +117,7 @@ public class OaAction extends ActionSupport {
 				return ERROR;
 			}
 			oa.setCreater(userid);
+			oa.setType(1);//设置类型为1
 			oaService.addOa(oa);
 			AddOaFiles(oafilestr);// 增加附件
 			AddOaReceivers();// 增加接收人
@@ -118,6 +130,41 @@ public class OaAction extends ActionSupport {
 			result = ERROR;
 		}
 		return result;
+	}
+	
+	public String addnotify() {
+		String result = "";
+		try {
+			int userid = 0;
+			if (ActionContext.getContext().getSession().get("userid") != null) {
+				userid = (Integer) ActionContext.getContext().getSession()
+						.get("userid");
+			} else {
+				setErrorMsg("登录用户为空。");
+				return ERROR;
+			}
+			oa.setCreater(userid);
+			oa.setType(2);//设置类型为1
+			oaService.addOa(oa);
+			AddOaFiles(oafilestr);// 增加附件
+			//AddOaReceivers();// 增加接收人
+			setErrorMsg("0");
+			result = SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			setErrorMsg("保存出错。" + e.getMessage());
+			result = ERROR;
+		}
+		return result;
+	}
+	
+	public String savenotify() {
+		if (oa.getId() == null) {
+			return addnotify();
+		} else {
+			return updatenotify();
+		}
 	}
 
 	private void AddOaFiles(String oafilestr) throws Exception {
@@ -147,6 +194,10 @@ public class OaAction extends ActionSupport {
 				Oareceiver receiver = new Oareceiver();
 				receiver.setOaid(oa.getId());
 				receiver.setUserid(userid);
+				Integer	sendid = (Integer) ActionContext.getContext().getSession()
+						.get("userid");
+				User sender=this.userService.getUser(User.class, sendid);
+				receiver.setSender(sender.getUsername());//设置发送人姓名
 				this.oaReceiverService.addOaReceiver(receiver);
 			}
 		}
@@ -162,6 +213,26 @@ public class OaAction extends ActionSupport {
 			//先删除旧的接收人
 			this.oaReceiverService.deleteReceiversByOa(oa.getId(), Oareceiver.class);
 			AddOaReceivers();// 增加接收人
+			setErrorMsg("0");
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			setErrorMsg("更新用户出错。" + e.getMessage());
+			return ERROR;
+		}
+		// System.out.println(this);
+	}
+	
+	public String updatenotify() {
+		try {
+			oaService.updateOaWithoutUser(oa);
+			// 先删除旧的附件
+			this.oaFileService.deleteOafileByOaid(oa.getId(), Oafile.class);
+			// 再增加oa附件
+			AddOaFiles(oafilestr);
+			//先删除旧的接收人
+			//this.oaReceiverService.deleteReceiversByOa(oa.getId(), Oareceiver.class);
+			//AddOaReceivers();// 增加接收人
 			setErrorMsg("0");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -214,6 +285,36 @@ public class OaAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	public String modifyNotify() {
+		if (getParam("id") != null) {
+			Integer id = Integer.parseInt(getParam("id"));
+			oa = oaService.getOa(Oa.class, id);// 初始化oa
+			// 获取oa附件
+			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(id,
+					Oafile.class);
+			Set<Oafile> set=new HashSet<Oafile>();         
+	        set.addAll(oafilelist);//给set填充   
+			oa.setOafiles(set);
+			// 获取oa接收人
+			/*List<Oareceiver> receiverlist = this.oaReceiverService.queryOaReceiverByOaid(id, Oareceiver.class);
+			for (int i = 0; i < receiverlist.size(); i++) {
+				int userid = receiverlist.get(i).getUserid();
+				oareceivers += userid + ";";
+				User user = userService.getUser(User.class, userid);
+				this.oareceivernames += user.getUsername() + ";";
+			}*/
+			/*if(oareceivers!=null&&  oareceivers.endsWith(";")){
+				oareceivers=oareceivers.substring(0,oareceivers.length()-1);
+			}
+			if(oareceivernames!=null&&oareceivernames.endsWith(";")){
+				oareceivernames=oareceivernames.substring(0,oareceivernames.length()-1);
+			}
+			this.setOareceivers(oareceivers);
+			this.setOareceivernames(oareceivernames);*/
+		}
+		return SUCCESS;
+	}
 
 	public String delete() {
 		try {
@@ -253,6 +354,38 @@ public class OaAction extends ActionSupport {
 		if (ActionContext.getContext().getSession().get("userid") != null) {
 			Integer userid = (Integer) ActionContext.getContext().getSession().get("userid");
 			List<Oareceiver> receiverList=this.oaReceiverService.queryOaReceiverByUserid(userid, Oareceiver.class);
+			this.oareceivelist=new ArrayList<Oa>();
+			if(receiverList!=null)
+			{
+				for(int i=0;i<receiverList.size();i++)
+				{
+					Oa oa=new Oa();
+					Oareceiver oares=receiverList.get(i);
+					oa=oaService.getOa(Oa.class, oares.getOaid());
+					if(oares.getIsread()!=null&&oares.getIsread()){
+						oa.setIsread(true);
+					}
+					else{
+						oa.setIsread(false);
+					}
+					oa.setSenduser(oares.getSender());
+					oa.setRecid(oares.getId());
+					oareceivelist.add(oa);
+				}
+			}
+		}
+		return SUCCESS;
+	}
+	
+	public String querydeal()
+	{
+		searchText = "";
+		if (getParam("queryText") != null) {
+			searchText = getParam("queryText");
+		}
+		if (ActionContext.getContext().getSession().get("userid") != null) {
+			Integer userid = (Integer) ActionContext.getContext().getSession().get("userid");
+			List<Oareceiver> receiverList=this.oaReceiverService.queryOaReceiverByUseridDeal(userid, Oareceiver.class);
 			this.oareceivelist=new ArrayList<Oa>();
 			if(receiverList!=null)
 			{
@@ -343,10 +476,14 @@ public class OaAction extends ActionSupport {
 				}
 			}
 			else{
+				
 				setErrorMsg("用户未登陆。");
 				return ERROR;
 			}
 		} catch (Exception ex) {
+		
+			//system.out.println();
+			
 			setErrorMsg("访问出错。" + ex.getMessage());
 			return ERROR;
 		}
@@ -444,4 +581,78 @@ public class OaAction extends ActionSupport {
 		this.errormsg = errormsg;
 	}
 
+	public List<Oa> getNotifyList() {
+		return notifyList;
+	}
+
+	public void setNotifyList(List<Oa> notifyList) {
+		this.notifyList = notifyList;
+	}
+
+	public List<Oa> getSendNotifyList() {
+		return sendNotifyList;
+	}
+
+	public void setSendNotifyList(List<Oa> sendNotifyList) {
+		this.sendNotifyList = sendNotifyList;
+	}
+	
+	public String queryNotifyByPage() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		this.notifyList=this.oaService.queryNotifyByPage(pagesize, pagenum);
+		int num = oaService.getNotifyCount();
+		page = new SplitPage(num,pagesize);
+		page.setCurrentPage(pagenum);
+		return SUCCESS;
+	}
+	
+	public String queryNotifySendByPage() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		this.notifyList=this.oaService.queryNotifySendByPage(pagesize, pagenum);
+		int num = oaService.getNotifySendCount();
+		page = new SplitPage(num,pagesize);
+		page.setCurrentPage(pagenum);
+		return SUCCESS;
+	}
+	
+	public String viewnotify() {
+		if (getParam("notifyid") != null) {
+			Integer oaid = Integer.parseInt(getParam("notifyid"));
+			this.oa = this.oaService.getOa(Oa.class, oaid);
+			// 获取oa附件
+			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(oaid, Oafile.class);
+			Set<Oafile> set = new HashSet<Oafile>();
+			set.addAll(oafilelist);// 给set填充
+			oa.setOafiles(set);
+			//设置oa发送人
+			//User senduser=this.userService.getUser(User.class, oa.getCreater());
+			//this.oasender=senduser.getUsername();
+		}
+		/*else if (getParam("oarecid") != null) {
+			Integer oarecid = Integer.parseInt(getParam("oarecid"));
+			Oareceiver rec= this.oaReceiverService.getOaReceiver(Oareceiver.class, oarecid);
+			this.oa = this.oaService.getOa(Oa.class, rec.getOaid());
+			// 获取oa附件
+			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(oa.getId(), Oafile.class);
+			Set<Oafile> set = new HashSet<Oafile>();
+			set.addAll(oafilelist);// 给set填充
+			oa.setOafiles(set);
+			//设置oa发送人
+			User senduser=this.userService.getUser(User.class, oa.getCreater());
+			this.oasender=senduser.getUsername();
+			oa.setRecid(rec.getId());
+			oa.setIsread(rec.getIsread());
+		}*/
+		return SUCCESS;
+	}
 }

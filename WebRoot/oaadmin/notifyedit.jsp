@@ -14,13 +14,13 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>用户管理</title>
+<title>通知公告编辑</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="用户管理">
+<meta http-equiv="description" content="通知公告编辑">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -42,43 +42,31 @@ background-color:#f2f2f2;
 
 <body>
    <%@ include file="/oaadmin/oahead.jsp"%>
-  	<div class="contentstyle">
+   
+   <div style="width:100%;text-align:center;">
+
 	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt;<a href="/travel/oa/querysend.action">发文管理</a>&gt;&gt; 发文编辑    </span>
+					<span>当前位置：OA后台管理&gt;&gt; 通知公告编辑    </span>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">用户工作箱：发文编辑</label>
-			</div>
-		</div>
+		
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">OA管理：发文编辑</div>
+				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
+					<div class="panel-heading">OA管理：通知公告编辑</div>
 					<div class="panel-body">
 						<s:form role="form" theme="simple" id="formOa" action="save"
 							namespace="/oa" style="width:100%;margin:0 auto;">
-							<s:hidden class="form-control" id="oaid" name="oa.id"
-								readonly="true"></s:hidden>
 							<table id="oainfo"
 								style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
 								<tr>
-									<td><span>接收人</span></td>
-									<td colspan="3">
-										<div class="input-group" style="width:800px;">
-											<input type="text" class="form-control"
-												value="${oareceivernames}" id="receivers"
-												readonly="readonly"> <span class="input-group-btn">
-												<button class="btn btn-default" type="button"
-													data-toggle="modal" data-target="#userModal">选择...</button>
-											</span>
-										</div> <!-- /input-group -->
-									</td>
+									<td><span>ID</span></td>
+									<td colspan="3"><s:textfield class="form-control"
+											id="oaid" name="oa.id"   readonly="true"></s:textfield></td>
 								</tr>
 								<tr>
 									<td><span>标题</span></td>
@@ -95,7 +83,7 @@ background-color:#f2f2f2;
 									<td><span>发布日期</span></td>
 									<td style="width:260px;">
 										<div class="input-group date form_date"
-											data-date-format="yyyy-mm-dd hh:ii:ss">
+											data-date-format="yyyy-mm-dd "> <!-- hh:ii:ss -->
 											<s:textfield class="form-control" id="oapubdate">
 												<s:param name="value">
 													<s:date name="oa.pubdate" format="yyyy-MM-dd HH:mm:ss" />
@@ -108,7 +96,7 @@ background-color:#f2f2f2;
 									</td>
 									<td></td>
 									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox
-												name="oa.status" id="chksend" onclick="return false" />是否已发布</label>
+												name="oa.status" id="chksend"  />是否发布</label>
 									</td>
 								</tr>
 								<tr>
@@ -164,22 +152,22 @@ background-color:#f2f2f2;
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
-						<c:if test="${oa.status!=true}">
+						<a href="/travel/oaadmin/notifyedit.jsp" class="btn btn-default">新增数据</a>
+						<%-- <c:if test="${oa.status!=true}"> --%>
 							<button type="button" id="btnsave" class="btn btn-primary"
-								onclick="SaveOa(0)">保存数据</button>
-							<button type="button" id="btnsend"
+								onclick="SaveOa()">保存数据</button>
+							<!-- <button type="button" id="btnsend"
 								style="margin-left:10px;margin-right:10px;"
-								class="btn btn-success" onclick="SaveOa(1)">发布数据</button>
+								class="btn btn-success" onclick="SaveOa(1)">发布数据</button> -->
 							<button type="button" id="btndel" class="btn btn-warning"
 								onclick="DeleteOa()">删除数据</button>
-							</c:if>
-						</div>
+						<%-- </c:if> --%>
 					</div>
 				</div>
 			</div>
 		</div>
-    </div>
+	</div>
+</div>
 	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="height:610px;width:460px;">
@@ -238,15 +226,15 @@ background-color:#f2f2f2;
 			}
 			$("#receivers").val(receivernames);
 		}
-		function SaveOa(status) {
+		function SaveOa() {
 			//获取oafiles
 			//var oafiles=[];
-			if(status==1){
+/* 			if(status==1){
 				if(receiverids==""){
 					alert("请选择用户");
 					return;
 				}
-			}
+			} */
 			var oafilestr = "";
 			$("#tbattach").find("tr").each(function() {
 				var filename = $(this).find("td").eq(1)[0].innerText;
@@ -267,16 +255,23 @@ background-color:#f2f2f2;
 				oafiles=oafiles.substr(0,oafiles.length-1);
 			}
 			oafiles=oafiles+"]"; */
+			
+			var status;
+			if ($('#chksend').is(':checked')) {
+				status = true;
+			} else {
+				status=false;
+			}
 			$.ajax({
 				type : "post",
-				url : "/travel/oa/save.action",
+				url : "/travel/oa/savenotify.action",
 				data : {
 					"oa.id" : $("#oaid").val(),
 					"oa.title" : $("#oatitle").val(),
 					"oa.content" : $("#oacontent").val(),
 					"oa.pubdate" : $("#oapubdate").val(),
-					"oa.status" : status == 1 ? true : false,
-				    "oareceivers":receiverids,
+					"oa.status" : status,
+					//"oareceivers":receiverids,
 					"oafilestr" : oafilestr
 				//,"oa.oafiles":oafiles
 				},
@@ -285,16 +280,16 @@ background-color:#f2f2f2;
 				dataType : "json",
 				success : function(data) {
 					if (data.errorMsg == "0") {
-						//新增用户
+						//新增通知公告
 						if (status == 0) {
 							$("#oaid").val(data.oa.id);
 							alert("保存成功");
 						} else {
 							$("#oaid").val(data.oa.id);
-							$('#btnsave').attr('disabled', "true");
-							$('#btnsend').attr('disabled', "true");
-							$('#btndel').attr('disabled', "true");
-							$("#chksend").attr("checked", "true");
+							//$('#btnsave').attr('disabled', "true");
+							//$('#btnsend').attr('disabled', "true");
+							//$('#btndel').attr('disabled', "true");
+							//$("#chksend").attr("checked", "true");
 							alert("发布成功");
 						}
 					} else {
@@ -307,7 +302,7 @@ background-color:#f2f2f2;
 			});
 		}
 		function DeleteOa() {
-			if ($("#oaid").val() != null&&$("#oaid").val() !="") {
+			if ($("#oaid").val() != null && $("#oaid").val() != "") {
 				$.ajax({
 					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
 					type : 'POST',
@@ -338,32 +333,34 @@ background-color:#f2f2f2;
 		var uploader;
 		$(function() {
 			//初始化日期控件
-			receiverids='${oareceivers}';//初始化
+			//receiverids='${oareceivers}';//初始化
 			$('.form_date').datetimepicker({
 				language : 'zh-CN',
 				weekStart : 1,
 				todayBtn : 1,
 				autoclose : 1,
 				todayHighlight : 1,
-				startView : 0,
-				minView : 0,
+				startView : 2,
+				minView : 2,
 				forceParse : 0
 			});
 			//初始化所有人
-			InitAllUsers();
+			//InitAllUsers();
 			//初始化ueditor及内容,实例化编辑器
 			/*init webuploader*/
 			var $list = $("#thelist"); //上传列表  
 			var $btn = $("#ctlBtn"); //开始上传  
 			if (!WebUploader.Uploader.support()) {
 				alert('Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
-				throw new Error('WebUploader does not support the browser you are using.');
+				throw new Error(
+						'WebUploader does not support the browser you are using.');
 			}
-			uploader = WebUploader.create({
+			uploader = WebUploader
+					.create({
 						// 选完文件后，是否自动上传。  
 						auto : false,
 						// swf文件路径  
-						swf : '<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+						swf : '	<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
 			       server: '/travel/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
@@ -447,7 +444,6 @@ background-color:#f2f2f2;
 			});
 			$btn.on('click', function() {
 				uploader.upload();
-				
 				$("#ctlBtn").addClass('disabled');
 			});
 			//根据参数判断
@@ -497,6 +493,7 @@ background-color:#f2f2f2;
 		}
 		function InitAllUsers(){
 			var recs=receiverids.split(";");
+			
 			$.ajax({
 				url : '/travel/user/query.action?param=1',
 				type : 'GET',

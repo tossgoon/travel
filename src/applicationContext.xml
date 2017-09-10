@@ -13,7 +13,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://192.168.9.252:3306/travel">
+		<property name="url" value="jdbc:mysql://localhost:3306/travel">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value="gis"></property>
@@ -128,5 +128,12 @@
 	</bean>
 	<bean id="oaReceiverService" class="com.travel.service.OaReceiverService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="deptService" class="com.travel.service.DeptService"  scope="prototype">
+		<property name="dao" ref="dao"></property>
+	</bean> 
+	<bean id="deptAct" class="com.travel.action.DeptAction" scope="prototype">
+		<property name="deptService" ref="deptService"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
 </beans>

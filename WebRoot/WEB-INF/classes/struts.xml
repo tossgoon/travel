@@ -251,11 +251,11 @@
 			<result name="success" type="json"></result>
 		</action>
 		<action name="query" class="userAct" method="query">
- 			<result name="success">/travel/user/userlist.jsp</result>
+ 			<result name="success">/oaadmin/userlist.jsp</result>
 			 <result name="getalluser" type="json"></result> 
 		</action>
 		<action name="querypage" class="userAct" method="queryByPage">
- 			<result name="success">/travel/user/userlist.jsp</result>
+ 			<result name="success">/oaadmin/userlist.jsp</result>
 			 <result name="error" type="json"></result> 
 		</action>
 		
@@ -297,7 +297,7 @@
 		</action>
 		<action name="query" class="portalAct" method="query">
 		    <result name="portalinfo">/portal/editor.jsp</result>
- 			<result name="success">/portal/portallist.jsp</result>
+ 			<result name="success">/oaadmin/portallist.jsp</result>
 			<!-- <result name="success" type="json"></result> -->
 		</action>
 		<action name="save" class="portalAct" method="save">
@@ -305,7 +305,7 @@
 			<result name="success" type="json"></result>
 		</action>
 		<action name="querypage" class="portalAct" method="queryByPage">
- 			<result name="success">/portal/portallist.jsp</result>
+ 			<result name="success">/oaadmin/portallist.jsp</result>
 			 <result name="error" type="json"></result> 
 		</action>
 	</package>
@@ -412,6 +412,11 @@
  			<result name="error">/travel/user/error.jsp</result>
 		</action>
 		
+		<action name="querydeal" class="oaAct" method="querydeal">
+ 			<result name="success">/travel/user/oadeal.jsp</result>
+ 			<result name="error">/travel/user/error.jsp</result>
+		</action>
+		
 		<action name="query" class="oaAct" method="query">
  			<result name="success">/travel/user/oaview.jsp</result>
  			<result name="error">/travel/user/error.jsp</result>
@@ -423,13 +428,41 @@
 		</action>
 		
 		<action name="loginsuccess" class="oaAct" method="loginsuccess">
-		  <result name="normal">/travel/user/oareceive.jsp</result>
-		  <!-- <result name="admin">/portal/portallist.jsp</result> -->
-		   <!-- <result name="admin" type="redirect">/travel/user/querypage</result>   -->
-		   <result name="admin" type="redirectAction">
+		    <result name="normal" type="redirectAction">
+		      <param name="actionName">querynotifysend</param>
+		      <param name="namespace">/oa</param>
+		    </result> 
+		    <result name="error">/travel/user/login.jsp</result>
+		    <!-- <result name="admin">/oa/portallist.jsp</result> -->
+		    <!-- <result name="admin" type="redirect">/travel/user/querypage</result>   -->
+		    <result name="admin" type="redirectAction">
 		      <param name="actionName">querypage</param>
 		      <param name="namespace">/user</param>
 		    </result> 
+		</action>
+		<action name="addnotify" class="oaAct" method="addnotify">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="querynotify" class="oaAct" method="queryNotifyByPage">
+ 			<result name="success">/oaadmin/notifylist.jsp</result>
+			 <result name="error" type="json"></result> 
+		</action>
+		<action name="querynotifysend" class="oaAct" method="queryNotifySendByPage">
+ 			<result name="success">/travel/user/oanotify.jsp</result>
+			 <result name="error" type="json"></result> 
+		</action>
+		<action name="savenotify" class="oaAct" method="savenotify">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="modifynotify" class="oaAct" method="modifyNotify">
+			<result name="success">/oaadmin/notifyedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="viewnotify" class="oaAct" method="viewnotify">
+ 			<result name="success">/oaadmin/notifyview.jsp</result>
+ 			<result name="error" type="json"></result>
 		</action>
 	</package>
 	

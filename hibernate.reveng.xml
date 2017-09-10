@@ -9,5 +9,8 @@
 	</table>
 	<table name="TB_KC_ZK" schema="dbo" catalog="jkgis" class="kczk"></table>
 	<table name="TB_KC_TC" schema="dbo" catalog="jkgis" class="Kctc"></table>
-	<table name="TB_KC_DCXX" schema="dbo" catalog="jkgis" class="Kcdcxx"></table>
+	<table name="TB_KC_DCXX" schema="dbo" catalog="jkgis"
+		class="Kcdcxx">
+	</table>
+	<table name="notify" catalog="travel"></table>
 </hibernate-reverse-engineering>

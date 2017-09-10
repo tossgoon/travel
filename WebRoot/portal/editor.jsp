@@ -100,7 +100,7 @@
 										</tbody>
 									</table>
 								</div>
-								<div  id="uploader">d
+								<div  id="uploader">
 									<div style="margin-bottom:5px;"><label>
 									<input type="checkbox" id="isshowpicture"
 										<c:if test="${portal.isshowpicture==true}">

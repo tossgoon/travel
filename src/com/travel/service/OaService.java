@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 
 import com.travel.dao.BaseDao;
 import com.travel.pojo.Oa;
+import com.travel.pojo.Portal;
 
 public class OaService<T> {
 
@@ -60,15 +61,74 @@ public class OaService<T> {
 	}
 
 	public List<T> queryOaByCreater(int userid, Class<T> clazz) {
-		String queryString = "from Oa oa where oa.creater =" + userid;
+		String queryString = "from Oa oa where oa.creater =" + userid+" and type=1";
 		return dao.getObjects(queryString);
 	}
 
 	public List<T> queryOaByName(int userid, Class<T> clazz, String username) {
-		String queryString = "from Oa oa where oa.title like '%" + username	+ "%' and  oa.creater =" + userid;
+		String queryString = "from Oa oa where oa.title like '%" + username	+ "%' and type=1 and  oa.creater =" + userid;
 		return dao.getObjects(queryString);
 	}
-
+	
+	public List<T> queryAllNotify() {
+		String queryString = "from Oa oa where oa.type=2";
+		return dao.getObjects(queryString);
+	}
+	public List<T> querySendNotify() {
+		String queryString = "from Oa oa where oa.type=2 and oa.status=true";
+		return dao.getObjects(queryString);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Oa> queryNotifyByPage(int pagesize,int pagenum){
+		String queryString="from Oa oa where oa.type=2  order by oa.pubdate desc";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		//query.setInteger("param", type);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		List<Oa>list=(List<Oa>)query.list();
+		session.close();
+		return list;
+	}
+	public int getNotifyCount(){
+		String queryString="select count(*) from Oa as p where p.type=2";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Oa> queryNotifySendByPage(int pagesize,int pagenum){
+		String queryString="from Oa oa where oa.type=2 and oa.status=true  order by oa.pubdate desc";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		//query.setInteger("param", type);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		List<Oa>list=(List<Oa>)query.list();
+		session.close();
+		return list;
+	}
+	public int getNotifySendCount(){
+		String queryString="select count(*) from Oa as p where p.type=2 and p.status=true";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
+	}
 	/*
 	 * public List<T> queryPortalByType(String portalType,int topnum) { String
 	 * queryString =
