@@ -29,7 +29,7 @@
 <style type="text/css">
 body {
 	font-family: "Microsoft Yahei";
-	background-color: rgb(226, 252, 231);
+		background-color: rgb(226, 252, 231);
 }
 
 .title1 a {
@@ -52,10 +52,17 @@ body {
 </head>
 <body>
 	<%@ include file="/portal/headmodal.jsp"%>
-	<div class="container" style="width:100%;margin:0 auto;text-align:center;margin-top:20px;">
+
+    
+    
+    
+    <div class="contentstyle">
+	<div class="container" style="text-align:left;width:1024px;margin:0 auto;background-color: #ffffff;margin-top:20px;">
+	
+	
 		<div class="row">
 			<div class="col-md-12" style="margin:0 auto;">
-				<div	style="width:1024px;margin:0 auto;padding-top:20px;text-align:left;background-color:#ffffff;border-bottom:1px solid #228B22;padding-left:20px;padding-bottom:12px;">
+				<div	style="margin:0 auto;padding-top:20px;text-align:left;background-color:#ffffff;border-bottom:1px solid #228B22;padding-left:20px;padding-bottom:12px;">
 					<span>当前位置：首页&gt;&gt;
 					<c:choose>
 						 <c:when test="${ptype=='0'}">
@@ -95,9 +102,8 @@ body {
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;text-align:left;margin:0 auto;padding-top:20px;">
-					<div class="panel-body" style="height:500px;">
-						<c:forEach var="portal" items="${portals}">
+			   <div style="margin:0 auto;padding-top:20px;text-align:left;background-color:#ffffff;border-bottom:1px solid #228B22;padding-left:20px;padding-bottom:12px;">
+				<c:forEach var="portal" items="${portals}">
 							<p class="title1">
 								<a href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
 							</p>
@@ -106,22 +112,27 @@ body {
 								${portal.subtitle}</p>
 							<hr
 								style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
-						</c:forEach>
-					</div>
-
-					<div class="panel-footer">
-						<a id="firstpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=${ptype}">第一页</a> 
+				</c:forEach>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		  <div class="col-md-12">
+		       <a id="firstpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=1&type=${ptype}">第一页</a> 
 						<a id="lastpage"  href="/travel/visitor/querypage.action?pagesize=7&pagenum=${page.currentPage-1 }&type=${ptype}" >上一页</a> 
 						<a id="nextpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=${page.currentPage+1 }&type=${ptype}" >下一页</a>
 						<a id="endpage" href="/travel/visitor/querypage.action?pagesize=7&pagenum=${page.totalPage }&type=${ptype}" >最后一页</a>
 						<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
-					</div>
-				</div>
-			</div>
-		</div>
+		    </div>
+		  </div>
 	</div>
-	
-    <%@ include file="footmodal.jsp"%>
+	</div>
+		<%@ include file="footmodal.jsp"%>
+    
+    
+    
+    
+    
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 </body>

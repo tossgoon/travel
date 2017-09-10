@@ -481,4 +481,19 @@
 		</action>
 	</package>
 	
+	<package name="survey"  extends="struts-default,json-default,usercheck" namespace="/survey">
+		<action name="animalsave" class="animalAct">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="download" class="fileDownLoad">
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">fileInput</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			</result>
+			<result name="error">/travel/error.jsp</result>
+		</action>
+	</package>
+	
 </struts>    

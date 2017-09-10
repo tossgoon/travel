@@ -32,7 +32,7 @@
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" /> --%>
 
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portaltab.css">
-
+<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
 <style type="text/css">
 body{
 	background-color: #F2F2F2;
@@ -114,7 +114,7 @@ body{
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 		</div>
-	<div style="width:100%;margin:0 auto;text-align:center;">
+	<div class="contentstyle">
 		<div class="maincontent">
 			<div class="leftpanel">
 				<ul>

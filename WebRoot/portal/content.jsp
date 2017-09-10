@@ -22,7 +22,15 @@
 <link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <style type="text/css">
 body{
- font-family:"Microsoft Yahei";
+ 	font-family:"Microsoft Yahei";
+ 	position: absolute;
+	width: 100%;
+	min-height: 100%;
+}
+.contentstyle{
+	margin-bottom:120px;
+	width:100%;
+	text-align:center;
 }
 .headlogo {
 	text-align: center;
@@ -86,6 +94,7 @@ body{
 		</ul>
 	</div>
 
+    
 	<div class="container" style="width:100%;">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10 col-md-offset-1 ">

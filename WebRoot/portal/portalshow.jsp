@@ -25,7 +25,9 @@ body {
 </head>
 <body>
 	<%@ include file="headmodal.jsp"%>
-	<div class="container" style="width:1024px;margin:0 auto;background-color: #ffffff;margin-top:20px;">
+	
+	<div class="contentstyle">
+	<div class="container" style="text-align:left;width:1024px;margin:0 auto;background-color: #ffffff;margin-top:20px;">
 	
 	<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
@@ -46,6 +48,7 @@ body {
 			   ${portal.content}
 			</div>
 		</div>
+	</div>
 	</div>
 		<%@ include file="footmodal.jsp"%>
     <script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>

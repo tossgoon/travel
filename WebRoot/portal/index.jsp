@@ -87,6 +87,20 @@ body {
 	text-decoration: none;
 	color: #FFFFFF;
 }
+.dropdown-menu li {
+	width:100%;
+}
+.dropdown-menu li a {
+	font-size: 16px;
+	color: #000000;
+	text-decoration: none;
+	margin: 0px;
+	padding-top: 14px;
+	display: block;
+	padding-right: 15px;
+	padding-bottom: 14px;
+	padding-left: 15px;
+}
 
 .carousel-inner img {
 	margin: 0 auto;
@@ -234,7 +248,6 @@ color:#ffffff;
 			<a href="#" style="font-color:#fff;" onClick="window.external.AddFavorite('http://219.144.50.146:8088/travel/visitor/first.action','延安黄龙山褐马鸡国家级自然保护区')">加入收藏</a>
 			| <a href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://219.144.50.146:8088/travel/visitor/first.action');">设为首页</a>
 		</div>
-
 		<img alt="" style="position:absolute;z-index:9;top:200px;left:16%;width:1000px;" src="<%=contextPath%>/includes/image/logotitle.png"> 
 		<div class="login-content">
 		    
@@ -252,10 +265,30 @@ color:#ffffff;
 	<div class="navbarhead">
 		<ul style="margin:0 auto;width:1150px;">
 			<li><a href="javascript:void(0)">首页</a></li>
-			<li><a href="/travel/visitor/show.action?id=24">保护区介绍</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1">工作动态</a></li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    	保护区介绍
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/travel/visitor/show.action?id=24" target="_blank">保护区简介</a></li>
+                    <li><a href="#">保护区历史</a></li>
+                    <li><a href="#">组织机构</a></li>
+                    <li><a href="#">人员编制</a></li>
+                    <li><a href="#">工作职能</a></li>
+                </ul>
+            </li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    	保护区动态
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1"  target="_blank">工作动态</a></li>
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3"  target="_blank">政务公开</a></li>
+                </ul>
+            </li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3">政务公开</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
 			<li><a href="/travel/portal/webgis.jsp">地理位置</a></li>
@@ -403,7 +436,7 @@ color:#ffffff;
 							更多&gt;&gt; </a>
 					</div>
 					
-					<p style='font-size:16px;m'><label style='padding-left:30px;'>陕西省延安黄龙山褐马鸡国家级自然保护区</label>是以保护褐马鸡及其自然栖息地、产卵场的林地、河道、溪流、溶洞等自然环境为主，以保护该区域其他动植物资源为辅。开展褐马鸡人工救护、科研、繁殖以促进自然增殖的，集生物多样性保护、科学研究、学术交流、宣教展览为一体的国家级自然保护区.....
+					<p style='font-size:16px;m'><label style='padding-left:30px;'>陕西延安黄龙山褐马鸡国家级自然保护区</label>是以保护褐马鸡及其自然栖息地、产卵场的林地、河道、溪流、溶洞等自然环境为主，以保护该区域其他动植物资源为辅。开展褐马鸡人工救护、科研、繁殖以促进自然增殖的，集生物多样性保护、科学研究、学术交流、宣教展览为一体的国家级自然保护区.....
 					</p>
 					<div style="text-align:center;margin:0 auto;"><img alt="褐马鸡" style="width:350px;" src="<%=contextPath%>/includes/image/chickshow.jpg"></div>
 					
