@@ -14,25 +14,24 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
 import com.travel.pojo.Animalsurvey;
+import com.travel.pojo.Camerasurvey;
 import com.travel.pojo.User;
 import com.travel.service.GeneralService;
 import com.travel.service.UserService;
 
-public class AnimalsurveyAction extends ActionSupport {
+public class CamerasurveyAction extends ActionSupport {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2871113028472366475L;
-	/**
-	 * 
-	 */
-	private Animalsurvey animal = new Animalsurvey();
-	private GeneralService<Animalsurvey> animalService;
-	private List<Animalsurvey> animallist;
+	private static final long serialVersionUID = -2429982078693264138L;
+	
+	private Camerasurvey camera = new Camerasurvey();
+	private GeneralService <Camerasurvey> cameraService;
+	private List<Camerasurvey> cameralist;
 	/*private UserService<User> userService;*/
 	private String errormsg;
 
-	public AnimalsurveyAction() {
+	public CamerasurveyAction() {
 
 	}
 
@@ -47,29 +46,23 @@ public class AnimalsurveyAction extends ActionSupport {
 		return userService;
 	}*/
 
-	public Animalsurvey getAnimal() {
-		return animal;
+	public Camerasurvey getCamera() {
+		return camera;
 	}
 
-	public void setAnimal(Animalsurvey animal) {
-		this.animal = animal;
+	public void setCamera(Camerasurvey camera) {
+		this.camera = camera;
 	}
 
-	@JSON(serialize = false)
-	public GeneralService<Animalsurvey> getAnimalService() {
-		return animalService;
+	
+
+
+	public List<Camerasurvey> getCameralist() {
+		return cameralist;
 	}
 
-	public void setAnimalService(GeneralService<Animalsurvey> animalService) {
-		this.animalService = animalService;
-	}
-
-	public List<Animalsurvey> getAnimallist() {
-		return animallist;
-	}
-
-	public void setAnimallist(List<Animalsurvey> animallist) {
-		this.animallist = animallist;
+	public void setAnimallist(List<Camerasurvey> animallist) {
+		this.cameralist = animallist;
 	}
 
 	/*public void setUserService(UserService<User> userService) {
@@ -87,7 +80,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String add() {
 		String result = "";
 		try {
-			this.animalService.addObject(animal);
+			this.cameraService.addObject(camera);
 			// throw new RuntimeException("");
 			setErrormsg("0");
 			result = SUCCESS;
@@ -103,7 +96,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String update() {
 		try {
 			// String param = getParam("param");
-			this.animalService.updateObject(animal);
+			this.cameraService.updateObject(camera);
 			setErrormsg("0");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -114,8 +107,8 @@ public class AnimalsurveyAction extends ActionSupport {
 		// System.out.println(this);
 	}
 	
-	public String saveanimal() {
-		if (animal.getId() == null) {
+	public String save() {
+		if (camera.getId() == null) {
 			return add();
 		} else {
 			return update();
@@ -125,7 +118,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String delete() {
 		try {
 			Integer param = Integer.parseInt(getParam("id"));
-			this.animalService.deleteObject(param, Animalsurvey.class);
+			this.cameraService.deleteObject(param, Camerasurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,14 +131,23 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String query() {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
-			animal = animalService.getObject(Animalsurvey.class, id);
+			camera = this.cameraService.getObject(Camerasurvey.class, id);
 		}
 		return SUCCESS;
+	}
+
+	@JSON(serialize = false)
+	public GeneralService <Camerasurvey> getCameraService() {
+		return cameraService;
+	}
+
+	public void setCameraService(GeneralService <Camerasurvey> cameraService) {
+		this.cameraService = cameraService;
 	}
 	
 	public String querylist(){
 		try {
-			animallist=this.animalService.getObjectList(Animalsurvey.class);
+			this.cameralist=this.cameraService.getObjectList(Camerasurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();

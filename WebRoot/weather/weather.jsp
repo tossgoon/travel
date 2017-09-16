@@ -176,28 +176,66 @@ body {
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
-		var receiverids="";
-		var receivernames="";
+	
+		$(function() {
+			
+			
+			
+			
+			
+			//获取天气数据
+			$.ajax({
+				type : "get",
+				url : "http://xsdz.veinasa.cn/intfa/queryData/16053404.json",
+				//data : $("#formAnimal").serialize(),
+				/* cache : false, */
+				dataType : "jsonp",
+				 jsonp: "callback", 
+				jsonpCallback:"success_callback",
+				crossDomain: true, 
+				async:false,
+				/* async:false,
+				crossDomain: true,  
+				jsonp: "callbackparam",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+				jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名 */
+				success : function(data) {
+					alert(data.statusCode);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				}
+			});
+			
+		});
+		function callback(){
+			alert("111");
+		}
+		function success_callback(data)
+		{
+			alert("abc");
+		}
+
+		var receiverids = "";
+		var receivernames = "";
 		function SelectAll() {
-			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
+			$("#tbuser").find("input[type='checkbox']").prop("checked", true);
 		}
 		function ReSelect() {
-			$("#tbuser").find("input[type='checkbox']").each(function(){
-				if($(this).is(":checked")){
-					$(this).prop("checked",false);
-				}
-				else{
-					$(this).prop("checked",true);
+			$("#tbuser").find("input[type='checkbox']").each(function() {
+				if ($(this).is(":checked")) {
+					$(this).prop("checked", false);
+				} else {
+					$(this).prop("checked", true);
 				}
 			});
 		}
-		
+
 		function SaveAnimal() {
-			if($("#jingdu").val()==null||$("#jingdu").val()==""){
+			if ($("#jingdu").val() == null || $("#jingdu").val() == "") {
 				alert("经度不能为空");
 				return;
 			}
-			if($("#weidu").val()==null||$("#weidu").val()==""){
+			if ($("#weidu").val() == null || $("#weidu").val() == "") {
 				alert("纬度不能为空");
 				return;
 			}
@@ -205,11 +243,11 @@ body {
 			$.ajax({
 				type : "post",
 				url : "/travel/survey/saveanimal.action",
-				data :  $("#formAnimal").serialize(),
+				data : $("#formAnimal").serialize(),
 				cache : false,
 				dataType : "json",
 				success : function(data) {
-				if (data.errormsg == "0") {
+					if (data.errormsg == "0") {
 						//新增部门
 						$("#animalid").val(data.animal.id);
 						alert("保存成功");
@@ -225,7 +263,8 @@ body {
 		function DeleteAnimal() {
 			if ($("#animalid").val() != null && $("#animalid").val() != "") {
 				$.ajax({
-					url : '/travel/survey/deleteanimal.action?id=' + $("#animalid").val(),
+					url : '/travel/survey/deleteanimal.action?id='
+							+ $("#animalid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

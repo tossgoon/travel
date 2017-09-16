@@ -13,12 +13,12 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>动物状况监测编辑</title>
+<title>褐马鸡野外种群状况监测</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="部门编辑">
+<meta http-equiv="description" content="褐马鸡野外种群状况监测">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -55,7 +55,7 @@ body {
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt; 动物状况监测信息编辑    </span>
+					<span>当前位置：OA管理&gt;&gt; 褐马鸡野外种群状况监测    </span>
 				</div>
 			</div>
 		</div>
@@ -64,30 +64,42 @@ body {
 				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
 					<!-- <div class="panel-heading">OA管理：动物状况监测信息编辑 </div> -->
 					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formAnimal"  style="width:100%;margin:0 auto;">
+						<s:form role="form" theme="simple" id="formAnimal" action="saveanimal" namespace="/survey" style="width:100%;margin:0 auto;">
 								<div class="container" style="width:800px;">
 										<div class="row">
 											<div class="col-md-2">
 												<span>ID</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="animalid" readonly="true" name="animal.id"></s:textfield>
+												<s:textfield class="form-control input-sm" id="id" name="chick.id" readonly="true"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>样线号</span></div>
+											<div class="col-md-2"><span>保护区</span></div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm"  name="animal.yangxianhao"></s:textfield>
+												<s:textfield class="form-control input-sm" name="chick.baohuqu"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>填表时间</span>
+												<span>保护站</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm"  name="animal.tianbiaoshijian"></s:textfield>
+												<s:textfield class="form-control input-sm" name="chick.baohuzhan"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>天气</span></div>
+											<div class="col-md-2"><span>小地名</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.tianqi"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.xiaodiming"></s:textfield>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>天气</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.tianqi"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>填表时间</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.tianbiaoshijian"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
@@ -95,59 +107,104 @@ body {
 												<span>监测人</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.jianceren"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.jianceren"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>动物名称</span></div>
+											<div class="col-md-2"><span>样线号</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.dongwumingcheng"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.yangxianhao"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>实体数量(*)</span>
+												<span>记录号</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield   class="form-control input-sm" name="animal.shitishuliang"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.jiluhao"></s:textfield>
 											</div>
+											<div class="col-md-2"><span>实体数量(*)</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.shitishuliang"></s:textfield>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>实体行为</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.shitixingwei"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>实体年龄(*)</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.shitinianling"></s:textfield>
+											</div>
+										</div>
+										
+										<div class="row">
+										<div class="col-md-2">
+												<span>生境类型</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.shengjingleixing"></s:textfield>
+											</div>
+											
 											<div class="col-md-2"><span>尸体数量(*)</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.bodyshuliang"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.bodyshuliang"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>粪便</span>
+												<span>尸体简述</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.fenbian"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.bodyjianshu"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>生境类型</span></div>
+											<div class="col-md-2"><span>粪便数量</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.shengjingleixing"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="chick.fenbianshuliang"></s:textfield>
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>坡位</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.powei"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>坡度</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.podu"></s:textfield>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>坡向</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.poxiang"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>海拔高度(*)</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="chick.haibagaodu"></s:textfield>
+											</div>
+										</div>
+										
 										<div class="row">
 											<div class="col-md-2">
 												<span>经度(*)</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="jingdu" name="animal.jingdu"></s:textfield>
+												<s:textfield class="form-control input-sm" id="jingdu" name="chick.jingdu"></s:textfield>
 											</div>
 											<div class="col-md-2"><span>纬度(*)</span></div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="weidu" name="animal.weidu"></s:textfield>
+												<s:textfield  class="form-control input-sm" id="weidu" name="chick.weidu"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-md-2">
-												<span>海拔高度(*)</span>
-											</div>
-											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.height"></s:textfield>
-											</div>
 											<div class="col-md-2"><span>备注</span></div>
-											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.beizhu"></s:textfield>
+											<div class="col-md-10">
+												<s:textfield  class="form-control input-sm" name="chick.beizhu"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
@@ -161,7 +218,7 @@ body {
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/survey/animalsuredit.jsp" class="btn btn-default">新增数据</a>
+						<a href="/travel/survey/chickedit.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
 						<button type="button"  id="btndel" onclick="DeleteAnimal()" class="btn btn-warning">删除数据</button>
 					</div>
@@ -204,14 +261,14 @@ body {
 			//获取oafiles
 			$.ajax({
 				type : "post",
-				url : "/travel/survey/saveanimal.action",
+				url : "/travel/survey/savechick.action",
 				data :  $("#formAnimal").serialize(),
 				cache : false,
 				dataType : "json",
 				success : function(data) {
 				if (data.errormsg == "0") {
 						//新增部门
-						$("#animalid").val(data.animal.id);
+						$("#id").val(data.chick.id);
 						alert("保存成功");
 					} else {
 						alert(data.errormsg);
@@ -223,9 +280,9 @@ body {
 			});
 		}
 		function DeleteAnimal() {
-			if ($("#animalid").val() != null && $("#animalid").val() != "") {
+			if ($("#id").val() != null && $("#id").val() != "") {
 				$.ajax({
-					url : '/travel/survey/deleteanimal.action?id=' + $("#animalid").val(),
+					url : '/travel/survey/deletechick.action?id=' + $("#id").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

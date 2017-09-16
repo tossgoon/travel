@@ -464,6 +464,12 @@
  			<result name="success">/oaadmin/notifyview.jsp</result>
  			<result name="error" type="json"></result>
 		</action>
+		
+		<action name="queryweather" class="weatherAct" method="query">
+ 			<result name="success"  type="json"></result>
+ 			<result name="error" type="json"></result>
+		</action>
+		
 	</package>
 	
 	<package name="fileio"  extends="struts-default,json-default,usercheck" namespace="/fileio">
@@ -482,18 +488,107 @@
 	</package>
 	
 	<package name="survey"  extends="struts-default,json-default,usercheck" namespace="/survey">
-		<action name="animalsave" class="animalAct">
+		<action name="saveanimal" class="animalAct" method="saveanimal">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
-		<action name="download" class="fileDownLoad">
-			<result name="success" type="stream">
-				<param name="contentType">text/plain</param>
-				<param name="inputName">fileInput</param>
-				<param name="contentDisposition">attachment;filename="${fileName}"</param>
-			</result>
-			<result name="error">/travel/error.jsp</result>
+		<action name="deleteanimal" class="animalAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
 		</action>
+		<action name="queryanimal" class="animalAct" method="query">
+			<result name="success">/survey/animalsuredit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryanimallist" class="animalAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		
+		<action name="savecamera" class="cameraAct" method="save">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="deletecamera" class="cameraAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="querycamera" class="cameraAct" method="query">
+			<result name="success">/survey/cameraedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="querycameralist" class="cameraAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		
+		<action name="savechick" class="chickAct" method="save">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="deletechick" class="chickAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="querychick" class="chickAct" method="query">
+			<result name="success">/survey/chickedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="querychicklist" class="chickAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		
+		<action name="saveimportinfo" class="importinfoAct" method="save">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="deleteimportinfo" class="importinfoAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryimportinfo" class="importinfoAct" method="query">
+			<result name="success">/survey/importinfoedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryimportinfolist" class="importinfoAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		
+		<action name="saveplant" class="plantAct" method="save">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="deleteplant" class="plantAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryplant" class="plantAct" method="query">
+			<result name="success">/survey/plantedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryplantlist" class="plantAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		
+		<action name="saveprotect" class="protectAct" method="save">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="deleteprotect" class="protectAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryprotect" class="protectAct" method="query">
+			<result name="success">/survey/protectedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryprotectlist" class="protectAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		
 	</package>
-	
 </struts>    

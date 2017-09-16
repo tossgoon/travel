@@ -21,9 +21,12 @@ public class Oareceiver implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Oareceiver(Integer userid, Integer oaid) {
+	public Oareceiver(Integer userid, Integer oaid, Boolean isread,
+			String sender) {
 		this.userid = userid;
 		this.oaid = oaid;
+		this.isread = isread;
+		this.sender = sender;
 	}
 
 	// Property accessors
@@ -53,7 +56,7 @@ public class Oareceiver implements java.io.Serializable {
 	}
 
 	public Boolean getIsread() {
-		return isread;
+		return this.isread;
 	}
 
 	public void setIsread(Boolean isread) {
@@ -61,12 +64,11 @@ public class Oareceiver implements java.io.Serializable {
 	}
 
 	public String getSender() {
-		return sender;
+		return this.sender;
 	}
 
 	public void setSender(String sender) {
 		this.sender = sender;
 	}
-
 
 }

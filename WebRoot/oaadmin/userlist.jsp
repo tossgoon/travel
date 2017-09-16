@@ -44,56 +44,58 @@ body{
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
-	<div style="width:100%;text-align:center;">
+	<div  class="contentstyle">
 
 	<div class="maincontent" >
 		<div class="leftpanel">
 			<ul>
 				<li><a	href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
-				<li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li>
+				<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
 				<li class="activeli"><a href="javascript:void(0)">用户管理</a></li>
 				<li><a href="/travel/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
-				<li><a href="/travel/oaadmin/filelist.jsp">资料中心</a></li>
-				<li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li>
+				<li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li>
+				<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
 			</ul>
 		</div>
 		<div class="rightpanel">
-			<div class="panel-heading">
+			<div style="padding-top:10px;">
 							<span style="font-size:18px;">用户管理</span>
 							<input value="新增用户" onclick="InsertUser()" type="button"
 								class="btn btn-primary"
 								style="margin-right:20px; float:right;width:90px;" />
 						</div>
+				<div style="height:400px;">
+					<table align="center" class="table table-hover" id="userlist"
+						style="width:100%;margin-top:20px;">
+						<tr align="center" height="26px">
+							<td width="100">ID</td>
+							<td width="160">姓名</td>
+							<td width="160">用户名</td>
+							<td width="160">电话</td>
+							<td width="160">部门</td>
+							<td width="160">备注</td>
+							<td width="160">操作</td>
+						</tr>
 
-						<table align="center" class="table table-hover" id="userlist"
-							style="width:100%;" style="margin-top:20px;">
-							<tr align="center" height="26px">
-								<td width="100">ID</td>
-								<td width="160">姓名</td>
-								<td width="160">用户名</td>
-								<td width="160">电话</td>
-								<td width="160">部门</td>
-								<td width="160">备注</td>
-								<td width="160">操作</td>
+						<c:forEach var="user" items="${users}">
+							<tr align="center" height="24px">
+								<td>${user.id}</td>
+								<td>${user.username}</td>
+								<td>${user.loginname}</td>
+								<td>${user.telephone }</td>
+								<td>${user.department }</td>
+								<td>${user.remark }</td>
+								<td width="120"><a href="javascript:void(0)"
+									onclick="EditUser(this)">编辑</a>&nbsp;&nbsp; <a
+									href="javascript:void(0)"
+									onclick="DeleteUserModal(${user.id},this)">删除</a></td>
 							</tr>
+						</c:forEach>
+					</table>
+				</div>
 
-							<c:forEach var="user" items="${users}">
-								<tr align="center" height="24px">
-									<td>${user.id}</td>
-									<td>${user.username}</td>
-									<td>${user.loginname}</td>
-									<td>${user.telephone }</td>
-									<td>${user.department }</td>
-									<td>${user.remark }</td>
-									<td width="120"><a href="javascript:void(0)"
-										onclick="EditUser(this)">编辑</a>&nbsp;&nbsp; <a
-										href="javascript:void(0)"
-										onclick="DeleteUserModal(${user.id},this)">删除</a></td>
-								</tr>
-							</c:forEach>
-						</table>
 
-						<div style="margin-top:10px;">
+				<div style="margin-top:10px;">
 							<a id="firstpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
 							<a id="lastpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
 							<a id="nextpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>

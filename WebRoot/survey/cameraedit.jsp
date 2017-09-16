@@ -13,12 +13,12 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>动物状况监测编辑</title>
+<title>红外相机监测数据编辑</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="部门编辑">
+<meta http-equiv="description" content="红外相机编辑">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -55,7 +55,7 @@ body {
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt; 动物状况监测信息编辑    </span>
+					<span>当前位置：OA管理&gt;&gt; 红外相机监测信息编辑    </span>
 				</div>
 			</div>
 		</div>
@@ -64,66 +64,42 @@ body {
 				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
 					<!-- <div class="panel-heading">OA管理：动物状况监测信息编辑 </div> -->
 					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formAnimal"  style="width:100%;margin:0 auto;">
+						<s:form role="form" theme="simple" id="formAnimal" action="saveanimal" namespace="/survey" style="width:100%;margin:0 auto;">
 								<div class="container" style="width:800px;">
 										<div class="row">
 											<div class="col-md-2">
 												<span>ID</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="animalid" readonly="true" name="animal.id"></s:textfield>
+												<s:textfield class="form-control input-sm" id="id" name="camera.id" readonly="readonly"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>样线号</span></div>
+											<div class="col-md-2"><span>相机编号</span></div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm"  name="animal.yangxianhao"></s:textfield>
+												<s:textfield class="form-control input-sm" name="camera.xiangjibianhao"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>填表时间</span>
+												<span>安装日期</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm"  name="animal.tianbiaoshijian"></s:textfield>
+												<s:textfield class="form-control input-sm" name="camera.anzhuangriqi"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>天气</span></div>
+											<div class="col-md-2"><span>安装人员</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.tianqi"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="camera.anzhuangrenyuan"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>监测人</span>
+												<span>小地名</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.jianceren"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="camera.xiaodiming"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>动物名称</span></div>
+											<div class="col-md-2"><span>海拔高度(*)</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.dongwumingcheng"></s:textfield>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<span>实体数量(*)</span>
-											</div>
-											<div class="col-md-4">
-												<s:textfield   class="form-control input-sm" name="animal.shitishuliang"></s:textfield>
-											</div>
-											<div class="col-md-2"><span>尸体数量(*)</span></div>
-											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.bodyshuliang"></s:textfield>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<span>粪便</span>
-											</div>
-											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.fenbian"></s:textfield>
-											</div>
-											<div class="col-md-2"><span>生境类型</span></div>
-											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.shengjingleixing"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="camera.height"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
@@ -131,23 +107,35 @@ body {
 												<span>经度(*)</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="jingdu" name="animal.jingdu"></s:textfield>
+												<s:textfield id="jingdu"  class="form-control input-sm" name="camera.jingdu"></s:textfield>
 											</div>
 											<div class="col-md-2"><span>纬度(*)</span></div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="weidu" name="animal.weidu"></s:textfield>
+												<s:textfield id="weidu" class="form-control input-sm" name="camera.weidu"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>海拔高度(*)</span>
+												<span>生境类型</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.height"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="camera.shengjingleixing"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>坡位</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="camera.powei"></s:textfield>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>坡向</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield class="form-control input-sm" name="camera.poxiang"></s:textfield>
 											</div>
 											<div class="col-md-2"><span>备注</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.beizhu"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="camera.beizhu"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
@@ -161,7 +149,7 @@ body {
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/survey/animalsuredit.jsp" class="btn btn-default">新增数据</a>
+						<a href="/travel/survey/cameraedit.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
 						<button type="button"  id="btndel" onclick="DeleteAnimal()" class="btn btn-warning">删除数据</button>
 					</div>
@@ -204,14 +192,14 @@ body {
 			//获取oafiles
 			$.ajax({
 				type : "post",
-				url : "/travel/survey/saveanimal.action",
+				url : "/travel/survey/savecamera.action",
 				data :  $("#formAnimal").serialize(),
 				cache : false,
 				dataType : "json",
 				success : function(data) {
 				if (data.errormsg == "0") {
 						//新增部门
-						$("#animalid").val(data.animal.id);
+						$("#id").val(data.camera.id);
 						alert("保存成功");
 					} else {
 						alert(data.errormsg);
@@ -223,9 +211,9 @@ body {
 			});
 		}
 		function DeleteAnimal() {
-			if ($("#animalid").val() != null && $("#animalid").val() != "") {
+			if ($("#id").val() != null && $("#id").val() != "") {
 				$.ajax({
-					url : '/travel/survey/deleteanimal.action?id=' + $("#animalid").val(),
+					url : '/travel/survey/deletecamera.action?id=' + $("#id").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

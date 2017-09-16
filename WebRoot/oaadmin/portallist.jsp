@@ -94,16 +94,6 @@ body{
 	color:#FF5F3E;
 	font-weight:bold;
 }
-.toptool {
-	width: 100%;
-	margin: 0 auto;
-	border-bottom: 1px solid #A1A1A1;
-	padding-top: 12px;
-	padding-left: 60px;
-	text-align:left;
-	height:40px;
-	background-color:#ffffff;
-}
 </style>
 
 </head>
@@ -119,11 +109,11 @@ body{
 			<div class="leftpanel">
 				<ul>
 					<li class="activeli"><a style="color:#FF5F3E;" href="javascript:void(0)">网站门户</a></li>
-					<li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li>
+					<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
 					<li><a href="/travel/user/querypage.action">用户管理</a></li>
 					<li><a href="/travel/oaadmin/notifylist.jsp">通知公告</a></li>
-					<li><a href="/travel/oaadmin/filelist.jsp">资料中心</a></li>
-					<li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li>
+					<li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li>
+					<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
 				</ul>
 			</div>
 			<div class="rightpanel" style="padding-top:20px;">

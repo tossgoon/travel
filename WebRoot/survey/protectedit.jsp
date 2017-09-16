@@ -13,7 +13,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>动物状况监测编辑</title>
+<title>保护区巡护记录</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -55,7 +55,7 @@ body {
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt; 动物状况监测信息编辑    </span>
+					<span>当前位置：OA管理&gt;&gt; 保护区巡护记录   </span>
 				</div>
 			</div>
 		</div>
@@ -71,87 +71,148 @@ body {
 												<span>ID</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="animalid" readonly="true" name="animal.id"></s:textfield>
+												<s:textfield class="form-control input-sm" id="id" name="protect.id" readonly="true"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>样线号</span></div>
+											<div class="col-md-2"><span>保护站名称</span></div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm"  name="animal.yangxianhao"></s:textfield>
+												<s:textfield class="form-control input-sm" name="protect.baohuzhanmingcheng"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>填表时间</span>
+												<span>记录人</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm"  name="animal.tianbiaoshijian"></s:textfield>
+												<s:textfield class="form-control input-sm" name="protect.jiluren"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>巡护日期</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="protect.xunhuriqi"></s:textfield>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>时间</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="protect.shijian"></s:textfield>
 											</div>
 											<div class="col-md-2"><span>天气</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.tianqi"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.tianqi"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>监测人</span>
+												<span>大地名</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.jianceren"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.dadiming"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>动物名称</span></div>
+											<div class="col-md-2"><span>巡护人员</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.dongwumingcheng"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.xunhurenyuan"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>实体数量(*)</span>
+												<span>东至</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield   class="form-control input-sm" name="animal.shitishuliang"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.dongzhi"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>尸体数量(*)</span></div>
+											<div class="col-md-2"><span>西至</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.bodyshuliang"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.xizhi"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>粪便</span>
+												<span>南至</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.fenbian"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.nanzhi"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>生境类型</span></div>
+											<div class="col-md-2"><span>北至</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.shengjingleixing"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.beizhi"></s:textfield>
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>动物名称</span>
+											</div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="protect.dongwumingcheng"></s:textfield>
+											</div>
+											<div class="col-md-2"><span>数量</span></div>
+											<div class="col-md-4">
+												<s:textfield  class="form-control input-sm" name="protect.shuliang"></s:textfield>
+											</div>
+										</div>
+										
 										<div class="row">
 											<div class="col-md-2">
 												<span>经度(*)</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="jingdu" name="animal.jingdu"></s:textfield>
+												<s:textfield id="jingdu" class="form-control input-sm"  name="protect.jingdu"></s:textfield>
 											</div>
 											<div class="col-md-2"><span>纬度(*)</span></div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="weidu" name="animal.weidu"></s:textfield>
+												<s:textfield id="weidu" class="form-control input-sm" name="protect.weidu"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-2">
-												<span>海拔高度(*)</span>
+												<span>海拔(*)</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.height"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.haiba"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>备注</span></div>
+											<div class="col-md-2"><span>生境类型</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="animal.beizhu"></s:textfield>
+												<s:textfield  class="form-control input-sm" name="protect.shengjingleixing"></s:textfield>
 											</div>
 										</div>
 										<div class="row">
-										<div class="col-md-12" style="padding-top:15px;">
+											<div class="col-md-2">
+												<span>人为活动类型</span>
+											</div>
+											<div class="col-md-4">
+												<input  class="form-control input-sm" name="protect.renweihuodongleixing">
+											</div>
+											<div class="col-md-2"><span>干扰描述</span></div>
+											<div class="col-md-4">
+												<input  class="form-control input-sm" name="protect.ganraomiaoshu">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>干扰经度</span>
+											</div>
+											<div class="col-md-4">
+												<input  class="form-control input-sm" name="protect.ganraomiaoshu">
+											</div>
+											<div class="col-md-2"><span>干扰纬度</span></div>
+											<div class="col-md-4">
+												<input  class="form-control input-sm" name="protect.ganraoweidu">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<span>干扰海拔</span>
+											</div>
+											<div class="col-md-4">
+												<input  class="form-control input-sm" name="protect.ganraohaiba">
+											</div>
+											<div class="col-md-2"><span>干扰生境类型</span></div>
+											<div class="col-md-4">
+												<input  class="form-control input-sm" name="protect.ganraoshengjingleixing">
+											</div>
+										</div>
+										<div class="row">
+										     <div class="col-md-12" style="padding-top:15px;">
 												<label>带*为数字。其中经度、纬度为必填项。</label>
 											</div>
 										</div>
@@ -161,7 +222,7 @@ body {
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/survey/animalsuredit.jsp" class="btn btn-default">新增数据</a>
+						<a href="/travel/survey/protectedit.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
 						<button type="button"  id="btndel" onclick="DeleteAnimal()" class="btn btn-warning">删除数据</button>
 					</div>
@@ -176,22 +237,6 @@ body {
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
-		var receiverids="";
-		var receivernames="";
-		function SelectAll() {
-			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
-		}
-		function ReSelect() {
-			$("#tbuser").find("input[type='checkbox']").each(function(){
-				if($(this).is(":checked")){
-					$(this).prop("checked",false);
-				}
-				else{
-					$(this).prop("checked",true);
-				}
-			});
-		}
-		
 		function SaveAnimal() {
 			if($("#jingdu").val()==null||$("#jingdu").val()==""){
 				alert("经度不能为空");
@@ -204,14 +249,14 @@ body {
 			//获取oafiles
 			$.ajax({
 				type : "post",
-				url : "/travel/survey/saveanimal.action",
+				url : "/travel/survey/saveprotect.action",
 				data :  $("#formAnimal").serialize(),
 				cache : false,
 				dataType : "json",
 				success : function(data) {
 				if (data.errormsg == "0") {
 						//新增部门
-						$("#animalid").val(data.animal.id);
+						$("#id").val(data.protect.id);
 						alert("保存成功");
 					} else {
 						alert(data.errormsg);
@@ -223,9 +268,9 @@ body {
 			});
 		}
 		function DeleteAnimal() {
-			if ($("#animalid").val() != null && $("#animalid").val() != "") {
+			if ($("#id").val() != null && $("#id").val() != "") {
 				$.ajax({
-					url : '/travel/survey/deleteanimal.action?id=' + $("#animalid").val(),
+					url : '/travel/survey/deleteprotect.action?id=' + $("#id").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

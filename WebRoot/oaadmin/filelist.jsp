@@ -14,13 +14,13 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>部门管理</title>
+<title>网络硬盘</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="用户管理">
+<meta http-equiv="description" content="网络硬盘">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -40,7 +40,7 @@ body{
 <body>
 	<%@ include file="/oaadmin/oahead.jsp"%>
     <div class="toptool">
-			<span>当前位置：OA后台管理>>资料中心（正在完善.....）
+			<span>当前位置：OA后台管理>>网络硬盘
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
@@ -50,11 +50,11 @@ body{
 		<div class="leftpanel">
 			<ul>
 				<li><a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
-				<li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li>
+				<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
 				<li><a href="/travel/user/querypage.action">用户管理</a></li>
 				<li><a href="/travel/oaadmin/notifylist.jsp">通知公告</a></li>
-				<li  class="activeli"><a href="javascript:void(0)">资料中心</a></li>
-				<li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li>
+				<li  class="activeli"><a href="javascript:void(0)">网络硬盘</a></li>
+				<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
 			</ul>
 		</div>
 		<div class="rightpanel">

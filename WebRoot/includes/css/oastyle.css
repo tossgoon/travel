@@ -9,7 +9,7 @@ h3{
 	 font-family:"Microsoft Yahei";
 }
 .leftpanel {
-	width: 220px;
+	width: 260px;
 	margin: 0 auto;
 	float: left;
 }
@@ -23,7 +23,7 @@ h3{
 }
 
 .maincontent {
-	width: 1180px;
+	width: 1220px;
 	margin: 0 auto;
 	text-align:center;
 	background-color:#ffffff;
@@ -34,32 +34,32 @@ h3{
 	 width:100%;
 	 text-align:center;
 }
-ul{
+.leftpanel ul{
 	width:180px;
 	margin:0 auto;
 	background:#fff;
 	position:relative;
 	z-index:0;
 	padding:60px 20px 70px;}
-ul li{
+.leftpanel ul li{
 	height:50px;
 	line-height:50px;
 	text-align:center;
 	border-bottom:1px solid #F8F8F8;
 	}	
-ul li a{
+.leftpanel ul li a{
 	color:#666;
 	padding-top:10px;
 	font-size:16px;
 	}
-ul li a:hover{
+.leftpanel ul li a:hover{
 	text-decoration:none;
 	color:#FF5F3E;
 }	
-.activeli{
+.leftpanel .activeli{
 	background-color:#F9F9F9;
 }
-.activeli a{
+.leftpanel .activeli a{
 	color:#FF5F3E;
 	font-weight:bold;
 }

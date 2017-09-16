@@ -14,25 +14,32 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
 import com.travel.pojo.Animalsurvey;
+import com.travel.pojo.Camerasurvey;
+import com.travel.pojo.Chicksurvey;
+import com.travel.pojo.Importinfo;
+import com.travel.pojo.Plantsurvey;
+import com.travel.pojo.Protectrecord;
 import com.travel.pojo.User;
 import com.travel.service.GeneralService;
 import com.travel.service.UserService;
 
-public class AnimalsurveyAction extends ActionSupport {
+public class ProtectrecordAction extends ActionSupport {
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2871113028472366475L;
+	private static final long serialVersionUID = 2111424893973947271L;
 	/**
 	 * 
 	 */
-	private Animalsurvey animal = new Animalsurvey();
-	private GeneralService<Animalsurvey> animalService;
-	private List<Animalsurvey> animallist;
+	private Protectrecord protect = new Protectrecord();
+	private GeneralService <Protectrecord> protectService;
+	private List<Protectrecord> protectlist;
 	/*private UserService<User> userService;*/
 	private String errormsg;
 
-	public AnimalsurveyAction() {
+	public ProtectrecordAction() {
 
 	}
 
@@ -41,35 +48,34 @@ public class AnimalsurveyAction extends ActionSupport {
 		return ServletActionContext.getRequest().getParameter(key);
 	}
 
-
 	/*@JSON(serialize = false)
 	public UserService<User> getUserService() {
 		return userService;
 	}*/
 
-	public Animalsurvey getAnimal() {
-		return animal;
+	public Protectrecord getProtect() {
+		return protect;
 	}
 
-	public void setAnimal(Animalsurvey animal) {
-		this.animal = animal;
+	public void setProtect(Protectrecord importinfo) {
+		this.protect = importinfo;
 	}
 
 	@JSON(serialize = false)
-	public GeneralService<Animalsurvey> getAnimalService() {
-		return animalService;
+	public GeneralService<Protectrecord> getProtectService() {
+		return this.protectService;
 	}
 
-	public void setAnimalService(GeneralService<Animalsurvey> animalService) {
-		this.animalService = animalService;
+	public void setProtectService(GeneralService<Protectrecord> chickService) {
+		this.protectService = chickService;
 	}
 
-	public List<Animalsurvey> getAnimallist() {
-		return animallist;
+	public List<Protectrecord> getProtectlist() {
+		return this.protectlist;
 	}
 
-	public void setAnimallist(List<Animalsurvey> animallist) {
-		this.animallist = animallist;
+	public void setProtectlist(List<Protectrecord> chicklist) {
+		this.protectlist= chicklist;
 	}
 
 	/*public void setUserService(UserService<User> userService) {
@@ -87,7 +93,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String add() {
 		String result = "";
 		try {
-			this.animalService.addObject(animal);
+			this.protectService.addObject(protect);
 			// throw new RuntimeException("");
 			setErrormsg("0");
 			result = SUCCESS;
@@ -103,7 +109,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String update() {
 		try {
 			// String param = getParam("param");
-			this.animalService.updateObject(animal);
+			this.protectService.updateObject(protect);
 			setErrormsg("0");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -114,8 +120,8 @@ public class AnimalsurveyAction extends ActionSupport {
 		// System.out.println(this);
 	}
 	
-	public String saveanimal() {
-		if (animal.getId() == null) {
+	public String save() {
+		if (protect.getId() == null) {
 			return add();
 		} else {
 			return update();
@@ -125,7 +131,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String delete() {
 		try {
 			Integer param = Integer.parseInt(getParam("id"));
-			this.animalService.deleteObject(param, Animalsurvey.class);
+			this.protectService.deleteObject(param, Protectrecord.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,14 +144,13 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String query() {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
-			animal = animalService.getObject(Animalsurvey.class, id);
+			protect = this.protectService.getObject(Protectrecord.class, id);
 		}
 		return SUCCESS;
 	}
-	
 	public String querylist(){
 		try {
-			animallist=this.animalService.getObjectList(Animalsurvey.class);
+			this.protectlist=this.protectService.getObjectList(Protectrecord.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();

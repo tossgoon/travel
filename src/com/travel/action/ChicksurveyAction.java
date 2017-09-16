@@ -14,25 +14,30 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
 import com.travel.pojo.Animalsurvey;
+import com.travel.pojo.Camerasurvey;
+import com.travel.pojo.Chicksurvey;
 import com.travel.pojo.User;
 import com.travel.service.GeneralService;
 import com.travel.service.UserService;
 
-public class AnimalsurveyAction extends ActionSupport {
+public class ChicksurveyAction extends ActionSupport {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2871113028472366475L;
+	private static final long serialVersionUID = -2816337202054358494L;
 	/**
 	 * 
 	 */
-	private Animalsurvey animal = new Animalsurvey();
-	private GeneralService<Animalsurvey> animalService;
-	private List<Animalsurvey> animallist;
+	
+	private Chicksurvey chick = new Chicksurvey();
+	private GeneralService <Chicksurvey> chicksurService;
+	private List<Chicksurvey> chicklist;
+	
+
 	/*private UserService<User> userService;*/
 	private String errormsg;
 
-	public AnimalsurveyAction() {
+	public ChicksurveyAction() {
 
 	}
 
@@ -47,29 +52,23 @@ public class AnimalsurveyAction extends ActionSupport {
 		return userService;
 	}*/
 
-	public Animalsurvey getAnimal() {
-		return animal;
+	public Chicksurvey getChick() {
+		return chick;
 	}
 
-	public void setAnimal(Animalsurvey animal) {
-		this.animal = animal;
+	public void setChick(Chicksurvey chick) {
+		this.chick = chick;
 	}
 
-	@JSON(serialize = false)
-	public GeneralService<Animalsurvey> getAnimalService() {
-		return animalService;
+	
+
+
+	public List<Chicksurvey> getChicklist() {
+		return this.chicklist;
 	}
 
-	public void setAnimalService(GeneralService<Animalsurvey> animalService) {
-		this.animalService = animalService;
-	}
-
-	public List<Animalsurvey> getAnimallist() {
-		return animallist;
-	}
-
-	public void setAnimallist(List<Animalsurvey> animallist) {
-		this.animallist = animallist;
+	public void setChicklist(List<Chicksurvey> chicklist) {
+		this.chicklist = chicklist;
 	}
 
 	/*public void setUserService(UserService<User> userService) {
@@ -87,7 +86,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String add() {
 		String result = "";
 		try {
-			this.animalService.addObject(animal);
+			this.chicksurService.addObject(chick);
 			// throw new RuntimeException("");
 			setErrormsg("0");
 			result = SUCCESS;
@@ -103,7 +102,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String update() {
 		try {
 			// String param = getParam("param");
-			this.animalService.updateObject(animal);
+			this.chicksurService.updateObject(chick);
 			setErrormsg("0");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -114,8 +113,8 @@ public class AnimalsurveyAction extends ActionSupport {
 		// System.out.println(this);
 	}
 	
-	public String saveanimal() {
-		if (animal.getId() == null) {
+	public String save() {
+		if (chick.getId() == null) {
 			return add();
 		} else {
 			return update();
@@ -125,7 +124,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String delete() {
 		try {
 			Integer param = Integer.parseInt(getParam("id"));
-			this.animalService.deleteObject(param, Animalsurvey.class);
+			this.chicksurService.deleteObject(param, Chicksurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,14 +137,23 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String query() {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
-			animal = animalService.getObject(Animalsurvey.class, id);
+			chick = chicksurService.getObject(Chicksurvey.class, id);
 		}
 		return SUCCESS;
 	}
 	
+	@JSON(serialize = false)
+	public GeneralService<Chicksurvey> getChicksurService() {
+		return chicksurService;
+	}
+
+	public void setChicksurService(GeneralService<Chicksurvey> chicksurService) {
+		this.chicksurService = chicksurService;
+	}
+	
 	public String querylist(){
 		try {
-			animallist=this.animalService.getObjectList(Animalsurvey.class);
+			this.chicklist=this.chicksurService.getObjectList(Chicksurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();

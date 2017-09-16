@@ -14,25 +14,29 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
 import com.travel.pojo.Animalsurvey;
+import com.travel.pojo.Camerasurvey;
+import com.travel.pojo.Chicksurvey;
+import com.travel.pojo.Importinfo;
 import com.travel.pojo.User;
 import com.travel.service.GeneralService;
 import com.travel.service.UserService;
 
-public class AnimalsurveyAction extends ActionSupport {
+public class ImportinfoAction extends ActionSupport {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2871113028472366475L;
+	private static final long serialVersionUID = 7221637156146403587L;
 	/**
 	 * 
 	 */
-	private Animalsurvey animal = new Animalsurvey();
-	private GeneralService<Animalsurvey> animalService;
-	private List<Animalsurvey> animallist;
+	
+	private Importinfo importinfo = new Importinfo();
+	private GeneralService <Importinfo> importinfoService;
+	private List<Importinfo> importinfolist;
 	/*private UserService<User> userService;*/
 	private String errormsg;
 
-	public AnimalsurveyAction() {
+	public ImportinfoAction() {
 
 	}
 
@@ -47,29 +51,29 @@ public class AnimalsurveyAction extends ActionSupport {
 		return userService;
 	}*/
 
-	public Animalsurvey getAnimal() {
-		return animal;
+	public Importinfo getImportinfo() {
+		return importinfo;
 	}
 
-	public void setAnimal(Animalsurvey animal) {
-		this.animal = animal;
+	public void setImportinfo(Importinfo importinfo) {
+		this.importinfo = importinfo;
 	}
 
 	@JSON(serialize = false)
-	public GeneralService<Animalsurvey> getAnimalService() {
-		return animalService;
+	public GeneralService<Importinfo> getImportinfoService() {
+		return this.importinfoService;
 	}
 
-	public void setAnimalService(GeneralService<Animalsurvey> animalService) {
-		this.animalService = animalService;
+	public void setImportinfoService(GeneralService<Importinfo> chickService) {
+		this.importinfoService = chickService;
 	}
 
-	public List<Animalsurvey> getAnimallist() {
-		return animallist;
+	public List<Importinfo> getImportinfolist() {
+		return this.importinfolist;
 	}
 
-	public void setAnimallist(List<Animalsurvey> animallist) {
-		this.animallist = animallist;
+	public void setImportinfolist(List<Importinfo> chicklist) {
+		this.importinfolist= chicklist;
 	}
 
 	/*public void setUserService(UserService<User> userService) {
@@ -87,7 +91,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String add() {
 		String result = "";
 		try {
-			this.animalService.addObject(animal);
+			this.importinfoService.addObject(importinfo);
 			// throw new RuntimeException("");
 			setErrormsg("0");
 			result = SUCCESS;
@@ -103,7 +107,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String update() {
 		try {
 			// String param = getParam("param");
-			this.animalService.updateObject(animal);
+			this.importinfoService.updateObject(importinfo);
 			setErrormsg("0");
 			return SUCCESS;
 		} catch (Exception e) {
@@ -114,8 +118,8 @@ public class AnimalsurveyAction extends ActionSupport {
 		// System.out.println(this);
 	}
 	
-	public String saveanimal() {
-		if (animal.getId() == null) {
+	public String save() {
+		if (importinfo.getId() == null) {
 			return add();
 		} else {
 			return update();
@@ -125,7 +129,7 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String delete() {
 		try {
 			Integer param = Integer.parseInt(getParam("id"));
-			this.animalService.deleteObject(param, Animalsurvey.class);
+			this.importinfoService.deleteObject(param, Importinfo.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,14 +142,14 @@ public class AnimalsurveyAction extends ActionSupport {
 	public String query() {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
-			animal = animalService.getObject(Animalsurvey.class, id);
+			importinfo = importinfoService.getObject(Importinfo.class, id);
 		}
 		return SUCCESS;
 	}
 	
 	public String querylist(){
 		try {
-			animallist=this.animalService.getObjectList(Animalsurvey.class);
+			this.importinfolist=this.importinfoService.getObjectList(Importinfo.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
