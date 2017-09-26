@@ -71,11 +71,32 @@ text-align:center;
 	margin-bottom: 4px;
 	cursor: pointer;
 }
+	    
+.button-tool {
+	position: absolute;
+	top: 180px;
+	right: 80px;
+	font-size: 12px;
+	padding: 10px;
+}
+.button-tool .button {
+	height: 28px;
+	line-height: 28px;
+	background-color: #0D9BF2;
+	color: #FFF;
+	border: 0;
+	outline: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 3px;
+	margin-bottom: 4px;
+	cursor: pointer;
+}
 </style>
 <body>
 	<%@ include file="/oaadmin/oahead.jsp"%>
    <div class="toptool">
-			<span>当前位置：OA系统&gt;&gt;动物状况监测信息编辑
+			<span>当前位置：OA系统&gt;&gt;监测信息
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
@@ -105,6 +126,11 @@ text-align:center;
 					<input type="checkbox" id="chk6" style="margin-left:10px;" onclick="toggle(6,this)" />保护区巡护记录
 				</div>
 				<div id="themap" style="width:100%;height:680px;"></div>
+				<div class="button-tool">
+					<input type="button" class="button" value="地图"
+						onclick="ChangeDiTuTile()" /> <input  type="button"
+						class="button" value="卫星图" onclick="ChangeSatelliteTile()" />
+				</div>
 			</div>
 			<!-- <div style="clear:both;"></div> -->
 		</div>
@@ -119,27 +145,28 @@ text-align:center;
 	<script type="text/javascript" src="<%=contextPath%>includes/js/travel/gps.js"></script>
 	<script type="text/javascript">
 		var map;//地图
+		var tileLayerDitu;        //切片地图
+		var tileLayerSatellite;   //卫星影像图
+		var tileLayerRoad;        //路网图层
 		var marker;//标记
 		var ptlist=new Array();  
 		//var animals=[],cameras=[],chicks=[],importinfos=[],plants=[],protects=[];
 		$(function() {
 			//初始化地图
+			tileLayerSatellite=new AMap.TileLayer.Satellite();
+			tileLayerRoad=new AMap.TileLayer.RoadNet();
 			map = new AMap.Map('themap', {
 				zoom : 10,
-				//dragEnable:false,
-				//zoomEnable : false,
-				layers : [ new AMap.TileLayer.Satellite(),
-						new AMap.TileLayer.RoadNet() ],
+				layers : [ tileLayerSatellite,tileLayerRoad],
 				center : [ 109.803373, 35.600862 ]
-			//new AMap.LngLat(116.39,39.9)
 			});
-			
+			//tileLayerSatellite.setMap(map);
+			//tileLayerRoad.setMap(map);
 			/* map.plugin(["AMap.MapType"],function(){  //添加地图类型切换插件 
 		        //地图类型切换  
 		        var mapType= new AMap.MapType({defaultType:2,showRoad:true});  
 		        map.addControl(mapType);  
 		    }); */
-
 			marker = new AMap.Marker({
 				icon : '/travel/includes/image/redmarker.png',//24px*24px
 				position : map.getCenter()
@@ -373,6 +400,41 @@ text-align:center;
                size: new AMap.Size(11, 11)
              }
          ];
+		 function ChangeDiTuTile() {
+			    if (!tileLayerDitu) {
+			        tileLayerDitu = new AMap.TileLayer({
+			            map: map
+			        });
+			    }
+			    //隐藏卫星图
+			    if (tileLayerSatellite) {
+			        tileLayerSatellite.hide();
+			    }
+			    //隐藏路网图
+			    if (tileLayerRoad) {
+			        tileLayerRoad.hide();
+			    }
+			    tileLayerDitu.show();
+			}
+			//切换到卫星影像底图
+			function ChangeSatelliteTile() {
+			    if (!tileLayerSatellite) {
+			        tileLayerSatellite = new AMap.TileLayer.Satellite({
+			            map: map
+			        });
+			    }
+			    //隐藏地图
+			    if (tileLayerDitu) {
+			        tileLayerDitu.hide();
+			    }
+			    tileLayerSatellite.show();
+			    if (!tileLayerRoad) {
+			        tileLayerRoad = new AMap.TileLayer.RoadNet({
+			            map: map
+			        });
+			    }
+			    tileLayerRoad.show();
+			}
 	</script>
 </body>
 </html>

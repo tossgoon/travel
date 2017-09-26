@@ -53,12 +53,11 @@ th{
 	<div class="maincontent" >
 		<div class="leftpanel">
 			<ul>
-				<li><a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
-				<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
+				<li><a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0" target="_blank">网站门户</a></li>
 				<li><a href="/travel/user/querypage.action">用户管理</a></li>
 				<li  class="activeli"><a href="javascript:void(0)">通知公告</a></li>
-				<li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li>
-				<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
+				<!-- <li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li> -->
+				<li><a href="/travel/dept/querylist.action">部门管理</a></li>
 			</ul>
 		</div>
 		<div class="rightpanel" style="height:500px;">

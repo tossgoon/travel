@@ -81,16 +81,31 @@ body {
 							志愿者之家
 						</c:when>
 						<c:when test="${ptype=='5'}">
-							科普知识
+							科普知识（动物）
 						</c:when>
 						<c:when test="${ptype=='6'}">
 							联系我们
 						</c:when>
 						<c:when test="${ptype=='7'}">
-							图片赏析
+							图片赏析（动物）
 						</c:when>
 						<c:when test="${ptype=='8'}">
-							保护区防护
+							保护区防护（防火）
+						</c:when>
+						<c:when test="${ptype=='9'}">
+							保护区防护（防虫）
+						</c:when>
+						<c:when test="${ptype=='10'}">
+							科普知识（植物）
+						</c:when>
+						<c:when test="${ptype=='11'}">
+							图片赏析（植物）
+						</c:when>
+						<c:when test="${ptype=='12'}">
+							图片赏析（景观）
+						</c:when>
+						<c:when test="${ptype=='13'}">
+							保护区防护（野生动植物）
 						</c:when>
 						 <c:otherwise>
                                                          其他
@@ -128,10 +143,6 @@ body {
 	</div>
 	</div>
 		<%@ include file="footmodal.jsp"%>
-    
-    
-    
-    
     
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>

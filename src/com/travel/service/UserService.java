@@ -107,6 +107,41 @@ public class UserService<T> {
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<User> queryUserByDeptPage(Class<T> clazz,int pagesize,int pagenum,String deptname){
+		String queryString="from User u Where u.department=:param order by u.id";
+		if(deptname==""){
+			queryString="from User u order by u.department";
+		}
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setString("param", deptname);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		List<User>list=(List<User>)query.list();
+		session.close();
+		return list;
+	}
+	
+	public int getDeptUserCount(String deptname){
+		if(deptname==""){
+			//queryString="select count(*) from User as user";
+			return getUserCount();
+		}
+		String queryString="select count(*) from User u Where u.department=:param";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setString("param", deptname);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
+	}
+	
 	public T queryUserByName(String loginname){
 		if (loginname == null )
 			return null;

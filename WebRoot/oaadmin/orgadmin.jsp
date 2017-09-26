@@ -40,7 +40,7 @@ body{
 <body>
 	<%@ include file="/oaadmin/oahead.jsp"%>
     <div class="toptool">
-			<span>当前位置：OA后台管理>>组织架构（正在完善.....）
+			<span>当前位置：OA后台管理>>组织架构
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>

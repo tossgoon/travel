@@ -53,16 +53,15 @@ body{
 				<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
 				<li class="activeli"><a href="javascript:void(0)">用户管理</a></li>
 				<li><a href="/travel/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
-				<li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li>
-				<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
+				<!-- <li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li> -->
+				<li><a href="/travel/dept/querylist.action">部门管理</a></li>
 			</ul>
 		</div>
 		<div class="rightpanel">
 			<div style="padding-top:10px;">
 							<span style="font-size:18px;">用户管理</span>
 							<input value="新增用户" onclick="InsertUser()" type="button"
-								class="btn btn-primary"
-								style="margin-right:20px; float:right;width:90px;" />
+								class="btn btn-primary"	style="margin-right:20px; float:right;width:90px;" />
 						</div>
 				<div style="height:400px;">
 					<table align="center" class="table table-hover" id="userlist"
@@ -86,14 +85,11 @@ body{
 								<td>${user.department }</td>
 								<td>${user.remark }</td>
 								<td width="120"><a href="javascript:void(0)"
-									onclick="EditUser(this)">编辑</a>&nbsp;&nbsp; <a
-									href="javascript:void(0)"
-									onclick="DeleteUserModal(${user.id},this)">删除</a></td>
+									onclick="EditUser(this)">编辑</a>&nbsp;&nbsp; <a 	href="javascript:void(0)"	onclick="DeleteUserModal(${user.id},this)">删除</a></td>
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
-
 
 				<div style="margin-top:10px;">
 							<a id="firstpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
@@ -101,8 +97,7 @@ body{
 							<a id="nextpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
 							<a id="endpage"		href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
 							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
-							
-						</div>
+				</div>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -116,30 +111,27 @@ body{
 				</div>
 				<div class="modal-body" style="height:170px;">
 					<div style="width:100%;">
-
 						<s:form method="post" role="form" theme="simple" id="formUser">
 
 							<table style="font-size:14px;width:100%;">
 								<tr style="display: none">
-									<td><input type="hidden" id="userid" name="user.id">
-										id</td>
+									<td><input type="hidden" id="userid" name="user.id">id</td>
 								</tr>
 								<tr>
 									<td>姓名</td>
-									<td><input class="form-control" id="username"
-										name="user.username"></td>
+									<td><input class="form-control" id="username"	name="user.username"></td>
 
 									<td style="float:right;line-height: 30px;">用户名</td>
-									<td><input class="form-control" id="loginname"
-										name="user.loginname"></td>
+									<td><input class="form-control" id="loginname"	name="user.loginname"></td>
 								</tr>
 								<tr>
 									<td>电话</td>
-									<td><input class="form-control" id="telephone"
-										name="user.telephone"></td>
+									<td><input class="form-control" id="telephone"	name="user.telephone"></td>
 									<td style="float:right;line-height: 30px;">部门</td>
-									<td><input class="form-control" id="department"
-										name="user.department"></td>
+									<td>
+										<!-- <input class="form-control" id="department"	name="user.department"> -->
+										<s:select class="form-control" id="department" list="deptlist" name="user.department" listKey="deptname" listValue="deptname"	label="选择部门" ></s:select>
+									</td>
 								</tr>
 								<tr>
 									<td>备注</td>
@@ -158,10 +150,7 @@ body{
 			</div>
 		</div>
 	</div>
-
-
-	<div class="modal fade" id="deleteModal" role="dialog"
-		aria-labelledby="删除用户" data-backdrop="static">
+	<div class="modal fade" id="deleteModal" role="dialog"		aria-labelledby="删除用户" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content" style="height:210px;width:460px;">
 				<div class="modal-header">
@@ -180,9 +169,7 @@ body{
 		</div>
 	</div>
 	
-
-<%@ include file="/portal/footmodal.jsp"%>
-
+	<%@ include file="/portal/footmodal.jsp"%>
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script

@@ -258,7 +258,10 @@
  			<result name="success">/oaadmin/userlist.jsp</result>
 			 <result name="error" type="json"></result> 
 		</action>
-		
+		<action name="querydeptuser" class="userAct" method="queryByDeptPage">
+ 			<result name="success" type="json"></result>
+			 <result name="error" type="json"></result> 
+		</action>
 	</package>
 
     <package name="portalpack" extends="struts-default,json-default,usercheck"
@@ -359,6 +362,14 @@
  			<result name="success">/portal/searchlist.jsp</result>
 			 <result name="error" type="json"></result> 
 		</action>
+		<action name="queryweather" class="weatherAct" method="query">
+ 			<result name="success"  type="json"></result>
+ 			<result name="error" type="json"></result>
+		</action>
+		<action name="queryweatherlist" class="weatherAct" method="queryWeatherListByPage">
+ 			<result name="success">/weather/weatherlist.jsp</result>
+ 			<result name="error" type="json"></result>
+		</action>
    </package>
 	
 	<package name="oapack" extends="struts-default,json-default,usercheck"
@@ -368,6 +379,11 @@
 			<result name="success">/user/success.jsp</result>
 		</global-results>
 
+		<action name="insertuseroa" class="oaAct" method="insertuseroa">
+			<result name="success">/travel/user/useroa.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		
 		<action name="update" class="oaAct" method="update">
 			<result name="success" type="json"></result>
 		</action>
@@ -465,9 +481,33 @@
  			<result name="error" type="json"></result>
 		</action>
 		
-		<action name="queryweather" class="weatherAct" method="query">
- 			<result name="success"  type="json"></result>
- 			<result name="error" type="json"></result>
+		<action name="savefolder" class="folderAct" method="save">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="deletefolder" class="folderAct" method="delete">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="queryfolderlist" class="folderAct" method="querylist">
+			<result name="error" type="json"></result>
+			<result name="success">/travel/user/oafolder.jsp</result>
+		</action>
+		<action name="savediskfile" class="diskfileAct" method="save">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="deletediskfile" class="diskfileAct" method="delete">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="querydiskfilelist" class="diskfileAct" method="queryByPage">
+			<result name="error" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		<action name="querydiskfile" class="diskfileAct" method="query">
+			<result name="error" type="json"></result>
+			<result name="success" >/travel/user/diskfile.jsp</result>
 		</action>
 		
 	</package>
@@ -484,6 +524,25 @@
 				<param name="contentDisposition">attachment;filename="${fileName}"</param>
 			</result>
 			<result name="error">/travel/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="dept"  extends="struts-default,json-default,usercheck" namespace="/dept">
+		<action name="save" class="deptAct" method="save">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="delete" class="deptAct" method="delete">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="query" class="deptAct" method="query">
+			<result name="success">/dept/deptedit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="querylist" class="deptAct" method="querylist">
+			<result name="success">/oaadmin/deptlist.jsp</result>
+			<result name="error" type="json"></result>
 		</action>
 	</package>
 	
@@ -589,6 +648,5 @@
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
-		
 	</package>
 </struts>    

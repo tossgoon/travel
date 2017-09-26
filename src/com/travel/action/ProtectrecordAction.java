@@ -154,7 +154,7 @@ public class ProtectrecordAction extends ActionSupport {
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
-			setErrormsg("É¾³ý³ö´í¡£" + e.getMessage());
+			setErrormsg("³ö´í¡£" + e.getMessage());
 			return ERROR;
 		}
 		return SUCCESS;

@@ -47,7 +47,7 @@ text-align:center;
 <body>
    <%@ include file="/oaadmin/oahead.jsp"%>
    <div class="toptool">
-			<span>当前位置：OA系统>>收文管理
+			<span>当前位置：OA系统&np;>收文管理
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
@@ -59,7 +59,7 @@ text-align:center;
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
 					<li  class="activeli"><a href="javascript:void(0)">收文管理</a></li>
-					<li><a href="/travel/travel/user/oafilelist.jsp">网络硬盘</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action">网络硬盘</a></li>
 					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li><a href="/travel/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
@@ -67,7 +67,7 @@ text-align:center;
 					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
 					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
 					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/survey/surveymap.jsp">气象数据 </a></li>
+					<li><a href="/travel/weather/weather.jsp">气象数据 </a></li>
 					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
 				</ul>
 			</div>

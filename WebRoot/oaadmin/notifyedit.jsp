@@ -43,7 +43,7 @@ background-color:#f2f2f2;
 <body>
    <%@ include file="/oaadmin/oahead.jsp"%>
    
-   <div style="width:100%;text-align:center;">
+   <div class="contentstyle">
 
 	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
 		<div class="row">
@@ -164,6 +164,7 @@ background-color:#f2f2f2;
 						<%-- </c:if> --%>
 					</div>
 				</div>
+				<div style="height:20px;clear:both;"></div>
 			</div>
 		</div>
 	</div>

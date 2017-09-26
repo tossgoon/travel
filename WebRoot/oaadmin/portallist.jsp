@@ -106,39 +106,50 @@ body{
 		</div>
 	<div class="contentstyle">
 		<div class="maincontent">
-			<div class="leftpanel">
+			<!-- <div class="leftpanel">
 				<ul>
 					<li class="activeli"><a style="color:#FF5F3E;" href="javascript:void(0)">网站门户</a></li>
-					<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
 					<li><a href="/travel/user/querypage.action">用户管理</a></li>
-					<li><a href="/travel/oaadmin/notifylist.jsp">通知公告</a></li>
+					<li><a href="/travel/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
 					<li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li>
-					<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
+					<li><a href="/travel/dept/querylist.action">部门管理</a></li>
+					<li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li>
 				</ul>
-			</div>
-			<div class="rightpanel" style="padding-top:20px;">
+			</div> -->
+			<div  style="padding-top:20px;">
 					<span style="font-size:18px;">网站门户管理</span>
 					<div style="margin:0 auto;margin-top:20px;text-align:left;height:400px;">
 							<div class="menu1box">
 								<ul id="menu1">
 									<li <c:if test="${ptype=='0'}"> class= "mhover" </c:if>><a
-										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">保护区介绍</a></li>
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">简介</a></li>
 									<li <c:if test="${ptype=='1'}"> class= "mhover" </c:if>><a
 										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=1">工作动态</a></li>
 									<li <c:if test="${ptype=='2'}"> class= "mhover" </c:if>><a
 										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
 									<li <c:if test="${ptype=='3'}"> class= "mhover" </c:if>><a
 										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=3">政务公开</a></li>
+									<li <c:if test="${ptype=='13'}"> class= "mhover" </c:if>><a
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=13">动植物防护</a></li>
 									<li <c:if test="${ptype=='8'}"> class= "mhover" </c:if>><a
-										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=8">保护区防火</a></li>
+									<li <c:if test="${ptype=='9'}"> class= "mhover" </c:if>><a
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=9">保护区防虫</a></li>
 									<%-- <li <c:if test="${ptype=='4'}"> class= "mhover" </c:if>><a
 										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=4">志愿者之家</a></li> --%>
 									<li <c:if test="${ptype=='5'}"> class= "mhover" </c:if>><a
-										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=5">科普-动物</a></li>
+									<li <c:if test="${ptype=='10'}"> class= "mhover" </c:if>><a
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=10">科普-植物</a></li>
 									<li <c:if test="${ptype=='6'}"> class= "mhover" </c:if>><a
 										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=6">联系我们</a></li>
 									<li <c:if test="${ptype=='7'}"> class= "mhover" </c:if>><a
-										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=7">图片赏析</a></li>
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=7">图片-动物</a></li>
+									<li <c:if test="${ptype=='11'}"> class= "mhover" </c:if>><a
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=11">图片-植物</a></li>
+									<li <c:if test="${ptype=='12'}"> class= "mhover" </c:if>><a
+										href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=12">图片-景观</a></li>
+									
 								</ul>
 							</div>
 
@@ -166,20 +177,19 @@ body{
 								</table>
 							</div>
 						</div>
-					 <div>
+					 <div style="padding-bottom:5px;">
 						<a id="firstpage"	href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=${ptype}">第一页</a>
 						<a id="lastpage"	href="/travel/portal/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }&type=${ptype}">上一页</a>
 						<a id="nextpage"	href="/travel/portal/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }&type=${ptype}">下一页</a>
 						<a id="endpage"		href="/travel/portal/querypage.action?pagesize=10&pagenum=${page.totalPage }&type=${ptype}">最后一页</a>
 						<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
-						<a class="btn btn-success" style="margin-left:50px;"
-							href="/travel/portal/editor.jsp">新增数据</a>
+						<a class="btn btn-success" style="margin-left:50px;" target="_blanck" href="/travel/portal/editor.jsp?ptype=${ptype}">新增数据</a>
 					</div>
 					
 					</div>
 					
 		</div>
-		<div  style="clear:both;"></div>
+		<div  style="clear:both;height:20px;"></div>
 	</div>
 
 	<div class="modal fade" id="deleteModal" role="dialog"

@@ -1,4 +1,5 @@
 package com.travel.service;
+import java.util.List;
 import com.travel.dao.BaseDao;
 
 public class DeptService<T> {
@@ -32,5 +33,9 @@ public class DeptService<T> {
 
 	public void setDao(BaseDao dao) {
 		this.dao = dao;
+	}
+	
+	public List<T> getDeptList(Class<T> clazz){
+		return dao.getAllObjects(clazz);
 	}
 }

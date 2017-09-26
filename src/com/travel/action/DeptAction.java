@@ -13,6 +13,7 @@ import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
+import com.travel.pojo.Chicksurvey;
 import com.travel.pojo.Department;
 import com.travel.pojo.Oa;
 import com.travel.pojo.Oafile;
@@ -36,7 +37,6 @@ public class DeptAction extends ActionSupport {
 	private Department dept = new Department();
 	private DeptService<Department> deptService;
 	private List<Department> deptlist;
-	private UserService<User> userService;
 	private String errormsg;
 
 	public DeptAction() {
@@ -71,14 +71,6 @@ public class DeptAction extends ActionSupport {
 
 	public void setDeptlist(List<Department> deptlist) {
 		this.deptlist = deptlist;
-	}
-
-	public UserService<User> getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService<User> userService) {
-		this.userService = userService;
 	}
 
 	public String getErrormsg() {
@@ -119,7 +111,7 @@ public class DeptAction extends ActionSupport {
 		// System.out.println(this);
 	}
 	
-	public String savedept() {
+	public String save() {
 		if (dept.getId() == null) {
 			return add();
 		} else {
@@ -144,6 +136,18 @@ public class DeptAction extends ActionSupport {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
 			dept = deptService.getDept(Department.class, id);
+		}
+		return SUCCESS;
+	}
+	
+	public String querylist(){
+		try {
+			this.deptlist=this.deptService.getDeptList(Department.class);
+			setErrormsg("0");
+		} catch (Exception e) {
+			e.printStackTrace();
+			setErrormsg("³ö´í¡£" + e.getMessage());
+			return ERROR;
 		}
 		return SUCCESS;
 	}

@@ -59,7 +59,7 @@ body {
    <!-- <div class="pageoverlay"></div> -->
     <div class="contentstyle">
     <div class="toptool">
-			<span>当前位置：OA系统>>日程安排
+			<span>当前位置：OA系统>>通知公告
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
@@ -88,266 +88,25 @@ body {
 			</div>
 		</div>
 		<div class="row">
-			<%-- <div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
-					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formOa" action="save"
-							namespace="/oa" style="width:100%;margin:0 auto;">
-							<table id="oainfo"	style="border-collapse:separate; border-spacing:0px 10px;margin:0 auto;">
-								<tr>
-									<td><span>ID</span></td>
-									<td colspan="3"><s:textfield class="form-control"
-											id="oaid" name="oa.id"   readonly="true"></s:textfield></td>
-								</tr>
-								<tr>
-									<td><span>标题</span></td>
-									<td colspan="3"><s:textfield class="form-control"
-											id="oatitle" name="oa.title"></s:textfield></td>
-								</tr>
-								<tr>
-									<td valign="top"><span>内容</span></td>
-									<td colspan="3"><s:textarea class="form-control"
-											style="resize: none;margin-bottom:10px;width:800px;"
-											rows="10" id="oacontent" name="oa.content"></s:textarea></td>
-								</tr>
-								<tr>
-									<td><span>发布日期</span></td>
-									<td style="width:260px;">
-										<div class="input-group date form_date"
-											data-date-format="yyyy-mm-dd "> <!-- hh:ii:ss -->
-											<s:textfield class="form-control" id="oapubdate">
-												<s:param name="value">
-													<s:date name="oa.pubdate" format="yyyy-MM-dd HH:mm:ss" />
-												</s:param>
-											</s:textfield>
-											<span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</td>
-									<td></td>
-									<td><label style="font-size:12px;margin-left:20px;"><s:checkbox
-												name="oa.status" id="chksend"  />是否发布</label>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4"><hr style="border:1px solid;" /></td>
-								</tr>
-
-								<tr>
-									<td colspan="2" style="font-size:14px;text-align:center;">附件上传</td>
-									<td colspan="2" style="font-size:14px;text-align:center;">已上传</td>
-								</tr>
-
-								<tr>
-									<td colspan="2" valign="top"><div id="uploader"
-											style="width:300px;">
-											<div id="filePicker" style="float:left;font-size:14px;">选择...</div>
-											<a onclick="ResetUploader()" href="javascript:void(0);"
-												style="float:left;margin:7px;font-size:14px;">重置</a>
-											<button id="ctlBtn" type="button" class="btn btn-success"
-												style="float:right;height:32px;font-size:14px;">开始上传</button>
-											<div id="thelist" class="uploader-list" style="clear:both;"></div>
-										</div></td>
-									<td colspan="2" valign="top">
-										<table style="width:100%;margin:0 auto;font-size:14px;"
-											class="table">
-											<thead>
-												<tr>
-													<th style="display: none">id</th>
-													<th width="200" style="text-align:center;">名称</th>
-													<th style="display: none">路径</th>
-													<th width="100" style="text-align:center;">操作</th>
-												</tr>
-											</thead>
-											<tbody id="tbattach">
-												<s:iterator value="oa.oafiles" var="oafile">
-													<tr>
-														<td style="display: none"><s:property
-																value="#oafile.id" /></td>
-														<td width="200" style="text-align:center;"><s:property
-																value="#oafile.filename" /></td>
-														<td style="display: none"><s:property
-																value="#oafile.filepath" /></td>
-														<td width="100" style="text-align:center;"><a
-															href='javascript:void(0)' onclick='DeleteAtt(this)'>删除</a></td>
-													</tr>
-												</s:iterator>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-							</table>
-						</s:form>
-						</div>
-					</div>
-				</div> --%>
+			<div class="col-md-12">
+			   <s:iterator value="oa.oafiles" var="oafile">
+						<tr>
+							<td style="display: none"><s:property	value="#oafile.id" /></td>
+							<td width="200" style="text-align:center;"><s:property	value="#oafile.filename" /></td>
+							<td width="100" style="text-align:center;"><a href=' <s:property	value="#oafile.filepath" />'  download="<s:property	value="#oafile.filename" />">下载</a></td>
+						</tr>
+				</s:iterator>
+			</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content" style="height:610px;width:460px;">
-			    <div class="panel-heading">选择用户</div>
-				<div class="modal-body">
-					<table class="table">
-						<thead><tr><th style='text-align:center;'>选择</th><th  style='display:none;'>id</th><th style='text-align:center;'>姓名</th><th style='text-align:center;'>部门</th></tr></thead>
-						<tbody id="tbuser">
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer form-horizontal">
-				    <button type="button" class="btn btn-default" style="float:left;" onclick="SelectAll()">全选</button>
-				    <button type="button" class="btn btn-default" style="float:left;" onclick="ReSelect()">反选</button>
-				    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="SelectUser()">确定</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
-		var receiverids="";
-		var receivernames="";
-		function SelectAll() {
-			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
-		}
-		function ReSelect() {
-			$("#tbuser").find("input[type='checkbox']").each(function(){
-				if($(this).is(":checked")){
-					$(this).prop("checked",false);
-				}
-				else{
-					$(this).prop("checked",true);
-				}
-			});
-		}
-		function SelectUser(){
-			receiverids="";
-			receivernames="";
-			$("#tbuser").find("input[type='checkbox']").each(function(){
-				if($(this).is(":checked")){
-					receiverids=receiverids+$(this).parent().parent().find("td").eq(1)[0].innerText+";";
-					receivernames=receivernames+$(this).parent().parent().find("td").eq(2)[0].innerText+";";
-				}
-			});
-			if (receiverids.substr(receiverids.length - 1, 1) == ";") {
-				receiverids = receiverids.substr(0, receiverids.length - 1);
-			}
-			if (receivernames.substr(receivernames.length - 1, 1) == ";") {
-				receivernames = receivernames.substr(0, receivernames.length - 1);
-			}
-			$("#receivers").val(receivernames);
-		}
-		function SaveOa() {
-			//获取oafiles
-			//var oafiles=[];
-/* 			if(status==1){
-				if(receiverids==""){
-					alert("请选择用户");
-					return;
-				}
-			} */
-			var oafilestr = "";
-			$("#tbattach").find("tr").each(function() {
-				var filename = $(this).find("td").eq(1)[0].innerText;
-				var filepath = $(this).find("td").eq(2)[0].innerText;
-				//var row="{'filename':'"+filename+"','filepath':'"+filepath+"'},";
-				/* var row={
-						filename:filename,
-						filepath:filepath
-				}; */
-				var rowstr = filename + "*" + filepath + "?";
-				//oafiles.push(row);
-				oafilestr = oafilestr + rowstr;
-			});
-			if (oafilestr.substr(oafilestr.length - 1, 1) == "?") {
-				oafilestr = oafilestr.substr(0, oafilestr.length - 1);
-			}
-			/* if(oafiles.substr(oafiles.length-1,1)==","){
-				oafiles=oafiles.substr(0,oafiles.length-1);
-			}
-			oafiles=oafiles+"]"; */
-			
-			var status;
-			if ($('#chksend').is(':checked')) {
-				status = true;
-			} else {
-				status=false;
-			}
-			$.ajax({
-				type : "post",
-				url : "/travel/oa/savenotify.action",
-				data : {
-					"oa.id" : $("#oaid").val(),
-					"oa.title" : $("#oatitle").val(),
-					"oa.content" : $("#oacontent").val(),
-					"oa.pubdate" : $("#oapubdate").val(),
-					"oa.status" : status,
-					//"oareceivers":receiverids,
-					"oafilestr" : oafilestr
-				//,"oa.oafiles":oafiles
-				},
-				//$("#formOa").serialize(), 
-				cache : false,
-				dataType : "json",
-				success : function(data) {
-					if (data.errorMsg == "0") {
-						//新增通知公告
-						if (status == 0) {
-							$("#oaid").val(data.oa.id);
-							alert("保存成功");
-						} else {
-							$("#oaid").val(data.oa.id);
-							//$('#btnsave').attr('disabled', "true");
-							//$('#btnsend').attr('disabled', "true");
-							//$('#btndel').attr('disabled', "true");
-							//$("#chksend").attr("checked", "true");
-							alert("发布成功");
-						}
-					} else {
-						alert(data.errorMsg);
-					}
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
-				}
-			});
-		}
-		function DeleteOa() {
-			if ($("#oaid").val() != null && $("#oaid").val() != "") {
-				$.ajax({
-					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
-					type : 'POST',
-					// 提交数据给Action传入数据
-					//data : {userid:delUserid},
-					// 返回的数据类型
-					dataType : 'json',
-					// 成功是调用的方法
-					success : function(data) {
-						if (data.errorMsg == "0") {
-							//删除oa
-							$("#oaid").val('');
-							$("#oatitle").val('');
-							$("#oacontent").val('');
-							$("#tbattach tr").empty();
-							ResetUploader();
-							alert("删除完成");
-						} else {
-							alert(data.errorMsg);
-						}
-					},
-					error : function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(XMLHttpRequest.status);
-					}
-				});
-			}
-		}
-		var uploader;
 		$(function() {
 			//初始化日期控件
 			//receiverids='${oareceivers}';//初始化

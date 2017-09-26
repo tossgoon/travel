@@ -52,9 +52,8 @@ float: right;
 	}
 %>
 <body>
-	<div class="headlogo" id="logoindex">
-		<img style="margin:20px;" alt="陕西省延安黄龙山褐马鸡国家级自然保护区"
-			src="<%=contextPath%>/includes/image/oatitle2.png">
+	<div class="headlogo" id="logoindex" style="text-align:center;">
+		<p style="font-size:26px;padding-top:12px;color:#ffffff;">陕西延安黄龙山褐马鸡国家级自然保护区OA管理系统</p>
 	</div>
 	<div style="width:100%;background-color:#EFF4FA;height:140px;position:absolute;top:250px;z-index:-1;">
 	<p style="margin:50px;">为了更好的用户体验，请您使用谷歌浏览器或搜狗及360等现代浏览器的<strong>极速模式</strong>浏览。</p>
@@ -66,7 +65,7 @@ float: right;
 			cellspacing="10">
 			<tr>
 				<td colspan="2" style="background-color:#EFF4FA;border-bottom:1px solid;margin:0 auto;text-algin:center;height:50px;">
-				<p class="txtstyle" style="padding-top:10px;">OA办公系统用户登录</p>
+				<p class="txtstyle" style="padding-top:10px;">OA管理系统用户登录</p>
 				</td>
 			</tr>
 

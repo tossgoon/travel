@@ -25,12 +25,12 @@ System.out.println(currentTime + "/当前时间");
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>欢迎访问本站!</title>
+<title>陕西延安黄龙山褐马鸡国家级自然保护区</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="延安黄龙山褐马鸡国家级自然保护区">
+<meta http-equiv="keywords" content="黄龙山,褐马鸡,自然保护区">
+<meta http-equiv="description" content="陕西延安黄龙山褐马鸡国家级自然保护区">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet"	href="<%=contextPath%>/includes/css/index.css" />
@@ -89,6 +89,7 @@ body {
 }
 .dropdown-menu li {
 	width:100%;
+	border-bottom:1px solid #C4C4C4;
 }
 .dropdown-menu li a {
 	font-size: 16px;
@@ -130,7 +131,9 @@ body {
 	margin: 0 auto;
 	background-color: #ffffff;
 }
-
+.title1{
+   margin-top:5px;
+}
 .title1 a {
 	font-size: 18px;
 	color: #2E2E2E;
@@ -144,7 +147,8 @@ body {
 }
 
 .title2 {
-	margin-left: 20px;
+	margin:10px;
+	margin-left:20px;
 }
 
 .titlepanel {
@@ -192,7 +196,6 @@ body {
 	border-bottom: 1px dotted;
 	font-size: 16px;
 }
-
 .morea {
 	font-size: 12px;
 	float: right;
@@ -225,16 +228,16 @@ body {
 	border: 3px solid #F2F2F2;
 }
 
-#indemo {
+#indemo,#indemop,#indeoms {
 	float: left;width: 800%;
 
 }
 
-#demo1 {
+#demo1,#demop1,#demos1 {
 	float: left;
 }
 
-#demo2 {
+#demo2,#demop2,#demos2 {
 	float: left;
 }
 #logoindex a{
@@ -245,12 +248,17 @@ color:#ffffff;
 <body>
 	<div class="headlogo" id="logoindex">
 		<div style="position:absolute;z-index:10;top:16px;right:16px;font-color:#fff;">
-			<a href="#" style="font-color:#fff;" onClick="window.external.AddFavorite('http://219.144.50.146:8088/travel/visitor/first.action','延安黄龙山褐马鸡国家级自然保护区')">加入收藏</a>
-			| <a href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://219.144.50.146:8088/travel/visitor/first.action');">设为首页</a>
+			<a href="#" style="font-color:#fff;" onClick="window.external.AddFavorite('http://hemaji.gov.cn','陕西延安黄龙山褐马鸡国家级自然保护区')">加入收藏</a>
+			| <a href="#" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://hemaji.gov.cn');">设为首页</a>
 		</div>
-		<img alt="" style="position:absolute;z-index:9;top:200px;left:16%;width:1000px;" src="<%=contextPath%>/includes/image/logotitle.png"> 
+		
+		<%-- <img alt="" style="position:absolute;z-index:9;top:200px;margin-left:-500px;left:50%;width:1000px;" src="<%=contextPath%>/includes/image/toptitle.png"> --%> 
+		
+		<div style="position:absolute;z-index:9;width:100%;min-width:1200px;text-align:center;left:0px;right:0px;top:200px;margin:0 auto;">
+		    <img alt="" style="width:1100px;" src="<%=contextPath%>/includes/image/toptitle.png"> 
+		</div>
+		
 		<div class="login-content">
-		    
 			<div class="bg_item bg_item1">
 				<div class="item1"></div>
 			</div>
@@ -266,16 +274,16 @@ color:#ffffff;
 		<ul style="margin:0 auto;width:1150px;">
 			<li><a href="javascript:void(0)">首页</a></li>
 			<li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" target="_blank">
                     	保护区介绍
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/travel/visitor/show.action?id=24" target="_blank">保护区简介</a></li>
-                    <li><a href="#">保护区历史</a></li>
-                    <li><a href="#">组织机构</a></li>
-                    <li><a href="#">人员编制</a></li>
-                    <li><a href="#">工作职能</a></li>
+                    <li><a href="/travel/visitor/show.action?id=54" target="_blank">保护区历史</a></li>
+                    <li><a href="/travel/visitor/show.action?id=55" target="_blank">组织机构</a></li>
+                    <li><a href="/travel/visitor/show.action?id=56" target="_blank">人员编制</a></li>
+                    <li><a href="/travel/visitor/show.action?id=57" target="_blank">工作职能</a></li>
                 </ul>
             </li>
 			<li class="dropdown">
@@ -289,11 +297,30 @@ color:#ffffff;
                 </ul>
             </li>
 			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">保护区防护</a></li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">科普知识</a></li>
-			<li><a href="/travel/portal/webgis.jsp">地理位置</a></li>
-			<li><a href="/travel/visitor/show.action?id=50">联系我们</a></li>
-			<li><a href="/travel/travel/user/login.jsp">OA办公系统</a></li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    	保护区防护
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=13"  target="_blank">野生动植物保护</a></li>
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8"  target="_blank">防火管理</a></li>
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=9"  target="_blank">防虫管理</a></li>
+                </ul>
+            </li>
+			<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    	科普知识
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5"  target="_blank">保护区动物</a></li>
+                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=10"  target="_blank">保护区植物</a></li>
+                </ul>
+            </li>
+			<li><a href="/travel/weather/weather.jsp" target="_blank">气象数据</a></li>
+			<li><a href="/travel/visitor/show.action?id=50" target="_blank">联系我们</a></li>
+			<li><a href="/travel/travel/user/login.jsp" target="_blank">OA办公系统</a></li>
 		</ul>
 	</div>
 	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:60px;">
@@ -389,7 +416,7 @@ color:#ffffff;
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalWorkList}" varStatus="status">
 					<p class="title1">
-						<a href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
+						<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
 					</p>
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -400,11 +427,11 @@ color:#ffffff;
 			<div class="titlepaneldiv">
 				<span class="titlepanel">政策法规</span>
 			</div>
-			<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2"> 更多&gt;&gt; </a>
+			<a class="morea" target="_blank"  href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalLawList}">
 					<p class="title1">
-						<a href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
+						<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
 					</p>
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -415,11 +442,11 @@ color:#ffffff;
 			<div class="titlepaneldiv">
 				<span class="titlepanel">政务公开</span>
 			</div>
-			<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3"> 更多&gt;&gt; </a>
+			<a class="morea" target="_blank"  href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalAffairsList}">
 					<p class="title1">
-						<a href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
+						<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
 					</p>
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -432,11 +459,11 @@ color:#ffffff;
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">保护区介绍</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/show.action?id=24">
+						<span class="subtitle">保护区介绍</span><a  target="_blank" 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/show.action?id=24">
 							更多&gt;&gt; </a>
 					</div>
 					
-					<p style='font-size:16px;m'><label style='padding-left:30px;'>陕西延安黄龙山褐马鸡国家级自然保护区</label>是以保护褐马鸡及其自然栖息地、产卵场的林地、河道、溪流、溶洞等自然环境为主，以保护该区域其他动植物资源为辅。开展褐马鸡人工救护、科研、繁殖以促进自然增殖的，集生物多样性保护、科学研究、学术交流、宣教展览为一体的国家级自然保护区.....
+					<p style='font-size:16px;line-height:28px;'><label style='padding-left:30px;font-size:16px;'>陕西延安黄龙山褐马鸡国家级自然保护区</label>位于陕西省延安市的黄龙、宜川两县境内，是陕北黄土高原上唯一保存完整的天然次生林区。保护区地形复杂、山势陡峻，沟壑纵横、生境多样、自然资源丰富。总面积81753公顷，其中核心区25906公顷，缓冲区24825公顷，实验区31022公顷，森林覆盖率86.6%.....
 					</p>
 					<div style="text-align:center;margin:0 auto;"><img alt="褐马鸡" style="width:350px;" src="<%=contextPath%>/includes/image/chickshow.jpg"></div>
 					
@@ -455,9 +482,15 @@ color:#ffffff;
 						<span class="subtitle">科普知识</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">
 							更多&gt;&gt; </a>
 					</div>
-					<c:forEach var="portal" items="${portalScienceList}">
+					<c:forEach var="portal" items="${portalAnimalList}">
 						<div class='sublist'>
-							<a href="/travel/visitor/show.action?id=${portal.id}">
+							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+								${portal.title} </a>
+						</div>
+					</c:forEach>
+					<c:forEach var="portal" items="${portalPlantList}">
+						<div class='sublist'>
+							<a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
@@ -468,19 +501,33 @@ color:#ffffff;
 						   <source src="<%=contextPath%>/includes/image/movie.ogg" type="video/ogg" />
 						   <source src="<%=contextPath%>/includes/image/intro3.mp4" type="video/mp4" />
 						</video> --%>
-						<embed  type="application/x-shockwave-flash" align="9" width="100%" height="230px;" src="http://player.youku.com/player.php/sid/XMTc1NDU0NTY5Ng==/v.swf" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed>
+						<!-- <embed  type="application/x-shockwave-flash" align="9" width="100%" height="230px;" src="http://v.youku.com/v_show/id_XMzA0MzM4ODAzNg==.html?spm=a2hzp.8244740.0.0" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed> -->
+					    <!-- <embed  type="application/x-shockwave-flash" align="9" width="100%" height="230px;" src="http://v.youku.com/v_show/id_XMzA0MzM4ODAzNg==.html" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed> -->
+					    <div id="youkuplayer" style="width:100%;height:230px"></div>
 					</div>
 				</div>
 			</div>
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">保护区防护</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">
+						<span class="subtitle">保护区防护</span><a  target="_blank" 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">
 							更多&gt;&gt; </a>
 					</div>
-					<c:forEach var="portal" items="${portalProtectList}">
+					<c:forEach var="portal" items="${portalPlantAnimalProtectList}">
 						<div class='sublist'>
-							<a href="/travel/visitor/show.action?id=${portal.id}">
+							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+								${portal.title} </a>
+						</div>
+					</c:forEach>
+					<c:forEach var="portal" items="${portalFireList}">
+						<div class='sublist'>
+							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+								${portal.title} </a>
+						</div>
+					</c:forEach>
+					<c:forEach var="portal" items="${portalInsectList}">
+						<div class='sublist'>
+							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
@@ -490,30 +537,45 @@ color:#ffffff;
 		<div style="clear:both;"></div>
 	</div>
 	<div class="maincontent"  >
-	      <div class="titlepaneldiv">
-				<span class="titlepanel">图片赏析</span>
-			</div>
+	        <div class="titlepaneldiv" style="width:320px;">
+				 <span class="titlepanel">图片赏析 &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="animallink" style="color:#228B22;font-weight:normal;" onclick="ChangeAnimal()">动物</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="plantlink" style="color:#436EEE;font-weight:normal;" href="javascript:void(0)"onclick="ChangePlant()">植物</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="landscapelink" style="color:#436EEE;font-weight:normal;" href="javascript:void(0)"onclick="ChangeLandscape()">景观</a>
+			</span>
+				 </div>
 	        <div class="panelcontent" id="demo" style="overflow: hidden;border: 1px dashed #CCC;	width: 100%;">
 	        
-	        <div id="indemo">
+	        <div id="indemo" >
 				<div id="demo1">
 				    <c:forEach var="portal" items="${pictureList}">
 						<c:if test="${not empty portal.pictureurl}">
-						  <a href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						  <a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
 						</c:if>
 					</c:forEach>
-					<%-- <a href="#"><img
-						src="<%=contextPath%>/includes/image/chick1.jpg" border="0" style="width:300px;height:200px;"  /></a> --%>
 				</div>
 				<div id="demo2"></div>
 			</div>
-	        
-	            <%-- <img alt="" style="width:300px;height:200px;margin-left:90px;" 
-							src="<%=contextPath%>/includes/image/chick1.jpg">
-				<img alt="" style="width:300px;height:200px;margin-left:20px;"
-							src="<%=contextPath%>/includes/image/chick2.jpg">
-							<img alt="" style="width:300px;height:200px;margin-left:20px;"
-							src="<%=contextPath%>/includes/image/chick3.jpg"> --%>
+			
+			<div id="indemop" style="display:none;">
+				<div id="demop1">
+				    <c:forEach var="portal" items="${pictureListPlant}">
+						<c:if test="${not empty portal.pictureurl}">
+						  <a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div id="demop2"></div>
+			</div>	
+			
+			<div id="indemos" style="display:none;">
+				<div id="demos1">
+				    <c:forEach var="portal" items="${pictureLisLandscape}">
+						<c:if test="${not empty portal.pictureurl}">
+						  <a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						</c:if>
+					</c:forEach>
+				</div>
+				<div id="demos2"></div>
+			</div>	
+			           
 		</div>
 	</div>
 	<div class="maincontent" id="themap" style="height:600px;margin-top:15px;border:1px solid;">
@@ -532,7 +594,6 @@ color:#ffffff;
 			<a style="margin-right:12px;" href="http://www.yanan.gov.cn/" target="_blank">延安市人民政府</a>
 		</div>
 	</div>
-
 	<%@ include file="footmodal.jsp"%>
 	<%--    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script> --%>
@@ -540,7 +601,14 @@ color:#ffffff;
 	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script src="<%=contextPath%>/includes/js/travel/rolling.js"></script>
+	<script type="text/javascript" src="//player.youku.com/jsapi"></script>
 	<script type="text/javascript">
+    	player = new YKU.Player('youkuplayer',{
+    	 styleid: '0',
+    	 client_id: 'YOUR YOUKUOPENAPI CLIENT_ID',
+    	 vid: 'XMzA0MzM4ODAzNg',
+    	 newPlayer: true
+	   });
 	    var map;//地图
 	    var marker;//标记
 		$(function() {
@@ -564,7 +632,7 @@ color:#ffffff;
 		    // 设置label标签
 		    marker.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
 		        offset: new AMap.Pixel(-100, -30),//修改label相对于maker的位置
-		        content: "<label style='font-size:14px;'>延安黄龙山褐马鸡国家级自然保护区</label>"
+		        content: "<label style='font-size:14px;'>陕西黄龙山褐马鸡国家级自然保护区</label>"
 		    });
 		});
 		
@@ -596,6 +664,30 @@ color:#ffffff;
 					alert(XMLHttpRequest.status);
 				}
 			});
+		}
+		function ChangeAnimal(){
+			$("#indemo").show();
+			$("#indemop").hide();
+			$("#indemos").hide();
+			$("#animallink").css("color","#228B22");
+			$("#plantlink").css("color","#436EEE");
+			$("#landscapelink").css("color","#436EEE");
+		}
+		function ChangePlant(){
+			$("#indemo").hide();
+			$("#indemop").show();
+			$("#indemos").hide();
+			$("#animallink").css("color","#436EEE");
+			$("#plantlink").css("color","#228B22");
+			$("#landscapelink").css("color","#436EEE");
+		}
+		function ChangeLandscape(){
+			$("#indemo").hide();
+			$("#indemop").hide();
+			$("#indemos").show();
+			$("#animallink").css("color","#436EEE");
+			$("#plantlink").css("color","#436EEE");
+			$("#landscapelink").css("color","#228B22");
 		}
 	</script>
 </body>

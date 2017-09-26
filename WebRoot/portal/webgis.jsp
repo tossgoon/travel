@@ -22,7 +22,9 @@
 
 <body>
     <%@ include file="headmodal.jsp"%>
+   <div class="contentstyle">
 	<div  id="themap" style="height:600px;width:1174px;margin:0 auto;">
+	</div>
 	</div>
 	<%@ include file="footmodal.jsp"%>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=3ad53ae8a26edf19caf8573cbdbb9b15"></script> 

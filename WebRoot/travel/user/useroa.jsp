@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>includes/js/jquery-treeview/jquery.treeview.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	 float: right;
@@ -182,19 +183,65 @@ background-color:#f2f2f2;
     </div>
 	<div class="modal fade" id="userModal" role="dialog" aria-labelledby="选择用户" data-backdrop="static">
 		<div class="modal-dialog">
-			<div class="modal-content" style="height:610px;width:460px;">
-			    <div class="panel-heading">选择用户</div>
+			<div class="modal-content" style="width:760px;">
+			    <div class="panel-heading" style="text-align:center;">选择用户</div>
 				<div class="modal-body">
-					<table class="table">
+					<!-- <table class="table">
 						<thead><tr><th style='text-align:center;'>选择</th><th  style='display:none;'>id</th><th style='text-align:center;'>姓名</th><th style='text-align:center;'>部门</th></tr></thead>
 						<tbody id="tbuser">
 						</tbody>
-					</table>
+					</table> -->
+
+					<div style="padding-top:0px;">
+					<div style="width:230px;float:left;text-align:left;">
+					<div style="margin-bottom:20px;" id="currentfoldertext"> 当前部门:</div>
+					<ul id="browser" class="filetree">
+						<li>
+							<span class="folder">所有部门</span>
+							<ul id="browserul">
+							   <c:forEach var="dept" items="${deptlist}">
+										<li class="closed" onclick="folderclick(this)">
+											<span class="folder" id="folder${dept.id}">${dept.deptname}</span>
+											<label style="display:none;">${dept.id}</label>
+											<ul>
+											</ul>
+										</li>
+								</c:forEach>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div style="float:left;width:460px;margin-top:20px;">
+				   <div style="width:90%;height:360px;">
+				   		<table align="center" class="table table-hover" id="deptuser"
+							style="width:100%;text-align:center;margin-top:20px;font-size:14px;">
+								<thead>
+									<tr height="26px">
+							    		<th style='text-align:center;'> <input type="checkbox" onclick="chktoolselect()"  id="chktool"/></th>
+										<th width="100" style="display:none;">ID</th>
+										<th width="200">部门</th>
+										<th style="text-align:center;" width="120">姓名</th>
+									</tr>
+								</thead>
+								<tbody id="tbdeptuser" >
+								</tbody>
+							</table>
+						</div>
+						<span id="userselected">已选中人员：</span>
+						<div  style="text-align:center;">
+							<a id="firstpage" onclick="showpage(1)" href="javascript:void(0)" >第一页</a> 
+							<a id="lastpage"  onclick="showpage(2)" href="javascript:void(0)" >上一页</a> 
+							<a id="nextpage"  onclick="showpage(3)" href="javascript:void(0)" >下一页</a>
+							<a id="endpage"   onclick="showpage(4)" href="javascript:void(0)" >最后一页</a>
+							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
+					</div>
+				</div>
+			</div>
 				</div>
 				<div class="modal-footer form-horizontal">
-				    <button type="button" class="btn btn-default" style="float:left;" onclick="SelectAll()">全选</button>
-				    <button type="button" class="btn btn-default" style="float:left;" onclick="ReSelect()">反选</button>
-				    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="SelectUser()">确定</button>
+				    <!-- <a type="button" class="btn btn-default" style="float:left;" onclick="SelectAll()">全选</a>
+				    <a type="button" class="btn btn-default" style="float:left;" onclick="ReSelect()">反选</a> -->
+				    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="UserOKClick()">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
@@ -202,17 +249,28 @@ background-color:#f2f2f2;
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery-treeview/jquery.treeview.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 		var receiverids="";
 		var receivernames="";
+		var selectuserid=[],selectusername=[];//已选中的用户
+		function chktoolselect(){
+			chktool
+			if($("#chktool").is(":checked")){
+				SelectAll();
+			}
+			else{
+				ReSelect();
+			}
+		}
 		function SelectAll() {
-			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
+			$("#tbdeptuser").find("input[type='checkbox']").prop("checked",true);
 		}
 		function ReSelect() {
-			$("#tbuser").find("input[type='checkbox']").each(function(){
+			$("#tbdeptuser").find("input[type='checkbox']").each(function(){
 				if($(this).is(":checked")){
 					$(this).prop("checked",false);
 				}
@@ -350,7 +408,7 @@ background-color:#f2f2f2;
 				forceParse : 0
 			});
 			//初始化所有人
-			InitAllUsers();
+			//InitAllUsers();
 			//初始化ueditor及内容,实例化编辑器
 			/*init webuploader*/
 			var $list = $("#thelist"); //上传列表  
@@ -447,11 +505,17 @@ background-color:#f2f2f2;
 			});
 			$btn.on('click', function() {
 				uploader.upload();
-				
 				$("#ctlBtn").addClass('disabled');
 			});
 			//根据参数判断
 			$('.form_date').datetimepicker("setValue");
+			//初始化
+			$("#browser").treeview({
+				unique:true
+				/* ,toggle: function() {
+					console.log("%s was toggled.", $(this).find(">span").text());
+				} */
+			});
 		});
 		function deleteFile(fileid) {
 			uploader.removeFile(fileid, true);
@@ -521,7 +585,6 @@ background-color:#f2f2f2;
 						else{
 							 var row="<tr style='text-align:center;'> <td><input type='checkbox'  /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
 						}
-					   
 					    $("#tbuser").append(row);
 					});
 				},
@@ -529,6 +592,130 @@ background-color:#f2f2f2;
 					alert(XMLHttpRequest.status);
 				}
 			});
+		}
+		function folderclick(li){
+			folderid=$(li).find("label").text();
+			foldername=$(li).find(">span").text();
+			$("#browserul li").css({ "font-weight": "normal" });
+			$(li).css({ "font-weight": "bold" });
+			$("#currentfoldertext").html("当前部门:"+foldername);
+			//查询该文件夹下的文件列表
+			$.ajax({
+				url : '/travel/user/querydeptuser.action',
+				type : 'GET',
+				// 提交数据给Action传入数据
+				data : {
+					"deptname" : foldername
+				},
+				// 返回的数据类型
+				dataType : 'json',
+				// 成功是调用的方法
+				success : function(data) {
+							 // $("#deptuser").html('');
+							  var tbhtml="";
+						      for(var i=0;i<data.users.length;i++){
+						    	  var row=GetUserRow(data.users[i]);
+						    	  tbhtml+=row;
+						      }
+						      $("#tbdeptuser").html(tbhtml);
+						      totalpagenum=data.page.totalPage;
+						      currentpagenum=1;
+						      $("#pagecount").html("1/"+totalpagenum);
+							
+						},
+						error : function(XMLHttpRequest, textStatus,
+								errorThrown) {
+							alert(XMLHttpRequest.status);
+						}
+					});
+		}
+		function GetUserRow(user) {
+			var newRow = "<tr style='text-align:center;'> <td><input type='checkbox' onclick=chkuserselect(this,"+user.id+",'"+user.username+"') /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.department+"</td><td>"+user.username+"</td></tr>";
+			return newRow;
+		}
+		function showpage(index){
+			//查询该文件夹下的文件列表
+			if(index==1){
+				currentpagenum=1;
+			}
+			else if(index==2){
+				if(currentpagenum==1){
+					return;
+				}
+				currentpagenum=currentpagenum-1;
+			}
+			else if(index==3){
+				if(currentpagenum==totalpagenum){
+					return;
+				}
+				currentpagenum=currentpagenum+1;
+			}
+			else if(index==4){
+				if(currentpagenum==totalpagenum){
+					return;
+				}
+				currentpagenum=totalpagenum;
+			}
+			$.ajax({
+				url : '/travel/user/querydeptuser.action',
+				type : 'GET',
+				// 提交数据给Action传入数据
+				data : {
+					"deptname" : foldername
+				},
+				// 返回的数据类型
+				dataType : 'json',
+				// 成功是调用的方法
+				success : function(data) {
+							  $("#deptuser").html('');
+							  var tbhtml="";
+						      for(var i=0;i<data.users.length;i++){
+						    	  var row=GetUserRow(data.users[i]);
+						    	  tbhtml+=row;
+						      }
+						      $("#tbdeptuser").html(tbhtml);
+						      totalpagenum=data.page.totalPage;
+						      currentpagenum=1;
+						      $("#pagecount").html("1/"+totalpagenum);
+							
+						},
+						error : function(XMLHttpRequest, textStatus,
+								errorThrown) {
+							alert(XMLHttpRequest.status);
+						}
+					});
+		}
+		
+		function chkuserselect(chk,userid,username){
+			if($(chk).is(":checked")){
+				var isexsit=false;
+				for(var i=0;i<selectuserid.length;i++){
+					if(selectuserid[i]==userid){
+						isexsit=true;
+						break;
+					}
+				}
+				if(!isexsit){
+					selectuserid.push(userid);//插入选中用户id
+					selectusername.push(username);//插入选中用户名称
+				}
+				//$(this).prop("checked",false);
+			}
+			else{
+				//$(this).prop("checked",true);
+				for(var i=0;i<selectuserid.length;i++){
+					if(selectuserid[i]==userid){
+						selectuserid.splice(i,1);
+						selectusername.splice(i,1);
+					}
+				}
+			}
+			//
+			$("#userselected").html(selectusername.join(","));
+		}
+		function UserOKClick(){
+			receiverids=selectuserid.join(";");
+			$("#receivers").val(selectusername.join(";"));
 		}
 	</script>
 </body>

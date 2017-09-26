@@ -9,7 +9,9 @@ import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
+import com.travel.pojo.Department;
 import com.travel.pojo.User;
+import com.travel.service.DeptService;
 import com.travel.service.UserService;
 
 
@@ -24,6 +26,16 @@ public class UserAction extends ActionSupport {
 	private List<User> users;
 	private String errorMsg;
 	private SplitPage page;
+	private List<Department> deptlist;
+	private DeptService<Department> deptservice;
+	public String getSearchText() {
+		return searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
+	}
+
 	public UserAction() {
 
 	}
@@ -43,6 +55,7 @@ public class UserAction extends ActionSupport {
 				String md5OfPass="";//md5加密之后的密码
 				md5OfPass=MD5Util.getMD5("111111");
 				user.setPassword(md5OfPass);
+				user.setUsertype("0");
 				userService.addUser(user);
 				// throw new RuntimeException("");
 				setErrorMsg("0");
@@ -128,7 +141,27 @@ public class UserAction extends ActionSupport {
 			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
 		}
 		users = userService.queryUserByPage(User.class, pagesize, pagenum);
+		this.deptlist=deptservice.getDeptList(Department.class);
 		int num = userService.getUserCount();
+		page = new SplitPage(num,pagesize);
+		page.setCurrentPage(pagenum);
+		return SUCCESS;
+	}
+	
+	public String queryByDeptPage() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		String deptname="";
+		if(getParam("deptname")!=null)
+		{
+			deptname =getParam("deptname");
+		}
+		users = userService.queryUserByDeptPage(User.class, pagesize, pagenum,deptname);
+		int num = userService.getDeptUserCount(deptname);
 		page = new SplitPage(num,pagesize);
 		page.setCurrentPage(pagenum);
 		return SUCCESS;
@@ -237,5 +270,22 @@ public class UserAction extends ActionSupport {
 
 	public void setPage(SplitPage page) {
 		this.page = page;
+	}
+
+	public List<Department> getDeptlist() {
+		return deptlist;
+	}
+
+	public void setDeptlist(List<Department> deptlist) {
+		this.deptlist = deptlist;
+	}
+	
+	@JSON(serialize = false)
+	public DeptService<Department> getDeptservice() {
+		return deptservice;
+	}
+
+	public void setDeptservice(DeptService<Department> deptservice) {
+		this.deptservice = deptservice;
 	}
 }

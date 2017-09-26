@@ -13,10 +13,12 @@ import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
+import com.travel.pojo.Department;
 import com.travel.pojo.Oa;
 import com.travel.pojo.Oafile;
 import com.travel.pojo.Oareceiver;
 import com.travel.pojo.User;
+import com.travel.service.DeptService;
 import com.travel.service.OaFileService;
 import com.travel.service.OaReceiverService;
 import com.travel.service.OaService;
@@ -45,6 +47,9 @@ public class OaAction extends ActionSupport {
 	private List<Oa> notifyList;
 	private List<Oa> sendNotifyList;
 	private SplitPage page;
+	private List<Department> deptlist;
+	private DeptService<Department> deptservice;
+	
 	public SplitPage getPage() {
 		return page;
 	}
@@ -427,19 +432,20 @@ public class OaAction extends ActionSupport {
 		else if (getParam("oarecid") != null) {
 			Integer oarecid = Integer.parseInt(getParam("oarecid"));
 			Oareceiver rec= this.oaReceiverService.getOaReceiver(Oareceiver.class, oarecid);
-			
 			this.oa = this.oaService.getOa(Oa.class, rec.getOaid());
 			// 获取oa附件
-			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(
-					oa.getId(), Oafile.class);
+			List<Oafile> oafilelist = this.oaFileService.queryOafileByOaid(oa.getId(), Oafile.class);
 			Set<Oafile> set = new HashSet<Oafile>();
 			set.addAll(oafilelist);// 给set填充
 			oa.setOafiles(set);
-			//设置oa发送人
-			User senduser=this.userService.getUser(User.class, oa.getCreater());
-			this.oasender=senduser.getUsername();
-			oa.setRecid(rec.getId());
+			this.oasender=rec.getSender();
 			oa.setIsread(rec.getIsread());
+			oa.setRecid(rec.getId());
+			//设置oa发送人
+			//User senduser=this.userService.getUser(User.class, oa.getCreater());
+			//this.oasender=senduser.getUsername();
+			//oa.setRecid(rec.getId());
+			//oa.setIsread(rec.getIsread());
 		}
 		return SUCCESS;
 	}
@@ -655,4 +661,27 @@ public class OaAction extends ActionSupport {
 		}*/
 		return SUCCESS;
 	}
+	
+	public String insertuseroa() {
+		this.deptlist=deptservice.getDeptList(Department.class);
+		return SUCCESS;
+	}
+
+	public List<Department> getDeptlist() {
+		return deptlist;
+	}
+
+	public void setDeptlist(List<Department> deptlist) {
+		this.deptlist = deptlist;
+	}
+
+	@JSON(serialize = false)
+	public DeptService<Department> getDeptservice() {
+		return deptservice;
+	}
+
+	public void setDeptservice(DeptService<Department> deptservice) {
+		this.deptservice = deptservice;
+	}
+	
 }

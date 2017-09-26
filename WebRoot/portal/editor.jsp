@@ -30,7 +30,7 @@
 	width: 300px;
 	margin-left: 30px;
 	padding-left: 10px;
-	height: 270px;
+	height: 320px;
 	border-left: 1px solid #A9A9A9;
 	margin-top: 10px;
 	margin-bottom: 20px;
@@ -40,6 +40,7 @@
 </head>
 <body>
 	<%@ include file="headmodal.jsp"%>
+	<div class="contentstyle">
 	<div class="container" style="width:100%;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
@@ -62,9 +63,12 @@
 											</tr>
 											<tr>
 												<td><span>选择类型</span></td>
-											    <td><s:select class="form-control" id="portaltype"
-													list="#{'0':'保护区介绍','1':'工作动态','2':'政策法规','3':'政务公开','8':'保护区防护','4':'志愿者之家','5':'科普知识','6':'联系我们','7':'图片赏析'}"
-													label="选择类型" name="portal.type" onchange="ChangeSelect()"></s:select></td>
+											    <td>
+											    <s:select class="form-control" id="portaltype"
+													list="#{'0':'保护区介绍','1':'工作动态','3':'政务公开','2':'政策法规','5':'科普知识（动物）','10':'科普知识（植物）','8':'保护区防护（防火）','9':'保护区防护（防虫）','13':'保护区防护（野生动植物）','6':'联系我们','7':'图片赏析(动物)','11':'图片赏析(植物)','12':'图片赏析(景观)'}"
+													label="选择类型" name="portal.type" onchange="ChangeSelect()"></s:select>
+													
+													</td>
 										    </tr>
 											<tr>
 												<td><span>主标题</span></td>
@@ -81,7 +85,7 @@
 											<tr>
 												<td><span>状态</span></td>
 												<td><s:select class="form-control" id="portalstatus"
-													list="#{'0':'未发布','1':'已发布'}"
+													list="#{'1':'已发布','0':'未发布'}"
 													label="选择状态" name="portal.status"></s:select></td>
 											</tr>
 											<tr>
@@ -105,9 +109,7 @@
 									<input type="checkbox" id="isshowpicture"
 										<c:if test="${portal.isshowpicture==true}">
 									        checked="true" 
-									    </c:if>
-										name="portal.isshowpicture">
-
+									    </c:if>	name="portal.isshowpicture">
 										首页图片:	</label><label id="uploadmsg" style="margin-left:20px;"></label>
 									<s:textfield style="width:100%;" class="form-control input-sm" id="portalpictureurl" readonly="true" name="portal.pictureurl"></s:textfield>
 									</div>
@@ -132,7 +134,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<%@ include file="footmodal.jsp"%>
     <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
@@ -187,7 +189,7 @@
 		{
 			var options=$("#portaltype option:selected");
 			var portaltype=options.val();
-			if(portaltype=="1"||portaltype=="7"){
+			if(portaltype=="1"||portaltype=="7"||portaltype=="11"||portaltype=="12"){
 				$("#uploader").show();
 			}
 			else{
@@ -306,7 +308,11 @@
 			      });
 			   //根据参数判断
 			   $('.form_date').datetimepicker("setValue");
-			   
+			   //初始化下拉菜单
+			   var portaltype= GetQueryString("ptype");//portal类型
+			   if(portaltype!=null&&portaltype!=undefined&&portaltype!=""){
+				   $("#portaltype").val(portaltype);
+				}
 			  }); 
 
 		   /*关闭上传框窗口后恢复上传框初始状态*/
@@ -342,7 +348,7 @@
 				minView : 0,
 				forceParse : 0
 			});
-			
+			$('.form_date').datetimepicker("setValue");
 			/* function GetQueryString(name)
 			{
 			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -350,7 +356,12 @@
 			     if(r!=null)return  unescape(r[2]); return null;
 			} */
 			//$('.form_date').datetimepicker("setValue");
-			
+			function GetQueryString(name)
+			{
+			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if(r!=null)return  unescape(r[2]); return null;
+			}
 	</script>
 </body>
 </html>

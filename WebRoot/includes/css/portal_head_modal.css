@@ -29,7 +29,6 @@ body{
 	margin-right:5px;
 	float: left;
 }
-
 .navbarhead li a {
     font-size:18px;
     font-weight:bold;
@@ -46,4 +45,19 @@ body{
 	background-color: rgb(1,135,82);
 	text-decoration:underline;
 	color: #FFFFFF;
+}
+.dropdown-menu li {
+	width:100%;
+	border-bottom:1px solid #C4C4C4;
+}
+.dropdown-menu li a {
+	font-size: 16px;
+	color: #000000;
+	text-decoration: none;
+	margin: 0px;
+	padding-top: 14px;
+	display: block;
+	padding-right: 15px;
+	padding-bottom: 14px;
+	padding-left: 15px;
 }

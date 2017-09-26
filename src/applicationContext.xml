@@ -9,11 +9,11 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-	<!-- 数据库配置 -->
+	<!-- 数据库配置 192.168.9.252 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://localhost:3306/travel">
+		<property name="url" value="jdbc:mysql://192.168.9.252:3306/travel">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value="gis"></property>
@@ -97,6 +97,7 @@
 	</bean>
 	<bean id="userAct" class="com.travel.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
+		<property name="deptservice" ref="deptService"></property>
 	</bean>
 	<bean id="portalService" class="com.travel.service.PortalService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
@@ -122,6 +123,7 @@
 		<property name="oaFileService" ref="oaFileService"></property>
 		<property name="oaReceiverService" ref="oaReceiverService"></property>
 		<property name="userService" ref="userService"></property>
+		<property name="deptservice" ref="deptService"></property>
 	</bean>
 	<bean id="oaFileService" class="com.travel.service.OaFileService"  scope="prototype">
 		<property name="dao" ref="dao"></property>
@@ -134,7 +136,6 @@
 	</bean> 
 	<bean id="deptAct" class="com.travel.action.DeptAction" scope="prototype">
 		<property name="deptService" ref="deptService"></property>
-		<property name="userService" ref="userService"></property>
 	</bean>
 	
 	<bean id="surveyService" class="com.travel.service.GeneralService"  scope="prototype">
@@ -158,6 +159,23 @@
 	<bean id="protectAct" class="com.travel.action.ProtectrecordAction" scope="prototype">
 		<property name="protectService" ref="surveyService"></property>
 	</bean>
+	<bean id="weatherService" class="com.travel.service.WeatherService"  scope="prototype">
+		<property name="dao" ref="dao"></property>
+	</bean> 
 	<bean id="weatherAct" class="com.travel.action.WeatherAction" scope="prototype">
+	    <property name="weatherService" ref="weatherService"></property>
+	</bean>
+	<bean id="foldertypeService" class="com.travel.service.FoldertypeService"  scope="prototype">
+		<property name="dao" ref="dao"></property>
+	</bean> 
+	<bean id="folderAct" class="com.travel.action.FoldertypeAction" scope="prototype">
+		<property name="foldertypeService" ref="foldertypeService"></property>
+	</bean>
+	<bean id="diskfileService" class="com.travel.service.DiskfileService"  scope="prototype">
+		<property name="dao" ref="dao"></property>
+	</bean> 
+	<bean id="diskfileAct" class="com.travel.action.DiskfileAction" scope="prototype">
+		<property name="diskfileService" ref="diskfileService"></property>
+		<property name="foldertypeService" ref="foldertypeService"></property>
 	</bean>
 </beans>

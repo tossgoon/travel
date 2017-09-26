@@ -33,6 +33,7 @@ h3{
 	 height: 70px;
 	 width:100%;
 	 text-align:center;
+	 min-width:1220px;
 }
 .leftpanel ul{
 	width:180px;
@@ -73,6 +74,7 @@ h3{
 	height:50px;
 	background-color:#ffffff;
 	margin-bottom:20px;
+	min-width:1220px;
 }
 .contentstyle{
 	margin-bottom:110px;

@@ -32,10 +32,15 @@ public class PortalAction extends ActionSupport {
 	private List<Portal> portalLawList;//政策法规 2
 	private List<Portal> portalAffairsList;//政务公开 3
 	private List<Portal> portalVolHomeList;//志愿者之家4
-	private List<Portal> portalScienceList;//科普知识5
+	private List<Portal> portalAnimalList;//科普知识5（动物）
+	private List<Portal> portalPlantList;//科普知识10（植物）
 	private List<Portal> portalContactUsList;//联系我们6
-	private List<Portal> pictureList;//图片赏析7
-	private List<Portal> portalProtectList;//保护区防护8
+	private List<Portal> pictureList;//图片赏析7(动物）
+	private List<Portal> pictureListPlant;//图片赏析(植物）11
+	private List<Portal> pictureLisLandscape;//图片赏析(景观）12
+	private List<Portal> portalFireList;//保护区防护(防火)8
+	private List<Portal> portalInsectList;//保护区防护(防虫)9
+	private List<Portal> portalPlantAnimalProtectList;//动植物保护13
 	private SplitPage page;
 	private String ptype;
 	private String keywords;
@@ -116,13 +121,7 @@ public class PortalAction extends ActionSupport {
 		this.portalAffairsList = portalAffairsList;
 	}
 
-	public List<Portal> getPortalScienceList() {
-		return portalScienceList;
-	}
-
-	public void setPortalScienceList(List<Portal> portalScienceList) {
-		this.portalScienceList = portalScienceList;
-	}
+	
 
 	public List<Portal> getPortalIntroList() {
 		return portalIntroList;
@@ -219,11 +218,14 @@ public class PortalAction extends ActionSupport {
 			this.portalWorkList=portalService.queryPortalByType("1", 0);//工作动态
 			this.portalLawList=portalService.queryPortalByType("2", 0);//政策法规
 			this.portalAffairsList=portalService.queryPortalByType("3", 0);//政务公开
-			this.portalVolHomeList=portalService.queryPortalByType("4", 0);//志愿者之家
-			this.portalScienceList=portalService.queryPortalByType("5", 0);//科普知识
+			//this.portalVolHomeList=portalService.queryPortalByType("4", 0);//志愿者之家
+			this.portalAnimalList=portalService.queryPortalByType("5", 0);//科普知识
 			this.portalContactUsList=portalService.queryPortalByType("6", 0);//联系我们
 			this.setPictureList(portalService.queryPortalByType("7", 0));//图片赏析
-			this.portalProtectList=portalService.queryPortalByType("8", 0);//保护区防护
+			this.portalFireList=portalService.queryPortalByType("8", 0);//保护区防护
+			this.portalPlantList=portalService.queryPortalByType("10", 0);//科普知识 植物
+			this.portalInsectList=portalService.queryPortalByType("9", 0);//保护区防护(防虫)
+			
 			//portals = portalService.queryPortalByName(searchText, Portal.class);
 			// setUsers(userService.queryUserByName(searchText, User.class));
 			return SUCCESS;
@@ -320,14 +322,19 @@ public class PortalAction extends ActionSupport {
 	{
 		this.portalWorkPics=portalService.queryPortalOfPicturl(3);//首页照片(工作动态)
 		this.portalIntroList=portalService.queryPortalByType("0", 1);//保护区介绍
-		this.portalWorkList=portalService.queryPortalByType("1", 5);//工作动态
-		this.portalLawList=portalService.queryPortalByType("2", 5);//政策法规
-		this.portalAffairsList=portalService.queryPortalByType("3", 5);//政务公开
-		this.portalVolHomeList=portalService.queryPortalByType("4", 5);//志愿者之家
-		this.portalScienceList=portalService.queryPortalByType("5", 5);//科普知识
+		this.portalWorkList=portalService.queryPortalByType("1", 4);//工作动态
+		this.portalLawList=portalService.queryPortalByType("2", 4);//政策法规
+		this.portalAffairsList=portalService.queryPortalByType("3", 3);//政务公开
+		//this.portalVolHomeList=portalService.queryPortalByType("4", 5);//志愿者之家
+		this.portalAnimalList=portalService.queryPortalByType("5", 3);//科普知识（动物）-科普知识
+		this.portalPlantList=portalService.queryPortalByType("10", 2);//科普知识（植物）-科普知识
 		this.portalContactUsList=portalService.queryPortalByType("6", 5);//联系我们
-		this.setPictureList(portalService.queryPortalByType("7", 0));//图片赏析
-		this.portalProtectList=portalService.queryPortalByType("8", 5);//保护区防护
+		this.setPictureList(portalService.queryPortalByType("7", 0));//图片赏析（动物）
+		this.setPictureListPlant(portalService.queryPortalByType("11", 0));//图片赏析（植物）
+		this.portalFireList=portalService.queryPortalByType("8", 2);//保护区防护-防火
+		this.portalInsectList=portalService.queryPortalByType("9", 2);//保护区防护-防虫
+		this.setPortalPlantAnimalProtectList(portalService.queryPortalByType("13", 2));//保护区防护-野生动植物防护
+		this.pictureLisLandscape=portalService.queryPortalByType("12", 0);//图片赏析-景观
 		return SUCCESS;
 		//this.portalWorkList=portalService.queryPortalByType("工作动态", 5);
 	}
@@ -348,13 +355,7 @@ public class PortalAction extends ActionSupport {
 		this.ptype = ptype;
 	}
 
-	public List<Portal> getPortalProtectList() {
-		return portalProtectList;
-	}
-
-	public void setPortalProtectList(List<Portal> portalProtectList) {
-		this.portalProtectList = portalProtectList;
-	}
+	
 
 	public String getKeywords() {
 		return keywords;
@@ -362,5 +363,62 @@ public class PortalAction extends ActionSupport {
 
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
+	}
+
+	public List<Portal> getPortalAnimalList() {
+		return portalAnimalList;
+	}
+
+	public void setPortalAnimalList(List<Portal> portalAnimalList) {
+		this.portalAnimalList = portalAnimalList;
+	}
+
+	public List<Portal> getPortalPlantList() {
+		return portalPlantList;
+	}
+
+	public void setPortalPlantList(List<Portal> portalPlantList) {
+		this.portalPlantList = portalPlantList;
+	}
+
+	public List<Portal> getPortalFireList() {
+		return portalFireList;
+	}
+
+	public void setPortalFireList(List<Portal> portalFireList) {
+		this.portalFireList = portalFireList;
+	}
+
+	public List<Portal> getPortalInsectList() {
+		return portalInsectList;
+	}
+
+	public void setPortalInsectList(List<Portal> portalInsectList) {
+		this.portalInsectList = portalInsectList;
+	}
+
+	public List<Portal> getPictureListPlant() {
+		return pictureListPlant;
+	}
+
+	public void setPictureListPlant(List<Portal> pictureListPlant) {
+		this.pictureListPlant = pictureListPlant;
+	}
+
+	public List<Portal> getPictureLisLandscape() {
+		return pictureLisLandscape;
+	}
+
+	public void setPictureLisLandscape(List<Portal> pictureLisLandscape) {
+		this.pictureLisLandscape = pictureLisLandscape;
+	}
+
+	public List<Portal> getPortalPlantAnimalProtectList() {
+		return portalPlantAnimalProtectList;
+	}
+
+	public void setPortalPlantAnimalProtectList(
+			List<Portal> portalPlantAnimalProtectList) {
+		this.portalPlantAnimalProtectList = portalPlantAnimalProtectList;
 	}
 }

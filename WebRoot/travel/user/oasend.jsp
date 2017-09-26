@@ -49,7 +49,7 @@ text-align:center;
 <body>
    <%@ include file="/oaadmin/oahead.jsp"%>
    <div class="toptool">
-			<span>当前位置：OA系统>>发文管理
+			<span>当前位置：OA系统&gt;&gt;>发文管理
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
@@ -60,7 +60,7 @@ text-align:center;
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li class="activeli"><a href="javascript:void(0)">发文管理</a></li>
 					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
-					<li><a href="/travel/travel/user/oafilelist.jsp">网络硬盘</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action">网络硬盘</a></li>
 					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li><a href="/travel/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
@@ -68,7 +68,7 @@ text-align:center;
 					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
 					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
 					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/survey/surveymap.jsp">气象数据 </a></li>
+					<li><a href="/travel/weather/weather.jsp">气象数据 </a></li>
 					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
 				</ul>
 			</div>
@@ -80,7 +80,7 @@ text-align:center;
 							<span style="float:left;margin-left:30px;margin-top:5px;">输入标题查询：</span>
 							<input style="width:300px;float:left;" class="form-control" type="text" name="queryText"	value="${searchText}" />
 							<input style="float:left;height:33px;width:90px;" type="submit" class="btn btn-default" value="查询" />
-							<a href="/travel/travel/user/useroa.jsp" target="_blank" style="float:left;height:33px;width:90px;margin-left:10px;" type="button"	class="btn btn-primary">新增发文</a>
+							<a href="/travel/oa/insertuseroa.action" target="_blank" style="float:left;height:33px;width:90px;margin-left:10px;" type="button"	class="btn btn-primary">新增发文</a>
 					</s:form>
 				</div>
 				<div style="clear:both;"></div>

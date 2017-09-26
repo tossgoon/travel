@@ -32,7 +32,7 @@ body {
 	<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:100%;margin:0 auto;border-bottom:1px solid #228B22;padding-bottom:12px;padding-left:20px;">
-					  <span>当前位置：首页>>&nbsp;&nbsp;详细信息
+					  <span>当前位置：首页&gt;&gt;&nbsp;&nbsp;详细信息
 					  </span>
 				</div>
 			</div>

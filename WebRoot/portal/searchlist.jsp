@@ -52,6 +52,7 @@ body {
 </head>
 <body>
 	<%@ include file="/portal/headmodal.jsp"%>
+	<div class="contentstyle">
 	<div class="container" style="width:100%;margin:0 auto;text-align:center;margin-top:20px;">
 		<div class="row">
 			<div class="col-md-12" style="margin:0 auto;">
@@ -72,36 +73,51 @@ body {
 							<p class="title2">
 								${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 								<c:choose>
-									<c:when test="${portal.type=='0'}">
-										保护区介绍
-									</c:when>
-									<c:when test="${portal.type=='1'}">
-										工作动态
-									</c:when>
-									<c:when test="${portal.type=='2'}">
-										政策法规
-									</c:when>
-									<c:when test="${portal.type=='3'}">
-										政务公开
-									</c:when>
-									<c:when test="${portal.type=='4'}">
-										志愿者之家
-									</c:when>
-									<c:when test="${portal.type=='5'}">
-										科普知识
-									</c:when>
-									<c:when test="${portal.type=='6'}">
-										联系我们
-									</c:when>
-									<c:when test="${portal.type=='7'}">
-										图片赏析
-									</c:when>
-									<c:when test="${portal.type=='8'}">
-										保护区防护
-									</c:when>
-									<c:otherwise>
-                                                                               其他
-    								</c:otherwise>
+									 <c:when test="${ptype=='0'}">
+							保护区介绍
+						</c:when>
+						<c:when test="${ptype=='1'}">
+							工作动态
+						</c:when>
+						<c:when test="${ptype=='2'}">
+							政策法规
+						</c:when>
+						<c:when test="${ptype=='3'}">
+							政务公开
+						</c:when>
+						<c:when test="${ptype=='4'}">
+							志愿者之家
+						</c:when>
+						<c:when test="${ptype=='5'}">
+							科普知识（动物）
+						</c:when>
+						<c:when test="${ptype=='6'}">
+							联系我们
+						</c:when>
+						<c:when test="${ptype=='7'}">
+							图片赏析（动物）
+						</c:when>
+						<c:when test="${ptype=='8'}">
+							保护区防护（防火）
+						</c:when>
+						<c:when test="${ptype=='9'}">
+							保护区防护（防虫）
+						</c:when>
+						<c:when test="${ptype=='10'}">
+							科普知识（植物）
+						</c:when>
+						<c:when test="${ptype=='11'}">
+							图片赏析（植物）
+						</c:when>
+						<c:when test="${ptype=='12'}">
+							图片赏析（景观）
+						</c:when>
+						<c:when test="${ptype=='13'}">
+							保护区防护（野生动植物）
+						</c:when>
+						 <c:otherwise>
+                                                         其他
+    					</c:otherwise>
 								</c:choose>
 							</p>
 							<hr	style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
@@ -119,7 +135,7 @@ body {
 			</div>
 		</div>
 	</div>
-	
+	</div>
     <%@ include file="footmodal.jsp"%>
 	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
