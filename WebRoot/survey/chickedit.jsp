@@ -37,7 +37,7 @@ body {
 	background-color: #f2f2f2;
 }
 
-#formAnimal span {
+.col-md-2 span {
 	float: right;
 }
 
@@ -50,28 +50,45 @@ body {
 
 <body>
     <%@ include file="/oaadmin/oahead.jsp"%>
-    <div class="contentstyle">
-	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
-		<div class="row">
-			<div class="col-md-12" style="text-align:left;margin-top:20px;">
-				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt; 褐马鸡野外种群状况监测    </span>
-				</div>
+    
+    <div class="toptool">
+			<span>当前位置：OA系统&gt;&gt;褐马鸡野外种群状况监测
+			</span> 
+			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+	</div>
+		<div class="contentstyle">
+		<div class="maincontent">
+			<div class="leftpanel" style="border-right:1px solid #111111;">
+				<ul>
+					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
+					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
+					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
+				
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					<li  class="activeli"><a href="javascript:void(0)" >褐马鸡种群状况 </a></li>
+					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
+					<li><a href="/travel/survey/animalsuredit.jsp">野生动物监测状况</a></li>
+					<li><a href="/travel/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
+					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
+					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
+					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
+					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
+				</ul>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
-					<!-- <div class="panel-heading">OA管理：动物状况监测信息编辑 </div> -->
-					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formAnimal" action="saveanimal" namespace="/survey" style="width:100%;margin:0 auto;">
-								<div class="container" style="width:800px;">
-										<div class="row">
+			<div class="rightpanel" style="border:none;">
+			   <div style="width:100%;margin-top:80px;">
+			   <h3>褐马鸡野外种群状况监测</h3>
+			   <hr>
+			    <form  id="formAnimal" 	style="margin:0 auto;">
+										<div class="container" style="width:80%;">
+											<div class="row">
 											<div class="col-md-2">
 												<span>ID</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield class="form-control input-sm" id="id" name="chick.id" readonly="true"></s:textfield>
+											    <input class="form-control input-sm" id="id" name="chick.id" readonly="readonly" />
+												<%-- <s:textfield class="form-control input-sm" id="id" name="chick.id" readonly="true"></s:textfield> --%>
 											</div>
 											<div class="col-md-2"><span>保护区</span></div>
 											<div class="col-md-4">
@@ -99,7 +116,12 @@ body {
 											</div>
 											<div class="col-md-2"><span>填表时间</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="chick.tianbiaoshijian"></s:textfield>
+												<div class="input-group date form_date"	data-date-format="yyyy-mm-dd">
+															<s:textfield class="form-control input-sm"  name="chick.tianbiaoshijian"  id="tianbiaoshijian">
+															</s:textfield>
+														<span class="input-group-addon"> <span	class="glyphicon glyphicon-calendar"></span>
+														</span>
+												</div>
 											</div>
 										</div>
 										<div class="row">
@@ -121,7 +143,7 @@ body {
 											<div class="col-md-4">
 												<s:textfield  class="form-control input-sm" name="chick.jiluhao"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>实体数量(*)</span></div>
+											<div class="col-md-2"><span>实体数量(数字)</span></div>
 											<div class="col-md-4">
 												<s:textfield  class="form-control input-sm" name="chick.shitishuliang"></s:textfield>
 											</div>
@@ -133,7 +155,7 @@ body {
 											<div class="col-md-4">
 												<s:textfield  class="form-control input-sm" name="chick.shitixingwei"></s:textfield>
 											</div>
-											<div class="col-md-2"><span>实体年龄(*)</span></div>
+											<div class="col-md-2"><span>实体年龄(数字)</span></div>
 											<div class="col-md-4">
 												<s:textfield  class="form-control input-sm" name="chick.shitinianling"></s:textfield>
 											</div>
@@ -144,10 +166,11 @@ body {
 												<span>生境类型</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="chick.shengjingleixing"></s:textfield>
+												<s:select class="form-control input-sm" id="shengjingleixing" theme="simple"
+														list="{'寒温性针叶林','温性针叶林','温性针阔叶混交林','暖性针叶林','落叶阔叶林','常绿、落叶阔叶混交林','常绿阔叶林','硬叶常绿阔叶林','竹林','常绿针叶灌丛','常绿革叶灌丛','落叶阔叶灌丛','常绿阔叶灌丛','灌草丛','草甸','山地人工林','农田','其他'}"
+														label="选择类型" name="chick.shengjingleixing"></s:select>
 											</div>
-											
-											<div class="col-md-2"><span>尸体数量(*)</span></div>
+											<div class="col-md-2"><span>尸体数量(数字)</span></div>
 											<div class="col-md-4">
 												<s:textfield  class="form-control input-sm" name="chick.bodyshuliang"></s:textfield>
 											</div>
@@ -169,11 +192,15 @@ body {
 												<span>坡位</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="chick.powei"></s:textfield>
+												<s:select class="form-control input-sm" id="powei" theme="simple"
+														list="{'脊部','上部','中部','下部','沟谷'}"
+														label="选择类型" name="chick.powei"></s:select>
 											</div>
 											<div class="col-md-2"><span>坡度</span></div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="chick.podu"></s:textfield>
+												<s:select class="form-control input-sm" id="poxiang" theme="simple"
+														list="{'0-5','6-20','21-30','31-40','>40'}"
+														label="选择类型" name="chick.podu"></s:select>
 											</div>
 										</div>
 										<div class="row">
@@ -181,9 +208,12 @@ body {
 												<span>坡向</span>
 											</div>
 											<div class="col-md-4">
-												<s:textfield  class="form-control input-sm" name="chick.poxiang"></s:textfield>
+												<s:select class="form-control input-sm" id="poxiang" theme="simple"
+														list="{'北' ,'东北','东','东南','南','西南','西','西北','无坡向'}"
+														label="选择类型" name="chick.poxiang"></s:select>
+												
 											</div>
-											<div class="col-md-2"><span>海拔高度(*)</span></div>
+											<div class="col-md-2"><span>海拔高度(数字)</span></div>
 											<div class="col-md-4">
 												<s:textfield  class="form-control input-sm" name="chick.haibagaodu"></s:textfield>
 											</div>
@@ -204,29 +234,27 @@ body {
 										<div class="row">
 											<div class="col-md-2"><span>备注</span></div>
 											<div class="col-md-10">
-												<s:textfield  class="form-control input-sm" name="chick.beizhu"></s:textfield>
+												<s:textarea rows="3"  class="form-control input-sm" name="chick.beizhu"></s:textarea>
 											</div>
 										</div>
 										<div class="row">
 										<div class="col-md-12" style="padding-top:15px;">
-												<label>带*为数字。其中经度、纬度为必填项。</label>
+												<label>其中经度、纬度为必填项，格式为十进制。</label>
 											</div>
 										</div>
-									</div>
-						</s:form>
-					</div>
-				</div>
-				<div style="margin:0 auto;margin-top:20px;width:1024px;">
-					<div style="float:right;">
+										</div>
+									</form>
+			   </div>
+					<div style="margin-top:10px;">
 						<a href="/travel/survey/chickedit.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
 						<button type="button"  id="btndel" onclick="DeleteAnimal()" class="btn btn-warning">删除数据</button>
+						
 					</div>
-				</div>
 			</div>
+			<div style="clear:both;"></div>
 		</div>
 	</div>
-</div>
 	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
@@ -304,6 +332,22 @@ body {
 				});
 			}
 		}
+		$(function() {
+			//初始化日期控件
+			$('.form_date').datetimepicker({
+				language : 'zh-CN',
+				weekStart : 1,
+				todayBtn : 1,
+				autoclose : 1,
+				todayHighlight : 1,
+				startView : 2,
+				minView : 2,
+				forceParse : 0
+			});
+			if($("#id").val()==null||$("#id").val()==""){
+				$('.form_date').datetimepicker("setValue");
+			}
+		});
 	</script>
 </body>
 </html>

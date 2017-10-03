@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" /> --%>
 
 <style type="text/css">
@@ -75,7 +76,7 @@
 										    <tr>
 											    <td><span class="rightspan">存储目录(*)</span></td>
 											    <td><s:select class="form-control" id="foldertype"   style="width:330px;"
-													list="folderlist" listKey="id" listValue="name"
+													list="folderlist" listKey="id" listValue="name" 
 													label="选择目录 " name="diskfile.folderid" ></s:select></td>
 													<td><span class="rightspan">名称</span></td>
 												<td><s:textfield class="form-control"   style="width:330px;" id="diskfilename" name="diskfile.filename"></s:textfield></td>
@@ -312,8 +313,15 @@
 			        console.log("上传成功");  
 			      });
 			   //根据参数判断
-			   $('.form_date').datetimepicker("setValue");
-			   
+			   if($("#diskfileid").val()==null||$("#diskfileid").val()==""){
+					$('.form_date').datetimepicker("setValue");
+				}
+			   //如果文件夹不是空，则选中
+			   //初始化下拉菜单
+			   var folderid= GetQueryString("folderid");//portal类型
+			   if(folderid!=null&&folderid!=undefined&&folderid!=""){
+				   $("#foldertype").val(folderid);
+				}
 			  }); 
 
 		   /*关闭上传框窗口后恢复上传框初始状态*/
@@ -348,12 +356,12 @@
 				minView : 0,
 				forceParse : 0
 			});
-			/* function GetQueryString(name)
+			function GetQueryString(name)
 			{
 			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			     var r = window.location.search.substr(1).match(reg);
 			     if(r!=null)return  unescape(r[2]); return null;
-			} */
+			}
 			//$('.form_date').datetimepicker("setValue");
 	</script>
 </body>

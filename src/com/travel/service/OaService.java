@@ -65,9 +65,32 @@ public class OaService<T> {
 		return dao.getObjects(queryString);
 	}
 
-	public List<T> queryOaByName(int userid, Class<T> clazz, String username) {
+	public List<T> queryOaByName(int userid, Class<T> clazz, String username,int pagesize,int pagenum) {
 		String queryString = "from Oa oa where oa.title like '%" + username	+ "%' and type=1 and  oa.creater =" + userid;
-		return dao.getObjects(queryString);
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		//query.setInteger("param", type);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		@SuppressWarnings("unchecked")
+		List<T>list=(List<T>)query.list();
+		session.close();
+		return list;
+	}
+	
+	public int queryOaSendCount(int userid,String username){
+		String queryString="select count(*) from Oa as p where p.title like '%"+username+"%' and type=1 and p.creater=:param";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setInteger("param", userid);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
 	}
 	
 	public List<T> queryAllNotify() {

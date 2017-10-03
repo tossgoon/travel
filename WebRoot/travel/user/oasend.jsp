@@ -60,7 +60,8 @@ text-align:center;
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li class="activeli"><a href="javascript:void(0)">发文管理</a></li>
 					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
-					<li><a href="/travel/oa/queryfolderlist.action">网络硬盘</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
 					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li><a href="/travel/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
@@ -68,7 +69,6 @@ text-align:center;
 					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
 					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
 					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/weather/weather.jsp">气象数据 </a></li>
 					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
 				</ul>
 			</div>
@@ -83,8 +83,7 @@ text-align:center;
 							<a href="/travel/oa/insertuseroa.action" target="_blank" style="float:left;height:33px;width:90px;margin-left:10px;" type="button"	class="btn btn-primary">新增发文</a>
 					</s:form>
 				</div>
-				<div style="clear:both;"></div>
-			     <div>
+			     <div style="height:700px;width:100%;">
 			     <hr>
 			        <table style="width:90%;text-align:center;" class="table table-hover" >
 							<thead>
@@ -116,69 +115,19 @@ text-align:center;
 							</c:forEach></tbody>
 						</table>
 						</div>
+						<div style="margin-top:10px;">
+							<a id="firstpage" href="/travel/oa/querysend.action?pagesize=10&pagenum=1">第一页</a>
+							<a id="lastpage"  href="/travel/oa/querysend.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
+							<a id="nextpage"  href="/travel/oa/querysend.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
+							<a id="endpage"	  href="/travel/oa/querysend.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
+							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
+					</div>
 			</div>
 			<div style="clear:both;"></div>
 	 </div>
 	 </div>
-	<%-- <div class="container" style="width:1024px;margin:0 auto;background-color:#ffffff;margin-top:20px;">
-		
-		<div class="row">
-			<div class="col-md-12" style="text-align:left;margin-top:20px;">
-				<div style="width:100%;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理>>我的工作箱>>我的发送/&nbsp;&nbsp;<a href="/travel/oa/queryreceive.action">我的事务</a>
-					  </span>
-					   <span style="float:right;"><a href="javascript:void(0)" onclick="ShowpassModal()">修改密码</a></span>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin:30px;">用户工作箱：我的发送</label>
-			</div>
-		</div>
-		<div class="row" >
-		
-		<div class="col-md-12" style="text-align:center;">
-		
-			<div class="panel panel-default">
-				<div class="panel-body">
-					
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> --%>
-	<%@ include file="/portal/footmodal.jsp"%>
-	<div class="modal fade" id="userinfo" role="dialog" aria-labelledby="修改密码" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width:460px;">
-			    <div class="panel-heading">修改密码</div>
-				<div class="modal-body">
-					<table style="font-size:14px;width:100%;">
-						<tr>
-							<td>输入旧密码：</td>
-							<td><input class="form-control" id="oldpassword" type="password"></td>
-						</tr>
-						<tr>
-							<td>输入新密码：</td>
-							<td><input class="form-control" id="password1" type="password"></td>
-						</tr>
-						<tr>
-							<td>输入新密码2：</td>
-							<td><input class="form-control" id="password2" type="password"></td>
-						</tr>
-					</table>
-				</div>
-				<div class="modal-footer form-horizontal">
-				    <button type="button" class="btn btn-success" onclick="SavePassword()">保存</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	
+	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript">

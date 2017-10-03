@@ -51,13 +51,13 @@ text-align:center;}
 </head>
 
 <body>
-    <%@ include file="/oaadmin/oahead.jsp"%>
+   <%@ include file="/portal/headmodal.jsp"%>
     <div class="contentstyle">
 	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt; 历史天气信息    </span>
+					<span>当前位置：天气信息&gt;&gt; 历史天气信息    </span>
 					<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 				</div>
 			</div>
@@ -105,7 +105,7 @@ text-align:center;}
 															<td>${w.ziwaifushe}</td>
 															<td>${w.turangsuanjian}</td>
 															<td>${w.pm25}</td>
-															<td ><a	href="/travel/dept/query.action?id=${dept.id}">查看</a>&nbsp;&nbsp;
+															<td ><a	href="/travel/visitor/queryfireinfo.action?datestr=${w.weatherday}&flag=1" target="_blank">查看防火指数</a>&nbsp;&nbsp;
 															</td>
 														</tr>
 													</c:forEach>

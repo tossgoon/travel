@@ -62,7 +62,6 @@ text-align:center;
 					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
 					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
 					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/weather/weather.jsp">气象数据 </a></li>
 					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
 				</ul>
 			</div>

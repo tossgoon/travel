@@ -28,8 +28,9 @@ public class FoldertypeService<T> {
 		return dao.getObject(dept, id);
 	}
 	
-	public List<T> getFolderList(Class<T> clazz){
-		return dao.getAllObjects(clazz);
+	public List<T> getFolderList(Class<T> clazz,int ptype){
+		String queryString = "from Foldertype f where f.ptype="+ptype;
+		return dao.getObjects(queryString);
 	}
 
 	public BaseDao getDao() {

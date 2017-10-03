@@ -20,7 +20,7 @@ public class WeatherView implements java.io.Serializable {
 	private String ziwaifushe;
 	private String turangsuanjian;
 	private String pm25;
-
+	private String weatherday;//日期格式
 	// Constructors
 
 	/** default constructor */
@@ -113,6 +113,14 @@ public class WeatherView implements java.io.Serializable {
 
 	public void setWeatherdatestr(String weatherdatestr) {
 		this.weatherdatestr = weatherdatestr;
+	}
+
+	public String getWeatherday() {
+		return weatherday;
+	}
+
+	public void setWeatherday(String weatherday) {
+		this.weatherday = weatherday;
 	}
 	
 }

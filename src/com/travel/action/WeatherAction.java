@@ -2,6 +2,7 @@ package com.travel.action;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.apache.struts2.json.annotations.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.page.SplitPage;
 import com.travel.pojo.Animalsurvey;
+import com.travel.pojo.Fire;
 import com.travel.pojo.Weather;
 import com.travel.pojo.WeatherView;
 import com.travel.service.WeatherService;
@@ -29,6 +31,7 @@ public class WeatherAction extends ActionSupport {
 	private WeatherService<Weather> weatherService;
 	private List<Weather> weatherlist;
 	private SplitPage page;
+	private Fire fire=new Fire();
     public SplitPage getPage() {
 		return page;
 	}
@@ -193,5 +196,144 @@ public class WeatherAction extends ActionSupport {
 
 	public void setWlist(List<WeatherView> wlist) {
 		this.wlist = wlist;
+	}
+	
+	public String queryfireinfo() throws ParseException{
+		
+		if (getParam("datestr") != null) {
+			String datestr =getParam("datestr");
+			String daywater= this.weatherService.getWeatherWater(datestr);//天数,降水量
+			String[] dw=daywater.split(",");
+			double day=0;
+			double water=0;
+			if(dw.length==2)
+			{
+				day=Double.parseDouble(dw[0]);
+				water=Double.parseDouble(dw[1]);
+			}
+			double temprature=	this.weatherService.getWeatherTemprature(datestr);//气温
+			double humidity=	this.weatherService.getWeatherHumidity(datestr);//湿度
+			double wind=this.weatherService.getWeatherWind(datestr);//风力
+			fire.setHumidity(humidity);
+			fire.setTemprature(temprature);
+			fire.setWater(water);
+			fire.setWaterday(day);
+			fire.setWind(wind);
+			
+			fire.setParama(this.getParama(temprature));
+			fire.setParamb(this.getParamb(humidity));
+			fire.setParamc(this.getParamc(water,day));
+			fire.setParamd(this.getParamd(wind));
+			fire.setDaystr(datestr);
+		}
+		if(getParam("flag")!=null)
+		{
+			return "info";
+		}
+		return SUCCESS;
+	}
+	
+	//获取森林防火指数A
+	private double getParama(double tempr) {
+		if(tempr==-9999){
+			return -9999;
+		}
+		double parama = 0;
+		if (tempr <= 5) {
+			parama = 0;
+		} else if (tempr <= 10) {
+			parama = 4;
+		} else if (tempr <= 15) {
+			parama = 8;
+		} else if (tempr <= 20) {
+			parama = 12;
+		} else if (tempr <= 25) {
+			parama = 16;
+		} else {
+			parama = 20;
+		}
+		return parama;
+	}
+	//获取森林防火指数B
+	private double getParamb(double tempr) {
+		if(tempr==-9999){
+			return -9999;
+		}
+		double parama = 0;
+		if (tempr >= 71) {
+			parama = 0;
+		} else if (tempr >= 61) {
+			parama = 4;
+		} else if (tempr >= 51) {
+			parama = 8;
+		} else if (tempr >= 41) {
+			parama = 12;
+		} else if (tempr >= 31) {
+			parama = 16;
+		} else {
+			parama = 20;
+		}
+		return parama;
+	}
+	
+	//获取森林防火指数C
+	private double getParamc(double water, double day) {
+		if(water==-9999||day==-9999){
+			return -9999;
+		}
+		double paramc = 50;
+		if (water < 0.3) {
+			paramc = 50;
+			return paramc;
+		} else if (water < 2) {
+			paramc = 10 + 5 * day;
+		} else if (water < 5) {
+			paramc = 5 + 5 * day;
+		} else if (water < 10) {
+			paramc = 0 + 5 * day;
+		} else {
+			if (day <= 1) {
+				paramc = 0;
+			} else {
+				paramc = 5 + (day - 2) * 5;
+			}
+		}
+		return paramc;
+	}
+	
+	//获取森林防火指数D
+	private double getParamd(double tempr) {
+		if(tempr==-9999){
+			return -9999;
+		}
+		double parama = 0;
+		if (tempr <= 0.2) {
+			parama = 0;
+		} else if (tempr <= 1.5) {
+			parama = 5;
+		} else if (tempr <= 3.3) {
+			parama = 10;
+		} else if (tempr <= 5.4) {
+			parama = 15;
+		} else if (tempr <= 7.9) {
+			parama = 20;
+		} else if (tempr <= 10.7) {
+			parama = 25;
+		} else if (tempr <= 13.8) {
+			parama = 30;
+		} else if (tempr <= 17.1) {
+			parama = 35;
+		} else {
+			parama = 40;
+		}
+		return parama;
+	}
+
+	public Fire getFire() {
+		return fire;
+	}
+
+	public void setFire(Fire fire) {
+		this.fire = fire;
 	}
 }

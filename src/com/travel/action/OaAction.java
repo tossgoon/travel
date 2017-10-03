@@ -342,10 +342,19 @@ public class OaAction extends ActionSupport {
 		if (getParam("queryText") != null) {
 			searchText = getParam("queryText");
 		}
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
 		if (ActionContext.getContext().getSession().get("userid") != null) {
 			Integer userid = (Integer) ActionContext.getContext().getSession()
 					.get("userid");
-			oasendlist = oaService.queryOaByName(userid, Oa.class, searchText);
+			oasendlist = oaService.queryOaByName(userid, Oa.class, searchText,pagesize,pagenum);
+			int num =oaService.queryOaSendCount(userid, searchText);
+			page = new SplitPage(num,pagesize);
+			page.setCurrentPage(pagenum);
 		}
 		return SUCCESS;
 	}
@@ -356,9 +365,15 @@ public class OaAction extends ActionSupport {
 		if (getParam("queryText") != null) {
 			searchText = getParam("queryText");
 		}
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
 		if (ActionContext.getContext().getSession().get("userid") != null) {
 			Integer userid = (Integer) ActionContext.getContext().getSession().get("userid");
-			List<Oareceiver> receiverList=this.oaReceiverService.queryOaReceiverByUserid(userid, Oareceiver.class);
+			List<Oareceiver> receiverList=this.oaReceiverService.queryOaReceiverByUserid(userid, Oareceiver.class,pagesize,pagenum);
 			this.oareceivelist=new ArrayList<Oa>();
 			if(receiverList!=null)
 			{
@@ -378,6 +393,9 @@ public class OaAction extends ActionSupport {
 					oareceivelist.add(oa);
 				}
 			}
+			int num =oaReceiverService.queryReceiverCount(userid);
+			page = new SplitPage(num,pagesize);
+			page.setCurrentPage(pagenum);
 		}
 		return SUCCESS;
 	}

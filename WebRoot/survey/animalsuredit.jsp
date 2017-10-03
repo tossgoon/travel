@@ -37,7 +37,7 @@ body {
 	background-color: #f2f2f2;
 }
 
-#formAnimal col-md-2 span {
+#formAnimal .col-md-2 span {
 	float: right;
 }
 
@@ -62,7 +62,10 @@ body {
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
 					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
-					<li><a href="/travel/oa/queryfolderlist.action">网络硬盘</a></li>
+					
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					
 					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li class="activeli"><a href="javascript:void(0)">野生动物监测状况</a></li>
@@ -77,15 +80,14 @@ body {
 			   <div style="width:100%;margin-top:80px;">
 			   <h3>野生动物监测状况</h3>
 			   <hr>
-			    <s:form role="form" theme="simple" id="formAnimal"
-										style="margin:0 auto;">
+			    <form  id="formAnimal" style="margin:0 auto;">
 										<div class="container" style="width:80%;">
 											<div class="row">
 												<div class="col-md-2">
 													<span>ID</span>
 												</div>
 												<div class="col-md-4">
-													<s:textfield class="form-control input-sm" id="animalid"
+													<s:textfield class="form-control input-sm" id="id"
 														readonly="true" name="animal.id"></s:textfield>
 												</div>
 												<div class="col-md-2">
@@ -101,13 +103,8 @@ body {
 													<span>填表时间</span>
 												</div>
 												<div class="col-md-4">
-													<%-- <s:textfield class="form-control input-sm"
-														name="animal.tianbiaoshijian"></s:textfield> --%>
 													<div class="input-group date form_date"	data-date-format="yyyy-mm-dd">
-															<s:textfield class="form-control"  name="animal.tianbiaoshijian"  id="tianbiaoshijian">
-																<%-- <s:param name="value">
-																	<s:date name="animal.tianbiaoshijian" format="yyyy-MM-dd" />
-																</s:param> --%>
+															<s:textfield class="form-control input-sm"  name="animal.tianbiaoshijian"  id="tianbiaoshijian">
 															</s:textfield>
 														<span class="input-group-addon"> <span	class="glyphicon glyphicon-calendar"></span>
 														</span>
@@ -165,8 +162,7 @@ body {
 													<span>生境类型</span>
 												</div>
 												<div class="col-md-4">
-													<%-- <s:textfield  class="form-control input-sm" name="animal.shengjingleixing"></s:textfield> --%>
-													<s:select class="form-control input-sm" id="portaltype"
+													<s:select class="form-control input-sm" id="portaltype" theme="simple" 
 														list="{'寒温性针叶林','温性针叶林','温性针阔叶混交林','暖性针叶林','落叶阔叶林','常绿、落叶阔叶混交林','常绿阔叶林','硬叶常绿阔叶林','竹林','常绿针叶灌丛','常绿革叶灌丛','落叶阔叶灌丛','常绿阔叶灌丛','灌草丛','草甸','山地人工林','农田','其他'}"
 														label="选择类型" name="animal.shengjingleixing"></s:select>
 												</div>
@@ -195,21 +191,22 @@ body {
 													<s:textfield class="form-control input-sm"
 														name="animal.height"></s:textfield>
 												</div>
-												<div class="col-md-2">
-													<span>备注</span>
-												</div>
-												<div class="col-md-4">
-													<s:textfield class="form-control input-sm"
-														name="animal.beizhu"></s:textfield>
-												</div>
+												
 											</div>
+											<div class="row">
+										    <div class="col-md-2"><span>备注</span></div>
+											<div class="col-md-10">
+												<s:textarea rows="3" class="form-control input-sm" name="animal.beizhu"></s:textarea>
+											</div>
+										</div>
+											
 											<div class="row">
 												<div class="col-md-12" style="padding-top:15px;">
 													<label>带*为必填项。</label>
 												</div>
 											</div>
 										</div>
-									</s:form>
+									</form>
 			   </div>
 					<div style="margin-top:10px;">
 							
@@ -315,6 +312,9 @@ body {
 				minView : 2,
 				forceParse : 0
 			});
+			if($("#id").val()==null||$("#id").val()==""){
+				$('.form_date').datetimepicker("setValue");
+			}
 		});
 	</script>
 </body>

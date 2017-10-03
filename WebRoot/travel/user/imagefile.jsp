@@ -13,170 +13,164 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>网站编辑</title>
+<title>上传图片详情</title>
 <link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" /> --%>
 
 <style type="text/css">
 #portolinfo tr td:first-child span {
 	 float: right;
 }
-
+.rightspan{
+    float:right;
+}
 #uploader {
-	float: left;
-	width: 300px;
-	margin-left: 30px;
-	padding-left: 10px;
-	height: 320px;
-	border-left: 1px solid #A9A9A9;
-	margin-top: 10px;
-	margin-bottom: 20px;
+	width: 100%;
+	height: 270px;
 }
 
 </style>
 </head>
 <body>
-	<%@ include file="headmodal.jsp"%>
+  <%@ include file="/oaadmin/oahead.jsp"%>
+   <div class="toptool">
+			<span>当前位置：OA系统&gt;&gt;巡护图片
+			</span> 
+			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+	</div>
 	<div class="contentstyle">
 	<div class="container" style="width:100%;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<label style="font-size:20px;font-weight:normal;margin-top:30px;">网站编辑：新增内容</label>
+				<label style="font-size:20px;font-weight:normal;margin-top:30px;">巡护图片：文件详情</label>
 			</div>
 		</div>
 		<hr />
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default" style="width:1024px;margin:0 auto;">
-					<div class="panel-heading">新增内容</div>
+					<div class="panel-heading">文件详情</div>
 					<div class="panel-body">
-						<s:form role="form" theme="simple" id="formPortalInfo">
-								<div style="float:left;width:600px;overflow:hidden">
-									<table id="portolinfo" style="border-collapse:separate; border-spacing:0px 10px;width:100%;">
+						<s:form role="form" theme="simple" id="formdiskfile">
+								<table id="portolinfo" style="border-collapse:separate; border-spacing:0px 10px;width:100%;">
 										<tbody>
 											<tr>
 												<td style="width:120px;"><span>ID</span></td>
-												<td><s:textfield class="form-control" id="portalid" name="portal.id"  readonly="true"></s:textfield></td>
-											</tr>
-											<tr>
-												<td><span>选择类型</span></td>
-											    <td>
-											    <s:select class="form-control" id="portaltype"
-													list="#{'0':'保护区介绍','1':'工作动态','3':'政务公开','2':'政策法规','5':'科普知识（动物）','10':'科普知识（植物）','8':'保护区防护（防火）','9':'保护区防护（防虫）','13':'保护区防护（野生动植物）','6':'联系我们','7':'图片赏析(动物)','11':'图片赏析(植物)','12':'图片赏析(景观)'}"
-													label="选择类型" name="portal.type" onchange="ChangeSelect()"></s:select>
-													
-													</td>
-										    </tr>
-											<tr>
-												<td><span>主标题</span></td>
-												<td><s:textfield class="form-control" id="portaltitle" name="portal.title"></s:textfield></td>
-											</tr>
-											<tr>
-												<td><span>副标题</span></td>
-												<td><s:textfield class="form-control" id="portalsubtitle" name="portal.subtitle"></s:textfield></td>
-											</tr>
-											<tr>
-												<td><span>子标题</span></td>
-												<td><s:textfield class="form-control" id="portalfoottitle" name="portal.foottitle"></s:textfield></td>
-											</tr>
-											<tr>
-												<td><span>状态</span></td>
-												<td><s:select class="form-control" id="portalstatus"
-													list="#{'1':'已发布','0':'未发布'}"
-													label="选择状态" name="portal.status"></s:select></td>
-											</tr>
-											<tr>
-												<td><span>发布日期</span></td>
+												<td><s:textfield class="form-control" id="diskfileid"  style="width:330px;" name="diskfile.id"  readonly="true"></s:textfield></td>
+										        <td><span class="rightspan">上传日期</span></td>
 												<td>
-												 <div class="input-group date form_date" data-date-format="yyyy-mm-dd hh:ii:ss" >
-												    <s:textfield class="form-control" id="pubdate">
-												     <s:param name="value" ><s:date name="portal.pubdate" format="yyyy-MM-dd HH:mm:ss" /></s:param> 
-												    </s:textfield>
+												 <div class="input-group date form_date" style="width:330px;" data-date-format="yyyy-mm-dd hh:ii:ss" >
+												     	<s:textfield class="form-control" id="uploaddate" >
+												     		<s:param name="value" ><s:date name="diskfile.uploaddate" format="yyyy-MM-dd HH:mm:ss" /></s:param> 
+												    	</s:textfield>
 												       <span class="input-group-addon"> 
 												           <span class="glyphicon glyphicon-calendar"></span>
 												       </span>
 											       </div>
 											  </td>
+										    </tr>
+										    <tr>
+											    <td><span class="rightspan">存储目录(*)</span></td>
+											    <td><s:select class="form-control" id="foldertype"   style="width:330px;"
+													list="folderlist" listKey="id" listValue="name"
+													label="选择目录 " name="diskfile.folderid" ></s:select></td>
+													<td><span class="rightspan">名称</span></td>
+												<td><s:textfield class="form-control"   style="width:330px;" id="diskfilename" name="diskfile.filename"></s:textfield></td>
+										    </tr>
+											
+											<tr>
+												<td><span>备注</span></td>
+												<td colspan="3"><s:textarea style="width:800px;" id="diskfileremark" class="form-control" name="diskfile.remark"></s:textarea></td>
+											</tr>
+											<tr>
+												<td><span>选择文件</span></td>
+												<td colspan="3">										    
+												    <div id="filePicker" style="float:left;">点击选择...</div>
+													<a onclick="ResetUploader()" href="javascript:void(0);" style="float:left;margin:7px;">删除选择</a>
+												</td>
+											</tr>
+											<tr>
+												<td><span>已上传</span></td>
+												<td colspan="3">
+												    <s:hidden   class="form-control" id="diskfilepath" readonly="true" name="diskfile.filepath"></s:hidden>
+												    <s:textfield style="width:55%;float:left;"  class="form-control" id="diskfilerealname" readonly="true" name="diskfile.filerealname"></s:textfield>		   
+													<button id="ctlBtn" type="button" class="btn btn-success" style="height:32px;">开始上传</button>
+													<a class="btn btn-warning" href=' <s:property	value="diskfile.filepath" />'  download="<s:property	value="diskfile.filerealname" />">下载文件</a>
+												</td>
+											</tr>
+											<tr>
+											   <td><label id="uploadmsg" style="margin-left:20px;"></label></td>
 											</tr>
 										</tbody>
 									</table>
-								</div>
-								<div  id="uploader">
-									<div style="margin-bottom:5px;"><label>
-									<input type="checkbox" id="isshowpicture"
-										<c:if test="${portal.isshowpicture==true}">
-									        checked="true" 
-									    </c:if>	name="portal.isshowpicture">
-										首页图片:	</label><label id="uploadmsg" style="margin-left:20px;"></label>
-									<s:textfield style="width:100%;" class="form-control input-sm" id="portalpictureurl" readonly="true" name="portal.pictureurl"></s:textfield>
-									</div>
-									<div id="filePicker" style="float:left;">选择...</div>
-									<a onclick="ResetUploader()" href="javascript:void(0);" style="float:left;margin:7px;">删除选择</a>
-									<button id="ctlBtn" type="button" class="btn btn-success" style="float:right;height:32px;">开始上传</button>
-									<div id="thelist" class="uploader-list" style="clear:both;"></div>
-								</div>
+									<div  id="uploader">
+									    <div id="thelist" class="uploader-list" style="clear:both;"></div>
+								   </div>
+								   <div style="color:#1874CD;">上传注意事项：1.选择目录。2.选择上传文件后，点击“上传按钮”3.保存数据。上传后重新上传时点击“删除选择”</div>
 						</s:form>
-						<script id="editor" type="text/plain"
-							style="width:900px;height:600px;margin:0 auto;clear:both;"></script>
 					</div>
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-					    <a href="/travel/portal/editor.jsp" class="btn btn-default">新增数据</a>
+					    <a href="javascript:void(0)" onclick="InsertDiskfile()" class="btn btn-default">新增数据</a>
 						<button type="button" class="btn btn-primary"
-							onclick="SavePortal()">保存数据</button>
-						<button type="button" class="btn btn-warning" onclick="DeletePortal()">删除数据</button>
+							onclick="SaveDiskfile()">保存数据</button>
+						<button type="button" class="btn btn-warning" onclick="DeleteDiskfile()">删除数据</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-	<%@ include file="footmodal.jsp"%>
+	</div>
+	<%@ include file="/portal/footmodal.jsp"%>
     <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.all.min.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<%-- <script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webUploaderFeng.js"></script>	
 	 --%>
-	
 	<script type="text/javascript">
+	    //新增数据
+	    function InsertDiskfile(){
+	    	$("#diskfileid").val('');
+			//$("#uploaddate").val('');
+			//$("#foldertype").val('');
+			$("#diskfilename").val('');
+			$("#diskfileremark").val('');
+			$("#diskfilepath").val('');
+			$("#diskfilerealname").val('');
+	    }
 		//保存数据
-		function SavePortal()
+		function SaveDiskfile()
 		{
-			var isshowpic=$("#isshowpicture")[0].checked;
 			$.ajax({
 				type : "post",
-				url : "/travel/portal/save.action",
-				data : 
-					{
-					  "portal.id":$("#portalid").val(),
-					  "portal.type":$("#portaltype").val(),
-					  "portal.title":$("#portaltitle").val(),
-					  "portal.subtitle":$("#portalsubtitle").val(),
-					  "portal.foottitle":$("#portalfoottitle").val(),
-					  "portal.isshowpicture":isshowpic,
-					  "portal.status":$("#portalstatus").val(),
-					  "portal.pubdate":$("#pubdate").val(),
-					  "portal.pictureurl":$("#portalpictureurl").val(),
-					  "portal.content":ue.getContent()
-					},
-					//$("#formPortalInfo").serialize(),
+				url : "/travel/oa/savediskfile.action",
+				data : {
+					"diskfile.id" : $("#diskfileid").val(),
+					"diskfile.uploaddate" : $("#uploaddate").val(),
+					"diskfile.folderid" : $("#foldertype").val(),
+					"diskfile.filename" : $("#diskfilename").val(),
+					"diskfile.remark" : $("#diskfileremark").val(),
+					"diskfile.filepath" : $("#diskfilepath").val(),
+					"diskfile.filerealname" : $("#diskfilerealname").val()
+				//,"oa.oafiles":oafiles
+				},
+				//data : $("#formdiskfile").serialize(),
+					//$("#formPortalInfo").serialize(),diskfile
 				cache : false,
 				dataType : "json",
 				success : function(data) {
-					if (data.errorMsg == "0") {
+					if (data.errormsg == "0") {
 						//新增用户
-						$("#portalid").val(data.portal.id);
+						$("#diskfileid").val(data.diskfile.id);
 						alert("保存成功");
 					} else {
-						alert(data.errorMsg);
+						alert(data.errormsg);
 					}
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -184,33 +178,45 @@
 				}
 			});
 		}
-		//1代表工作区动态
-		function ChangeSelect()
-		{
-			var options=$("#portaltype option:selected");
-			var portaltype=options.val();
-			if(portaltype=="1"||portaltype=="7"||portaltype=="11"||portaltype=="12"){
-				$("#uploader").show();
-			}
-			else{
-				$("#uploader").hide();
+		
+		function DeleteDiskfile() {
+			if ($("#diskfileid").val() != null && $("#diskfileid").val() != "") {
+				$.ajax({
+					url : '/travel/oa/deletediskfile.action?id=' + $("#diskfileid").val(),
+					type : 'POST',
+					// 提交数据给Action传入数据
+					//data : {userid:delUserid},
+					// 返回的数据类型
+					dataType : 'json',
+					// 成功是调用的方法
+					success : function(data) {
+						if (data.errormsg == "0") {
+							//删除oa
+							$("#diskfileid").val('');
+							$("#diskfilename").val('');
+							$("#diskfileremark").val('');
+							ResetUploader();
+							alert("删除完成");
+						} else {
+							alert(data.errorMsg);
+						}
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.status);
+					}
+				});
 			}
 		}
+		
 		var uploader;
-		var ue = UE.getEditor('editor');
 		$(function(){  
 			   //初始化ueditor及内容,实例化编辑器
-		       //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-		       ue.ready(function() {//编辑器初始化完成再赋值  
-		            ue.setContent('${portal.content}');  //赋值给UEditor  
-		        });  
 			   /*init webuploader*/  
 			   var $list=$("#thelist");    //上传列表  
 			   var ratio = window.devicePixelRatio || 1;
 			   var $btn =$("#ctlBtn");     //开始上传  
-			   var thumbnailWidth = 100* ratio;   //缩略图高度和宽度 （单位是像素），当宽高度是0~1的时候，是按照百分比计算，具体可以看api文档  
-			   var thumbnailHeight = 100* ratio;  
-			   
+			   var thumbnailWidth = 200* ratio;   //缩略图高度和宽度 （单位是像素），当宽高度是0~1的时候，是按照百分比计算，具体可以看api文档  
+			   var thumbnailHeight = 200* ratio;  
 			   if ( !WebUploader.Uploader.support() ) {
 			        alert( 'Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
 			        throw new Error( 'WebUploader does not support the browser you are using.' );
@@ -280,12 +286,12 @@
 			    	   {
 			    	     $("#uploadmsg").html("(√ 上传成功)");
 			    	     $("#uploadmsg").css("color","#008B00");
-			    	     $("#portalpictureurl").val(response.newFileName); 
+			    	     $("#diskfilepath").val(response.newFileName);
+			    	     $("#diskfilerealname").val(file.name);
 			    	     //$('#uploader-demo').append('<input  type="text" name="fileUrl" value="'+data.name+'"/>');
 			    	     //$( '#'+file.id ).addClass('upload-state-done');
 			    	   }
 			   });  
-			  
 			   // 文件上传失败，显示上传出错。  
 			   uploader.on( 'uploadError', function( file ) {  
 			       var $li = $( '#'+file.id ),  
@@ -307,14 +313,14 @@
 			        console.log("上传成功");  
 			      });
 			   //根据参数判断
-			   
-			   if($("#portalid").val()==null||$("#portalid").val()==""){
-				   $('.form_date').datetimepicker("setValue");
-			   }
+			   if($("#diskfileid").val()==null||$("#diskfileid").val()==""){
+					$('.form_date').datetimepicker("setValue");
+				}
+			   //如果文件夹不是空，则选中
 			   //初始化下拉菜单
-			   var portaltype= GetQueryString("ptype");//portal类型
-			   if(portaltype!=null&&portaltype!=undefined&&portaltype!=""){
-				   $("#portaltype").val(portaltype);
+			   var folderid= GetQueryString("folderid");//portal类型
+			   if(folderid!=null&&folderid!=undefined&&folderid!=""){
+				   $("#foldertype").val(folderid);
 				}
 			  }); 
 
@@ -339,7 +345,6 @@
 			    // 更新状态等，重新计算文件总个数和总大小
 			    //updateStatus();
 			}
-		
 			//初始化日期控件
 			$('.form_date').datetimepicker({
 				language : 'zh-CN',
@@ -351,20 +356,13 @@
 				minView : 0,
 				forceParse : 0
 			});
-			$('.form_date').datetimepicker("setValue");
-			/* function GetQueryString(name)
-			{
-			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			     var r = window.location.search.substr(1).match(reg);
-			     if(r!=null)return  unescape(r[2]); return null;
-			} */
-			//$('.form_date').datetimepicker("setValue");
 			function GetQueryString(name)
 			{
 			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			     var r = window.location.search.substr(1).match(reg);
 			     if(r!=null)return  unescape(r[2]); return null;
 			}
+			//$('.form_date').datetimepicker("setValue");
 	</script>
 </body>
 </html>

@@ -75,7 +75,7 @@ text-align:center;
 .button-tool {
 	position: absolute;
 	top: 180px;
-	right: 80px;
+	right: 30%;
 	font-size: 12px;
 	padding: 10px;
 }
@@ -99,23 +99,11 @@ text-align:center;
 			<span>当前位置：OA系统&gt;&gt;监测信息
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">返回OA功能列表</a>
+			
 	</div>
 		<div class="contentstyle">
 		<div class="maincontent">
-			<!-- <div class="leftpanel" style="border-right:1px solid #111111;">
-				<ul>
-					<li class="activeli"><a href="javascript:void(0)">公告通知</a></li>
-					<li><a href="/travel/oa/querydeal.action">待办事务</a></li>
-					<li><a href="/travel/travel/user/oaorg.jsp">组织架构</a></li>
-					<li><a href="/travel/travel/user/oadepartment.jsp">部门信息</a></li>
-					<li><a href="/travel/travel/user/oaaddress.jsp">办公通讯录</a></li>
-					<li><a href="/travel/travel/user/oadaily.jsp">日程安排</a></li>
-					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
-					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li>
-					<li><a href="/travel/travel/user/oafilelist.jsp">资料中心</a></li>
-					<li style="border-bottom:1px solid #666666;"><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
-				</ul>
-			</div> -->
 			<div  style="width:100%;border:1px solid #666666;margin:0px;margin-bottom:10px;">
 				<div style="background-color: #7EC0EE;height:38px;padding:5px;">
 					<input type="checkbox" id="chk1" onclick="toggle(1,this)" />褐马鸡野外种群监测

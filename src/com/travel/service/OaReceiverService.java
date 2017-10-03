@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.travel.dao.BaseDao;
+import com.travel.pojo.Portal;
 
 
 public class OaReceiverService<T> {
@@ -55,9 +56,31 @@ public class OaReceiverService<T> {
 		this.dao = dao;
 	}
 	
-	public List<T> queryOaReceiverByUserid(int userid, Class<T> clazz) {
+	public List<T> queryOaReceiverByUserid(int userid, Class<T> clazz,int pagesize,int pagenum) {
 		String queryString = "from Oareceiver oareceiver where oareceiver.userid =" + userid+" order by isread asc,id desc ";
-		return dao.getObjects(queryString);
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setFirstResult((pagenum-1)*pagesize);
+		query.setMaxResults(pagesize);
+		@SuppressWarnings("unchecked")
+		List<T>list=(List<T>)query.list();
+		session.close();
+		return list;
+	}
+	
+	public int queryReceiverCount(int userid){
+		String queryString="select count(*) from Oareceiver as p where p.userid=:param";
+		SessionFactory sessionFactory = dao.getHibernateTemplate()
+				.getSessionFactory();
+		Session session = (Session) sessionFactory.openSession();//
+		Query query = session.createQuery(queryString);
+		query.setInteger("param", userid);
+		long count=(Long)query.uniqueResult();
+		int num= (int)count;
+		session.close();
+		return num;
 	}
 	
 	public List<T> queryOaReceiverByUseridDeal(int userid, Class<T> clazz) {

@@ -16,5 +16,8 @@
         <property name="pid" type="java.lang.Integer">
             <column name="pid" />
         </property>
+        <property name="ptype" type="java.lang.Integer">
+            <column name="ptype" />
+        </property>
     </class>
 </hibernate-mapping>

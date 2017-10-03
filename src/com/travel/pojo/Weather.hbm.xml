@@ -19,8 +19,8 @@
         <property name="eunit" type="java.lang.String">
             <column name="eunit" length="450" />
         </property>
-        <property name="evalue" type="java.lang.String">
-            <column name="evalue" length="450" />
+        <property name="evalue" type="java.lang.Double">
+            <column name="evalue" precision="18" scale="3" />
         </property>
         <property name="ekey" type="java.lang.String">
             <column name="ekey" length="450" />

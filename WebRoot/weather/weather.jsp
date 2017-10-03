@@ -49,13 +49,13 @@ body {
 </head>
 
 <body>
-    <%@ include file="/oaadmin/oahead.jsp"%>
+    <%@ include file="/portal/headmodal.jsp"%>
     <div class="contentstyle">
 	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt; 气象信息    </span>
+					<span>当前位置：天气信息&gt;&gt; 气象信息    </span>
 					<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 				</div>
 			</div>
@@ -82,7 +82,7 @@ body {
 												           <th>数据结果</th>
 												           <th>数据单位</th>
 												           <th>通道编号</th>
-												           <th>通道对应编码</th>
+												          <!--  <th>通道对应编码</th> -->
 												      </tr>
 												   </thead>
 												   <tbody id="tbweather"></tbody>
@@ -169,7 +169,6 @@ body {
 	<script type="text/javascript">
 	
 		$(function() {
-			
 			//获取天气数据
 			$.ajax({
 				type : "get",
@@ -186,11 +185,11 @@ body {
 						var weather = eval('(' + data.weatherdata + ')');
 						//$("#weatherdate").val(data.datestr);
 						$("#weathertime").html("获取时间：&nbsp;&nbsp;&nbsp;&nbsp;"+ data.datestr);
-						var content="";//天气内容
+						var content="";//天气内容   <td>"+obj.eNum+"</td>
 						for(var i=0;i<weather.entity.length;i++)
 							{
 							    var obj=weather.entity[i];
-							    var tr="<tr><td>"+obj.eName+"</td><td>"+obj.eValue+"</td><td>"+obj.eUnit+"</td><td>"+obj.eKey+"</td><td>"+obj.eNum+"</td></tr>";
+							    var tr="<tr><td>"+obj.eName+"</td><td>"+obj.eValue+"</td><td>"+obj.eUnit+"</td><td>"+obj.eKey+"</td></tr>";
 							    content+=tr;
 							   /*  switch(obj.eName){
 							    case "风速":
@@ -237,9 +236,6 @@ body {
 					alert(XMLHttpRequest.status);
 				}
 			});
-			
-			
-			
 			//获取天气数据
 			/* $.ajax({
 				type : "get",
@@ -258,8 +254,9 @@ body {
 					alert(XMLHttpRequest.status);
 				}
 			}); */
-			
 		});
+		//计算防火等级
+		
 
 	</script>
 </body>

@@ -1,6 +1,8 @@
 package com.travel.pojo;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Weather entity. @author MyEclipse Persistence Tools
@@ -14,10 +16,11 @@ public class Weather implements java.io.Serializable {
 	private Timestamp weatherdate;
 	private String leixing;
 	private String eunit;
-	private String evalue;
+	private Double evalue;
 	private String ekey;
 	private String ename;
 	private String enum_;
+	private String weatherday;//日期格式
 
 	// Constructors
 
@@ -27,11 +30,11 @@ public class Weather implements java.io.Serializable {
 
 	/** full constructor */
 	public Weather(Timestamp weatherdate, String leixing, String eunit,
-			String evalue, String ekey, String ename, String enum_) {
+			Double evalue, String ekey, String ename, String enum_) {
 		this.weatherdate = weatherdate;
 		this.leixing = leixing;
 		this.eunit = eunit;
-		this.evalue = evalue;
+		this.setEvalue(evalue);
 		this.ekey = ekey;
 		this.ename = ename;
 		this.enum_ = enum_;
@@ -71,14 +74,6 @@ public class Weather implements java.io.Serializable {
 		this.eunit = eunit;
 	}
 
-	public String getEvalue() {
-		return this.evalue;
-	}
-
-	public void setEvalue(String evalue) {
-		this.evalue = evalue;
-	}
-
 	public String getEkey() {
 		return this.ekey;
 	}
@@ -101,6 +96,29 @@ public class Weather implements java.io.Serializable {
 
 	public void setEnum_(String enum_) {
 		this.enum_ = enum_;
+	}
+
+	public Double getEvalue() {
+		return evalue;
+	}
+
+	public void setEvalue(Double evalue) {
+		this.evalue = evalue;
+	}
+
+	public String getWeatherday() {
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+        try {   
+          String  tsStr = sdf.format(this.weatherdate);   
+          return tsStr;
+        } catch (Exception e) {   
+            e.printStackTrace();   
+        }  
+        return weatherday;
+	}
+
+	public void setWeatherday(String weatherday) {
+		this.weatherday = weatherday;
 	}
 
 }

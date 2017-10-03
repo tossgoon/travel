@@ -8,9 +8,14 @@ public class Foldertype implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1840361921723220731L;
 	private Integer id;
 	private String name;
 	private Integer pid;
+	private Integer ptype;
 
 	// Constructors
 
@@ -48,6 +53,14 @@ public class Foldertype implements java.io.Serializable {
 
 	public void setPid(Integer pid) {
 		this.pid = pid;
+	}
+
+	public Integer getPtype() {
+		return ptype;
+	}
+
+	public void setPtype(Integer ptype) {
+		this.ptype = ptype;
 	}
 
 }

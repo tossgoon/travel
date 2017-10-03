@@ -52,14 +52,8 @@ body {
 </head>
 <body>
 	<%@ include file="/portal/headmodal.jsp"%>
-
-    
-    
-    
     <div class="contentstyle">
 	<div class="container" style="text-align:left;width:1024px;margin:0 auto;background-color: #ffffff;margin-top:20px;">
-	
-	
 		<div class="row">
 			<div class="col-md-12" style="margin:0 auto;">
 				<div	style="margin:0 auto;padding-top:20px;text-align:left;background-color:#ffffff;border-bottom:1px solid #228B22;padding-left:20px;padding-bottom:12px;">
@@ -125,8 +119,7 @@ body {
 							<p class="title2">
 								${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 								${portal.subtitle}</p>
-							<hr
-								style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
+							<hr	style='height:1px;border:none;border-top:1px dashed #C2C2C2;margin:0 auto;' />
 				</c:forEach>
 				</div>
 			</div>

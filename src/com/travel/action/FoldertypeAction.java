@@ -68,9 +68,10 @@ public class FoldertypeAction extends ActionSupport {
 		this.errormsg = errormsg;
 	}
 
-	public String add() {
+	public String add(int ptype) {
 		String result = "";
 		try {
+			foldertype.setPtype(ptype);//设置类型为1，则为网络硬盘的文件夹
 			this.foldertypeService.addFoldertype(foldertype);
 			// throw new RuntimeException("");
 			setErrormsg("0");
@@ -84,9 +85,10 @@ public class FoldertypeAction extends ActionSupport {
 		return result;
 	}
 
-	public String update() {
+	public String update(int ptype) {
 		try {
 			// String param = getParam("param");
+			foldertype.setPtype(ptype);
 			this.foldertypeService.updateFoldertype(foldertype);
 			setErrormsg("0");
 			return SUCCESS;
@@ -99,10 +101,11 @@ public class FoldertypeAction extends ActionSupport {
 	}
 	
 	public String save() {
+		Integer ptype = Integer.parseInt(getParam("ptype"));//1.为网络硬盘文件夹 2.为上传图片文件夹
 		if (foldertype.getId() == null) {
-			return add();
+			return add(ptype);
 		} else {
-			return update();
+			return update(ptype);
 		}
 	}
 
@@ -128,7 +131,17 @@ public class FoldertypeAction extends ActionSupport {
 	}
 	
 	public String querylist(){
-		this.foldertypelist=this.foldertypeService.getFolderList(Foldertype.class);
-		return SUCCESS;
+		Integer ptype=1;//1代表网络硬盘  2为图片目录
+		if (getParam("ptype") != null) {
+			ptype = Integer.parseInt(getParam("ptype"));
+			this.foldertypelist=this.foldertypeService.getFolderList(Foldertype.class,ptype);
+		}
+		if(ptype==1)
+		{
+			return SUCCESS;
+		}
+		else{
+			return "image";
+		}
 	}
 }

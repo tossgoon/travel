@@ -14,7 +14,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>OA系统-网络硬盘</title>
+<title>OA系统-保护区巡护照片</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -45,7 +45,7 @@ text-align:center;
 <body>
 	<%@ include file="/oaadmin/oahead.jsp"%>
    <div class="toptool">
-			<span>当前位置：OA系统&gt;&gt;网络硬盘
+			<span>当前位置：OA系统&gt;&gt;保护区巡护照片
 			</span> 
 			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
 	</div>
@@ -56,8 +56,8 @@ text-align:center;
 					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
 					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
-					<li class="activeli"><a href="javascript:void(0)">网络硬盘</a></li>
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
+					<li class="activeli"><a href="javascript:void(0)">巡护图片</a></li>
 					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li><a href="/travel/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
@@ -78,7 +78,7 @@ text-align:center;
 					<div style="margin-bottom:20px;" id="currentfoldertext"> 当前目录 :${currentfolder.name} </div>
 					<ul id="browser" class="filetree">
 						<li>
-							<span class="folder">网络硬盘</span>
+							<span class="folder">巡护照片</span>
 							<ul id="browserul">
 							   <c:forEach var="folder" items="${foldertypelist}">
 										<li class="closed" onclick="folderclick(this)">
@@ -171,13 +171,14 @@ text-align:center;
 				add: branches
 			});
 		}); */
+		
 	});
 	function NewFile(){
 		if(folderid!=null&&folderid!=undefined&&folderid!=""){
-			document.getElementById("newfile").href="/travel/oa/querydiskfile.action?ptype=1&folderid="+folderid;
+			document.getElementById("newfile").href="/travel/oa/querydiskfile.action?ptype=2&folderid="+folderid;
 		}
 		else{
-			document.getElementById("newfile").href="/travel/oa/querydiskfile.action?ptype=1";
+			document.getElementById("newfile").href="/travel/oa/querydiskfile.action?ptype=2";
 		}
 	}
 	function folderclick(li){
@@ -192,7 +193,7 @@ text-align:center;
 			type : 'GET',
 			// 提交数据给Action传入数据
 			data : {
-				"ptype":1,
+				"ptype":2,
 				"folderid" : folderid
 			},
 			// 返回的数据类型
@@ -249,7 +250,7 @@ text-align:center;
 			type : 'GET',
 			// 提交数据给Action传入数据
 			data : {
-				"ptype":1,
+				"ptype":2,
 				"folderid" : folderid,
 				"pagesize":3,
 				"pagenum":currentpagenum
@@ -284,7 +285,7 @@ text-align:center;
 			+ "<td  style='text-align:center;'>" + diskfile.uploaddateStr + "</td>" 
 			+ "<td  style='text-align:center;'>"
 			+ "<a href='"+diskfile.filepath+"' download='"+diskfile.filerealname+"' >下载</a>&nbsp;&nbsp;&nbsp;&nbsp;" 
-			+ "<a target='_blank' href='/travel/oa/querydiskfile.action?ptype=1&id="+diskfile.id+"'>查看</a>"+
+			+ "<a href='/travel/oa/querydiskfile.action?ptype=2&id="+diskfile.id+"'>查看</a>"+
 					"</td></tr>";
 	    return row;
 	}
@@ -314,7 +315,7 @@ text-align:center;
 				type : 'POST',
 				// 提交数据给Action传入数据
 				data : {
-					"ptype":1,
+					"ptype":2,
 					"foldertype.id" : cfolderid,
 					"foldertype.name" : foldername
 				},

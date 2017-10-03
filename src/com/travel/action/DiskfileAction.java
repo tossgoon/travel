@@ -118,8 +118,14 @@ public class DiskfileAction extends ActionSupport {
 		else if (getParam("folderid") != null) {
 			this.folderid = Integer.parseInt(getParam("folderid"));
 		}
-		this.folderlist=foldertypeService.getFolderList(Foldertype.class);
-		return SUCCESS;
+		Integer ptype = Integer.parseInt(getParam("ptype"));
+		this.folderlist=foldertypeService.getFolderList(Foldertype.class,ptype);
+		if(ptype==1){
+			return SUCCESS;
+		}
+		else{
+			return "image";
+		}
 	}
 
 	public Diskfile getDiskfile() {
@@ -175,7 +181,8 @@ public class DiskfileAction extends ActionSupport {
 		page = new SplitPage(num,pagesize);
 		page.setCurrentPage(pagenum);
 		//д©б╪пео╒
-		this.folderlist=foldertypeService.getFolderList(Foldertype.class);
+		Integer ptype = Integer.parseInt(getParam("ptype"));
+		this.folderlist=foldertypeService.getFolderList(Foldertype.class,ptype);
 		return SUCCESS;
 	}
 

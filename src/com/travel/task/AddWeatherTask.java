@@ -83,7 +83,15 @@ public class AddWeatherTask {
 						weather.setEname((String)obj.get("eName"));
 						weather.setEnum_((String)obj.get("eNum"));
 						weather.setEkey((String)obj.get("eKey"));
-						weather.setEvalue((String)obj.get("eValue"));
+						String evaluestr=(String)obj.get("eValue");
+						if(evaluestr!=null&&!evaluestr.equals("")){
+							double evalue=Double.parseDouble(evaluestr);
+							weather.setEvalue(evalue);
+						}
+						/*else{
+							weather.setEvalue(0.0);
+						}*/
+						//weather.setEvalue();
 						weather.setWeatherdate(currenttime);
 						weatherAction.setWeather(weather);
 						weatherAction.add();

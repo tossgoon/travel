@@ -228,7 +228,7 @@ body {
 	border: 3px solid #F2F2F2;
 }
 
-#indemo,#indemop,#indeoms {
+#indemo,#indemop,#indemos {
 	float: left;width: 800%;
 
 }
@@ -632,7 +632,7 @@ color:#ffffff;
 		    // 设置label标签
 		    marker.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
 		        offset: new AMap.Pixel(-100, -30),//修改label相对于maker的位置
-		        content: "<label style='font-size:14px;'>陕西黄龙山褐马鸡国家级自然保护区</label>"
+		        content: "<label style='font-size:14px;'>陕西延安黄龙山褐马鸡国家级自然保护区</label>"
 		    });
 		});
 		
