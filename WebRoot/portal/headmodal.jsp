@@ -1,5 +1,5 @@
 	<%@page pageEncoding="UTF-8"%>  
-	<div class="headlogo" id="logoindex" style="background-image:url(<%=contextPath%>/includes/image/topbackground.png);background-repeat: repeat-x;">
+	<div class="headlogo" id="logoindex" style="background-image:url(<%=contextPath%>/includes/image/topbackg.png);background-repeat: repeat-x;">
 		<div style="width:1100px;margin:0 auto;">
 			<img alt="" style="margin-top:30px;width:900px;"
 				src="<%=contextPath%>/includes/image/toptitle.png">

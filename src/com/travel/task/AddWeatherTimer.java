@@ -36,8 +36,8 @@ public class AddWeatherTimer {
 			}
 		};
 		// 执行后检查一下设置的时间间隔
-		int exeInterval = 43200;
-		try {
+		int exeInterval = 7200;
+		/*try {
 			// 从数据库中取得时间
 			// ISettingDAO settingDAO = DAOFactory.getSettingDAOInstance();
 			// Setting setting = settingDAO.queryByItem("interval");
@@ -54,7 +54,7 @@ public class AddWeatherTimer {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}
+		}*/
 		// 获取设置的时间（秒）
 		if (scheduler.isShutdown()) {
 			scheduler = Executors.newScheduledThreadPool(1);

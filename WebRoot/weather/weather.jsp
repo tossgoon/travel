@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<%-- <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" /> --%>
 <style type="text/css">
 #oainfo tr td:first-child span {
 	float: right;
@@ -71,6 +71,9 @@ body {
 											<div class="col-md-12">
 											   <span id="weathertime" style="font-size:14px;"></span>
 											   <a style="float:right;margin-right:20px;" target="_blank" href="/travel/visitor/queryweatherlist.action">查看历史数据</a>
+											
+											   <a id="firea" target="_blank">查看防火指数</a>
+											
 											</div>
 										</div>
 										<div class="row" style="margin-top:30px;">
@@ -254,6 +257,10 @@ body {
 					alert(XMLHttpRequest.status);
 				}
 			}); */
+			//设置查询
+			var myDate = new Date();
+            var datestr=myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate();
+			document.getElementById("firea").href="/travel/visitor/queryfireinfo.action?datestr="+datestr+"&flag=1";
 		});
 		//计算防火等级
 		

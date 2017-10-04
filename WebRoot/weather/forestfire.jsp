@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<%-- <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" /> --%>
 <style type="text/css">
 body {
 	background-color: #f2f2f2;

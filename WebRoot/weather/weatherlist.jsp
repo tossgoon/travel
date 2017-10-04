@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
 <link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
 <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<%-- <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" /> --%>
 <style type="text/css">
 #oainfo tr td:first-child span {
 	float: right;
@@ -105,7 +105,7 @@ text-align:center;}
 															<td>${w.ziwaifushe}</td>
 															<td>${w.turangsuanjian}</td>
 															<td>${w.pm25}</td>
-															<td ><a	href="/travel/visitor/queryfireinfo.action?datestr=${w.weatherday}&flag=1" target="_blank">查看防火指数</a>&nbsp;&nbsp;
+															<td><a	href="/travel/visitor/queryfireinfo.action?datestr=${w.weatherday}&flag=1" target="_blank">查看防火指数</a>&nbsp;&nbsp;
 															</td>
 														</tr>
 													</c:forEach>
