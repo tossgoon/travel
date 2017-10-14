@@ -4,7 +4,7 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -19,10 +19,10 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" /> --%>
 <style type="text/css">
 body {
@@ -43,7 +43,7 @@ td >span{
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
 					<span>当前位置：天气信息&gt;&gt; 森林防火等级    </span>
-					<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+					<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 				</div>
 			</div>
 		</div>
@@ -177,10 +177,11 @@ td >span{
 	</div>
 </div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript">
+	var contextPath="<%=contextPath%>";
 	function ChangeSelect(){
 		var options=$("#fireother option:selected");
 		var firetype=options.val();
@@ -189,7 +190,7 @@ td >span{
 	function GetData(){
 		$.ajax({
 			type : "get",
-			url : "/travel/visitor/queryfireinfo.action",
+			url : contextPath+"/visitor/queryfireinfo.action",
 			data :{datestr: $("#computedate").val()},
 			//data :{datestr: datestr},
 			cache : false, 

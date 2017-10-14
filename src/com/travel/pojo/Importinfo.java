@@ -1,5 +1,9 @@
 package com.travel.pojo;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Importinfo entity. @author MyEclipse Persistence Tools
  */
@@ -10,15 +14,17 @@ public class Importinfo implements java.io.Serializable {
 
 	private Integer id;
 	private String tianbaodanwei;
-	private String tianxieshijian;
+	private Timestamp tianxieshijian;
 	private String mingcheng;
 	private String henjileixing;
 	private String faxiandidian;
 	private Double jingdu;
 	private Double weidu;
-	private String faxianshijian;
+	private Timestamp faxianshijian;
 	private String faxianrenyuan;
 	private String miaoshu;
+	private String datestr;
+	private String faxiandatestr;
 
 	// Constructors
 
@@ -27,9 +33,9 @@ public class Importinfo implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Importinfo(String tianbaodanwei, String tianxieshijian,
+	public Importinfo(String tianbaodanwei, Timestamp tianxieshijian,
 			String mingcheng, String henjileixing, String faxiandidian,
-			Double jingdu, Double weidu, String faxianshijian,
+			Double jingdu, Double weidu, Timestamp faxianshijian,
 			String faxianrenyuan, String miaoshu) {
 		this.tianbaodanwei = tianbaodanwei;
 		this.tianxieshijian = tianxieshijian;
@@ -61,11 +67,12 @@ public class Importinfo implements java.io.Serializable {
 		this.tianbaodanwei = tianbaodanwei;
 	}
 
-	public String getTianxieshijian() {
-		return this.tianxieshijian;
+
+	public Timestamp getTianxieshijian() {
+		return tianxieshijian;
 	}
 
-	public void setTianxieshijian(String tianxieshijian) {
+	public void setTianxieshijian(Timestamp tianxieshijian) {
 		this.tianxieshijian = tianxieshijian;
 	}
 
@@ -109,11 +116,11 @@ public class Importinfo implements java.io.Serializable {
 		this.weidu = weidu;
 	}
 
-	public String getFaxianshijian() {
-		return this.faxianshijian;
+	public Timestamp getFaxianshijian() {
+		return faxianshijian;
 	}
 
-	public void setFaxianshijian(String faxianshijian) {
+	public void setFaxianshijian(Timestamp faxianshijian) {
 		this.faxianshijian = faxianshijian;
 	}
 
@@ -131,6 +138,32 @@ public class Importinfo implements java.io.Serializable {
 
 	public void setMiaoshu(String miaoshu) {
 		this.miaoshu = miaoshu;
+	}
+
+	public String getDatestr() {
+		if(this.tianxieshijian!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			datestr=sdf.format(this.tianxieshijian); 
+		}
+		return datestr;
+	}
+
+	public void setDatestr(String datestr) {
+		this.datestr = datestr;
+	}
+
+	public String getFaxiandatestr() {
+		if(this.faxianshijian!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			faxiandatestr=sdf.format(this.faxianshijian); 
+		}
+		return faxiandatestr;
+	}
+
+	public void setFaxiandatestr(String faxiandatestr) {
+		this.faxiandatestr = faxiandatestr;
 	}
 
 }

@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme() + "://"
 		+ request.getServerName() + ":" + request.getServerPort()
 		+ path + "/";
-String contextPath = request.getContextPath() + "/";
+String contextPath = request.getContextPath();
 
 %>
 
@@ -20,12 +20,13 @@ String contextPath = request.getContextPath() + "/";
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="黄龙山,褐马鸡,国家自然保护区">
 	<meta http-equiv="description" content="保护区网站">
-	<meta http-equiv="refresh" content="7;url=/visitor/first.action">
+	<meta http-equiv="refresh" content="7;url=<%=contextPath%>/visitor/first.action">
 	<style type="text/css">
 body {
 	 background-color:#97c7e9;
 	 text-align: center;
 	 padding:0px;
+	 margin:0px;
 }
 
 a{
@@ -35,18 +36,20 @@ a{
 
 </head>
 <body>
-	<div style="margin:0 auto;100%;min-width:1366px;">
-		<img id="pic" width="1366px;" alt="" src="/travel/includes/image/index/indexhemaji.gif">
+	<div style="margin:0px auto;width:100%;min-width:800px;">
+		<img id="pic" width="800px;" alt="" src="<%=contextPath%>/includes/image/index/indexhemaji.gif">
 	</div>
-	<div style="position:absolute;top:20px;right:20px;"><a href="/visitor/first.action" type="button">&gt;&gt;点击登陆</a></div>
-    <script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
+	
+	<div style="position:absolute;top:20px;right:20px;"><a href="<%=contextPath%>/visitor/first.action" type="button">&gt;&gt;点击登陆</a></div>
+    <script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
 	<script language="javascript" type="text/javascript"> 
+	    var contextPath="<%=contextPath%>";
 		var i = 7; 
 		var intervalid; 
 		intervalid = setInterval("fun()", 1000); 
 		function fun() { 
 			if (i == 0) { 
-					window.location.href = "/visitor/first.action"; 
+					window.location.href = contextPath+"/visitor/first.action"; 
 					clearInterval(intervalid); 
 			} 
 			//document.getElementById("mes").innerHTML = i; 
@@ -60,7 +63,7 @@ a{
 		});
 		//调整图片大小:原始大小为1920(宽)*1080(高)
 		function ChangePicSize(docwidth){
-				if(docwidth>1366){
+				if(docwidth>800){
 					$("#pic").css("width", docwidth); // 设定实际显示宽度
 				}
 		}

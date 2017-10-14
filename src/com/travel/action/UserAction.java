@@ -133,6 +133,14 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String getUserInfo() {
+		if (ActionContext.getContext().getSession().get("userid") != null) {
+			Integer userid = (Integer) ActionContext.getContext().getSession().get("userid");
+			this.user=this.userService.getUser(User.class, userid);
+		}
+		return SUCCESS;
+	}
+	
 	public String queryByPage() {
 		int pagesize = 10;
 		int pagenum = 1;

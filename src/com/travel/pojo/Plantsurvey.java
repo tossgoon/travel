@@ -1,5 +1,9 @@
 package com.travel.pojo;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Plantsurvey entity. @author MyEclipse Persistence Tools
  */
@@ -12,7 +16,7 @@ public class Plantsurvey implements java.io.Serializable {
 	private String yangfanghao;
 	private Double jingdu;
 	private Double weidu;
-	private String tianbiaoshijian;
+	private Timestamp tianbiaoshijian;
 	private String jianceren;
 	private String podu;
 	private String powei;
@@ -28,6 +32,7 @@ public class Plantsurvey implements java.io.Serializable {
 	private String nanbeiguanfu;
 	private String junzhi;
 	private String beizhu;
+	private String datestr;
 
 	// Constructors
 
@@ -37,7 +42,7 @@ public class Plantsurvey implements java.io.Serializable {
 
 	/** full constructor */
 	public Plantsurvey(String yangfanghao, Double jingdu, Double weidu,
-			String tianbiaoshijian, String jianceren, String podu,
+			Timestamp tianbiaoshijian, String jianceren, String podu,
 			String powei, String poxiang, Double height, String yubidu,
 			String qunximingcheng, String shuzhongming, String biaobenbianhao,
 			String gaodu, String xiongjing, String dongxiguanfu,
@@ -97,11 +102,11 @@ public class Plantsurvey implements java.io.Serializable {
 		this.weidu = weidu;
 	}
 
-	public String getTianbiaoshijian() {
-		return this.tianbiaoshijian;
+	public Timestamp getTianbiaoshijian() {
+		return tianbiaoshijian;
 	}
 
-	public void setTianbiaoshijian(String tianbiaoshijian) {
+	public void setTianbiaoshijian(Timestamp tianbiaoshijian) {
 		this.tianbiaoshijian = tianbiaoshijian;
 	}
 
@@ -223,6 +228,19 @@ public class Plantsurvey implements java.io.Serializable {
 
 	public void setBeizhu(String beizhu) {
 		this.beizhu = beizhu;
+	}
+
+	public String getDatestr() {
+		if(this.tianbiaoshijian!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			datestr=sdf.format(this.tianbiaoshijian); 
+		}
+		return datestr;
+	}
+
+	public void setDatestr(String datestr) {
+		this.datestr = datestr;
 	}
 
 }

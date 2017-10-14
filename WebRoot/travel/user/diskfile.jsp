@@ -7,18 +7,18 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>上传文件详情</title>
-<link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet"	href="<%=contextPath%>/includes/css/portal_head_modal.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" /> --%>
 
 <style type="text/css">
@@ -40,7 +40,7 @@
    <div class="toptool">
 			<span>当前位置：OA系统&gt;&gt;网络硬盘
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 	<div class="contentstyle">
 	<div class="container" style="width:100%;">
@@ -127,14 +127,15 @@
 	</div>
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
-    <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+    <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<%-- <script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webUploaderFeng.js"></script>	
 	 --%>
 	<script type="text/javascript">
 	    //新增数据
+	    var contextPath="<%=contextPath%>";
 	    function InsertDiskfile(){
 	    	$("#diskfileid").val('');
 			//$("#uploaddate").val('');
@@ -149,7 +150,7 @@
 		{
 			$.ajax({
 				type : "post",
-				url : "/travel/oa/savediskfile.action",
+				url : contextPath+"/oa/savediskfile.action",
 				data : {
 					"diskfile.id" : $("#diskfileid").val(),
 					"diskfile.uploaddate" : $("#uploaddate").val(),
@@ -182,7 +183,7 @@
 		function DeleteDiskfile() {
 			if ($("#diskfileid").val() != null && $("#diskfileid").val() != "") {
 				$.ajax({
-					url : '/travel/oa/deletediskfile.action?id=' + $("#diskfileid").val(),
+					url : contextPath+'/oa/deletediskfile.action?id=' + $("#diskfileid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -225,9 +226,9 @@
 			       // 选完文件后，是否自动上传。  
 			       auto: false,  
 			       // swf文件路径  
-			       swf: '<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+			       swf: '<%=contextPath%>/includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
-			       server: '/travel/fileio/upload.action',  
+			       server: contextPath+'/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
 			       // 内部根据当前运行是创建，可能是input元素，也可能是flash.  
 			       pick: '#filePicker',  

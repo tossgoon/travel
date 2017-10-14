@@ -1,5 +1,9 @@
 package com.travel.pojo;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Camerasurvey entity. @author MyEclipse Persistence Tools
  */
@@ -10,7 +14,7 @@ public class Camerasurvey implements java.io.Serializable {
 
 	private Integer id;
 	private String xiangjibianhao;
-	private String anzhuangriqi;
+	private Timestamp anzhuangriqi;
 	private String anzhuangrenyuan;
 	private String xiaodiming;
 	private Double jingdu;
@@ -21,6 +25,7 @@ public class Camerasurvey implements java.io.Serializable {
 	private String powei;
 	private String poxiang;
 	private String beizhu;
+	private String datestr;
 
 	// Constructors
 
@@ -29,7 +34,7 @@ public class Camerasurvey implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Camerasurvey(String xiangjibianhao, String anzhuangriqi,
+	public Camerasurvey(String xiangjibianhao, Timestamp anzhuangriqi,
 			String anzhuangrenyuan, String xiaodiming, Double jingdu,
 			Double weidu, String podu, Double height, String shengjingleixing,
 			String powei, String poxiang, String beizhu) {
@@ -65,11 +70,11 @@ public class Camerasurvey implements java.io.Serializable {
 		this.xiangjibianhao = xiangjibianhao;
 	}
 
-	public String getAnzhuangriqi() {
-		return this.anzhuangriqi;
+	public Timestamp getAnzhuangriqi() {
+		return anzhuangriqi;
 	}
 
-	public void setAnzhuangriqi(String anzhuangriqi) {
+	public void setAnzhuangriqi(Timestamp anzhuangriqi) {
 		this.anzhuangriqi = anzhuangriqi;
 	}
 
@@ -151,6 +156,19 @@ public class Camerasurvey implements java.io.Serializable {
 
 	public void setBeizhu(String beizhu) {
 		this.beizhu = beizhu;
+	}
+
+	public String getDatestr() {
+		if(this.anzhuangriqi!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			datestr=sdf.format(this.anzhuangriqi); 
+		}
+		return datestr;
+	}
+
+	public void setDatestr(String datestr) {
+		this.datestr = datestr;
 	}
 
 }

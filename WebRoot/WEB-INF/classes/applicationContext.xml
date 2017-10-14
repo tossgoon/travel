@@ -13,7 +13,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="url" value="jdbc:mysql://192.168.9.252:3306/travel">
+		<property name="url" value="jdbc:mysql://localhost:3306/travel">
 		</property>
 		<property name="username" value="root"></property>
 		<property name="password" value="gis"></property>
@@ -164,6 +164,13 @@
 	</bean> 
 	<bean id="weatherAct" class="com.travel.action.WeatherAction" scope="prototype">
 	    <property name="weatherService" ref="weatherService"></property>
+	</bean>
+	
+	<bean id="weatherTask" class="com.travel.task.AddWeatherTask" scope="prototype">
+		<property name="weatherService" ref="weatherService"></property>
+	</bean>
+	<bean id="weatherTimer" class="com.travel.task.AddWeatherTimer" scope="prototype">
+		<property name="weatherTask" ref="weatherTask"></property>
 	</bean>
 	<bean id="foldertypeService" class="com.travel.service.FoldertypeService"  scope="prototype">
 		<property name="dao" ref="dao"></property>

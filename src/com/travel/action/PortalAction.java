@@ -290,7 +290,7 @@ public class PortalAction extends ActionSupport {
 	}
 	
 	public String searchByPage() {
-		int pagesize = 10;
+		int pagesize = 7;
 		int pagenum = 1;
 		if (getParam("pagesize") != null && getParam("pagenum") != null) {
 			pagesize = Integer.parseInt(getParam("pagesize"));// Ã¿Ò³ÐÐÊý

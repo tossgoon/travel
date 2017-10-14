@@ -1,6 +1,10 @@
 package com.travel.action;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +33,9 @@ public class AnimalsurveyAction extends ActionSupport {
 	private Animalsurvey animal = new Animalsurvey();
 	private GeneralService<Animalsurvey> animalService;
 	private List<Animalsurvey> animallist;
-	/*private UserService<User> userService;*/
+	/* private UserService<User> userService; */
 	private String errormsg;
+	private SplitPage page;
 
 	public AnimalsurveyAction() {
 
@@ -41,11 +46,10 @@ public class AnimalsurveyAction extends ActionSupport {
 		return ServletActionContext.getRequest().getParameter(key);
 	}
 
-
-	/*@JSON(serialize = false)
-	public UserService<User> getUserService() {
-		return userService;
-	}*/
+	/*
+	 * @JSON(serialize = false) public UserService<User> getUserService() {
+	 * return userService; }
+	 */
 
 	public Animalsurvey getAnimal() {
 		return animal;
@@ -72,9 +76,10 @@ public class AnimalsurveyAction extends ActionSupport {
 		this.animallist = animallist;
 	}
 
-	/*public void setUserService(UserService<User> userService) {
-		this.userService = userService;
-	}*/
+	/*
+	 * public void setUserService(UserService<User> userService) {
+	 * this.userService = userService; }
+	 */
 
 	public String getErrormsg() {
 		return errormsg;
@@ -113,7 +118,7 @@ public class AnimalsurveyAction extends ActionSupport {
 		}
 		// System.out.println(this);
 	}
-	
+
 	public String saveanimal() {
 		if (animal.getId() == null) {
 			return add();
@@ -142,10 +147,10 @@ public class AnimalsurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	public String querylist(){
+
+	public String querylist() {
 		try {
-			animallist=this.animalService.getObjectList(Animalsurvey.class);
+			animallist = this.animalService.getObjectList(Animalsurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,5 +158,52 @@ public class AnimalsurveyAction extends ActionSupport {
 			return ERROR;
 		}
 		return SUCCESS;
+	}
+
+	public String querypagelist() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		Timestamp begindate;// 开始日期
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (getParam("begindate") != null) {
+			String beginstr = getParam("begindate") + " 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		} else {
+			String beginstr = "2000-1-1 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		}
+		Timestamp enddate;// 结束日期
+		if (getParam("enddate") != null) {
+			String endstr = getParam("enddate") + " 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		} else {
+			String endstr = "3999-12-12 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		}
+		try {
+			this.animallist = this.animalService.getAnimalListPage(begindate,
+					enddate, pagesize, pagenum);
+			int num = this.animalService.getAnimalCount(begindate, enddate);
+			page = new SplitPage(num, pagesize);
+			page.setCurrentPage(pagenum);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			setErrormsg("出错。" + e.getMessage());
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+
+	public SplitPage getPage() {
+		return page;
+	}
+
+	public void setPage(SplitPage page) {
+		this.page = page;
 	}
 }

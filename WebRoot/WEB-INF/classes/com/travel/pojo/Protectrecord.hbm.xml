@@ -16,11 +16,11 @@
         <property name="jiluren" type="java.lang.String">
             <column name="jiluren" length="45" />
         </property>
-        <property name="xunhuriqi" type="java.lang.String">
-            <column name="xunhuriqi" length="450" />
+        <property name="xunhuriqi" type="java.sql.Timestamp">
+            <column name="xunhuriqi" length="19" />
         </property>
-        <property name="shijian" type="java.lang.String">
-            <column name="shijian" length="450" />
+        <property name="shijian" type="java.sql.Timestamp">
+            <column name="shijian" length="19" />
         </property>
         <property name="tianqi" type="java.lang.String">
             <column name="tianqi" length="45" />

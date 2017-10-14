@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/uploadifive/uploadifive.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/uploadifive/uploadifive.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 body{
 	background-color: #F2F2F2;
@@ -42,23 +42,29 @@ body{
     <div class="toptool">
 			<span>当前位置：OA后台管理  &gt;&gt;部门管理
 			</span> 
-			<a style="float:right;margin-right:60px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:60px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 	<div class="contentstyle">
 	<div class="maincontent" >
 		<div class="leftpanel">
 			<ul>
-				<li><a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0" target="_blank">网站门户</a></li>
-				<li><a href="/travel/user/querypage.action">用户管理</a></li>
-				<li><a href="/travel/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
-				<!-- <li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li> -->
+				<li><a href="<%=contextPath%>/portal/querypage.action?pagesize=10&pagenum=1&type=0" target="_blank">网站门户</a></li>
+				<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
+				<li><a href="<%=contextPath%>/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
 				<li   class="activeli"><a href="javascript:void(0)">部门管理</a></li>
+				<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
+				<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
+				<li><a href="<%=contextPath%>/survey/animalsuredit.jsp">野生动物监测状况</a></li>
+				<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
+				<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
+				<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
+				<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
 			</ul>
 		</div>
 		<div class="rightpanel">
 			<div style="margin:20px;">
 							<span style="font-size:18px;">部门管理</span>
-							<a href="/travel/dept/deptedit.jsp" class="btn btn-primary" style="margin-right:20px; float:right;width:90px;">新增部门</a>
+							<a href="<%=contextPath%>/dept/deptedit.jsp" class="btn btn-primary" style="margin-right:20px; float:right;width:90px;">新增部门</a>
 						</div>
 			<div>
 			<table align="center" class="table table-hover" id=tbdeptlist
@@ -74,7 +80,7 @@ body{
 									<td>${dept.id}</td>
 									<td>${dept.deptname}</td>
 									<td width="120">
-										<a href="/travel/dept/query.action?id=${dept.id}">编辑/查看</a>&nbsp;&nbsp; 
+										<a href="<%=contextPath%>/dept/query.action?id=${dept.id}">编辑/查看</a>&nbsp;&nbsp; 
 									</td>
 								</tr>
 							</c:forEach>

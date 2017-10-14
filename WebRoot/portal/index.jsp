@@ -279,11 +279,11 @@ color:#ffffff;
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/travel/visitor/show.action?id=24" target="_blank">保护区简介</a></li>
-                    <li><a href="/travel/visitor/show.action?id=54" target="_blank">保护区历史</a></li>
-                    <li><a href="/travel/visitor/show.action?id=55" target="_blank">组织机构</a></li>
-                    <li><a href="/travel/visitor/show.action?id=56" target="_blank">人员编制</a></li>
-                    <li><a href="/travel/visitor/show.action?id=57" target="_blank">工作职能</a></li>
+                    <li><a href="<%=contextPath%>/visitor/show.action?id=24" target="_blank">保护区简介</a></li>
+                    <li><a href="<%=contextPath%>/visitor/show.action?id=54" target="_blank">保护区历史</a></li>
+                    <li><a href="<%=contextPath%>/visitor/show.action?id=55" target="_blank">组织机构</a></li>
+                    <li><a href="<%=contextPath%>/visitor/show.action?id=56" target="_blank">人员编制</a></li>
+                    <li><a href="<%=contextPath%>/visitor/show.action?id=57" target="_blank">工作职能</a></li>
                 </ul>
             </li>
 			<li class="dropdown">
@@ -292,20 +292,20 @@ color:#ffffff;
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1"  target="_blank">工作动态</a></li>
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3"  target="_blank">政务公开</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=1"  target="_blank">工作动态</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=3"  target="_blank">政务公开</a></li>
                 </ul>
             </li>
-			<li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
+			<li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=2">政策法规</a></li>
 			<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     	保护区防护
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=13"  target="_blank">野生动植物保护</a></li>
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8"  target="_blank">防火管理</a></li>
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=9"  target="_blank">防虫管理</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=13"  target="_blank">野生动植物保护</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=8"  target="_blank">防火管理</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=9"  target="_blank">防虫管理</a></li>
                 </ul>
             </li>
 			<li class="dropdown">
@@ -314,18 +314,19 @@ color:#ffffff;
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5"  target="_blank">保护区动物</a></li>
-                    <li><a href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=10"  target="_blank">保护区植物</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=5"  target="_blank">保护区动物</a></li>
+                    <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=10"  target="_blank">保护区植物</a></li>
                 </ul>
             </li>
-			<li><a href="/travel/weather/weather.jsp" target="_blank">气象数据</a></li>
-			<li><a href="/travel/visitor/show.action?id=50" target="_blank">联系我们</a></li>
-			<li><a href="/travel/travel/user/login.jsp" target="_blank">OA办公系统</a></li>
+			<li><a href="<%=contextPath%>/weather/weather.jsp" target="_blank">气象数据</a></li>
+			<li><a href="<%=contextPath%>/visitor/show.action?id=50" target="_blank">联系我们</a></li>
+			<li><a href="<%=contextPath%>/travel/user/login.jsp" target="_blank">OA办公系统</a></li>
 		</ul>
 	</div>
 	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:60px;">
 		<div style="width:1174px;margin:0 auto;">
 			<label	style="font-size:12px;font-weight:normal;margin-left:20%;float:left;">今日天气：<%=currentDate%></label>
+			<label>森林火险气象等级：</label><label id="firelevel">森林火险气象等级：</label>
 			<iframe name="sinaWeatherTool"
 				src="http://weather.news.sina.com.cn/chajian/iframe/weatherStyle1.html?city=%E5%BB%B6%E5%AE%89"
 				width="200" height="20" marginwidth="0" marginheight="0" hspace="0"
@@ -341,31 +342,6 @@ color:#ffffff;
 				</span>
 			</s:form>
 			<!-- /input-group -->
-
-			<%-- <c:if test="${sessionScope.loginname==null}">
-				<s:form method="post" action="login" namespace="/visitor" role="form"
-					theme="simple" id="formLogin">
-					<input type="button"  class="btn btn-success" onclick="DoLogin()"
-						value="登陆"
-						style="width:70px;height:30px;float:right;margin-top:-5px;margin-left:5px;" />
-					<input class="form-control input-sm" name="user.password" type="password"
-						style="width:160px;float:right;margin-top:-5px;" />
-					<span style="float:right;">密码:</span>
-					<input class="form-control input-sm" id="loginname"
-						name="user.loginname"
-						style="width:160px;float:right;margin-top:-5px;" />
-					<span style="float:right;">用户名:</span>
-				</s:form>
-			</c:if>
-
-			<c:if test="${sessionScope.loginname!=null}">
-				<div style="float:right;" id="divwelcome">
-					<span id="labelwelcome">欢迎登陆,${sessionScope.loginname}。</span> 
-					<a href="/travel/oa/loginsuccess.action"> &gt;&gt;点击进入OA  </a>
-					<a style="margin-left:10px;" href="/travel/visitor/loginout.action"> 退出登陆  </a>
-				</div>
-			</c:if> --%>
-			
 		</div>
 	</div>
 	<div class="maincontent">
@@ -385,7 +361,7 @@ color:#ffffff;
 						<c:choose>
 							<c:when test="${status.first}">
 								<div class="item active">
-									<a target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+									<a target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 									<img style="height:438px;width:100%;"
 										src="${portal.pictureurl}" alt="${portal.title}">
 									 <div class="carousel-caption">${portal.title}</div>
@@ -394,7 +370,7 @@ color:#ffffff;
 							</c:when>
 							<c:otherwise>
 								<div class="item">
-								<a target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+								<a target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 									<img style="height:438px;width:100%;"
 										src="${portal.pictureurl}" alt="${portal.title}">
 									<div class="carousel-caption">${portal.title}</div>
@@ -412,11 +388,11 @@ color:#ffffff;
 				<div class="titlepaneldiv">
 					<span class="titlepanel" >工作动态</span>
 				</div>
-				<a class="morea" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=1"> 更多&gt;&gt; </a>
+				<a class="morea" href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=1"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalWorkList}" varStatus="status">
 					<p class="title1">
-						<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
+						<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">${portal.title}</a>
 					</p>
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -427,11 +403,11 @@ color:#ffffff;
 			<div class="titlepaneldiv">
 				<span class="titlepanel">政策法规</span>
 			</div>
-			<a class="morea" target="_blank"  href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=2"> 更多&gt;&gt; </a>
+			<a class="morea" target="_blank"  href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=2"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalLawList}">
 					<p class="title1">
-						<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
+						<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">${portal.title}</a>
 					</p>
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -442,11 +418,11 @@ color:#ffffff;
 			<div class="titlepaneldiv">
 				<span class="titlepanel">政务公开</span>
 			</div>
-			<a class="morea" target="_blank"  href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=3"> 更多&gt;&gt; </a>
+			<a class="morea" target="_blank"  href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=3"> 更多&gt;&gt; </a>
 			<div class="panelcontent">
 				<c:forEach var="portal" items="${portalAffairsList}">
 					<p class="title1">
-						<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">${portal.title}</a>
+						<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">${portal.title}</a>
 					</p>
 					<p class="title2">
 						${portal.pubdatestr}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -459,7 +435,7 @@ color:#ffffff;
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">保护区介绍</span><a  target="_blank" 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/show.action?id=24">
+						<span class="subtitle">保护区介绍</span><a  target="_blank" 	style="font-size:12px;float:right;margin-top:12px;" href="<%=contextPath%>/visitor/show.action?id=24">
 							更多&gt;&gt; </a>
 					</div>
 					
@@ -479,30 +455,22 @@ color:#ffffff;
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">科普知识</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=5">
+						<span class="subtitle">科普知识</span><a 	style="font-size:12px;float:right;margin-top:12px;" href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=5">
 							更多&gt;&gt; </a>
 					</div>
 					<c:forEach var="portal" items="${portalAnimalList}">
 						<div class='sublist'>
-							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+							<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
 					<c:forEach var="portal" items="${portalPlantList}">
 						<div class='sublist'>
-							<a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}">
+							<a target="_blank"  href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
 					<div style="width:100%;text-align:center;margin-top:10px;height:230px;">
-						<!-- <video src="\travel\uploadpic\intro.mp4" style="width:90%;"  controls autobuffer></video> -->
-						<%-- <video width="80%"  controls="controls" autoplay="autoplay">
-						   <source src="\travel\uploadpic\movie.ogg" type="video/mp4" />
-						   <source src="<%=contextPath%>/includes/image/movie.ogg" type="video/ogg" />
-						   <source src="<%=contextPath%>/includes/image/intro3.mp4" type="video/mp4" />
-						</video> --%>
-						<!-- <embed  type="application/x-shockwave-flash" align="9" width="100%" height="230px;" src="http://v.youku.com/v_show/id_XMzA0MzM4ODAzNg==.html?spm=a2hzp.8244740.0.0" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed> -->
-					    <!-- <embed  type="application/x-shockwave-flash" align="9" width="100%" height="230px;" src="http://v.youku.com/v_show/id_XMzA0MzM4ODAzNg==.html" allowscriptaccess="always" quality="high" allowfullscreen="true" scale="ShowAll" loop="loop" menu="menu" autostart="true" wmode="Window"></embed> -->
 					    <div id="youkuplayer" style="width:100%;height:230px"></div>
 					</div>
 				</div>
@@ -510,24 +478,24 @@ color:#ffffff;
 			<div class="panel panel-success">
 				<div class="panel-body">
 					<div class="subtitlediv">
-						<span class="subtitle">保护区防护</span><a  target="_blank" 	style="font-size:12px;float:right;margin-top:12px;" href="/travel/visitor/querypage.action?pagesize=10&pagenum=1&type=8">
+						<span class="subtitle">保护区防护</span><a  target="_blank" 	style="font-size:12px;float:right;margin-top:12px;" href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=8">
 							更多&gt;&gt; </a>
 					</div>
 					<c:forEach var="portal" items="${portalPlantAnimalProtectList}">
 						<div class='sublist'>
-							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+							<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
 					<c:forEach var="portal" items="${portalFireList}">
 						<div class='sublist'>
-							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+							<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
 					<c:forEach var="portal" items="${portalInsectList}">
 						<div class='sublist'>
-							<a  target="_blank" href="/travel/visitor/show.action?id=${portal.id}">
+							<a  target="_blank" href="<%=contextPath%>/visitor/show.action?id=${portal.id}">
 								${portal.title} </a>
 						</div>
 					</c:forEach>
@@ -547,7 +515,7 @@ color:#ffffff;
 				<div id="demo1">
 				    <c:forEach var="portal" items="${pictureList}">
 						<c:if test="${not empty portal.pictureurl}">
-						  <a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						  <a target="_blank"  href="<%=contextPath%>/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
 						</c:if>
 					</c:forEach>
 				</div>
@@ -558,7 +526,7 @@ color:#ffffff;
 				<div id="demop1">
 				    <c:forEach var="portal" items="${pictureListPlant}">
 						<c:if test="${not empty portal.pictureurl}">
-						  <a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						  <a target="_blank"  href="<%=contextPath%>/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
 						</c:if>
 					</c:forEach>
 				</div>
@@ -569,7 +537,7 @@ color:#ffffff;
 				<div id="demos1">
 				    <c:forEach var="portal" items="${pictureLisLandscape}">
 						<c:if test="${not empty portal.pictureurl}">
-						  <a target="_blank"  href="/travel/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
+						  <a target="_blank"  href="<%=contextPath%>/visitor/show.action?id=${portal.id}"><img style="width:300px;height:200px;"src="${portal.pictureurl}" alt="${portal.title}"></a>
 						</c:if>
 					</c:forEach>
 				</div>
@@ -611,6 +579,7 @@ color:#ffffff;
 	   });
 	    var map;//地图
 	    var marker;//标记
+	    var contextPath="<%=contextPath%>";
 		$(function() {
 			$("#myCarousel").carousel({
 				interval : 7000
@@ -625,7 +594,7 @@ color:#ffffff;
 			});
 			
 			marker = new AMap.Marker({
-				icon : '/travel/includes/image/redmarker.png',//24px*24px
+				icon : contextPath+'/includes/image/redmarker.png',//24px*24px
 		        position: map.getCenter()
 		    });
 		    marker.setMap(map);
@@ -634,37 +603,36 @@ color:#ffffff;
 		        offset: new AMap.Pixel(-100, -30),//修改label相对于maker的位置
 		        content: "<label style='font-size:14px;'>陕西延安黄龙山褐马鸡国家级自然保护区</label>"
 		    });
-		});
-		
-		function DoLogin()
-		{
-			var loginname=$("#loginname").val();
-			$.ajax({
-				url : '/travel/visitor/login.action',
-				type : 'POST',
-				// 提交数据给Action传入数据
-				data :  $("#formLogin").serialize(),
-				// 返回的数据类型
-				dataType : 'json',
-				// 成功是调用的方法
+		    //获取防火等级
+		    $.ajax({
+				type : "get",
+				url : contextPath+"/visitor/queryfireinfo.action",
+				//data :{datestr: $("#computedate").val()},
+				//data :{datestr: datestr},
+				cache : false, 
+				dataType : "json",
 				success : function(data) {
-					var result=data.errorMsg;
-					if(result=="0"){
-						//$("#labelwelcome").html("欢迎登陆,"+loginname+"。");
-						//$("#divwelcome").show();
-						//$("#formLogin").hide();
-						$("#formLogin").html("<a style='margin-left:10px;float:right;' href='/travel/visitor/loginout.action'> 退出登陆  </a>   <a href='/travel/oa/loginsuccess.action' style='float:right'> &gt;&gt;点击进入OA </a>"+"<span id='labelwelcome' style='float:right;'>欢迎登陆,"+loginname+"。</span> ");
-						//window.location.reload();
+					var fire=data.fire;
+					$("#firelevel").html(fire.levelstr);
+					if(fire.level==1){
+						$("#firelevel").css("color","#00ff00");
 					}
-					else{
-						alert(data.errorMsg);
+					else if(fire.level==2){
+						$("#firelevel").css("color","#0000ff");
+						
+					}else if(fire.level==3){
+						$("#firelevel").css("color","#ffff00");
+					}else if(fire.level==4){
+						$("#firelevel").css("color","#FF8C00");
+					}else if(fire.level==5){
+						$("#firelevel").css("color","#ff0000");
 					}
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
 					alert(XMLHttpRequest.status);
 				}
 			});
-		}
+		});
 		function ChangeAnimal(){
 			$("#indemo").show();
 			$("#indemop").hide();

@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,9 +24,9 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	 float: right;
@@ -65,18 +65,7 @@ background-color:#f2f2f2;
 									<td><span>名称</span></td>
 									<td colspan="3"><s:textfield class="form-control"
 											id="deptname" name="dept.deptname"></s:textfield></td>
-								</tr>
-								<%-- <tr>
-									<td><span>位置</span></td>
-									<td colspan="3"><s:textfield class="form-control"
-											id="oatitle" name="oa.title"></s:textfield></td>
-								</tr> --%>
-								<%-- <tr>
-									<td valign="top"><span>职责</span></td>
-									<td colspan="3"><s:textarea class="form-control"
-											style="resize: none;margin-bottom:10px;width:800px;"
-											rows="10" id="deptfuntion" name="dept.funtion"></s:textarea></td>
-								</tr> --%>
+								</tr>		
 								<tr>
 									<td valign="top"><span>备注</span></td>
 									<td colspan="3"><s:textarea class="form-control"
@@ -100,14 +89,15 @@ background-color:#f2f2f2;
 	</div>
 </div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript">
+	    var  contextPath="<%=contextPath%>";
 		function SaveDept() {
 			//获取oafiles
 			$.ajax({
 				type : "post",
-				url : "/travel/dept/save.action",
+				url : contextPath+"/dept/save.action",
 				data : {
 					"dept.id" : $("#deptid").val(),
 					"dept.deptname" : $("#deptname").val(),
@@ -134,7 +124,7 @@ background-color:#f2f2f2;
 		function DeleteDept() {
 			if ($("#deptid").val() != null && $("#deptid").val() != "") {
 				$.ajax({
-					url : '/travel/dept/delete.action?id=' + $("#deptid").val(),
+					url : contextPath+'/dept/delete.action?id=' + $("#deptid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

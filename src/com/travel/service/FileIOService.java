@@ -22,6 +22,8 @@ public class FileIOService {
 	}
 
 	public InputStream getFileInput() throws FileNotFoundException {
+		String contextPath = ServletActionContext.getServletContext().getContextPath();// contextPath为\\travel 
+		
 		String realpath=ServletActionContext.getServletContext().getRealPath(filepath).replace("\\webapps\\travel\\travel","");
 		//InputStream ist=ServletActionContext.getServletContext().getResourceAsStream(realpath);
 		//InputStream ist=new FileInputStream(realpath);
@@ -30,15 +32,31 @@ public class FileIOService {
 	}
 
 	public String uploadFile(String fileName, File fileData) throws Exception {
-		String path = ServletActionContext.getServletContext().getRealPath("/")
+		/*String path = ServletActionContext.getServletContext().getRealPath("/")
 				.replace("\\webapps\\travel\\", "")
-				+ "\\uploadpic";
+				+ "\\uploadpic";*/
+		String contextPath = ServletActionContext.getServletContext().getContextPath().replace("/", "\\");// contextPath为\\travel 
+		if(contextPath.equals("")){
+			contextPath="\\ROOT";
+		}
+		String pathstr="\\webapps"+contextPath+"\\";
+		String realpath=ServletActionContext.getServletContext().getRealPath("/");
+		String path = ServletActionContext.getServletContext().getRealPath("/").replace(pathstr, "")+ "\\uploadpic";
 		String filetype = fileName.substring(fileName.lastIndexOf("."));
+		
+		System.out.println(contextPath);
+		System.out.println(pathstr);
+		System.out.println(realpath);
+		System.out.println(path);
+		System.out.println(filetype);
+		
 		// 生成文件名
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String newFileName = sdf.format(date) + filetype;
-		String fullFileName = "\\travel\\uploadpic\\" + newFileName;
+		
+		//String fullFileName = "\\travel\\uploadpic\\" + newFileName;
+		String fullFileName = contextPath+"\\uploadpic\\" + newFileName;
 		InputStream is = null;
 		OutputStream os = null;
 		/*

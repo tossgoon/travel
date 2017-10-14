@@ -2,8 +2,10 @@ package com.travel.action;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,8 +33,9 @@ public class WeatherAction extends ActionSupport {
 	private WeatherService<Weather> weatherService;
 	private List<Weather> weatherlist;
 	private SplitPage page;
-	private Fire fire=new Fire();
-    public SplitPage getPage() {
+	private Fire fire = new Fire();
+
+	public SplitPage getPage() {
 		return page;
 	}
 
@@ -41,6 +44,7 @@ public class WeatherAction extends ActionSupport {
 	}
 
 	private List<WeatherView> wlist;
+
 	public WeatherAction() {
 
 	}
@@ -49,13 +53,14 @@ public class WeatherAction extends ActionSupport {
 	protected String getParam(String key) {
 		return ServletActionContext.getRequest().getParameter(key);
 	}
-	
-	public String query(){
-		String weinanaurl="http://xsdz.veinasa.cn/intfa/queryData/16053404.json";
+
+	public String query() {
+		String weinanaurl = "http://xsdz.veinasa.cn/intfa/queryData/16053404.json";
 		StringBuffer sb = new StringBuffer();
 		try {
 			java.net.URL url = new java.net.URL(weinanaurl);
-			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(),"utf-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					url.openStream(), "utf-8"));
 			String line;
 			while ((line = in.readLine()) != null) {
 				sb.append(line);
@@ -64,13 +69,15 @@ public class WeatherAction extends ActionSupport {
 			in.close();
 			setErrormsg("0");
 			setWeatherdata(sb.toString());
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat format = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
 			this.datestr = format.format(new Date());
 			return SUCCESS;
 		} catch (Exception e) { // Report any errors that arise
 			sb.append(e.toString());
 			System.err.println(e);
-			System.err.println("Usage:   java   HttpClient   <URL>   [<filename>]");
+			System.err
+					.println("Usage:   java   HttpClient   <URL>   [<filename>]");
 			setErrormsg(e.getMessage());
 			setWeatherdata(sb.toString());
 			return ERROR;
@@ -125,7 +132,7 @@ public class WeatherAction extends ActionSupport {
 	public void setWeatherlist(List<Weather> weatherlist) {
 		this.weatherlist = weatherlist;
 	}
-	
+
 	public String add() {
 		String result = "";
 		try {
@@ -141,18 +148,18 @@ public class WeatherAction extends ActionSupport {
 		}
 		return result;
 	}
-	
-	public String queryweather(){
+
+	public String queryweather() {
 		if (getParam("id") != null) {
 			Integer id = Integer.parseInt(getParam("id"));
 			weather = weatherService.getObject(Weather.class, id);
 		}
 		return SUCCESS;
 	}
-	
-	public String queryweatherlist(){
+
+	public String queryweatherlist() {
 		try {
-			weatherlist=this.weatherService.getObjectList(Weather.class);
+			weatherlist = this.weatherService.getObjectList(Weather.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,31 +168,27 @@ public class WeatherAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-/*	public String queryWeatherByPage(){
-		int pagesize = 3;
-		int pagenum = 1;
-		if (getParam("pagesize") != null && getParam("pagenum") != null) {
-			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
-			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
-		}
-		this.weatherlist=weatherService.queryWeatherByPage(pagesize, pagenum);
-		int num = weatherService.getWeatherCount();
-		page = new SplitPage(num,pagesize);
-		page.setCurrentPage(pagenum);
-		return SUCCESS;
-	}*/
 
-	public String queryWeatherListByPage(){
+	/*
+	 * public String queryWeatherByPage(){ int pagesize = 3; int pagenum = 1; if
+	 * (getParam("pagesize") != null && getParam("pagenum") != null) { pagesize
+	 * = Integer.parseInt(getParam("pagesize"));// 每页行数 pagenum =
+	 * Integer.parseInt(getParam("pagenum"));// 页码 }
+	 * this.weatherlist=weatherService.queryWeatherByPage(pagesize, pagenum);
+	 * int num = weatherService.getWeatherCount(); page = new
+	 * SplitPage(num,pagesize); page.setCurrentPage(pagenum); return SUCCESS; }
+	 */
+
+	public String queryWeatherListByPage() {
 		int pagesize = 10;
 		int pagenum = 1;
 		if (getParam("pagesize") != null && getParam("pagenum") != null) {
 			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
 			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
 		}
-		wlist=weatherService.queryWeatherViewByPage(pagesize, pagenum);
+		wlist = weatherService.queryWeatherViewByPage(pagesize, pagenum);
 		int num = weatherService.getWeatherViewCount();
-		page = new SplitPage(num,pagesize);
+		page = new SplitPage(num, pagesize);
 		page.setCurrentPage(pagenum);
 		return SUCCESS;
 	}
@@ -197,45 +200,51 @@ public class WeatherAction extends ActionSupport {
 	public void setWlist(List<WeatherView> wlist) {
 		this.wlist = wlist;
 	}
-	
-	public String queryfireinfo() throws ParseException{
-		
+
+	public String queryfireinfo() throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 格式化
+		String datestr;
 		if (getParam("datestr") != null) {
-			String datestr =getParam("datestr");
-			String daywater= this.weatherService.getWeatherWater(datestr);//天数,降水量
-			String[] dw=daywater.split(",");
-			double day=0;
-			double water=0;
-			if(dw.length==2)
-			{
-				day=Double.parseDouble(dw[0]);
-				water=Double.parseDouble(dw[1]);
-			}
-			double temprature=	this.weatherService.getWeatherTemprature(datestr);//气温
-			double humidity=	this.weatherService.getWeatherHumidity(datestr);//湿度
-			double wind=this.weatherService.getWeatherWind(datestr);//风力
-			fire.setHumidity(humidity);
-			fire.setTemprature(temprature);
-			fire.setWater(water);
-			fire.setWaterday(day);
-			fire.setWind(wind);
-			
-			fire.setParama(this.getParama(temprature));
-			fire.setParamb(this.getParamb(humidity));
-			fire.setParamc(this.getParamc(water,day));
-			fire.setParamd(this.getParamd(wind));
-			fire.setDaystr(datestr);
+			datestr = getParam("datestr");
+		} else {
+			datestr = sdf.format(new Date());
 		}
-		if(getParam("flag")!=null)
-		{
+		String daywater = this.weatherService.getWeatherWater(datestr);// 天数,降水量
+		String[] dw = daywater.split(",");
+		double day = 0;
+		double water = 0;
+		if (dw.length == 2) {
+			day = Double.parseDouble(dw[0]);
+			water = Double.parseDouble(dw[1]);
+		}
+		double temprature = this.weatherService.getWeatherTemprature(datestr);// 气温
+		double humidity = this.weatherService.getWeatherHumidity(datestr);// 湿度
+		double wind = this.weatherService.getWeatherWind(datestr);// 风力
+		fire.setHumidity(humidity);
+		fire.setTemprature(temprature);
+		fire.setWater(water);
+		fire.setWaterday(day);
+		fire.setWind(wind);
+
+		fire.setParama(this.getParama(temprature));
+		fire.setParamb(this.getParamb(humidity));
+		fire.setParamc(this.getParamc(water, day));
+		fire.setParamd(this.getParamd(wind));
+		fire.setDaystr(datestr);
+
+		Date date = sdf.parse(datestr);
+		fire.setParame(this.getParame(date));
+		// 计算
+		fire.computeLevel();
+		if (getParam("flag") != null) {
 			return "info";
 		}
 		return SUCCESS;
 	}
-	
-	//获取森林防火指数A
+
+	// 获取森林防火指数A
 	private double getParama(double tempr) {
-		if(tempr==-9999){
+		if (tempr == -9999) {
 			return -9999;
 		}
 		double parama = 0;
@@ -254,9 +263,10 @@ public class WeatherAction extends ActionSupport {
 		}
 		return parama;
 	}
-	//获取森林防火指数B
+
+	// 获取森林防火指数B
 	private double getParamb(double tempr) {
-		if(tempr==-9999){
+		if (tempr == -9999) {
 			return -9999;
 		}
 		double parama = 0;
@@ -275,10 +285,10 @@ public class WeatherAction extends ActionSupport {
 		}
 		return parama;
 	}
-	
-	//获取森林防火指数C
+
+	// 获取森林防火指数C
 	private double getParamc(double water, double day) {
-		if(water==-9999||day==-9999){
+		if (water == -9999 || day == -9999) {
 			return -9999;
 		}
 		double paramc = 50;
@@ -300,10 +310,10 @@ public class WeatherAction extends ActionSupport {
 		}
 		return paramc;
 	}
-	
-	//获取森林防火指数D
+
+	// 获取森林防火指数D
 	private double getParamd(double tempr) {
-		if(tempr==-9999){
+		if (tempr == -9999) {
 			return -9999;
 		}
 		double parama = 0;
@@ -327,6 +337,25 @@ public class WeatherAction extends ActionSupport {
 			parama = 40;
 		}
 		return parama;
+	}
+
+	private double getParame(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		int month = cal.get(Calendar.MONTH)+1;
+		double re = 0;
+		if (month == 12 || month == 1 || month == 2) {
+			re = 0;
+		} else if (month == 3 || month == 10 || month == 11) {
+			re = 5;
+		} else if (month == 4 || month == 9) {
+			re = 10;
+		} else if (month == 5 || month == 8) {
+			re = 15;
+		} else if (month == 6 || month == 7) {
+			re = 20;
+		}
+		return re;
 	}
 
 	public Fire getFire() {

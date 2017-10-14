@@ -1,21 +1,16 @@
 package com.travel.task;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-
 public class AddWeatherTimer {
 
 	// 时间间隔
 	private ScheduledExecutorService scheduler = Executors
 			.newScheduledThreadPool(1);
-	private AddWeatherTask addweather = new AddWeatherTask();
-
+	
+	private AddWeatherTask weatherTask;
+	
 	public AddWeatherTimer() {
 		// TODO Auto-generated constructor stub
 
@@ -28,7 +23,7 @@ public class AddWeatherTimer {
 				// TODO Auto-generated method stub
 				try {
 					// 执行增加天气的操作
-					addweather.ExeAddWeather();
+					weatherTask.ExeAddWeather();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -36,7 +31,7 @@ public class AddWeatherTimer {
 			}
 		};
 		// 执行后检查一下设置的时间间隔
-		int exeInterval = 7200;
+		int exeInterval = 10800;
 		/*try {
 			// 从数据库中取得时间
 			// ISettingDAO settingDAO = DAOFactory.getSettingDAOInstance();
@@ -68,5 +63,13 @@ public class AddWeatherTimer {
 
 	public void stop() {
 		scheduler.shutdown();
+	}
+
+	public AddWeatherTask getWeatherTask() {
+		return weatherTask;
+	}
+
+	public void setWeatherTask(AddWeatherTask weatherTask) {
+		this.weatherTask = weatherTask;
 	}
 }

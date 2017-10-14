@@ -1,5 +1,9 @@
 package com.travel.pojo;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Animalsurvey entity. @author MyEclipse Persistence Tools
  */
@@ -10,7 +14,7 @@ public class Animalsurvey implements java.io.Serializable {
 
 	private Integer id;
 	private String yangxianhao;
-	private String tianbiaoshijian;
+	private Timestamp tianbiaoshijian;
 	private String tianqi;
 	private String jianceren;
 	private String dongwumingcheng;
@@ -22,6 +26,7 @@ public class Animalsurvey implements java.io.Serializable {
 	private Double weidu;
 	private Double jingdu;
 	private String beizhu;
+	private String datestr;
 
 	// Constructors
 
@@ -30,7 +35,7 @@ public class Animalsurvey implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Animalsurvey(String yangxianhao, String tianbiaoshijian,
+	public Animalsurvey(String yangxianhao, Timestamp tianbiaoshijian,
 			String tianqi, String jianceren, String dongwumingcheng,
 			Integer shitishuliang, Integer bodyshuliang, String fenbian,
 			String shengjingleixing, Double height, Double weidu,
@@ -68,11 +73,11 @@ public class Animalsurvey implements java.io.Serializable {
 		this.yangxianhao = yangxianhao;
 	}
 
-	public String getTianbiaoshijian() {
-		return this.tianbiaoshijian;
+	public Timestamp getTianbiaoshijian() {
+		return tianbiaoshijian;
 	}
 
-	public void setTianbiaoshijian(String tianbiaoshijian) {
+	public void setTianbiaoshijian(Timestamp tianbiaoshijian) {
 		this.tianbiaoshijian = tianbiaoshijian;
 	}
 
@@ -162,6 +167,19 @@ public class Animalsurvey implements java.io.Serializable {
 
 	public void setBeizhu(String beizhu) {
 		this.beizhu = beizhu;
+	}
+
+	public String getDatestr() {
+		if(this.tianbiaoshijian!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			datestr=sdf.format(this.tianbiaoshijian); 
+		}
+		return datestr;
+	}
+
+	public void setDatestr(String datestr) {
+		this.datestr = datestr;
 	}
 
 }

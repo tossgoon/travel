@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	 float: right;
@@ -47,7 +47,7 @@ background-color:#f2f2f2;
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt;<a href="/travel/oa/querysend.action">发文管理</a>&gt;&gt; 发文编辑    </span>
+					<span>当前位置：OA管理&gt;&gt;<a href="<%=contextPath%>/oa/querysend.action">发文管理</a>&gt;&gt; 发文编辑    </span>
 				</div>
 			</div>
 		</div>
@@ -164,7 +164,7 @@ background-color:#f2f2f2;
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
+						<a href="<%=contextPath%>/travel/user/useroa.jsp" class="btn btn-default">新增数据</a>
 						<c:if test="${oa.status!=true}">
 							<button type="button" id="btnsave" class="btn btn-primary"
 								onclick="SaveOa(0)">保存数据</button>
@@ -201,13 +201,14 @@ background-color:#f2f2f2;
 		</div>
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 		var receiverids="";
 		var receivernames="";
+		var contextPath="<%=contextPath%>";
 		function SelectAll() {
 			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
 		}
@@ -269,7 +270,7 @@ background-color:#f2f2f2;
 			oafiles=oafiles+"]"; */
 			$.ajax({
 				type : "post",
-				url : "/travel/oa/save.action",
+				url : contextPath+"/oa/save.action",
 				data : {
 					"oa.id" : $("#oaid").val(),
 					"oa.title" : $("#oatitle").val(),
@@ -309,7 +310,7 @@ background-color:#f2f2f2;
 		function DeleteOa() {
 			if ($("#oaid").val() != null&&$("#oaid").val() !="") {
 				$.ajax({
-					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
+					url : contextPath+'/oa/delete.action?id=' + $("#oaid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -363,9 +364,9 @@ background-color:#f2f2f2;
 						// 选完文件后，是否自动上传。  
 						auto : false,
 						// swf文件路径  
-						swf : '<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+						swf : contextPath+'/includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
-			       server: '/travel/fileio/upload.action',  
+			       server: contextPath+'/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
 			       // 内部根据当前运行是创建，可能是input元素，也可能是flash.  
 			       pick:{
@@ -498,7 +499,7 @@ background-color:#f2f2f2;
 		function InitAllUsers(){
 			var recs=receiverids.split(";");
 			$.ajax({
-				url : '/travel/user/query.action?param=1',
+				url : contextPath+'/user/query.action?param=1',
 				type : 'GET',
 				// 提交数据给Action传入数据
 				//data : {userid:delUserid},

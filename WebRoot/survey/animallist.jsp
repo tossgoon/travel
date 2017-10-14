@@ -13,12 +13,12 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>气象信息</title>
+<title>野生动物监测数据查询</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="褐马鸡,保护区,气象信息">
-<meta http-equiv="description" content="气象信息">
+<meta http-equiv="keywords" content="褐马鸡,保护区">
+<meta http-equiv="description" content="野生动物监测数据查询">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -57,15 +57,45 @@ text-align:center;}
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：天气信息&gt;&gt; 历史天气信息    </span>
+					<span>当前位置：天气信息&gt;&gt; 野生动物监测数据查询    </span>
 					<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 				</div>
 			</div>
 		</div>
-		<div class="row">
+			<div class="row" style="margin-top:18px;">
+				<div class="col-md-2">
+    					<span style="float:right">起始日期</span>
+				</div>
+
+				<div class="col-md-3">
+
+					<div class="input-group date form_date"
+						data-date-format="yyyy-mm-dd" >
+						<s:textfield class="form-control input-sm" id="begindate">
+						</s:textfield>
+						<span class="input-group-addon"> <span
+							class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-2"> <span style="float:right">终止日期</span></div>
+				<div class="col-md-3">
+					<div class="input-group date form_date" 
+						data-date-format="yyyy-mm-dd">
+						<s:textfield class="form-control input-sm" id="enddate">
+						</s:textfield>
+						<span class="input-group-addon"> <span
+							class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-1">查询</div>
+				<div class="col-md-1"><%-- <td width="100" style="text-align:center;"><a
+															href='/travel/fileio/download.action?fid=<s:property	value="#oafile.id" /> '>下载</a></td> --%></div>
+			</div>
+			<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default" style="width:1024px;margin:0 auto;margin-top:20px;">
-					<!-- <div class="panel-heading">OA管理：动物状况监测信息编辑 </div> -->
 					<div class="panel-body">
 						<div  style="width:100%;margin:0 auto;">
 								<div class="container" style="width:1000px;">
@@ -79,33 +109,35 @@ text-align:center;}
 												<table style="width:100%;font-size:14px;" class="table">
 												   <thead>
 												      <tr  align="center">
-												           <th>时间</th>
-												           <th>降雨量</th>
-												           <th>空气温度</th>
-												           <th>空气湿度</th>
-												           <th>大气压力</th>
-												           <th>光合有效</th>
-												           <th>风向</th>
-												           <th>紫外辐射</th>
-												           <th>土壤酸碱</th>
-												           <th>PM25</th>
-												           <th>详情</th>
+												           <th>填表时间</th>
+												           <th>样线号</th>
+												           <th>天气</th>
+												           <th>监测人</th>
+												           <th>动物名称</th>
+												           <th>实体数量</th>
+												           <th>尸体数量(</th>
+												           <th>粪便</th>
+												           <th>经度</th>
+												           <th>纬度</th>
+												           <th>海拔</th>
+												           <th>详细</th>
 												      </tr>
 												   </thead>
 												   <tbody id="tbweather">
-													<c:forEach var="w" items="${wlist}">
+													<c:forEach var="a" items="${animallist}">
 														<tr align="center" height="24px">
-															<td>${w.weatherdatestr}</td>
-															<td>${w.jiangyuliang}</td>
-															<td>${w.kongqiwendu}</td>
-															<td>${w.kongqishidu}</td>
-															<td>${w.daqiyali}</td>
-															<td>${w.guangheyouxiao}</td>
-															<td>${w.fengxiang}</td>
-															<td>${w.ziwaifushe}</td>
-															<td>${w.turangsuanjian}</td>
-															<td>${w.pm25}</td>
-															<td><a	href="<%=contextPath%>/visitor/queryfireinfo.action?datestr=${w.weatherday}&flag=1" target="_blank">查看防火指数</a>&nbsp;&nbsp;
+															<td>${a.datestr}</td>
+															<td>${a.yangxianhao}</td>
+															<td>${a.tianqi}</td>
+															<td>${a.jianceren}</td>
+															<td>${a.dongwumingcheng}</td>
+															<td>${a.shitishuliang}</td>
+															<td>${a.bodyshuliang}</td>
+															<td>${a.fenbian}</td>
+															<td>${a.weidu}</td>
+															<td>${a.jingdu}</td>
+															<td>${a.height}</td>
+															<td><a	href="<%=contextPath%>/survey/queryanimal.action?id=${a.id}" target="_blank">查看详情</a>&nbsp;&nbsp;
 															</td>
 														</tr>
 													</c:forEach>
@@ -121,10 +153,10 @@ text-align:center;}
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<a id="firstpage" href="<%=contextPath%>/visitor/queryweatherlist.action?pagesize=10&pagenum=1">第一页</a> 
-				<a id="lastpage"  href="<%=contextPath%>/visitor/queryweatherlist.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
-				<a id="nextpage"  href="<%=contextPath%>/visitor/queryweatherlist.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
-				<a id="endpage"   href="<%=contextPath%>/visitor/queryweatherlist.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
+				<a id="firstpage" href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=1">第一页</a> 
+				<a id="lastpage"  href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
+				<a id="nextpage"  href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
+				<a id="endpage"   href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
 				<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 			</div>
 		</div>
@@ -135,5 +167,21 @@ text-align:center;}
 	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+    <script type="text/javascript">
+		$(function() {
+			//初始化日期控件
+			$('.form_date').datetimepicker({
+				language : 'zh-CN',
+				weekStart : 1,
+				todayBtn : 1,
+				autoclose : 1,
+				todayHighlight : 1,
+				startView : 2,
+				minView : 2,
+				forceParse : 0
+			});
+		});
+	</script>
+
 </body>
 </html>

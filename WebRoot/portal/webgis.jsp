@@ -7,7 +7,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,9 +15,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>地理位置</title>
 <link rel="stylesheet"
-	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
+	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet"
-	href="<%=contextPath%>includes/css/portal_head_modal.css">
+	href="<%=contextPath%>/includes/css/portal_head_modal.css">
 </head>
 
 <body>

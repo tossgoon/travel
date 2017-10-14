@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	 float: right;
@@ -45,7 +45,7 @@
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：OA管理&gt;&gt;<a href="/travel/oa/queryreceive.action">收文管理</a>&gt;&gt;收文详情
+					<span>当前位置：OA管理&gt;&gt;<a href="<%=contextPath%>/oa/queryreceive.action">收文管理</a>&gt;&gt;收文详情
 					  </span>
 				</div>
 			</div>
@@ -181,10 +181,10 @@
 		</div>
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 		var receiverids="";
 		var receivernames="";
@@ -249,7 +249,7 @@
 			oafiles=oafiles+"]"; */
 			$.ajax({
 				type : "post",
-				url : "/travel/oa/save.action",
+				url : "<%=contextPath%>/oa/save.action",
 				data : {
 					"oa.id" : $("#oaid").val(),
 					"oa.title" : $("#oatitle").val(),
@@ -289,7 +289,7 @@
 		function DeleteOa() {
 			if ($("#oaid").val() != null&&$("#oaid").val() !="") {
 				$.ajax({
-					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
+					url : '<%=contextPath%>/oa/delete.action?id=' + $("#oaid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -335,7 +335,7 @@
 		function setread(){
 			if ($("#oarecid").val() != null&&$("#oarecid").val() !="") {
 				$.ajax({
-					url : '/travel/oa/setread.action?id=' + $("#oarecid").val(),
+					url : '<%=contextPath%>/oa/setread.action?id=' + $("#oarecid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

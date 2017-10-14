@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	 float: right;
@@ -152,16 +152,12 @@ background-color:#f2f2f2;
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-						<a href="/travel/oaadmin/notifyedit.jsp" class="btn btn-default">新增数据</a>
-						<%-- <c:if test="${oa.status!=true}"> --%>
+						<a href="<%=contextPath%>/oaadmin/notifyedit.jsp" class="btn btn-default">新增数据</a>
 							<button type="button" id="btnsave" class="btn btn-primary"
 								onclick="SaveOa()">保存数据</button>
-							<!-- <button type="button" id="btnsend"
-								style="margin-left:10px;margin-right:10px;"
-								class="btn btn-success" onclick="SaveOa(1)">发布数据</button> -->
 							<button type="button" id="btndel" class="btn btn-warning"
 								onclick="DeleteOa()">删除数据</button>
-						<%-- </c:if> --%>
+						
 					</div>
 				</div>
 				<div style="height:20px;clear:both;"></div>
@@ -190,13 +186,14 @@ background-color:#f2f2f2;
 		</div>
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 		var receiverids="";
 		var receivernames="";
+		var contextPath="<%=contextPath%>";
 		function SelectAll() {
 			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
 		}
@@ -228,35 +225,16 @@ background-color:#f2f2f2;
 			$("#receivers").val(receivernames);
 		}
 		function SaveOa() {
-			//获取oafiles
-			//var oafiles=[];
-/* 			if(status==1){
-				if(receiverids==""){
-					alert("请选择用户");
-					return;
-				}
-			} */
 			var oafilestr = "";
 			$("#tbattach").find("tr").each(function() {
 				var filename = $(this).find("td").eq(1)[0].innerText;
 				var filepath = $(this).find("td").eq(2)[0].innerText;
-				//var row="{'filename':'"+filename+"','filepath':'"+filepath+"'},";
-				/* var row={
-						filename:filename,
-						filepath:filepath
-				}; */
 				var rowstr = filename + "*" + filepath + "?";
-				//oafiles.push(row);
 				oafilestr = oafilestr + rowstr;
 			});
 			if (oafilestr.substr(oafilestr.length - 1, 1) == "?") {
 				oafilestr = oafilestr.substr(0, oafilestr.length - 1);
 			}
-			/* if(oafiles.substr(oafiles.length-1,1)==","){
-				oafiles=oafiles.substr(0,oafiles.length-1);
-			}
-			oafiles=oafiles+"]"; */
-			
 			var status;
 			if ($('#chksend').is(':checked')) {
 				status = true;
@@ -265,18 +243,15 @@ background-color:#f2f2f2;
 			}
 			$.ajax({
 				type : "post",
-				url : "/travel/oa/savenotify.action",
+				url : contextPath+"/oa/savenotify.action",
 				data : {
 					"oa.id" : $("#oaid").val(),
 					"oa.title" : $("#oatitle").val(),
 					"oa.content" : $("#oacontent").val(),
 					"oa.pubdate" : $("#oapubdate").val(),
 					"oa.status" : status,
-					//"oareceivers":receiverids,
 					"oafilestr" : oafilestr
-				//,"oa.oafiles":oafiles
 				},
-				//$("#formOa").serialize(), 
 				cache : false,
 				dataType : "json",
 				success : function(data) {
@@ -287,10 +262,6 @@ background-color:#f2f2f2;
 							alert("保存成功");
 						} else {
 							$("#oaid").val(data.oa.id);
-							//$('#btnsave').attr('disabled', "true");
-							//$('#btnsend').attr('disabled', "true");
-							//$('#btndel').attr('disabled', "true");
-							//$("#chksend").attr("checked", "true");
 							alert("发布成功");
 						}
 					} else {
@@ -305,7 +276,7 @@ background-color:#f2f2f2;
 		function DeleteOa() {
 			if ($("#oaid").val() != null && $("#oaid").val() != "") {
 				$.ajax({
-					url : '/travel/oa/delete.action?id=' + $("#oaid").val(),
+					url : contextPath+'/oa/delete.action?id=' + $("#oaid").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -353,17 +324,15 @@ background-color:#f2f2f2;
 			var $btn = $("#ctlBtn"); //开始上传  
 			if (!WebUploader.Uploader.support()) {
 				alert('Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
-				throw new Error(
-						'WebUploader does not support the browser you are using.');
+				throw new Error('WebUploader does not support the browser you are using.');
 			}
-			uploader = WebUploader
-					.create({
+			uploader = WebUploader.create({
 						// 选完文件后，是否自动上传。  
 						auto : false,
 						// swf文件路径  
-						swf : '	<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+						swf : contextPath+'/includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
-			       server: '/travel/fileio/upload.action',  
+			       server: contextPath+'/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
 			       // 内部根据当前运行是创建，可能是input元素，也可能是flash.  
 			       pick:{
@@ -496,7 +465,7 @@ background-color:#f2f2f2;
 			var recs=receiverids.split(";");
 			
 			$.ajax({
-				url : '/travel/user/query.action?param=1',
+				url : contextPath+'/user/query.action?param=1',
 				type : 'GET',
 				// 提交数据给Action传入数据
 				//data : {userid:delUserid},

@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	float: right;
@@ -61,7 +61,7 @@ body {
     <div class="toptool">
 			<span>当前位置：OA系统>>通知公告
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 	<div class="container" style="width:1056px;background-color:#ffffff;margin:0 auto;margin-bottom:10px;">
 		<div class="row">
@@ -102,11 +102,13 @@ body {
 	</div>
 	
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
+	
+	    var contextPath="<%=contextPath%>";
 		$(function() {
 			//初始化日期控件
 			//receiverids='${oareceivers}';//初始化
@@ -136,9 +138,9 @@ body {
 						// 选完文件后，是否自动上传。  
 						auto : false,
 						// swf文件路径  
-						swf : '	<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+						swf : '	<%=contextPath%>/includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
-			       server: '/travel/fileio/upload.action',  
+			       server: contextPath+'/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
 			       // 内部根据当前运行是创建，可能是input元素，也可能是flash.  
 			       pick:{
@@ -266,42 +268,6 @@ body {
 		function DeleteAtt(a){
 			var delrow = $(a).parent().parent();//删除用户所在行
 			$(delrow).remove();
-		}
-		function InitAllUsers(){
-			var recs=receiverids.split(";");
-			
-			$.ajax({
-				url : '/travel/user/query.action?param=1',
-				type : 'GET',
-				// 提交数据给Action传入数据
-				//data : {userid:delUserid},
-				// 返回的数据类型
-				dataType : 'json',
-				// 成功是调用的方法
-				success : function(data) {
-					$.each(data.users, function(index,user){
-						var isin=false;
-						for(var i=0;i<recs.length;i++){
-						   if(recs[i]==user.id){
-							   isin=true;
-							   break;
-						   }	
-						}
-						var row="";
-						if(isin){
-							 var row="<tr style='text-align:center;'> <td><input type='checkbox' checked='true' /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
-						}
-						else{
-							 var row="<tr style='text-align:center;'> <td><input type='checkbox'  /></td><td style='display:none;'>"+user.id+"</td> <td>"+user.username+"</td><td>"+user.department+"</td></tr>";
-						}
-					   
-					    $("#tbuser").append(row);
-					});
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
-				}
-			});
 		}
 	</script>
 </body>

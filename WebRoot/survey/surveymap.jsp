@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,10 +24,10 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 </head>
 <style type="text/css">
 body{
@@ -98,8 +98,8 @@ text-align:center;
    <div class="toptool">
 			<span>当前位置：OA系统&gt;&gt;监测信息
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
-			<a style="float:right;margin-right:20px;"href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">返回OA功能列表</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/oa/querynotifysend.action?pagesize=7&pagenum=1">返回OA功能列表</a>
 			
 	</div>
 		<div class="contentstyle">
@@ -126,11 +126,11 @@ text-align:center;
 	<div style="height:10px;"></div>
 	<%@ include file="/portal/footmodal.jsp"%>
 	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=3ad53ae8a26edf19caf8573cbdbb9b15"></script> 
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/travel/gps.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/travel/gps.js"></script>
 	<script type="text/javascript">
 		var map;//地图
 		var tileLayerDitu;        //切片地图
@@ -138,6 +138,7 @@ text-align:center;
 		var tileLayerRoad;        //路网图层
 		var marker;//标记
 		var ptlist=new Array();  
+		var contextPath="<%=contextPath%>";
 		//var animals=[],cameras=[],chicks=[],importinfos=[],plants=[],protects=[];
 		$(function() {
 			//初始化地图
@@ -156,7 +157,7 @@ text-align:center;
 		        map.addControl(mapType);  
 		    }); */
 			marker = new AMap.Marker({
-				icon : '/travel/includes/image/redmarker.png',//24px*24px
+				icon : contextPath+'/includes/image/redmarker.png',//24px*24px
 				position : map.getCenter()
 			});
 			marker.setMap(map);
@@ -195,22 +196,22 @@ text-align:center;
 			switch(type)
 			{
 			case 1:
-				url="/travel/survey/querychicklist.action";
+				url=contextPath+"/survey/querychicklist.action";
 			  break;
 			case 2:
-				url="/travel/survey/querycameralist.action";
+				url=contextPath+"/survey/querycameralist.action";
 			  break;
 			case 3:
-				url="/travel/survey/queryanimallist.action";
+				url=contextPath+"/survey/queryanimallist.action";
 			  break;
 			case 4:
-				url="/travel/survey/queryplantlist.action";
+				url=contextPath+"/survey/queryplantlist.action";
 			  break;
 			case 5:
-				url="/travel/survey/queryimportinfolist.action";
+				url=contextPath+"/survey/queryimportinfolist.action";
 			  break;
 			case 6:
-				url="/travel/survey/queryprotectlist.action";
+				url=contextPath+"/survey/queryprotectlist.action";
 			  break;
 			default:
 				break;
@@ -308,7 +309,7 @@ text-align:center;
 				info.push("填表时间:"+survey.tianbiaoshijian);
 				info.push("样线号:"+survey.yangxianhao);
 				info.push("记录号:"+survey.jiluhao);
-				info.push("<a href='/travel/survey/querychick.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
+				info.push("<a href='"+contextPath+"/survey/querychick.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
 			case 2:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>红外相机监测数据</label>");
@@ -316,7 +317,7 @@ text-align:center;
 				info.push("安装日期:"+survey.anzhuangriqi);
 				info.push("安装人员:"+survey.anzhuangrenyuan);
 				info.push("小地名:"+survey.xiaodiming);
-				info.push("<a href='/travel/survey/querycamera.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
+				info.push("<a href='"+contextPath+"/survey/querycamera.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
 			case 3:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>动物状况监测信息</label>");
@@ -325,7 +326,7 @@ text-align:center;
 				info.push("实体数量:"+survey.shitishuliang);
 				info.push("尸体数量:"+survey.bodyshuliang);
 				info.push("填表时间:"+survey.tianbiaoshijian);
-				info.push("<a href='/travel/survey/queryanimal.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
+				info.push("<a href='"+contextPath+"/survey/queryanimal.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
 			case 4:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>森林植物群落监测</label>");
@@ -334,7 +335,7 @@ text-align:center;
 				info.push("树种名:"+survey.shuzhongming);
 				info.push("标本编号:"+survey.biaobenbianhao);
 				info.push("填表时间:"+survey.tianbiaoshijian);
-				info.push("<a href='/travel/survey/queryplant.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
+				info.push("<a href='"+contextPath+"/survey/queryplant.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
 			case 5:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>动植物相关重要信息</label>");
@@ -345,7 +346,7 @@ text-align:center;
 				info.push("发现时间:"+survey.faxianshijian);
 				info.push("发现人员:"+survey.faxianrenyuan);
 				info.push("填写时间:"+survey.tianxieshijian);
-				info.push("<a href='/travel/survey/queryimportinfo.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
+				info.push("<a href='"+contextPath+"/survey/queryimportinfo.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
 			case 6:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>保护区巡护记录</label>");
@@ -354,7 +355,7 @@ text-align:center;
 				info.push("巡护日期:"+survey.xunhuriqi);
 				info.push("动物名称:"+survey.dongwumingcheng);
 				info.push("数量:"+survey.shuliang);
-				info.push("<a href='/travel/survey/queryprotect.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
+				info.push("<a href='"+contextPath+"/survey/queryprotect.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
 			default:
 				break;
@@ -363,27 +364,27 @@ text-align:center;
 		}
 		//地图点样式
 		 var style = [{
-             url: '/travel/includes/image/survey/mass0.png',
+             url: contextPath+'/includes/image/survey/mass0.png',
              anchor: new AMap.Pixel(6, 6),
              size: new AMap.Size(11, 11)
            },{
-        	   url: '/travel/includes/image/survey/mass1.png',
+        	   url: contextPath+'/includes/image/survey/mass1.png',
              anchor: new AMap.Pixel(6, 6),
              size: new AMap.Size(11, 11)
            },{
-        	   url: '/travel/includes/image/survey/mass2.png',
+        	   url: contextPath+'/includes/image/survey/mass2.png',
              anchor: new AMap.Pixel(6, 6),
              size: new AMap.Size(11, 11)
            },{
-        	   url: '/travel/includes/image/survey/mass3.png',
+        	   url: contextPath+'/includes/image/survey/mass3.png',
              anchor: new AMap.Pixel(6, 6),
              size: new AMap.Size(11, 11)
            },{
-        	   url: '/travel/includes/image/survey/mass4.png',
+        	   url: contextPath+'/includes/image/survey/mass4.png',
                anchor: new AMap.Pixel(6, 6),
                size: new AMap.Size(11, 11)
              },{
-          	   url: '/travel/includes/image/survey/mass5.png',
+          	   url: contextPath+'/includes/image/survey/mass5.png',
                anchor: new AMap.Pixel(6, 6),
                size: new AMap.Size(11, 11)
              }

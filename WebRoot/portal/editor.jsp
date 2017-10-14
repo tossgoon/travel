@@ -7,18 +7,17 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>网站编辑</title>
-<link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/uploaderdemo.css" /> --%>
+<link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet"	href="<%=contextPath%>/includes/css/portal_head_modal.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
 
 <style type="text/css">
 #portolinfo tr td:first-child span {
@@ -125,7 +124,7 @@
 				</div>
 				<div style="margin:0 auto;margin-top:20px;width:1024px;">
 					<div style="float:right;">
-					    <a href="/travel/portal/editor.jsp" class="btn btn-default">新增数据</a>
+					    <a href="<%=contextPath%>/portal/editor.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" class="btn btn-primary"
 							onclick="SavePortal()">保存数据</button>
 						<button type="button" class="btn btn-warning" onclick="DeletePortal()">删除数据</button>
@@ -136,24 +135,25 @@
 	</div>
 </div>
 	<%@ include file="footmodal.jsp"%>
-    <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/ueditor.all.min.js"></script>
-	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>includes/js/ueditor/lang/zh-cn/zh-cn.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+    <script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" charset="utf-8"	src="<%=contextPath%>/includes/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<%-- <script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webUploaderFeng.js"></script>	
 	 --%>
 	
 	<script type="text/javascript">
 		//保存数据
+		var contextPath="<%=contextPath%>";
 		function SavePortal()
 		{
 			var isshowpic=$("#isshowpicture")[0].checked;
 			$.ajax({
 				type : "post",
-				url : "/travel/portal/save.action",
+				url : contextPath+"/portal/save.action",
 				data : 
 					{
 					  "portal.id":$("#portalid").val(),
@@ -219,9 +219,9 @@
 			       // 选完文件后，是否自动上传。  
 			       auto: false,  
 			       // swf文件路径  
-			       swf: '<%=contextPath%>includes/js/webuploader-0.1.5/Uploader.swf',  
+			       swf: '<%=contextPath%>/includes/js/webuploader-0.1.5/Uploader.swf',  
 			       // 文件接收服务端。  
-			       server: '/travel/fileio/upload.action',  
+			       server: contextPath+'/fileio/upload.action',  
 			       // 选择文件的按钮。可选。  
 			       // 内部根据当前运行是创建，可能是input元素，也可能是flash.  
 			       pick: '#filePicker',  

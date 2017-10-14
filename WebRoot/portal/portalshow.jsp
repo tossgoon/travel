@@ -7,15 +7,15 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>详细信息</title>
-<link rel="stylesheet"	href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet"	href="<%=contextPath%>includes/css/portal_head_modal.css">
+<link rel="stylesheet"	href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet"	href="<%=contextPath%>/includes/css/portal_head_modal.css">
 <style type="text/css">
 body {
 	font-family: "Microsoft Yahei";
@@ -51,7 +51,7 @@ body {
 	</div>
 	</div>
 		<%@ include file="footmodal.jsp"%>
-    <script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+    <script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>

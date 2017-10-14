@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/uploadifive/uploadifive.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/uploadifive/uploadifive.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 body{
 	background-color: #F2F2F2;
@@ -42,19 +42,17 @@ body{
     <div class="toptool">
 			<span>当前位置：OA后台管理>>网络硬盘
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 	<div style="width:100%;text-align:center;">
 
 	<div class="maincontent" >
 		<div class="leftpanel">
 			<ul>
-				<li><a href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
-				<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
-				<li><a href="/travel/user/querypage.action">用户管理</a></li>
-				<li><a href="/travel/oaadmin/notifylist.jsp">通知公告</a></li>
+				<li><a href="<%=contextPath%>/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
+				<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
+				<li><a href="<%=contextPath%>/oaadmin/notifylist.jsp">通知公告</a></li>
 				<li  class="activeli"><a href="javascript:void(0)">网络硬盘</a></li>
-				<!-- <li><a href="/travel/oaadmin/orgadmin.jsp">组织架构</a></li> -->
 			</ul>
 		</div>
 		<div class="rightpanel">
@@ -91,10 +89,10 @@ body{
 						</table>
 						</div>
 						<div style="margin-top:10px;">
-							<a id="firstpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
-							<a id="lastpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
-							<a id="nextpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
-							<a id="endpage"		href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
+							<a id="firstpage"	href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
+							<a id="lastpage"	href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
+							<a id="nextpage"	href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
+							<a id="endpage"		href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
 							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 							
 						</div>
@@ -178,17 +176,18 @@ body{
 
 <%@ include file="/portal/footmodal.jsp"%>
 
-	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script
-		src="<%=contextPath%>includes/js/uploadifive/jquery.uploadifive.min.js"></script>
+		src="<%=contextPath%>/includes/js/uploadifive/jquery.uploadifive.min.js"></script>
 	<script
-		src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+		src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript">
 		var isadd = true;
 		var updaterow;//更新的行
 		var delUserid;//当前删除的用户ID
 		var delrow;//要删除的行
+		var contextPath="<%=contextPath%>";
 		$(function() {
 
 		});
@@ -232,7 +231,7 @@ body{
 		function DeleteUser()
 		{
 			$.ajax({
-				url : '/travel/user/delete.action?id='+delUserid,
+				url : contextPath+'/user/delete.action?id='+delUserid,
 				type : 'POST',
 				// 提交数据给Action传入数据
 				//data : {userid:delUserid},
@@ -260,7 +259,7 @@ body{
 			if (isadd == true) {
 				$.ajax({
 					type : "post",
-					url : "/travel/user/add.action",
+					url : contextPath+"/user/add.action",
 					data : $("#formUser").serialize(),
 					cache : false,
 					dataType : "json",
@@ -285,7 +284,7 @@ body{
 				});
 			} else {
 				$.ajax({
-					url : '/travel/user/update.action',
+					url : contextPath+'/user/update.action',
 					type : 'POST',
 					// 提交数据给Action传入数据
 					data : $("#formUser").serialize(),

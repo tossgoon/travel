@@ -58,14 +58,9 @@ text-align:center;
 					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
 					<li class="activeli"><a href="javascript:void(0)">网络硬盘</a></li>
 					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
-					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
-					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
-					<li><a href="/travel/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
-					<li><a href="/travel/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
+					
 					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
+					<li><a href="/travel/user/queryuinfo.action">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="padding-top:30px;border:none;">

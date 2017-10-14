@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter;
 
+//UeditorFilter 继承了StrutsPreparedAndExecuteFilter，如果是ueitor的路径，则放行；否则，使用struts2过滤
 public class UeditorFilter extends StrutsPrepareAndExecuteFilter {
 
 	 @Override

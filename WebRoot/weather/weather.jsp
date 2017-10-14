@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -22,11 +22,11 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" /> --%>
 <style type="text/css">
 #oainfo tr td:first-child span {
@@ -56,7 +56,7 @@ body {
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
 					<span>当前位置：天气信息&gt;&gt; 气象信息    </span>
-					<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+					<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 				</div>
 			</div>
 		</div>
@@ -70,7 +70,7 @@ body {
 										<div class="row">
 											<div class="col-md-12">
 											   <span id="weathertime" style="font-size:14px;"></span>
-											   <a style="float:right;margin-right:20px;" target="_blank" href="/travel/visitor/queryweatherlist.action">查看历史数据</a>
+											   <a style="float:right;margin-right:20px;" target="_blank" href="<%=contextPath%>/visitor/queryweatherlist.action">查看历史数据</a>
 											
 											   <a id="firea" target="_blank">查看防火指数</a>
 											
@@ -92,63 +92,7 @@ body {
 												</table>
 											</div>
 										</div>
-										
-										<%-- <div class="row">
-											<div class="col-md-2">
-												<span>降雨量</span>
-											</div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="jiangyuliang" readonly="readonly">
-											</div>
-											<div class="col-md-2"><span>空气温度</span></div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="kongqiwendu" readonly="readonly">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<span>空气湿度</span>
-											</div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="kongqishidu" readonly="readonly">
-											</div>
-											<div class="col-md-2"><span>大气压力</span></div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="daqiyali" readonly="readonly">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<span>光合有效</span>
-											</div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="guangheyouxiao" readonly="readonly">
-											</div>
-											<div class="col-md-2"><span>风向</span></div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="fengxiang" readonly="readonly">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<span>紫外辐射</span>
-											</div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="ziwaifushe" readonly="readonly">
-											</div>
-											<div class="col-md-2"><span>土壤酸碱</span></div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="turangsuanjian" readonly="readonly">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<span>PM25</span>
-											</div>
-											<div class="col-md-4">
-												<input class="form-control input-sm"  id="pm25" readonly="readonly">
-											</div>
-										</div> --%>
+									
 									</div>
 						</div>
 					</div>
@@ -165,17 +109,18 @@ body {
 	</div>
 </div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 	
+	    var contextPath="<%=contextPath%>";
 		$(function() {
 			//获取天气数据
 			$.ajax({
 				type : "get",
-				url : "/travel/visitor/queryweather.action",
+				url : contextPath+"/visitor/queryweather.action",
 				//data : $("#formAnimal").serialize(),
 				cache : false, 
 				dataType : "json",
@@ -194,40 +139,7 @@ body {
 							    var obj=weather.entity[i];
 							    var tr="<tr><td>"+obj.eName+"</td><td>"+obj.eValue+"</td><td>"+obj.eUnit+"</td><td>"+obj.eKey+"</td></tr>";
 							    content+=tr;
-							   /*  switch(obj.eName){
-							    case "风速":
-							    	$("#fengsu").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "降雨量":
-							    	$("#jiangyuliang").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "空气温度":
-							    	$("#kongqiwendu").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "空气湿度":
-							    	$("#kongqishidu").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "大气压力":
-							    	$("#daqiyali").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "光合有效":
-							    	$("#guangheyouxiao").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "风向":
-							    	$("#fengxiang").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "紫外辐射":
-							    	$("#ziwaifushe").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "土壤酸碱":
-							    	$("#turangsuanjian").val(obj.eValue+obj.eUnit);
-							    	break;
-							    case "PM25":
-							    	$("#pm25").val(obj.eValue+obj.eUnit);
-							    	break;
-							    	default:
-							    		break;
-							    } */
+							  
 							}
 						$("#tbweather").html(content);
 					}
@@ -260,7 +172,7 @@ body {
 			//设置查询
 			var myDate = new Date();
             var datestr=myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate();
-			document.getElementById("firea").href="/travel/visitor/queryfireinfo.action?datestr="+datestr+"&flag=1";
+			document.getElementById("firea").href=contextPath+"/visitor/queryfireinfo.action?datestr="+datestr+"&flag=1";
 		});
 		//计算防火等级
 		

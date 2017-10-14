@@ -1,5 +1,9 @@
 package com.travel.pojo;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Protectrecord entity. @author MyEclipse Persistence Tools
  */
@@ -11,8 +15,8 @@ public class Protectrecord implements java.io.Serializable {
 	private Integer id;
 	private String baohuzhanmingcheng;
 	private String jiluren;
-	private String xunhuriqi;
-	private String shijian;
+	private Timestamp xunhuriqi;
+	private Timestamp shijian;
 	private String tianqi;
 	private String dadiming;
 	private String xunhurenyuan;
@@ -32,6 +36,8 @@ public class Protectrecord implements java.io.Serializable {
 	private Double ganraoweidu;
 	private Double ganraohaiba;
 	private String ganraoshengjingleixing;
+	private String datestr;
+	private String xunhudatestr;
 
 	// Constructors
 
@@ -41,7 +47,7 @@ public class Protectrecord implements java.io.Serializable {
 
 	/** full constructor */
 	public Protectrecord(String baohuzhanmingcheng, String jiluren,
-			String xunhuriqi, String shijian, String tianqi, String dadiming,
+			Timestamp xunhuriqi, Timestamp shijian, String tianqi, String dadiming,
 			String xunhurenyuan, String dongzhi, String xizhi, String nanzhi,
 			String beizhi, String dongwumingcheng, String shuliang,
 			Double jingdu, Double weidu, Double haiba, String shengjingleixing,
@@ -99,19 +105,20 @@ public class Protectrecord implements java.io.Serializable {
 		this.jiluren = jiluren;
 	}
 
-	public String getXunhuriqi() {
-		return this.xunhuriqi;
+
+	public Timestamp getXunhuriqi() {
+		return xunhuriqi;
 	}
 
-	public void setXunhuriqi(String xunhuriqi) {
+	public void setXunhuriqi(Timestamp xunhuriqi) {
 		this.xunhuriqi = xunhuriqi;
 	}
 
-	public String getShijian() {
-		return this.shijian;
+	public Timestamp getShijian() {
+		return shijian;
 	}
 
-	public void setShijian(String shijian) {
+	public void setShijian(Timestamp shijian) {
 		this.shijian = shijian;
 	}
 
@@ -265,6 +272,32 @@ public class Protectrecord implements java.io.Serializable {
 
 	public void setGanraoshengjingleixing(String ganraoshengjingleixing) {
 		this.ganraoshengjingleixing = ganraoshengjingleixing;
+	}
+
+	public String getDatestr() {
+		if(this.shijian!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			datestr=sdf.format(this.shijian); 
+		}
+		return datestr;
+	}
+
+	public void setDatestr(String datestr) {
+		this.datestr = datestr;
+	}
+
+	public String getXunhudatestr() {
+		if(this.xunhuriqi!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			xunhudatestr=sdf.format(this.xunhuriqi); 
+		}
+		return xunhudatestr;
+	}
+
+	public void setXunhudatestr(String xunhudatestr) {
+		this.xunhudatestr = xunhudatestr;
 	}
 
 }

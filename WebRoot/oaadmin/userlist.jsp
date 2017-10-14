@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/uploadifive/uploadifive.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/uploadifive/uploadifive.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 body{
 	background-color: #F2F2F2;
@@ -42,19 +42,24 @@ body{
     <div class="toptool">
 			<span>当前位置：OA后台管理>>用户管理
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 	<div  class="contentstyle">
 
 	<div class="maincontent" >
 		<div class="leftpanel">
 			<ul>
-				<li><a	href="/travel/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
-				<!-- <li><a href="/travel/oaadmin/deptlist.jsp">部门管理</a></li> -->
+				<li><a	href="<%=contextPath%>/portal/querypage.action?pagesize=10&pagenum=1&type=0">网站门户</a></li>
 				<li class="activeli"><a href="javascript:void(0)">用户管理</a></li>
-				<li><a href="/travel/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
-				<!-- <li><a href="/travel/oaadmin/filelist.jsp">网络硬盘</a></li> -->
-				<li><a href="/travel/dept/querylist.action">部门管理</a></li>
+				<li><a href="<%=contextPath%>/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
+				<li><a href="<%=contextPath%>/dept/querylist.action">部门管理</a></li>
+				<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
+				<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
+				<li><a href="<%=contextPath%>/survey/animalsuredit.jsp">野生动物监测状况</a></li>
+				<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
+				<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
+				<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
+				<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
 			</ul>
 		</div>
 		<div class="rightpanel">
@@ -92,10 +97,10 @@ body{
 				</div>
 
 				<div style="margin-top:10px;">
-							<a id="firstpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
-							<a id="lastpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
-							<a id="nextpage"	href="/travel/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
-							<a id="endpage"		href="/travel/user/querypage.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
+							<a id="firstpage"	href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=1">第一页</a>
+							<a id="lastpage"	href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
+							<a id="nextpage"	href="<%=contextPath%>l/user/querypage.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
+							<a id="endpage"		href="<%=contextPath%>/user/querypage.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
 							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 				</div>
 		</div>
@@ -170,17 +175,18 @@ body{
 	</div>
 	
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+	<script src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script
-		src="<%=contextPath%>includes/js/uploadifive/jquery.uploadifive.min.js"></script>
+		src="<%=contextPath%>/includes/js/uploadifive/jquery.uploadifive.min.js"></script>
 	<script
-		src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+		src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript">
 		var isadd = true;
 		var updaterow;//更新的行
 		var delUserid;//当前删除的用户ID
 		var delrow;//要删除的行
+		var contextPath="<%=contextPath%>";
 		$(function() {
 
 		});
@@ -224,7 +230,7 @@ body{
 		function DeleteUser()
 		{
 			$.ajax({
-				url : '/travel/user/delete.action?id='+delUserid,
+				url : contextPath+'/user/delete.action?id='+delUserid,
 				type : 'POST',
 				// 提交数据给Action传入数据
 				//data : {userid:delUserid},
@@ -252,7 +258,7 @@ body{
 			if (isadd == true) {
 				$.ajax({
 					type : "post",
-					url : "/travel/user/add.action",
+					url : contextPath+"/user/add.action",
 					data : $("#formUser").serialize(),
 					cache : false,
 					dataType : "json",
@@ -277,7 +283,7 @@ body{
 				});
 			} else {
 				$.ajax({
-					url : '/travel/user/update.action',
+					url : contextPath+'/user/update.action',
 					type : 'POST',
 					// 提交数据给Action传入数据
 					data : $("#formUser").serialize(),
@@ -343,40 +349,6 @@ body{
 			QueryUserByPage(0);
 		}
 
-		function QueryByIpidPage(isfirst) {
-			var begindate = $("#begindate").val();//开始日期
-			var enddate = $("#enddate").val();//终止日期
-			$.ajax({
-				url : 'ping/userdetail',
-				type : 'GET',
-				// 提交数据给Action传入数据
-				data : {
-					begindate : begindate,
-					enddate : enddate,
-					ipid : cipid,
-					beginindex : rowspage * (currentpage - 1),
-					rows : rowspage,
-					isfirst : isfirst
-				},
-				// 返回的数据类型
-				dataType : 'json',
-				// 成功是调用的方法
-				success : function(data) {
-					if (data.isok == 1) {
-						var rows = GetRowsFromDetail(data.info);
-						$("#detaillist").html(rows);
-						if (isfirst == 1) {
-							rowscount = data.count;
-							pagecount=Math.ceil(rowscount/rowspage);
-						}
-						$("#pagecount").text(currentpage + "/" + pagecount);
-					}
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
-				}
-			});
-		}
 	</script>
 </body>
 </html>

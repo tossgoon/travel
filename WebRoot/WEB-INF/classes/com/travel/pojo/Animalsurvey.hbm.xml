@@ -13,9 +13,11 @@
         <property name="yangxianhao" type="java.lang.String">
             <column name="yangxianhao" length="450" />
         </property>
-        <property name="tianbiaoshijian" type="java.lang.String">
-            <column name="tianbiaoshijian" length="450" />
+        
+        <property name="tianbiaoshijian" type="java.sql.Timestamp">
+            <column name="tianbiaoshijian" length="19" />
         </property>
+        
         <property name="tianqi" type="java.lang.String">
             <column name="tianqi" length="450" />
         </property>

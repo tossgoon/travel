@@ -13,9 +13,10 @@
         <property name="tianbaodanwei" type="java.lang.String">
             <column name="tianbaodanwei" length="45" />
         </property>
-        <property name="tianxieshijian" type="java.lang.String">
-            <column name="tianxieshijian" length="450" />
+        <property name="tianxieshijian" type="java.sql.Timestamp">
+            <column name="tianxieshijian" length="19" />
         </property>
+        
         <property name="mingcheng" type="java.lang.String">
             <column name="mingcheng" length="450" />
         </property>
@@ -31,8 +32,8 @@
         <property name="weidu" type="java.lang.Double">
             <column name="weidu" precision="18" scale="8" />
         </property>
-        <property name="faxianshijian" type="java.lang.String">
-            <column name="faxianshijian" length="500" />
+         <property name="faxianshijian" type="java.sql.Timestamp">
+            <column name="faxianshijian" length="19" />
         </property>
         <property name="faxianrenyuan" type="java.lang.String">
             <column name="faxianrenyuan" length="450" />

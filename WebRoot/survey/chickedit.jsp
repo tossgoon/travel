@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -22,12 +22,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/portal_head_modal.css">
-<link rel="stylesheet" href="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/portal_head_modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <style type="text/css">
 #oainfo tr td:first-child span {
 	float: right;
@@ -54,26 +54,24 @@ body {
     <div class="toptool">
 			<span>当前位置：OA系统&gt;&gt;褐马鸡野外种群状况监测
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 		<div class="contentstyle">
 		<div class="maincontent">
 			<div class="leftpanel" style="border-right:1px solid #111111;">
 				<ul>
-					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
-					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
-					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
-				
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					<li><a href="<%=contextPath%>/portal/querypage.action?pagesize=10&pagenum=1&type=0" target="_blank">网站门户</a></li>
+					<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
+					<li><a href="<%=contextPath%>/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
+					<li><a href="<%=contextPath%>/dept/querylist.action">部门管理</a></li>
 					<li  class="activeli"><a href="javascript:void(0)" >褐马鸡种群状况 </a></li>
-					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
-					<li><a href="/travel/survey/animalsuredit.jsp">野生动物监测状况</a></li>
-					<li><a href="/travel/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
-					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/travel/user/oauserinfo.jsp">个人账户管理</a></li>
+					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
+					<li><a href="<%=contextPath%>/survey/animalsuredit.jsp">野生动物监测状况</a></li>
+					<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
+					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
+					<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
+					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="border:none;">
@@ -87,7 +85,8 @@ body {
 												<span>ID</span>
 											</div>
 											<div class="col-md-4">
-											    <input class="form-control input-sm" id="id" name="chick.id" readonly="readonly" />
+											    <s:textfield class="form-control input-sm" id="id"
+														readonly="true" name="chick.id"></s:textfield>
 												<%-- <s:textfield class="form-control input-sm" id="id" name="chick.id" readonly="true"></s:textfield> --%>
 											</div>
 											<div class="col-md-2"><span>保护区</span></div>
@@ -117,8 +116,13 @@ body {
 											<div class="col-md-2"><span>填表时间</span></div>
 											<div class="col-md-4">
 												<div class="input-group date form_date"	data-date-format="yyyy-mm-dd">
-															<s:textfield class="form-control input-sm"  name="chick.tianbiaoshijian"  id="tianbiaoshijian">
+															<s:textfield class="form-control input-sm"  name="chick.tianbiaoshijian" value="%{chick.datestr}"  id="tianbiaoshijian">
 															</s:textfield>
+															
+														<%-- 	<s:textfield class="form-control" id="tianbiaoshijian" >
+												     		<s:param name="value" ><s:date name="chick.tianbiaoshijian" format="yyyy-MM-dd" /></s:param> 
+												    	</s:textfield> --%>
+															
 														<span class="input-group-addon"> <span	class="glyphicon glyphicon-calendar"></span>
 														</span>
 												</div>
@@ -246,7 +250,7 @@ body {
 									</form>
 			   </div>
 					<div style="margin-top:10px;">
-						<a href="/travel/survey/chickedit.jsp" class="btn btn-default">新增数据</a>
+						<a href="<%=contextPath%>/survey/chickedit.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
 						<button type="button"  id="btndel" onclick="DeleteAnimal()" class="btn btn-warning">删除数据</button>
 						
@@ -256,13 +260,14 @@ body {
 		</div>
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 		var receiverids="";
 		var receivernames="";
+		var contextPath="<%=contextPath%>";
 		function SelectAll() {
 			$("#tbuser").find("input[type='checkbox']").prop("checked",true);
 		}
@@ -289,7 +294,7 @@ body {
 			//获取oafiles
 			$.ajax({
 				type : "post",
-				url : "/travel/survey/savechick.action",
+				url : contextPath+"/survey/savechick.action",
 				data :  $("#formAnimal").serialize(),
 				cache : false,
 				dataType : "json",
@@ -310,7 +315,7 @@ body {
 		function DeleteAnimal() {
 			if ($("#id").val() != null && $("#id").val() != "") {
 				$.ajax({
-					url : '/travel/survey/deletechick.action?id=' + $("#id").val(),
+					url : contextPath+'/survey/deletechick.action?id=' + $("#id").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},

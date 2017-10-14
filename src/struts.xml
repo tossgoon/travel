@@ -40,6 +40,13 @@
 			</result>
 		</action>
 		
+		<action name="updateinfo" class="userAct" method="update">
+			<result name="success">/travel/user/oauserinfo.jsp</result>
+			<result name="error">
+				/travel/error.jsp
+			</result>
+		</action>
+		
 		<action name="updatepass" class="userAct" method="updateUserPass">
 			<result name="success" type="json"></result>
 			<result name="error"  type="json">
@@ -89,6 +96,13 @@
  			<result name="success" type="json"></result>
 			 <result name="error" type="json"></result> 
 		</action>
+		<action name="queryuinfo" class="userAct" method="getUserInfo">
+ 			<result name="success">/travel/user/oauserinfo.jsp</result>
+			 <result name="error" type="json"></result> 
+		</action>
+		
+		
+		
 	</package>
 
     <package name="portalpack" extends="struts-default,json-default,usercheck"
@@ -380,6 +394,10 @@
 		</action>
 		<action name="queryanimal" class="animalAct" method="query">
 			<result name="success">/survey/animalsuredit.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryanimalpage" class="animalAct" method="querypagelist">
+			<result name="success">/survey/animallist.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 		<action name="queryanimallist" class="animalAct" method="querylist">

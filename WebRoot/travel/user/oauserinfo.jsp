@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,10 +24,10 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 </head>
 <style type="text/css">
 body{
@@ -51,73 +51,84 @@ width:360px;float:left;
    <div class="toptool">
 			<span>当前位置：OA系统>>个人信息
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 		<div class="contentstyle">
 		<div class="maincontent">
 			<div class="leftpanel" style="border-right:1px solid #111111;">
 				<ul>
-					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
-					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
-					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li>
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
-					<li><a href="/travel/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
-					<li><a href="/travel/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
-					<li><a href="/travel/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
-					<li><a href="/travel/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-					<li><a href="/travel/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-					<li><a href="/travel/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
-					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
+					<li><a href="<%=contextPath%>/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
+					<li><a href="<%=contextPath%>/oa/querysend.action">发文管理</a></li>
+					<li><a href="<%=contextPath%>/oa/queryreceive.action">收文管理</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+<%-- 					<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
+					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
+					<li><a href="<%=contextPath%>/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
+					<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
+					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
+					<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li> --%>
+					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
 					<li class="activeli"><a href="javascript:void(0)">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="border:none;">
 			   <h3>个人信息</h3>
 			   <hr>
-			   <s:form role="form" theme="simple" id="formPortalInfo">
+			   <s:form role="form" theme="simple" id="formPortalInfo" action="updateinfo"  namespace="/user" >
 				<table style="width:80%;text-align:center;border-collapse:separate; border-spacing:0px 10px;" >
 					<tbody>
 						<tr>
 							<td style="width:120px;"><span>姓名</span></td>
-							<td><s:textfield class="form-control inputstyle"  id="portalid"
-									name="portal.id" readonly="true"></s:textfield></td>
+							<td><s:textfield class="form-control inputstyle"  id="username"
+									name="user.username" readonly="true"></s:textfield>
+									<s:hidden id="userid" name="user.id"></s:hidden>
+									</td>
 						</tr>
 						<tr>
 							<td style="width:120px;"><span>登陆名</span></td>
-							<td><s:textfield class="form-control inputstyle" id="portalid"
-									name="portal.id" readonly="true"></s:textfield></td>
+							<td><s:textfield class="form-control inputstyle" id="loginname"
+									name="user.loginname" readonly="true"></s:textfield></td>
+						</tr>
+						<tr>
+							<td><span>部门</span></td>
+							<td><s:textfield class="form-control inputstyle" id="department" readonly="true"
+									name="user.department"></s:textfield></td>
 						</tr>
 						<tr>
 							<td><span>生日</span></td>
-							<td><s:textfield class="form-control inputstyle" id="portaltitle"
-									name="portal.title"></s:textfield></td>
+							<td>
+							<div class="input-group date form_date"	data-date-format="yyyy-mm-dd" style="width:360px;">
+															<s:textfield class="form-control"  name="user.birthday"  id="birthday">
+															</s:textfield>
+														<span class="input-group-addon"> <span	class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+									</td>
 						</tr>
 						<tr>
-							<td><span>办公电话</span></td>
-							<td><s:textfield class="form-control inputstyle" id="portaltitle"
-									name="portal.title"></s:textfield></td>
-						</tr>
-						<tr>
-							<td><span>手机号</span></td>
-							<td><s:textfield class="form-control inputstyle" id="portaltitle"
-									name="portal.title"></s:textfield></td>
-						</tr>
-						<tr>
-							<td><span>邮箱</span></td>
-							<td><s:textfield class="form-control inputstyle" id="portaltitle"
-									name="portal.title"></s:textfield></td>
+							<td><span>电话</span></td>
+							<td><s:textfield class="form-control inputstyle" id="telphone"
+									name="user.telephone"></s:textfield></td>
 						</tr>
 						<tr>
 							<td><span>备注</span></td>
-							<td><s:textfield class="form-control inputstyle" id="portaltitle"
-									name="portal.title"></s:textfield></td>
+							<td><s:textfield class="form-control inputstyle" id="remark"
+									name="user.remark"></s:textfield></td>
 						</tr>
+						<tr>
+						<td></td>
+						<td> 
 						
+						<div> <input type="submit" value="保存信息" class="btn btn-primary">    <a class="btn btn-success" style="margin-left:20px;" onclick="ShowpassModal()" href="javascript:void(0)">修改密码</a></div>
+						
+						  </td>
+						
+						</tr>
 					</tbody>
 				</table>
 				</s:form>
-				<div><a href="javascript:void(0)">保存信息</a> <a style="margin-left:20px;" onclick="ShowpassModal()" href="javascript:void(0)">修改密码</a></div>
+				
 			</div>
 			<div style="clear:both;"></div>
 			
@@ -152,10 +163,10 @@ width:360px;float:left;
 		</div>
 	</div>
 <%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 	
 	//弹出修改密码对话框
@@ -177,7 +188,7 @@ width:360px;float:left;
 			return;
 		}
 		$.ajax({
-			url : '/travel/user/updatepass.action',
+			url : '<%=contextPath%>/user/updatepass.action',
 			type : 'POST',
 			// 提交数据给Action传入数据
 			data : {oldpass:oldpassword,
@@ -200,6 +211,19 @@ width:360px;float:left;
 			}
 		});
 	}
+	$(function() {
+		//初始化日期控件
+		$('.form_date').datetimepicker({
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
+		});
+	});
 	</script>
 </body>
 </html>

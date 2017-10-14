@@ -19,8 +19,8 @@
         <property name="weidu" type="java.lang.Double">
             <column name="weidu" precision="18" scale="8" />
         </property>
-        <property name="tianbiaoshijian" type="java.lang.String">
-            <column name="tianbiaoshijian" length="500" />
+        <property name="tianbiaoshijian" type="java.sql.Timestamp">
+            <column name="tianbiaoshijian" length="19" />
         </property>
         <property name="jianceren" type="java.lang.String">
             <column name="jianceren" length="45" />

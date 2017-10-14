@@ -58,7 +58,7 @@
 		</init-param>
 		<init-param>
 			<param-name>redirectURL</param-name>  <!-- //重定向后的地址 -->
-			<param-value>/travel/visitor/first.action</param-value>
+			<param-value>/visitor/first.action</param-value>
 		</init-param>
 		<init-param>
 			<param-name>notCheckURLList</param-name>  <!-- //不需要过滤的jsp -->

@@ -1,5 +1,9 @@
 package com.travel.pojo;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Chicksurvey entity. @author MyEclipse Persistence Tools
  */
@@ -13,7 +17,7 @@ public class Chicksurvey implements java.io.Serializable {
 	private String baohuzhan;
 	private String xiaodiming;
 	private String tianqi;
-	private String tianbiaoshijian;
+	private Timestamp tianbiaoshijian;
 	private String jianceren;
 	private String yangxianhao;
 	private String jiluhao;
@@ -30,6 +34,7 @@ public class Chicksurvey implements java.io.Serializable {
 	private Double weidu;
 	private String shengjingleixing;
 	private String beizhu;
+	private String datestr;
 
 	// Constructors
 
@@ -39,7 +44,7 @@ public class Chicksurvey implements java.io.Serializable {
 
 	/** full constructor */
 	public Chicksurvey(String baohuqu, String baohuzhan, String xiaodiming,
-			String tianqi, String tianbiaoshijian, String jianceren,
+			String tianqi, Timestamp tianbiaoshijian, String jianceren,
 			String yangxianhao, String jiluhao, Integer shitishuliang,
 			Integer shitinianling, String shitixingwei, Integer bodyshuliang,
 			String bodyjianshu, Double fenbianshuliang, String powei,
@@ -110,11 +115,11 @@ public class Chicksurvey implements java.io.Serializable {
 		this.tianqi = tianqi;
 	}
 
-	public String getTianbiaoshijian() {
-		return this.tianbiaoshijian;
+	public Timestamp getTianbiaoshijian() {
+		return tianbiaoshijian;
 	}
 
-	public void setTianbiaoshijian(String tianbiaoshijian) {
+	public void setTianbiaoshijian(Timestamp tianbiaoshijian) {
 		this.tianbiaoshijian = tianbiaoshijian;
 	}
 
@@ -244,6 +249,19 @@ public class Chicksurvey implements java.io.Serializable {
 
 	public void setBeizhu(String beizhu) {
 		this.beizhu = beizhu;
+	}
+
+	public String getDatestr() {
+		if(this.tianbiaoshijian!=null)
+		{
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
+			datestr=sdf.format(this.tianbiaoshijian); 
+		}
+		return datestr;
+	}
+
+	public void setDatestr(String datestr) {
+		this.datestr = datestr;
 	}
 
 }
