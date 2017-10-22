@@ -13,12 +13,12 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>野生动物监测数据查询</title>
+<title>褐马鸡野外种群状况监测查询</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="褐马鸡,保护区">
-<meta http-equiv="description" content="野生动物监测数据查询">
+<meta http-equiv="description" content="数据查询">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -57,7 +57,7 @@ text-align:center;}
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：天气信息&gt;&gt; 野生动物监测数据查询    </span>
+					<span>当前位置：数据查询&gt;&gt; 褐马鸡野外种群状况监测查询    </span>
 					<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 				</div>
 			</div>
@@ -109,14 +109,17 @@ text-align:center;}
 												<table style="width:100%;font-size:14px;" class="table">
 												   <thead>
 												      <tr  align="center">
-												           <th>填表时间</th>
-												           <th>样线号</th>
+												           <th>保护区</th>
+												           <th>保护站</th>
+												           <th>小地名</th>
 												           <th>天气</th>
+												           <th>填表时间</th>
 												           <th>监测人</th>
-												           <th>动物名称</th>
-												           <th>实体数量</th>
+												           <th>实体数量(</th>
+												           <th>实体行为(</th>
+												           <th>实体年龄(</th>
 												           <th>尸体数量(</th>
-												           <th>粪便</th>
+												           <th>粪便数量</th>
 												           <th>经度</th>
 												           <th>纬度</th>
 												           <th>海拔</th>
@@ -124,20 +127,23 @@ text-align:center;}
 												      </tr>
 												   </thead>
 												   <tbody id="tbweather">
-													<c:forEach var="a" items="${animallist}">
+													<c:forEach var="a" items="${chicklist}">
 														<tr align="center" height="24px">
-															<td>${a.datestr}</td>
-															<td>${a.yangxianhao}</td>
+															<td>${a.baohuqu}</td>
+															<td>${a.baohuzhan}</td>
+															<td>${a.xiaodiming}</td>
 															<td>${a.tianqi}</td>
+															<td>${a.datestr}</td>
 															<td>${a.jianceren}</td>
-															<td>${a.dongwumingcheng}</td>
 															<td>${a.shitishuliang}</td>
+															<td>${a.shitixingwei}</td>
+															<td>${a.shitinianling}</td>
 															<td>${a.bodyshuliang}</td>
-															<td>${a.fenbian}</td>
-															<td>${a.weidu}</td>
+															<td>${a.fenbianshuliang}</td>
 															<td>${a.jingdu}</td>
+															<td>${a.weidu}</td>
 															<td>${a.height}</td>
-															<td><a	href="<%=contextPath%>/survey/queryanimal.action?id=${a.id}" target="_blank">查看详情</a>&nbsp;&nbsp;
+															<td><a	href="<%=contextPath%>/survey/querychick.action?id=${a.id}" target="_blank">查看详情</a>&nbsp;&nbsp;
 															</td>
 														</tr>
 													</c:forEach>
@@ -153,10 +159,10 @@ text-align:center;}
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<a id="firstpage" href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=1">第一页</a> 
-				<a id="lastpage"  href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
-				<a id="nextpage"  href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
-				<a id="endpage"   href="<%=contextPath%>/survey/queryanimalpage.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
+				<a id="firstpage" href="<%=contextPath%>/survey/querychickpage.action?pagesize=10&pagenum=1">第一页</a> 
+				<a id="lastpage"  href="<%=contextPath%>/survey/querychickpage.action?pagesize=10&pagenum=${page.currentPage-1 }" >上一页</a> 
+				<a id="nextpage"  href="<%=contextPath%>/survey/querychickpage.action?pagesize=10&pagenum=${page.currentPage+1 }" >下一页</a>
+				<a id="endpage"   href="<%=contextPath%>/survey/querychickpage.action?pagesize=10&pagenum=${page.totalPage }" >最后一页</a>
 				<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 			</div>
 		</div>
@@ -185,16 +191,16 @@ text-align:center;}
 			var begindate=$("#begindate").val();//开始日期
 			var enddate=$("#enddate").val();//结束日期
 			if(begindate==""&&enddate==""){
-				window.location.href ="<%=contextPath%>/survey/queryanimalpage.action"; 
+				window.location.href ="<%=contextPath%>/survey/querychickpage.action"; 
 			}
 			else if(begindate==""){
-				window.location.href ="<%=contextPath%>/survey/queryanimalpage.action?enddate="+enddate; 
+				window.location.href ="<%=contextPath%>/survey/querychickpage.action?enddate="+enddate; 
 			}
 			else if(enddate==""){
-				window.location.href ="<%=contextPath%>/survey/queryanimalpage.action?begindate="+begindate; 
+				window.location.href ="<%=contextPath%>/survey/querychickpage.action?begindate="+begindate; 
 			}
 			else{
-				window.location.href ="<%=contextPath%>/survey/queryanimalpage.action?begindate="+begindate+"&enddate="+enddate; 
+				window.location.href ="<%=contextPath%>/survey/querychickpage.action?begindate="+begindate+"&enddate="+enddate; 
 			}
 		}
 		function LookGIS(){
@@ -203,20 +209,16 @@ text-align:center;}
 			var begindate=$("#begindate").val();//开始日期
 			var enddate=$("#enddate").val();//结束日期
 			if(begindate==""&&enddate==""){
-				//document.getElementById("lookgis").href="<%=contextPath%>/survey/exportanimallist.action?flag=3";
-				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=3";
+				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=1";
 			}
 			else if(begindate==""){
-				//document.getElementById("lookgis").href="<%=contextPath%>/survey/exportanimallist.action?flag=1&enddate="+enddate;
-				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=3&enddate="+enddate;
+				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=1&enddate="+enddate;
 			}
 			else if(enddate==""){
-				//document.getElementById("lookgis").href="<%=contextPath%>/survey/exportanimallist.action?flag=1&begindate="+begindate;
-				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=3&begindate="+begindate;
+				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=1&begindate="+begindate;
 			}
 			else{
-				//document.getElementById("lookgis").href="<%=contextPath%>/survey/exportanimallist.action?flag=1&begindate="+begindate+"&enddate="+enddate;
-				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=3&begindate="+begindate+"&enddate="+enddate;
+				document.getElementById("lookgis").href="<%=contextPath%>/survey/surveymap.jsp?type=1&begindate="+begindate+"&enddate="+enddate;
 			}
 		}
 		function DoExport(){
@@ -225,16 +227,16 @@ text-align:center;}
 			var begindate=$("#begindate").val();//开始日期
 			var enddate=$("#enddate").val();//结束日期
 			if(begindate==""&&enddate==""){
-				document.getElementById("export").href="<%=contextPath%>/survey/exportanimallist.action";
+				document.getElementById("export").href="<%=contextPath%>/survey/exportchicklist.action";
 			}
 			else if(begindate==""){
-				document.getElementById("export").href="<%=contextPath%>/survey/exportanimallist.action?enddate="+enddate;
+				document.getElementById("export").href="<%=contextPath%>/survey/exportchicklist.action?enddate="+enddate;
 			}
 			else if(enddate==""){
-				document.getElementById("export").href="<%=contextPath%>/survey/exportanimallist.action?begindate="+begindate;
+				document.getElementById("export").href="<%=contextPath%>/survey/exportchicklist.action?begindate="+begindate;
 			}
 			else{
-				document.getElementById("export").href="<%=contextPath%>/survey/exportanimallist.action?begindate="+begindate+"&enddate="+enddate;
+				document.getElementById("export").href="<%=contextPath%>/survey/exportchicklist.action?begindate="+begindate+"&enddate="+enddate;
 			}
 		}
 	</script>

@@ -13,11 +13,11 @@
         <property name="xiangjibianhao" type="java.lang.String">
             <column name="xiangjibianhao" length="45" />
         </property>
-        <property name="anzhuangriqi" type="java.lang.String">
-            <column name="anzhuangriqi" length="500" />
-        </property> 
-        <property name="anzhuangrenyuan" type="java.sql.Timestamp">
-            <column name="anzhuangrenyuan" length="19" />
+         <property name="anzhuangriqi" type="java.sql.Timestamp">
+            <column name="anzhuangriqi" length="19" />
+        </property>
+        <property name="anzhuangrenyuan" type="java.lang.String">
+            <column name="anzhuangrenyuan" length="450" />
         </property>
         <property name="xiaodiming" type="java.lang.String">
             <column name="xiaodiming" length="450" />

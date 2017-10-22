@@ -55,24 +55,24 @@ text-align:center;
 	</div>
 		<div class="contentstyle">
 		<div class="maincontent">
-			<div class="leftpanel" style="border-right:1px solid;">
+			<div class="leftpanel" >
 				<ul>
 					<li><a href="<%=contextPath%>/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li class="activeli"><a href="javascript:void(0)">发文管理</a></li>
 					<li><a href="<%=contextPath%>/oa/queryreceive.action">收文管理</a></li> 
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1" target="_blank">网络硬盘</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2" target="_blank">巡护图片</a></li>
 					<%-- <li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li><a href="<%=contextPath%>/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
 					<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
 					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
 					<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li> --%>
-					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
+					<%-- <li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li> --%>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
 				</ul>
 			</div>
-			<div class="rightpanel" style="border:none;">
+			<div class="rightpanel" >
 			    <h3  style="margin:30px;">发文管理</h3>
 				<div style="margin:10px;">
 				<s:form action="querysend" namespace="/oa" class="form-inline"

@@ -1,6 +1,12 @@
 package com.travel.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +44,11 @@ public class ProtectrecordAction extends ActionSupport {
 	private List<Protectrecord> protectlist;
 	/*private UserService<User> userService;*/
 	private String errormsg;
-
+	private SplitPage page;
+	private InputStream inputStream;
+	private String beginstr;
+	private String endstr;
+	private String exportname;
 	public ProtectrecordAction() {
 
 	}
@@ -158,5 +168,167 @@ public class ProtectrecordAction extends ActionSupport {
 			return ERROR;
 		}
 		return SUCCESS;
+	}
+	
+	public String querypagelist() {
+		int pagesize = 10;
+		int pagenum = 1;
+		if (getParam("pagesize") != null && getParam("pagenum") != null) {
+			pagesize = Integer.parseInt(getParam("pagesize"));// 每页行数
+			pagenum = Integer.parseInt(getParam("pagenum"));// 页码
+		}
+		Timestamp begindate;// 开始日期
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (getParam("begindate") != null) {
+			this.beginstr=getParam("begindate");
+			String beginstr = getParam("begindate") + " 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		} else {
+			String beginstr = "2000-1-1 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		}
+		Timestamp enddate;// 结束日期
+		if (getParam("enddate") != null) {
+			this.endstr=getParam("enddate");
+			String endstr = getParam("enddate") + " 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		} else {
+			String endstr = "3999-12-12 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		}
+		try {
+			this.protectlist = this.protectService.getProtectListPage(begindate,
+					enddate, pagesize, pagenum);
+			int num = this.protectService.getProtectCount(begindate, enddate);
+			page = new SplitPage(num, pagesize);
+			page.setCurrentPage(pagenum);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			setErrormsg("出错。" + e.getMessage());
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+
+	public String export() throws Exception {
+		// 时间
+		Timestamp begindate;// 开始日期
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (getParam("begindate") != null) {
+			String beginstr = getParam("begindate") + " 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		} else {
+			String beginstr = "2000-1-1 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		}
+		Timestamp enddate;// 结束日期
+		if (getParam("enddate") != null) {
+			String endstr = getParam("enddate") + " 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		} else {
+			String endstr = "3999-12-12 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		}
+		try {
+			this.protectlist = this.protectService.getProtectList(begindate,
+					enddate);
+			String str = "id,保护站名称,记录人,巡护日期,时间,天气,大地名,巡护人员,东至,西至,南至,北至,动物名称,数量,经度,纬度,海拔,生境类型,人为活动类型,干扰描述,干扰经度,干扰纬度,干扰海拔,干扰生境类型\r\n";
+			for (int i = 0; i < this.protectlist.size(); i++) {
+				Protectrecord an = protectlist.get(i);
+				str += an.getId() + "," + an.getBaohuzhanmingcheng() + ","
+						+ an.getJiluren() + ","+ an.getXunhudatestr() + ","
+						+ an.getDatestr() + ","+ an.getTianqi() + ","
+						+ an.getDadiming() + ","+ an.getXunhurenyuan() + ","
+						+ an.getDongzhi() + ","+ an.getXizhi() + ","
+						+ an.getNanzhi() + ","+ an.getBeizhi() + ","
+						+ an.getDongwumingcheng() + ","+ an.getShuliang() + ","
+						+ an.getJingdu() + ","+ an.getWeidu() + ","
+						+ an.getHaiba() + ","+ an.getShengjingleixing() + ","
+						+ an.getRenweihuodongleixing() + ","+ an.getGanraomiaoshu() + ","
+						+ an.getGanraojingdu() + ","+ an.getGanraoweidu() + ","
+						+ an.getGanraohaiba() + ","+ an.getGanraoshengjingleixing() +"\r\n";
+			}
+            this.inputStream=new ByteArrayInputStream(str.getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+			setErrormsg("出错。" + e.getMessage());
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+	
+	public String showmap() throws Exception {
+		// 时间
+		Timestamp begindate;// 开始日期
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if (getParam("begindate") != null) {
+			String beginstr = getParam("begindate") + " 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		} else {
+			String beginstr = "2000-1-1 0:00:00";
+			begindate = Timestamp.valueOf(beginstr);
+		}
+		Timestamp enddate;// 结束日期
+		if (getParam("enddate") != null) {
+			String endstr = getParam("enddate") + " 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		} else {
+			String endstr = "3999-12-12 23:59:59";
+			enddate = Timestamp.valueOf(endstr);
+		}
+		try {
+			this.protectlist = this.protectService.getProtectList(begindate,
+					enddate);
+			setErrormsg("0");
+		} catch (Exception e) {
+			e.printStackTrace();
+			setErrormsg("出错。" + e.getMessage());
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+
+	public SplitPage getPage() {
+		return page;
+	}
+
+	public void setPage(SplitPage page) {
+		this.page = page;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getBeginstr() {
+		return beginstr;
+	}
+
+	public void setBeginstr(String beginstr) {
+		this.beginstr = beginstr;
+	}
+
+	public String getEndstr() {
+		return endstr;
+	}
+
+	public void setEndstr(String endstr) {
+		this.endstr = endstr;
+	}
+
+	public String getExportname() throws UnsupportedEncodingException {
+		String timestr=new java.text.SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		exportname=timestr+"保护区巡护记录.txt";
+		this.exportname =  new String(exportname.getBytes("utf-8"),"ISO8859-1");
+		return exportname;
+	}
+
+	public void setExportname(String exportname) {
+		this.exportname = exportname;
 	}
 }

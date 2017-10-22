@@ -105,6 +105,14 @@ text-align:center;
 		<div class="contentstyle">
 		<div class="maincontent">
 			<div  style="width:100%;border:1px solid #666666;margin:0px;margin-bottom:10px;">
+				<div style="background-color: #7EC0EE;height:38px;padding:5px;">
+					<input type="checkbox" id="chk1" onclick="toggle(1,this)" />褐马鸡野外种群监测
+					<input type="checkbox" id="chk2" style="margin-left:10px;" onclick="toggle(2,this)" />红外相机监测点
+					<input type="checkbox" id="chk3" style="margin-left:10px;" onclick="toggle(3,this)" />野生动物监测 
+					<input type="checkbox" id="chk4" style="margin-left:10px;" onclick="toggle(4,this)" />森林植物群落监测
+					<input type="checkbox" id="chk5" style="margin-left:10px;" onclick="toggle(5,this)" />动植物相关重要信息 
+					<input type="checkbox" id="chk6" style="margin-left:10px;" onclick="toggle(6,this)" />保护区巡护记录
+				</div>
 				<div id="themap" style="width:100%;height:680px;"></div>
 				<div class="button-tool">
 					<input type="button" class="button" value="地图"
@@ -162,11 +170,6 @@ text-align:center;
 			for(var i=0;i<6;i++){          //一维长度为6
 				ptlist[i]='';    //初始化二维数组
 			 };
-			 //加载后根据日期查询相当的数据
-			 var type=GetQueryString("type");//类型
-			 var begindate=GetQueryString("begindate");//起始日期
-			 var enddate=GetQueryString("enddate");//终止日期
-			 loadpts(type,begindate,enddate);
 			});
 		//checkbox点击事件
 		function toggle(type,checkbox){
@@ -186,49 +189,29 @@ text-align:center;
 			}
 		}
 		//异步加载显示点
-		function loadpts(type,begindate,enddate){
-			 if(begindate==null)
-				 {
-				 begindate="";
-				 }
-			 if(enddate==null)
-				 {
-				 enddate="";
-				 }
-			 var infoWindow = new AMap.InfoWindow({ });
-			 var datecondition="";//日期字符串
-			 if(begindate==""&&enddate==""){
-				 datecondition="";
-			 }
-			 else if(begindate==""){
-				 datecondition="?enddate="+enddate;	 
-			 }
-			 else if(enddate==""){
-				 datecondition="?begindate="+begindate;	 
-			 }
-			 else{
-				 datecondition="?begindate="+begindate+"&enddate="+enddate;
-			 }
+		function loadpts(type){
+			 var infoWindow = new AMap.InfoWindow({
+		        });
 			var url="";
 			switch(type)
 			{
-			case "1":
-				url=contextPath+"/survey/showchicklist.action"+datecondition;
+			case 1:
+				url=contextPath+"/survey/querychicklist.action";
 			  break;
-			case "2":
-				url=contextPath+"/survey/showcameralist.action"+datecondition;
+			case 2:
+				url=contextPath+"/survey/querycameralist.action";
 			  break;
-			case "3":
-				url=contextPath+"/survey/showanimallist.action"+datecondition;
+			case 3:
+				url=contextPath+"/survey/queryanimallist.action";
 			  break;
-			case "4":
-				url=contextPath+"/survey/showplantlist.action"+datecondition;
+			case 4:
+				url=contextPath+"/survey/queryplantlist.action";
 			  break;
-			case "5":
-				url=contextPath+"/survey/showimportlist.action"+datecondition;
+			case 5:
+				url=contextPath+"/survey/queryimportinfolist.action";
 			  break;
-			case "6":
-				url=contextPath+"/survey/showprotectlist.action"+datecondition;
+			case 6:
+				url=contextPath+"/survey/queryprotectlist.action";
 			  break;
 			default:
 				break;
@@ -246,22 +229,22 @@ text-align:center;
 						var datalist=[];
 						switch(type)
 						{
-						case "1":
+						case 1:
 							datalist=data.chicklist;
 						  break;
-						case "2":
+						case 2:
 							datalist=data.cameralist;
 						  break;
-						case "3":
+						case 3:
 							datalist=data.animallist;
 						  break;
-						case "4":
+						case 4:
 							datalist=data.plantlist;
 						  break;
-						case "5":
+						case 5:
 							datalist=data.importinfolist;
 						  break;
-						case "6":
+						case 6:
 							datalist=data.protectlist;
 						  break;
 						default:
@@ -318,43 +301,43 @@ text-align:center;
 			var info = [];
 			switch(type)
 			{
-			case "1":
+			case 1:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>褐马鸡野外种群状况监测</label>");
 				info.push("保护站:"+survey.baohuzhan);
 				info.push("小地名:"+survey.xiaodiming);
 				info.push("实体数量:"+survey.shitishuliang);
-				info.push("填表时间:"+survey.datestr);
+				info.push("填表时间:"+survey.tianbiaoshijian);
 				info.push("样线号:"+survey.yangxianhao);
 				info.push("记录号:"+survey.jiluhao);
 				info.push("<a href='"+contextPath+"/survey/querychick.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "2":
+			case 2:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>红外相机监测数据</label>");
 				info.push("相机编号:"+survey.xiangjibianhao);
-				info.push("安装日期:"+survey.datestr);
+				info.push("安装日期:"+survey.anzhuangriqi);
 				info.push("安装人员:"+survey.anzhuangrenyuan);
 				info.push("小地名:"+survey.xiaodiming);
 				info.push("<a href='"+contextPath+"/survey/querycamera.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "3":
+			case 3:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>动物状况监测信息</label>");
 				info.push("样线号:"+survey.yangxianhao);
 				info.push("动物名称:"+survey.dongwumingcheng);
 				info.push("实体数量:"+survey.shitishuliang);
 				info.push("尸体数量:"+survey.bodyshuliang);
-				info.push("填表时间:"+survey.datestr);
+				info.push("填表时间:"+survey.tianbiaoshijian);
 				info.push("<a href='"+contextPath+"/survey/queryanimal.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "4":
+			case 4:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>森林植物群落监测</label>");
 				info.push("样方号:"+survey.yangfanghao);
 				info.push("群系名称:"+survey.qunximingcheng);
 				info.push("树种名:"+survey.shuzhongming);
 				info.push("标本编号:"+survey.biaobenbianhao);
-				info.push("填表时间:"+survey.datestr);
+				info.push("填表时间:"+survey.tianbiaoshijian);
 				info.push("<a href='"+contextPath+"/survey/queryplant.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "5":
+			case 5:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>动植物相关重要信息</label>");
 				info.push("填报单位:"+survey.tianbaodanwei);
 				info.push("名称:"+survey.mingcheng);
@@ -362,14 +345,14 @@ text-align:center;
 				info.push("发现地点:"+survey.faxiandidian);
 				info.push("发现时间:"+survey.faxianshijian);
 				info.push("发现人员:"+survey.faxianrenyuan);
-				info.push("填写时间:"+survey.datestr);
+				info.push("填写时间:"+survey.tianxieshijian);
 				info.push("<a href='"+contextPath+"/survey/queryimportinfo.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "6":
+			case 6:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>保护区巡护记录</label>");
 				info.push("保护站名称:"+survey.baohuzhanmingcheng);
 				info.push("巡护人员:"+survey.xunhurenyuan);
-				info.push("巡护日期:"+survey.xunhudatestr);
+				info.push("巡护日期:"+survey.xunhuriqi);
 				info.push("动物名称:"+survey.dongwumingcheng);
 				info.push("数量:"+survey.shuliang);
 				info.push("<a href='"+contextPath+"/survey/queryprotect.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
@@ -440,12 +423,6 @@ text-align:center;
 			        });
 			    }
 			    tileLayerRoad.show();
-			}
-			function GetQueryString(name)
-			{
-			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			     var r = window.location.search.substr(1).match(reg);
-			     if(r!=null)return  unescape(r[2]); return null;
 			}
 	</script>
 </body>

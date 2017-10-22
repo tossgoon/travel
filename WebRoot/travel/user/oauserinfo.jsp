@@ -55,25 +55,19 @@ width:360px;float:left;
 	</div>
 		<div class="contentstyle">
 		<div class="maincontent">
-			<div class="leftpanel" style="border-right:1px solid #111111;">
+			<div class="leftpanel">
 				<ul>
-					<li><a href="<%=contextPath%>/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
-					<li><a href="<%=contextPath%>/oa/querysend.action">发文管理</a></li>
-					<li><a href="<%=contextPath%>/oa/queryreceive.action">收文管理</a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
-<%-- 					<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
-					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
-					<li><a href="<%=contextPath%>/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
-					<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-					<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li> --%>
-					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
 					<li class="activeli"><a href="javascript:void(0)">个人账户管理</a></li>
 				</ul>
 			</div>
-			<div class="rightpanel" style="border:none;">
-			   <h3>个人信息</h3>
+			<div class="rightpanel">
+			   <h3>个人信息(
+							      <c:if test="${user.usertype=='0'}">普通用户</c:if>
+								     <c:if test="${user.usertype=='1'}">数据管理</c:if>
+								     <c:if test="${user.usertype=='9'}">管理员</c:if>)
+									
+									
+						</h3>
 			   <hr>
 			   <s:form role="form" theme="simple" id="formPortalInfo" action="updateinfo"  namespace="/user" >
 				<table style="width:80%;text-align:center;border-collapse:separate; border-spacing:0px 10px;" >
@@ -90,6 +84,7 @@ width:360px;float:left;
 							<td><s:textfield class="form-control inputstyle" id="loginname"
 									name="user.loginname" readonly="true"></s:textfield></td>
 						</tr>
+						
 						<tr>
 							<td><span>部门</span></td>
 							<td><s:textfield class="form-control inputstyle" id="department" readonly="true"

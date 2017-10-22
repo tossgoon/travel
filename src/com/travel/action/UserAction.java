@@ -28,6 +28,7 @@ public class UserAction extends ActionSupport {
 	private SplitPage page;
 	private List<Department> deptlist;
 	private DeptService<Department> deptservice;
+	private String logintype;
 	public String getSearchText() {
 		return searchText;
 	}
@@ -55,7 +56,7 @@ public class UserAction extends ActionSupport {
 				String md5OfPass="";//md5加密之后的密码
 				md5OfPass=MD5Util.getMD5("111111");
 				user.setPassword(md5OfPass);
-				user.setUsertype("0");
+				//user.setUsertype("0");
 				userService.addUser(user);
 				// throw new RuntimeException("");
 				setErrorMsg("0");
@@ -99,6 +100,25 @@ public class UserAction extends ActionSupport {
 			}
 			else{
 				setErrorMsg("原密码输入错误");
+			}
+			return SUCCESS;
+		} catch (Exception e) {
+			// TODO: handle exception
+			setErrorMsg("更新用户出错。" + e.getMessage());
+			return ERROR;
+		}
+	}
+
+	public String ResetUserPass() {
+		try {
+			if (getParam("userid") != null) {
+				String newpassword = getParam("newpass");// 新密码
+				Integer userid = Integer.parseInt(getParam("userid"));// 用户ID
+				User muser = this.userService.getUser(User.class, userid);
+				String md5newpass = MD5Util.getMD5(newpassword);// 加密后的新密码
+				muser.setPassword(md5newpass);
+				this.userService.updateUserPassword(muser);
+				setErrorMsg("0");
 			}
 			return SUCCESS;
 		} catch (Exception e) {
@@ -210,13 +230,35 @@ public class UserAction extends ActionSupport {
 				User user1 = userService.queryUserByNamePassword(
 						user.getLoginname(), user.getPassword());
 				if (user1 != null) {
+					//以普通用户登陆
+					String finallogin="";
+					if(logintype.equals("0")){
+						finallogin="normal";
+					}
+					else if(logintype.equals("1")){
+						//以数据管理权限登陆
+						if(user1.getUsertype().equals("0")){
+							setErrorMsg("权限不够");
+							return ERROR;
+						}
+						else{
+							finallogin="datamanage";
+						}
+					}
+					else if(logintype.equals("9")){
+						if(!user1.getUsertype().equals("9")){
+							setErrorMsg("权限不够");
+							return ERROR;
+						}
+						else{
+							finallogin="admin";
+						}
+					}
 					setErrorMsg("0");
 					ActionContext.getContext().getSession().put("userid", user1.getId());//将用户id存储到loginname中
+					ActionContext.getContext().getSession().put("usertype", user1.getUsertype());//将用户id存储到loginname中
 					ActionContext.getContext().getSession().put("loginname", user1.getLoginname());//将用户姓名存储到loginname中
-					if(user1.getUsertype().equals("9")){
-						return "admin";
-					}
-					return "normal";
+					return finallogin;
 				} else {
 					setErrorMsg("密码错误。");
 					return ERROR;
@@ -295,5 +337,13 @@ public class UserAction extends ActionSupport {
 
 	public void setDeptservice(DeptService<Department> deptservice) {
 		this.deptservice = deptservice;
+	}
+
+	public String getLogintype() {
+		return logintype;
+	}
+
+	public void setLogintype(String logintype) {
+		this.logintype = logintype;
 	}
 }

@@ -71,13 +71,21 @@ float: right;
 
 			<tr>
 				<td><span style="margin-left:15px;margin-top:20px;">用户名</span></td>
-				<td><input type="text" name="user.loginname" style="width:260px;margin-top:20px;"
+				<td><input type="text" name="user.loginname" value="${user.loginname}" style="width:260px;margin-top:20px;"
 					placeholder="输入用户名" class="form-control"></td>
 			</tr>
 			<tr>
 				<td><span  style="margin-left:15px;">密码</span></td>
 				<td><input type="password" name="user.password" style="width:260px;"
 					placeholder="输入密码" class="form-control"></td>
+			</tr>
+			<tr>
+				<td><span  style="margin-left:15px;">登陆类型</span></td>
+				<td>
+				  <s:select class="form-control" id="usertype" style="width:260px;"
+													list="#{'0':'普通用户','1':'数据管理用户','9':'管理员'}"
+													label="选择类型" name="logintype"></s:select>
+					</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -87,7 +95,7 @@ float: right;
 					</td>
 			</tr>
 			<tr>
-			<td colspan="2">${errorMsg}</td>
+			<td colspan="2" style="color:#ff0000;">${errorMsg}</td>
 			</tr>
 		</table>
 	</s:form>

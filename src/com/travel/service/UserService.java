@@ -28,7 +28,7 @@ public class UserService<T> {
 
 	public void updateUserNoPassword(User user)
 			throws Exception {
-		String queryString = "update User u set u.username=?,u.loginname=?,u.telephone=?,u.department=?,u.remark=? where u.id=?";
+		String queryString = "update User u set u.username=?,u.loginname=?,u.telephone=?,u.department=?,u.usertype=?,u.remark=? where u.id=?";
 		SessionFactory sessionFactory = dao.getHibernateTemplate()
 				.getSessionFactory();
 		Session session = (Session) sessionFactory.openSession();//
@@ -37,8 +37,9 @@ public class UserService<T> {
 		query.setString(1, user.getLoginname());
 		query.setString(2, user.getTelephone());
 		query.setString(3, user.getDepartment());
-		query.setString(4, user.getRemark());
-		query.setInteger(5, user.getId());
+		query.setString(4, user.getUsertype());
+		query.setString(5, user.getRemark());
+		query.setInteger(6, user.getId());
 		query.executeUpdate();
 		session.close();
 	}

@@ -54,24 +54,17 @@ text-align:center;
 	
 		<div class="contentstyle">
 		<div class="maincontent" >
-			<div class="leftpanel" style="border-right:1px solid;">
+			<div class="leftpanel">
 				<ul>
 					<li><a href="<%=contextPath%>/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
 					<li><a href="<%=contextPath%>/oa/querysend.action">发文管理</a></li>
 					<li  class="activeli"><a href="javascript:void(0)">收文管理</a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
-					<%-- <li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
-					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
-					<li><a href="<%=contextPath%>/survey/animalsuredit.jsp" target="_blank">野生动物监测状况 </a></li>
-					<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-					<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li> --%>
-					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1" target="_blank">网络硬盘</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2" target="_blank">巡护图片</a></li>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
 				</ul>
 			</div>
-			<div class="rightpanel" style="border:none;height:700px;">
+			<div class="rightpanel" style="height:700px;">
 			        <h3  style="margin:30px;">收文管理</h3>
 			        <s:form action="queryreceive" namespace="/oa" class="form-inline"
 							method="post" theme="simple">
@@ -81,11 +74,10 @@ text-align:center;
 					</s:form>
 					<div style="clear:both;"></div>
 			        <hr>
-					
 						
 					<table align="center"  cellpadding="0" cellspacing="0"
 							 id="userlist" class="table"
-							style="margin-top:20px;clear:both;width:100%;">
+							style="margin-top:20px;clear:both;width:100%;height:500px;">
 							<thead>
 								<tr align="center">
 									<th width="50">ID</th>
@@ -126,14 +118,15 @@ text-align:center;
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
-					<div style="margin-top:10px;">
+						<div style="margin-top:10px;">
 							<a id="firstpage" href="<%=contextPath%>/oa/queryreceive.action?pagesize=10&pagenum=1">第一页</a>
 							<a id="lastpage"  href="<%=contextPath%>/oa/queryreceive.action?pagesize=10&pagenum=${page.currentPage-1 }">上一页</a>
 							<a id="nextpage"  href="<%=contextPath%>/oa/queryreceive.action?pagesize=10&pagenum=${page.currentPage+1 }">下一页</a>
 							<a id="endpage"	  href="<%=contextPath%>/oa/queryreceive.action?pagesize=10&pagenum=${page.totalPage }">最后一页</a>
 							<label id="pagecount"> ${page.currentPage }/${page.totalPage }</label>
 					</div>
+					</div>
+					
 					<div style="clear:both;"></div>
 		   </div>
 	    </div>

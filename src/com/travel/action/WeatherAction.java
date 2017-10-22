@@ -234,6 +234,8 @@ public class WeatherAction extends ActionSupport {
 
 		Date date = sdf.parse(datestr);
 		fire.setParame(this.getParame(date));
+		fire.setOther(fire.getParame());
+		
 		// º∆À„
 		fire.computeLevel();
 		if (getParam("flag") != null) {

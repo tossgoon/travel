@@ -71,11 +71,25 @@ public class FileIOService {
 			is = new FileInputStream(fileData);
 			os = new FileOutputStream(new File(path, newFileName));
 			// 因为file是存放在临时文件夹的文件，我们可以将其文件名和文件路径打印出来，看和之前的fileFileName是否相同
-			byte[] buffer = new byte[1024 * 1024];
-			int length = 0;
-			while (-1 != (length = is.read(buffer, 0, buffer.length))) {
-				os.write(buffer);
-			}
+			
+			int i=0;
+			//缓冲大小为512字节
+			byte[] buffer = new byte[512]; 
+	        while(true) { 
+	            if(is.available() < 512) { 
+	                while(i != -1) { 
+	                    i = is.read(); 
+	                    if(i!=-1){
+	                    	os.write(i); 
+	                    }
+	                } 
+	                break;//注意此处不能忘记哦 
+	            } else { 
+	                //当文件的大小大于512字节时 
+	                is.read(buffer); 
+	                os.write(buffer); 
+	            } 
+	        } 
 		}
 		/*
 		 * catch (FileNotFoundException e) { e.printStackTrace();

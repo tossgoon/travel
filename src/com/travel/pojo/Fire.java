@@ -10,6 +10,10 @@ public class Fire implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7215801816139341401L;
 	private Timestamp computedate;
 	private double temprature;// 最高气温
 	private double parama;// 指数A
@@ -178,19 +182,19 @@ public class Fire implements java.io.Serializable {
 		this.htz = this.parama + this.paramb + this.paramc + this.paramd
 				- this.parame;
 		if (htz <= 25) {
-			levelstr = "一等";
+			levelstr = "一级";
 			level=1;
 		} else if (htz <= 50) {
-			levelstr = "二等";
+			levelstr = "二级";
 			level=2;
 		} else if (htz <= 72) {
-			levelstr = "三等";
+			levelstr = "三级";
 			level=3;
 		} else if (htz <= 90) {
-			levelstr = "四等";
+			levelstr = "四级";
 			level=4;
 		} else {
-			levelstr = "五等";
+			levelstr = "五级";
 			level=5;
 		}
 	}

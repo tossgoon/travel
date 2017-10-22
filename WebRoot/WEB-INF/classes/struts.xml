@@ -52,6 +52,12 @@
 			<result name="error"  type="json">
 			</result>
 		</action>
+		
+		<action name="resetpass" class="userAct" method="ResetUserPass">
+			<result name="success" type="json"></result>
+			<result name="error"  type="json">
+			</result>
+		</action>
 
 		<action name="delete" class="userAct" method="delete">
 			<!-- <result name="success" type="redirect">
@@ -100,9 +106,6 @@
  			<result name="success">/travel/user/oauserinfo.jsp</result>
 			 <result name="error" type="json"></result> 
 		</action>
-		
-		
-		
 	</package>
 
     <package name="portalpack" extends="struts-default,json-default,usercheck"
@@ -169,21 +172,12 @@
 		      <param name="namespace">/user</param>
 		    </result> 
 		    <result name="normal" type="redirectAction">
-		      <param name="actionName">loginsuccess</param>
+		      <param name="actionName">querynotifysend</param>
 		      <param name="namespace">/oa</param>
-		    </result> 
-			<!-- <result name="error" type="chain">
-		      <param name="actionName">first</param>
-		      <param name="namespace">/visitor</param>
-		    </result> 
-			<result name="success" type="chain">
-		      <param name="actionName">first</param>
-		      <param name="namespace">/visitor</param>
-		    </result> 
-		    <result name="input" type="chain">
-		      <param name="actionName">first</param>
-		      <param name="namespace">/visitor</param>
-		    </result>  -->	
+		    </result>
+		    <result name="datamanage">
+		      /survey/chickedit.jsp
+		    </result>  
 		</action>
 		<action name="querypage" class="portalAct" method="queryByPage">
  			<result name="success">/portal/portallistshow.jsp</result>
@@ -404,7 +398,19 @@
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
-		
+		<action name="exportanimallist" class="animalAct" method="export">
+		    <result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${exportname}"</param>
+			</result>
+			<result name="map" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="showanimallist" class="animalAct" method="showmap">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
 		<action name="savecamera" class="cameraAct" method="save">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
@@ -418,6 +424,23 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="querycameralist" class="cameraAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="querycamerapage" class="cameraAct" method="querypagelist">
+			<result name="success">/survey/cameralist.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="exportcameralist" class="cameraAct" method="export">
+		    <result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${exportname}"</param>
+			</result>
+			<result name="map" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="showcameralist" class="cameraAct" method="showmap">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
@@ -438,6 +461,23 @@
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
+		<action name="querychickpage" class="chickAct" method="querypagelist">
+			<result name="success">/survey/chicklist.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="exportchicklist" class="chickAct" method="export">
+		    <result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${exportname}"</param>
+			</result>
+			<result name="map" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="showchicklist" class="chickAct" method="showmap">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
 		
 		<action name="saveimportinfo" class="importinfoAct" method="save">
 			<result name="success" type="json"></result>
@@ -455,7 +495,23 @@
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
-		
+		<action name="queryimportpage" class="importinfoAct" method="querypagelist">
+			<result name="success">/survey/importlist.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="exportimportlist" class="importinfoAct" method="export">
+		    <result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${exportname}"</param>
+			</result>
+			<result name="map" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="showimportlist" class="importinfoAct" method="showmap">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
 		<action name="saveplant" class="plantAct" method="save">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
@@ -472,7 +528,23 @@
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>
-		
+		<action name="queryplantpage" class="plantAct" method="querypagelist">
+			<result name="success">/survey/plantlist.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="exportplantlist" class="plantAct" method="export">
+		    <result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${exportname}"</param>
+			</result>
+			<result name="map" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="showplantlist" class="plantAct" method="showmap">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
 		<action name="saveprotect" class="protectAct" method="save">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
@@ -486,6 +558,23 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="queryprotectlist" class="protectAct" method="querylist">
+			<result name="success" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="queryprotectpage" class="protectAct" method="querypagelist">
+			<result name="success">/survey/protectlist.jsp</result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="exportprotectlist" class="protectAct" method="export">
+		    <result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${exportname}"</param>
+			</result>
+			<result name="map" type="json"></result>
+			<result name="error" type="json"></result>
+		</action>
+		<action name="showprotectlist" class="protectAct" method="showmap">
 			<result name="success" type="json"></result>
 			<result name="error" type="json"></result>
 		</action>

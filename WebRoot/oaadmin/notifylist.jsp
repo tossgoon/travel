@@ -8,14 +8,11 @@
 			+ path + "/";
 	String contextPath = request.getContextPath();
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
-
 <title>通知公告管理</title>
-
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -57,13 +54,7 @@ th{
 				<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
 				<li  class="activeli"><a href="javascript:void(0)">通知公告</a></li>
 				<li><a href="<%=contextPath%>/dept/querylist.action">部门管理</a></li>
-				<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
-				<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
-				<li><a href="<%=contextPath%>/survey/animalsuredit.jsp">野生动物监测状况</a></li>
-				<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-				<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-				<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
-				<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
+				<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
 			</ul>
 		</div>
 		<div class="rightpanel" style="height:500px;">

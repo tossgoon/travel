@@ -326,7 +326,7 @@ color:#ffffff;
 	<div style="padding-top:15px;padding-bottom:35px;width:100%;background-color:#ffffff;height:60px;">
 		<div style="width:1174px;margin:0 auto;">
 			<label	style="font-size:12px;font-weight:normal;margin-left:20%;float:left;">今日天气：<%=currentDate%></label>
-			<label>森林火险气象等级：</label><label id="firelevel">森林火险气象等级：</label>
+			<label>森林火险气象等级：</label><label id="firelevel" style="background-color:#f2f2f2"></label>
 			<iframe name="sinaWeatherTool"
 				src="http://weather.news.sina.com.cn/chajian/iframe/weatherStyle1.html?city=%E5%BB%B6%E5%AE%89"
 				width="200" height="20" marginwidth="0" marginheight="0" hspace="0"
@@ -621,7 +621,7 @@ color:#ffffff;
 						$("#firelevel").css("color","#0000ff");
 						
 					}else if(fire.level==3){
-						$("#firelevel").css("color","#ffff00");
+						$("#firelevel").css("color","#EE9A00");
 					}else if(fire.level==4){
 						$("#firelevel").css("color","#FF8C00");
 					}else if(fire.level==5){
@@ -629,7 +629,8 @@ color:#ffffff;
 					}
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.status);
+					//alert(XMLHttpRequest.status);
+					$("#firelevel").html("--");
 				}
 			});
 		});

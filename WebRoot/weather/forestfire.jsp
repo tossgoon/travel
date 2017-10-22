@@ -137,19 +137,19 @@ td >span{
 												</td>
 											</tr>
 											<tr>
-												<td><span style="color:#FF3030;">生物及非生物物候季节特征(*)</span></td>
+												<td><span style="color:#FF3030;">生物及非生物物候季节特征1(*)</span></td>
 												<td colspan="3">
-												
-												<s:select class="form-control" id="fireother" name="fire.other"
-													list="#{'20':'全部绿草覆盖（草木生长期）/90%以上积雪覆盖(积雪期)'
-													       ,'15':'75%绿草覆盖（草木生长期）/60%以上积雪覆盖(积雪期)'
-													       ,'10':'50%绿草覆盖（草木生长期）/30%以上积雪覆盖(积雪期)'
-													       ,'5':'20%绿草覆盖（草木生长期）/10%以上积雪覆盖(积雪期)'
-													       ,'0':'没有绿草（草木生长期）/没有积雪(积雪期)'}"
-													label="选择" onchange="ChangeSelect()"></s:select>
+												<s:select class="form-control" id="fireother" name="fire.other"  label="选择"
+													list="#{'20.0':'全部绿草覆盖（草木生长期）/90%以上积雪覆盖(积雪期)'
+													       ,'15.0':'75%绿草覆盖（草木生长期）/60%以上积雪覆盖(积雪期)'
+													       ,'10.0':'50%绿草覆盖（草木生长期）/30%以上积雪覆盖(积雪期)'
+													       ,'5.0':'20%绿草覆盖（草木生长期）/10%以上积雪覆盖(积雪期)'
+													       ,'0':'没有绿草（草木生长期）/没有积雪(积雪期)'}" 
+													onchange="ChangeSelect()"></s:select>
+													<%-- <s:textfield class="form-control input-sm" id="parame" name="fire.otherstr" readonly="true" ></s:textfield> --%>
 												</td>
 												<td><span>指数E</span></td>
-												<td><s:textfield class="form-control input-sm" id="parame" name="fire.parame" readonly="true" value="20"></s:textfield></td>
+												<td><s:textfield class="form-control input-sm" id="parame" name="fire.parame" readonly="true" ></s:textfield></td>
 											</tr>
 											<tr>
 											<td colspan="5"></td>
@@ -162,12 +162,12 @@ td >span{
 											<tr>
 											    <td colspan="4"></td>
 												<td><span>森林火险天气指数HTZ</span></td>
-												<td><s:textfield class="form-control  input-sm" id="htz" readonly="true"></s:textfield></td>
+												<td><s:textfield class="form-control  input-sm" id="htz" name="fire.htz" readonly="true"></s:textfield></td>
 											</tr>
 											<tr>
 												<td  colspan="2"></td>
 												<td><span>森林火险天气等级</span></td>
-												<td colspan="3"><s:textfield class="form-control  input-sm" id="firelevel"   readonly="true"></s:textfield></td>
+												<td colspan="3"><s:textfield class="form-control  input-sm" id="firelevel" name="fire.levelstr"    readonly="true"></s:textfield></td>
 											</tr>
 										</tbody>
 									</table>
@@ -272,15 +272,15 @@ td >span{
 		$("#htz").val(htz);
 		var level="";
 		if (htz <= 25) {
-				level = "一等/没有危险/不能燃烧/不能蔓延";
+				level = "一级/没有危险/不能燃烧/不能蔓延";
 			} else if (htz <= 50) {
-				level = "二等/低度危险/难以燃烧/难以蔓延";
+				level = "二级/低度危险/难以燃烧/难以蔓延";
 			} else if (htz <= 72) {
-				level = "三等/中度危险/较易燃烧/较易蔓延";
+				level = "三级/中度危险/较易燃烧/较易蔓延";
 			} else if (htz <= 90) {
-				level = "四等/高度危险/容易燃烧/容易蔓延";
+				level = "四级/高度危险/容易燃烧/容易蔓延";
 			} else {
-				level = "五等/极度危险/极易燃烧/极易蔓延";
+				level = "五级/极度危险/极易燃烧/极易蔓延";
 			}
 		   $("#firelevel").val(level);
 
@@ -304,7 +304,8 @@ td >span{
 			if($("#computedate").val()==null||$("#computedate").val()==""){
 				//$('.form_date').datetimepicker("setValue");
 			}
-			compute();
+			//设置
+			//compute();
 		});
 	</script>
 </body>

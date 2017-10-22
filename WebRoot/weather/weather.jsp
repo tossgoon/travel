@@ -72,7 +72,8 @@ body {
 											   <span id="weathertime" style="font-size:14px;"></span>
 											   <a style="float:right;margin-right:20px;" target="_blank" href="<%=contextPath%>/visitor/queryweatherlist.action">查看历史数据</a>
 											
-											   <a id="firea" target="_blank">查看防火指数</a>
+											   <!-- <a id="firea" target="_blank">查看防火指数</a> -->
+											   <label>森林火险气象等级：</label><label id="firelevel" style="background-color:#f2f2f2"></label>
 											
 											</div>
 										</div>
@@ -175,7 +176,36 @@ body {
 			document.getElementById("firea").href=contextPath+"/visitor/queryfireinfo.action?datestr="+datestr+"&flag=1";
 		});
 		//计算防火等级
-		
+		//获取防火等级
+		    $.ajax({
+				type : "get",
+				url : contextPath+"/visitor/queryfireinfo.action",
+				//data :{datestr: $("#computedate").val()},
+				//data :{datestr: datestr},
+				cache : false, 
+				dataType : "json",
+				success : function(data) {
+					var fire=data.fire;
+					$("#firelevel").html(fire.levelstr);
+					if(fire.level==1){
+						$("#firelevel").css("color","#00ff00");
+					}
+					else if(fire.level==2){
+						$("#firelevel").css("color","#0000ff");
+						
+					}else if(fire.level==3){
+						$("#firelevel").css("color","#EE9A00");
+					}else if(fire.level==4){
+						$("#firelevel").css("color","#FF8C00");
+					}else if(fire.level==5){
+						$("#firelevel").css("color","#ff0000");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					//alert(XMLHttpRequest.status);
+					$("#firelevel").html("--");
+				}
+			});
 
 	</script>
 </body>

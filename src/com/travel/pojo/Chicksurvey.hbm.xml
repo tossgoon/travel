@@ -60,6 +60,9 @@
         <property name="podu" type="java.lang.String">
             <column name="podu" length="450" />
         </property>
+        <property name="poxiang" type="java.lang.String">
+            <column name="poxiang" length="450" />
+        </property>
         <property name="height" type="java.lang.Double">
             <column name="height" precision="18" scale="3" />
         </property>

@@ -29,6 +29,7 @@ public class Chicksurvey implements java.io.Serializable {
 	private Double fenbianshuliang;
 	private String powei;
 	private String podu;
+	private String poxiang;
 	private Double height;
 	private Double jingdu;
 	private Double weidu;
@@ -262,6 +263,14 @@ public class Chicksurvey implements java.io.Serializable {
 
 	public void setDatestr(String datestr) {
 		this.datestr = datestr;
+	}
+
+	public String getPoxiang() {
+		return poxiang;
+	}
+
+	public void setPoxiang(String poxiang) {
+		this.poxiang = poxiang;
 	}
 
 }

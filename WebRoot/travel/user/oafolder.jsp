@@ -51,19 +51,14 @@ text-align:center;
 	</div>
 	<div class="contentstyle">
 		<div class="maincontent">
-			<div class="leftpanel" style="border-right:1px solid;">
+			<div class="leftpanel" >
 				<ul>
-					<li><a href="/travel/oa/querynotifysend.action?pagesize=7&pagenum=1">公告通知</a></li>
-					<li><a href="/travel/oa/querysend.action">发文管理</a></li>
-					<li><a href="/travel/oa/queryreceive.action">收文管理</a></li> 
 					<li class="activeli"><a href="javascript:void(0)">网络硬盘</a></li>
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
-					
-					<li><a href="/travel/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="/travel/user/queryuinfo.action">个人账户管理</a></li>
+					<li><a href="/travel/oa/queryfolderlist.action?ptype=2" target="_blank">巡护图片</a></li>
+					<li><a href="/travel/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
 				</ul>
 			</div>
-			<div class="rightpanel" style="padding-top:30px;border:none;">
+			<div class="rightpanel" style="padding-top:30px;">
 				<div style="width:260px;float:left;text-align:left;">
 					<div style="margin-bottom:20px;">
 						<a href="javascript:void(0);" onclick="InsertFolder()" class="btn btn-default btn-sm">新增目录</a>

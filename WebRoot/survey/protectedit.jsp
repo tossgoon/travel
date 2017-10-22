@@ -59,10 +59,6 @@ body {
 		<div class="maincontent">
 			<div class="leftpanel" style="border-right:1px solid #111111;">
 				<ul>
-					<li><a href="<%=contextPath%>/portal/querypage.action?pagesize=10&pagenum=1&type=0" target="_blank">网站门户</a></li>
-					<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
-					<li><a href="<%=contextPath%>/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
-					<li><a href="<%=contextPath%>/dept/querylist.action">部门管理</a></li>
 					<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
 					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
 					<li><a href="<%=contextPath%>/survey/animalsuredit.jsp" target="_blank">野生动物监测状况</a></li>
@@ -70,7 +66,9 @@ body {
 					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
 					<li  class="activeli"><a href="javascript:void(0)">保护区巡护记录 </a></li>
 					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1" target="_blank">网络硬盘</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2" target="_blank">巡护图片</a></li>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="border:none;">
@@ -253,6 +251,8 @@ body {
 						<a href="<%=contextPath%>/survey/protectedit.jsp" class="btn btn-default">新增数据</a>
 						<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
 						<button type="button"  id="btndel" onclick="DeleteAnimal()" class="btn btn-warning">删除数据</button>
+					<a href="<%=contextPath%>/survey/queryprotectpage.action" target="_blank"
+								class="btn btn-success">数据查询</a>
 					</div>
 			</div>
 			<div style="clear:both;"></div>
