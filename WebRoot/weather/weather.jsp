@@ -55,7 +55,7 @@ body {
 		<div class="row">
 			<div class="col-md-12" style="text-align:left;margin-top:20px;">
 				<div style="width:1024px;margin:0 auto;border-bottom:2px solid #A1A1A1;padding-bottom:12px;padding-left:20px;">
-					<span>当前位置：天气信息&gt;&gt; 气象信息    </span>
+					<span>当前位置：森林火险气象等级&gt;&gt; 气象信息    </span>
 					<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 				</div>
 			</div>
@@ -69,12 +69,10 @@ body {
 								<div class="container" style="width:800px;">
 										<div class="row">
 											<div class="col-md-12">
-											   <span id="weathertime" style="font-size:14px;"></span>
+											   <span id="weathertime" style="font-size:14px;margin-right:20px;"></span>
 											   <a style="float:right;margin-right:20px;" target="_blank" href="<%=contextPath%>/visitor/queryweatherlist.action">查看历史数据</a>
-											
-											   <!-- <a id="firea" target="_blank">查看防火指数</a> -->
+											   <a id="firea" style="float:right;margin-right:20px;" target="_blank">查看防火指数</a>
 											   <label>森林火险气象等级：</label><label id="firelevel" style="background-color:#f2f2f2"></label>
-											
 											</div>
 										</div>
 										<div class="row" style="margin-top:30px;">

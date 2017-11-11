@@ -99,7 +99,7 @@ text-align:center;
 			<span>当前位置：OA系统&gt;&gt;监测信息
 			</span> 
 			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
-			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/oa/querynotifysend.action?pagesize=7&pagenum=1">返回OA功能列表</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/survey/chickedit.jsp">返回OA功能列表</a>
 			
 	</div>
 		<div class="contentstyle">
@@ -129,8 +129,12 @@ text-align:center;
 		var tileLayerSatellite;   //卫星影像图
 		var tileLayerRoad;        //路网图层
 		var marker;//标记
-		var ptlist=new Array();  
+		//var ptlist=new Array();  
 		var contextPath="<%=contextPath%>";
+		var type=${maptype};//展示类型
+		//var dtlist=  eval('(' + ${mapstr} + ')');//数据字符串
+		var dtlist= ${mapstr};//数据字符串
+		var ptsmap;//点在地图上的定义
 		//var animals=[],cameras=[],chicks=[],importinfos=[],plants=[],protects=[];
 		$(function() {
 			//初始化地图
@@ -159,17 +163,52 @@ text-align:center;
 						content : "<label style='font-size:14px;'>延安黄龙山褐马鸡国家级自然保护区</label>"
 					}); */
 			//二维数据的定义 
-			for(var i=0;i<6;i++){          //一维长度为6
+			/* for(var i=0;i<6;i++){          //一维长度为6
 				ptlist[i]='';    //初始化二维数组
-			 };
+			 }; */
 			 //加载后根据日期查询相当的数据
-			 var type=GetQueryString("type");//类型
-			 var begindate=GetQueryString("begindate");//起始日期
-			 var enddate=GetQueryString("enddate");//终止日期
-			 loadpts(type,begindate,enddate);
+			 //var type=GetQueryString("type");//类型
+			 //var begindate=GetQueryString("begindate");//起始日期
+			 //var enddate=GetQueryString("enddate");//终止日期
+			 //var searchstr;
+			 /* switch(type)
+				{
+				case "1":
+					var baohuzhan=GetQueryString("baohuzhan");//保护站
+					var xiaodiming=GetQueryString("xiaodiming");//小地名
+					var jianceren=GetQueryString("jianceren");//监测人
+					var shengjingleixing=GetQueryString("shengjingleixing");//生境类型
+					searchstr="baohuzhan="+baohuzhan+"&xiaodiming="+xiaodiming+"&jianceren="+jianceren+"&shengjingleixing="+shengjingleixing;
+				  break;
+				case "2":
+				  break;
+				case "3":
+					var jianceren=GetQueryString("jianceren");//监测人
+					var dongwumingcheng=GetQueryString("dongwumingcheng");//动物名称
+					var shengjingleixing=GetQueryString("shengjingleixing");//生境类型 
+					searchstr="jianceren="+jianceren+"&dongwumingcheng="+dongwumingcheng+"&shengjingleixing="+shengjingleixing;
+				  break;
+				case "4":
+				  break;
+				case "5":
+					var p1=GetQueryString("p1");//
+					var p2=GetQueryString("p2");//
+					var p3=GetQueryString("p3");//
+					var p4=GetQueryString("p4");//
+					var p5=GetQueryString("p5");//
+					var p6=GetQueryString("p6");//
+					var searchstr="p1="+p1+"&p2="+p2+"&p3="+p3+"&p4="+p4+"&p5="+p5+"&p6="+p6;
+				  break;
+				case "6":
+				  break;
+				default:
+					break;
+				} */
+			 //loadpts(type,begindate,enddate,searchstr);
+			 initPtList(dtlist,type);
 			});
 		//checkbox点击事件
-		function toggle(type,checkbox){
+		/* function toggle(type,checkbox){
 			if (checkbox.checked) {
 	            showpt(type);
 	        } else {
@@ -184,9 +223,9 @@ text-align:center;
 			else{
 				visiblepts(type);
 			}
-		}
+		} */
 		//异步加载显示点
-		function loadpts(type,begindate,enddate){
+		/* function loadpts(type,begindate,enddate,searchstr){
 			 if(begindate==null)
 				 {
 				 begindate="";
@@ -201,34 +240,34 @@ text-align:center;
 				 datecondition="";
 			 }
 			 else if(begindate==""){
-				 datecondition="?enddate="+enddate;	 
+				 datecondition="&enddate="+enddate;	 
 			 }
 			 else if(enddate==""){
-				 datecondition="?begindate="+begindate;	 
+				 datecondition="&begindate="+begindate;	 
 			 }
 			 else{
-				 datecondition="?begindate="+begindate+"&enddate="+enddate;
+				 datecondition="&begindate="+begindate+"&enddate="+enddate;
 			 }
 			var url="";
 			switch(type)
 			{
 			case "1":
-				url=contextPath+"/survey/showchicklist.action"+datecondition;
+				url=contextPath+"/survey/showchicklist.action?"+searchstr+datecondition;
 			  break;
 			case "2":
-				url=contextPath+"/survey/showcameralist.action"+datecondition;
+				url=contextPath+"/survey/showcameralist.action?1=1"+datecondition;
 			  break;
 			case "3":
-				url=contextPath+"/survey/showanimallist.action"+datecondition;
+				url=contextPath+"/survey/showanimallist.action?"+searchstr+datecondition;
 			  break;
 			case "4":
-				url=contextPath+"/survey/showplantlist.action"+datecondition;
+				url=contextPath+"/survey/showplantlist.action?1=1"+datecondition;
 			  break;
 			case "5":
-				url=contextPath+"/survey/showimportlist.action"+datecondition;
+				url=contextPath+"/survey/showimportlist.action?"+searchstr+datecondition;
 			  break;
 			case "6":
-				url=contextPath+"/survey/showprotectlist.action"+datecondition;
+				url=contextPath+"/survey/showprotectlist.action?1=1"+datecondition;
 			  break;
 			default:
 				break;
@@ -305,20 +344,52 @@ text-align:center;
 					alert(XMLHttpRequest.status);
 				}
 			});
+		} */
+		function initPtList(datalist,type){
+			var pts=[];
+			var infoWindow = new AMap.InfoWindow({ });
+			for(var i=0;i<datalist.length;i++){
+				var survey=datalist[i];//单个动物监测点
+				var ptgcj02=GPS.gcj_encrypt(survey.weidu,survey.jingdu);
+				var pt={
+						"lnglat":[ptgcj02.lon,ptgcj02.lat],
+						"id":survey.id,
+						"survey":survey,
+						"style":type-1
+				};
+				pts.push(pt);
+			}
+			//定义点
+			 ptsmap = new AMap.MassMarks(pts, {
+		            opacity:0.8,
+		            zIndex: 111,
+		            cursor:'pointer',
+		            style:style
+		      });
+			 //var infoWindow = new AMap.InfoWindow();
+		     // var marker = new AMap.Marker({content:' ',map:map});
+		      ptsmap.on('mouseover',function(e){
+		        //marker.setPosition(e.data.lnglat);
+		        //marker.setLabel({content:e.data.id});
+		         var content=getptinfo(type,e.data.survey);
+		    	 infoWindow.setContent(content);
+		    	 infoWindow.open(map, e.data.lnglat);
+		      });
+		      ptsmap.setMap(map);
 		}
 		//直接显示点
-		function visiblepts(type){
+		/* function visiblepts(type){
 			ptlist[type-1].show();
 		}
 		//隐藏点
 		function hidept(type) {
 			ptlist[type-1].hide();
-		}
+		} */
 		function getptinfo(type,survey){
 			var info = [];
 			switch(type)
 			{
-			case "1":
+			case 1:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>褐马鸡野外种群状况监测</label>");
 				info.push("保护站:"+survey.baohuzhan);
 				info.push("小地名:"+survey.xiaodiming);
@@ -328,7 +399,7 @@ text-align:center;
 				info.push("记录号:"+survey.jiluhao);
 				info.push("<a href='"+contextPath+"/survey/querychick.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "2":
+			case 2:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>红外相机监测数据</label>");
 				info.push("相机编号:"+survey.xiangjibianhao);
 				info.push("安装日期:"+survey.datestr);
@@ -336,7 +407,7 @@ text-align:center;
 				info.push("小地名:"+survey.xiaodiming);
 				info.push("<a href='"+contextPath+"/survey/querycamera.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "3":
+			case 3:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>动物状况监测信息</label>");
 				info.push("样线号:"+survey.yangxianhao);
 				info.push("动物名称:"+survey.dongwumingcheng);
@@ -345,7 +416,7 @@ text-align:center;
 				info.push("填表时间:"+survey.datestr);
 				info.push("<a href='"+contextPath+"/survey/queryanimal.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "4":
+			case 4:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>森林植物群落监测</label>");
 				info.push("样方号:"+survey.yangfanghao);
 				info.push("群系名称:"+survey.qunximingcheng);
@@ -354,18 +425,18 @@ text-align:center;
 				info.push("填表时间:"+survey.datestr);
 				info.push("<a href='"+contextPath+"/survey/queryplant.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "5":
+			case 5:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>动植物相关重要信息</label>");
 				info.push("填报单位:"+survey.tianbaodanwei);
 				info.push("名称:"+survey.mingcheng);
 				info.push("痕迹类型:"+survey.henjileixing);
 				info.push("发现地点:"+survey.faxiandidian);
-				info.push("发现时间:"+survey.faxianshijian);
+				info.push("发现时间:"+survey.faxiandatestr);
 				info.push("发现人员:"+survey.faxianrenyuan);
 				info.push("填写时间:"+survey.datestr);
 				info.push("<a href='"+contextPath+"/survey/queryimportinfo.action?id="+survey.id+"' target='_blank'>查看详细信息</a></div>");
 			  break;
-			case "6":
+			case 6:
 				info.push("<div style='margin:10px;'><label style='border-bottom:1px solid;padding-bottom:5px;'>保护区巡护记录</label>");
 				info.push("保护站名称:"+survey.baohuzhanmingcheng);
 				info.push("巡护人员:"+survey.xunhurenyuan);

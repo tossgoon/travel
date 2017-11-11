@@ -6,7 +6,7 @@
 		</div> 
 	</div>
 	<div class="navbarhead">
-		<ul style="margin:0 auto;width:1180px;">
+		<ul style="margin:0 auto;width:1280px;">
 			<li><a href="<%=contextPath%>/visitor/first.action">首页</a></li>
 			<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" target="_blank">
@@ -53,7 +53,7 @@
                     <li><a href="<%=contextPath%>/visitor/querypage.action?pagesize=10&pagenum=1&type=10"  target="_blank">保护区植物</a></li>
                 </ul>
             </li>
-			<li><a href="<%=contextPath%>/weather/weather.jsp" target="_blank">气象数据</a></li>
+			<li><a href="<%=contextPath%>/weather/weather.jsp" target="_blank">森林火险气象等级</a></li>
 			<li><a href="<%=contextPath%>/visitor/show.action?id=50" target="_blank">联系我们</a></li>
 			<li><a href="<%=contextPath%>/travel/user/login.jsp" target="_blank">OA办公系统</a></li>
 		</ul>

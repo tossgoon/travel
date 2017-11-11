@@ -227,8 +227,45 @@ public class UserAction extends ActionSupport {
 				setErrorMsg("用户不存在");
 				return ERROR;
 			} else {
-				User user1 = userService.queryUserByNamePassword(
-						user.getLoginname(), user.getPassword());
+				User user1 = userService.queryUserByNamePassword(user.getLoginname(), user.getPassword());
+				if (user1 != null) {
+					String finallogin="";//登陆方式 0为普通用户  1为数据管理员  9为系统管理员
+					if(user1.getUsertype().equals("9"))
+					{
+						finallogin="admin";
+					}
+					else if(user1.getUsertype().equals("1"))
+					{
+						finallogin="datamanage";
+					}
+					else{
+						finallogin="normal";
+					}
+					setErrorMsg("0");
+					ActionContext.getContext().getSession().put("userid", user1.getId());//将用户id存储到loginname中
+					ActionContext.getContext().getSession().put("usertype", user1.getUsertype());//将用户权限存储到loginname中
+					ActionContext.getContext().getSession().put("loginname", user1.getLoginname());//将用户姓名存储到loginname中
+					return finallogin;
+				} else {
+					setErrorMsg("密码错误。");
+					return ERROR;
+				}
+			}
+		} catch (Exception ex) {
+			setErrorMsg("登陆出错。" + ex.getMessage());
+			return ERROR;
+		}
+	}
+	
+	/*让用户选择登陆方式
+	 * public String login() {
+		try {
+			User userresult = userService.queryUserByName(user.getLoginname());
+			if (userresult == null) {
+				setErrorMsg("用户不存在");
+				return ERROR;
+			} else {
+				User user1 = userService.queryUserByNamePassword(user.getLoginname(), user.getPassword());
 				if (user1 != null) {
 					//以普通用户登陆
 					String finallogin="";
@@ -256,7 +293,7 @@ public class UserAction extends ActionSupport {
 					}
 					setErrorMsg("0");
 					ActionContext.getContext().getSession().put("userid", user1.getId());//将用户id存储到loginname中
-					ActionContext.getContext().getSession().put("usertype", user1.getUsertype());//将用户id存储到loginname中
+					ActionContext.getContext().getSession().put("usertype", user1.getUsertype());//将用户权限存储到loginname中
 					ActionContext.getContext().getSession().put("loginname", user1.getLoginname());//将用户姓名存储到loginname中
 					return finallogin;
 				} else {
@@ -268,7 +305,7 @@ public class UserAction extends ActionSupport {
 			setErrorMsg("删除用户出错。" + ex.getMessage());
 			return ERROR;
 		}
-	}
+	}*/
 	
 	public String signout() {
 		try {

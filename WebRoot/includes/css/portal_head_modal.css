@@ -14,7 +14,7 @@ body{
 	width: 100%;
 	height: 191px;
 	min-width: 1174px;
-	background-image: url(<%=contextPath%>/includes/image/logobk.png);
+/* 	background-image: url(../image/logobk.png); */
 }
 .navbarhead {
     text-align: center;

@@ -2,6 +2,7 @@ package com.travel.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
@@ -41,6 +43,8 @@ public class CamerasurveyAction extends ActionSupport {
 	private String beginstr;
 	private String endstr;
 	private String exportname;
+	private String maptype;
+	private String mapstr;
 	public CamerasurveyAction() {
 
 	}
@@ -316,8 +320,12 @@ public class CamerasurveyAction extends ActionSupport {
 			enddate = Timestamp.valueOf(endstr);
 		}
 		try {
-			this.cameralist = this.cameraService.getCameraList(begindate,
+			List<Camerasurvey> datalist = this.cameraService.getCameraList(begindate,
 					enddate);
+			StringWriter swr = new StringWriter();
+			ObjectMapper objMapper = new ObjectMapper();
+			objMapper.writeValue(swr, datalist);
+			this.setMapstr(swr.toString());
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -325,5 +333,21 @@ public class CamerasurveyAction extends ActionSupport {
 			return ERROR;
 		}
 		return SUCCESS;
+	}
+
+	public String getMaptype() {
+		return "2";
+	}
+
+	public void setMaptype(String maptype) {
+		this.maptype = maptype;
+	}
+
+	public String getMapstr() {
+		return mapstr;
+	}
+
+	public void setMapstr(String mapstr) {
+		this.mapstr = mapstr;
 	}
 }

@@ -53,9 +53,26 @@ text-align:center;
 		<div class="maincontent">
 			<div class="leftpanel" >
 				<ul>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1" target="_blank">网络硬盘</a></li>
+				  <c:if test="${usertype==1}">
+						<li><a href="<%=contextPath%>/survey/querychickpage.action">褐马鸡监测查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/querycamerapage.action"> 红外相机监测查询</a></li>
+						<li><a href="<%=contextPath%>/survey/queryanimalpage.action">野生动物监测查询</a></li>
+						<li><a href="<%=contextPath%>/survey/queryplantpage.action" >森林植物群落查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/queryimportpage.action">动植物信息查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/queryprotectpage.action" >保护区巡护查询 </a></li>
+					</c:if>
+					<c:if test="${usertype==0}">
+						<li><a href="<%=contextPath%>/survey/chickedit.jsp"	>褐马鸡种群状况 </a></li>
+						<li><a href="<%=contextPath%>/survey/cameraedit.jsp"> 红外相机监测状况</a></li>
+						<li><a href="<%=contextPath%>/survey/animalsuredit.jsp">野生动物监测状况</a></li>
+						<li><a href="<%=contextPath%>/survey/plantedit.jsp">森林植物群落监测 </a></li>
+						<li><a href="<%=contextPath%>/survey/importinfoedit.jsp">动植物重要信息 </a></li>
+						<li><a href="<%=contextPath%>/survey/protectedit.jsp">保护区巡护记录 </a></li>
+					</c:if>
+				
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
 					<li class="activeli"><a href="javascript:void(0)">巡护图片</a></li>
-					<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="padding-top:30px;">

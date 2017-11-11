@@ -2,6 +2,7 @@ package com.travel.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
@@ -31,7 +33,6 @@ import com.travel.service.UserService;
 
 public class ProtectrecordAction extends ActionSupport {
 
-	
 	/**
 	 * 
 	 */
@@ -40,15 +41,22 @@ public class ProtectrecordAction extends ActionSupport {
 	 * 
 	 */
 	private Protectrecord protect = new Protectrecord();
-	private GeneralService <Protectrecord> protectService;
+	private GeneralService<Protectrecord> protectService;
 	private List<Protectrecord> protectlist;
-	/*private UserService<User> userService;*/
+	/* private UserService<User> userService; */
 	private String errormsg;
 	private SplitPage page;
 	private InputStream inputStream;
 	private String beginstr;
 	private String endstr;
 	private String exportname;
+
+	private String maptype;
+	private String mapstr;
+
+	private String baohuzhan;
+	private String dongwuming;
+
 	public ProtectrecordAction() {
 
 	}
@@ -58,10 +66,10 @@ public class ProtectrecordAction extends ActionSupport {
 		return ServletActionContext.getRequest().getParameter(key);
 	}
 
-	/*@JSON(serialize = false)
-	public UserService<User> getUserService() {
-		return userService;
-	}*/
+	/*
+	 * @JSON(serialize = false) public UserService<User> getUserService() {
+	 * return userService; }
+	 */
 
 	public Protectrecord getProtect() {
 		return protect;
@@ -85,12 +93,13 @@ public class ProtectrecordAction extends ActionSupport {
 	}
 
 	public void setProtectlist(List<Protectrecord> chicklist) {
-		this.protectlist= chicklist;
+		this.protectlist = chicklist;
 	}
 
-	/*public void setUserService(UserService<User> userService) {
-		this.userService = userService;
-	}*/
+	/*
+	 * public void setUserService(UserService<User> userService) {
+	 * this.userService = userService; }
+	 */
 
 	public String getErrormsg() {
 		return errormsg;
@@ -129,7 +138,7 @@ public class ProtectrecordAction extends ActionSupport {
 		}
 		// System.out.println(this);
 	}
-	
+
 	public String save() {
 		if (protect.getId() == null) {
 			return add();
@@ -158,9 +167,11 @@ public class ProtectrecordAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	public String querylist(){
+
+	public String querylist() {
 		try {
-			this.protectlist=this.protectService.getObjectList(Protectrecord.class);
+			this.protectlist = this.protectService
+					.getObjectList(Protectrecord.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,7 +180,7 @@ public class ProtectrecordAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String querypagelist() {
 		int pagesize = 10;
 		int pagenum = 1;
@@ -180,7 +191,7 @@ public class ProtectrecordAction extends ActionSupport {
 		Timestamp begindate;// 开始日期
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (getParam("begindate") != null) {
-			this.beginstr=getParam("begindate");
+			this.beginstr = getParam("begindate");
 			String beginstr = getParam("begindate") + " 0:00:00";
 			begindate = Timestamp.valueOf(beginstr);
 		} else {
@@ -189,17 +200,31 @@ public class ProtectrecordAction extends ActionSupport {
 		}
 		Timestamp enddate;// 结束日期
 		if (getParam("enddate") != null) {
-			this.endstr=getParam("enddate");
+			this.endstr = getParam("enddate");
 			String endstr = getParam("enddate") + " 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		} else {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 群系名
+		String p1 = "";
+		if (getParam("p1") != null) {
+			p1 = getParam("p1");
+			this.baohuzhan = p1;
+		}
+		// 树种名
+		String p2 = "";
+		if (getParam("p2") != null) {
+			p2 = getParam("p2");
+			this.dongwuming = p2;
+		}
+
 		try {
-			this.protectlist = this.protectService.getProtectListPage(begindate,
-					enddate, pagesize, pagenum);
-			int num = this.protectService.getProtectCount(begindate, enddate);
+			this.protectlist = this.protectService.getProtectListPage(
+					begindate, enddate, p1, p2, pagesize, pagenum);
+			int num = this.protectService.getProtectCount(begindate, enddate,
+					p1, p2);
 			page = new SplitPage(num, pagesize);
 			page.setCurrentPage(pagenum);
 
@@ -230,26 +255,39 @@ public class ProtectrecordAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 群系名
+		String p1 = "";
+		if (getParam("p1") != null) {
+			p1 = getParam("p1");
+			this.baohuzhan = p1;
+		}
+		// 树种名
+		String p2 = "";
+		if (getParam("p2") != null) {
+			p2 = getParam("p2");
+			this.dongwuming = p2;
+		}
 		try {
 			this.protectlist = this.protectService.getProtectList(begindate,
-					enddate);
+					enddate, p1, p2);
 			String str = "id,保护站名称,记录人,巡护日期,时间,天气,大地名,巡护人员,东至,西至,南至,北至,动物名称,数量,经度,纬度,海拔,生境类型,人为活动类型,干扰描述,干扰经度,干扰纬度,干扰海拔,干扰生境类型\r\n";
 			for (int i = 0; i < this.protectlist.size(); i++) {
 				Protectrecord an = protectlist.get(i);
 				str += an.getId() + "," + an.getBaohuzhanmingcheng() + ","
-						+ an.getJiluren() + ","+ an.getXunhudatestr() + ","
-						+ an.getDatestr() + ","+ an.getTianqi() + ","
-						+ an.getDadiming() + ","+ an.getXunhurenyuan() + ","
-						+ an.getDongzhi() + ","+ an.getXizhi() + ","
-						+ an.getNanzhi() + ","+ an.getBeizhi() + ","
-						+ an.getDongwumingcheng() + ","+ an.getShuliang() + ","
-						+ an.getJingdu() + ","+ an.getWeidu() + ","
-						+ an.getHaiba() + ","+ an.getShengjingleixing() + ","
-						+ an.getRenweihuodongleixing() + ","+ an.getGanraomiaoshu() + ","
-						+ an.getGanraojingdu() + ","+ an.getGanraoweidu() + ","
-						+ an.getGanraohaiba() + ","+ an.getGanraoshengjingleixing() +"\r\n";
+						+ an.getJiluren() + "," + an.getXunhudatestr() + ","
+						+ an.getDatestr() + "," + an.getTianqi() + ","
+						+ an.getDadiming() + "," + an.getXunhurenyuan() + ","
+						+ an.getDongzhi() + "," + an.getXizhi() + ","
+						+ an.getNanzhi() + "," + an.getBeizhi() + ","
+						+ an.getDongwumingcheng() + "," + an.getShuliang()
+						+ "," + an.getJingdu() + "," + an.getWeidu() + ","
+						+ an.getHaiba() + "," + an.getShengjingleixing() + ","
+						+ an.getRenweihuodongleixing() + ","
+						+ an.getGanraomiaoshu() + "," + an.getGanraojingdu()
+						+ "," + an.getGanraoweidu() + "," + an.getGanraohaiba()
+						+ "," + an.getGanraoshengjingleixing() + "\r\n";
 			}
-            this.inputStream=new ByteArrayInputStream(str.getBytes());
+			this.inputStream = new ByteArrayInputStream(str.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 			setErrormsg("出错。" + e.getMessage());
@@ -257,7 +295,7 @@ public class ProtectrecordAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String showmap() throws Exception {
 		// 时间
 		Timestamp begindate;// 开始日期
@@ -277,9 +315,26 @@ public class ProtectrecordAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 群系名
+		String p1 = "";
+		if (getParam("p1") != null) {
+			p1 = getParam("p1");
+			this.baohuzhan = p1;
+		}
+		// 树种名
+		String p2 = "";
+		if (getParam("p2") != null) {
+			p2 = getParam("p2");
+			this.dongwuming = p2;
+		}
 		try {
-			this.protectlist = this.protectService.getProtectList(begindate,
-					enddate);
+
+			List<Protectrecord> datalist = this.protectService.getProtectList(
+					begindate, enddate, p1, p2);
+			StringWriter swr = new StringWriter();
+			ObjectMapper objMapper = new ObjectMapper();
+			objMapper.writeValue(swr, datalist);
+			this.setMapstr(swr.toString());
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -322,13 +377,46 @@ public class ProtectrecordAction extends ActionSupport {
 	}
 
 	public String getExportname() throws UnsupportedEncodingException {
-		String timestr=new java.text.SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		exportname=timestr+"保护区巡护记录.txt";
-		this.exportname =  new String(exportname.getBytes("utf-8"),"ISO8859-1");
+		String timestr = new java.text.SimpleDateFormat("yyyyMMddhhmmss")
+				.format(new Date());
+		exportname = timestr + "保护区巡护记录.txt";
+		this.exportname = new String(exportname.getBytes("utf-8"), "ISO8859-1");
 		return exportname;
 	}
 
 	public void setExportname(String exportname) {
 		this.exportname = exportname;
+	}
+
+	public String getMaptype() {
+		return "6";
+	}
+
+	public void setMaptype(String maptype) {
+		this.maptype = maptype;
+	}
+
+	public String getMapstr() {
+		return mapstr;
+	}
+
+	public void setMapstr(String mapstr) {
+		this.mapstr = mapstr;
+	}
+
+	public String getBaohuzhan() {
+		return baohuzhan;
+	}
+
+	public void setBaohuzhan(String baohuzhan) {
+		this.baohuzhan = baohuzhan;
+	}
+
+	public String getDongwuming() {
+		return dongwuming;
+	}
+
+	public void setDongwuming(String dongwuming) {
+		this.dongwuming = dongwuming;
 	}
 }

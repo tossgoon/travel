@@ -14,7 +14,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>陕西省延安黄龙山褐马鸡国家级自然保护区</title>
+<title>陕西延安黄龙山褐马鸡国家级自然保护区</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -65,7 +65,7 @@ float: right;
 			cellspacing="10">
 			<tr>
 				<td colspan="2" style="background-color:#EFF4FA;border-bottom:1px solid;margin:0 auto;text-algin:center;height:50px;">
-				<p class="txtstyle" style="padding-top:10px;">OA管理系统用户登录</p>
+				<p class="txtstyle" style="padding-top:10px;">OA用户登录</p>
 				</td>
 			</tr>
 
@@ -79,14 +79,14 @@ float: right;
 				<td><input type="password" name="user.password" style="width:260px;"
 					placeholder="输入密码" class="form-control"></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td><span  style="margin-left:15px;">登陆类型</span></td>
 				<td>
 				  <s:select class="form-control" id="usertype" style="width:260px;"
 													list="#{'0':'普通用户','1':'数据管理用户','9':'管理员'}"
 													label="选择类型" name="logintype"></s:select>
 					</td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<td></td>
 				<td><input type="submit" value="登 录" class="btn btn-primary"

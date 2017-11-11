@@ -2,6 +2,7 @@ package com.travel.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
@@ -43,8 +45,12 @@ public class AnimalsurveyAction extends ActionSupport {
 	private InputStream inputStream;
 	private String beginstr;
 	private String endstr;
+	private String jianceren;
+	private String dongwumingcheng;
+	private String shengjingleixing;
 	private String exportname;
-
+	private String maptype;
+	private String mapstr;
 	public AnimalsurveyAction() {
 
 	}
@@ -194,13 +200,30 @@ public class AnimalsurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		//监测人
+		String p1="";//监测人
+		if (getParam("jianceren") != null) {
+			p1=getParam("jianceren");
+			this.jianceren=p1;
+		} 
+		//动物名称
+		String p2="";//动物名称
+		if (getParam("dongwumingcheng") != null) {
+			p2=getParam("dongwumingcheng");
+			this.dongwumingcheng=p2;
+		} 
+		//生境类型
+		String p3="";//生境类型
+		if (getParam("shengjingleixing") != null) {
+			p3=getParam("shengjingleixing");
+			this.shengjingleixing=p3;
+		} 
 		try {
 			this.animallist = this.animalService.getAnimalListPage(begindate,
-					enddate, pagesize, pagenum);
-			int num = this.animalService.getAnimalCount(begindate, enddate);
+					enddate,p1,p2,p3, pagesize, pagenum);
+			int num = this.animalService.getAnimalCount(begindate, enddate,p1,p2,p3);
 			page = new SplitPage(num, pagesize);
 			page.setCurrentPage(pagenum);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			setErrormsg("出错。" + e.getMessage());
@@ -228,9 +251,27 @@ public class AnimalsurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 监测人
+		String p1 = "";// 监测人
+		if (getParam("jianceren") != null) {
+			p1 = getParam("jianceren");
+			this.jianceren = p1;
+		}
+		// 动物名称
+		String p2 = "";// 动物名称
+		if (getParam("dongwumingcheng") != null) {
+			p2 = getParam("dongwumingcheng");
+			this.dongwumingcheng = p2;
+		}
+		// 生境类型
+		String p3 = "";// 生境类型
+		if (getParam("shengjingleixing") != null) {
+			p3 = getParam("shengjingleixing");
+			this.shengjingleixing = p3;
+		}
 		try {
 			this.animallist = this.animalService.getAnimalList(begindate,
-					enddate);
+					enddate,p1,p2,p3);
 			String str = "id,样线号,填表时间,天气,监测人,动物名称,实体数量,尸体数量,粪便,生境类型,经度,纬度,海拔高度,备注\r\n";
 			for (int i = 0; i < animallist.size(); i++) {
 				Animalsurvey an = animallist.get(i);
@@ -271,9 +312,31 @@ public class AnimalsurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 监测人
+		String p1 = "";// 监测人
+		if (getParam("jianceren") != null) {
+			p1 = getParam("jianceren");
+			this.jianceren = p1;
+		}
+		// 动物名称
+		String p2 = "";// 动物名称
+		if (getParam("dongwumingcheng") != null) {
+			p2 = getParam("dongwumingcheng");
+			this.dongwumingcheng = p2;
+		}
+		// 生境类型
+		String p3 = "";// 生境类型
+		if (getParam("shengjingleixing") != null) {
+			p3 = getParam("shengjingleixing");
+			this.shengjingleixing = p3;
+		}
 		try {
-			this.animallist = this.animalService.getAnimalList(begindate,
-					enddate);
+			List<Animalsurvey> datalist = this.animalService.getAnimalList(
+					begindate, enddate, p1, p2, p3);
+			StringWriter swr = new StringWriter();
+			ObjectMapper objMapper = new ObjectMapper();
+			objMapper.writeValue(swr, datalist);
+			this.setMapstr(swr.toString());
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -324,6 +387,46 @@ public class AnimalsurveyAction extends ActionSupport {
 
 	public void setExportname(String exportname) {
 		this.exportname = exportname;
+	}
+
+	public String getJianceren() {
+		return jianceren;
+	}
+
+	public void setJianceren(String jianceren) {
+		this.jianceren = jianceren;
+	}
+
+	public String getDongwumingcheng() {
+		return dongwumingcheng;
+	}
+
+	public void setDongwumingcheng(String dongwumingcheng) {
+		this.dongwumingcheng = dongwumingcheng;
+	}
+
+	public String getShengjingleixing() {
+		return shengjingleixing;
+	}
+
+	public void setShengjingleixing(String shengjingleixing) {
+		this.shengjingleixing = shengjingleixing;
+	}
+
+	public String getMaptype() {
+		return "3";
+	}
+
+	public void setMaptype(String maptype) {
+		this.maptype = maptype;
+	}
+
+	public String getMapstr() {
+		return mapstr;
+	}
+
+	public void setMapstr(String mapstr) {
+		this.mapstr = mapstr;
 	}
 
 }

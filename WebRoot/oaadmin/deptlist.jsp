@@ -50,9 +50,9 @@ body{
 			<ul>
 				<li><a href="<%=contextPath%>/portal/querypage.action?pagesize=10&pagenum=1&type=0" target="_blank">网站门户</a></li>
 				<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
-				<li><a href="<%=contextPath%>/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li>
+				<%-- <li><a href="<%=contextPath%>/oa/querynotify.action?pagesize=10&pagenum=1">通知公告</a></li> --%>
 				<li   class="activeli"><a href="javascript:void(0)">部门管理</a></li>
-				<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
+				<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
 			</ul>
 		</div>
 		<div class="rightpanel">
@@ -61,6 +61,7 @@ body{
 							<a href="<%=contextPath%>/dept/deptedit.jsp" class="btn btn-primary" style="margin-right:20px; float:right;width:90px;">新增部门</a>
 						</div>
 			<div>
+			<div style="min-height:400px;">
 			<table align="center" class="table table-hover" id=tbdeptlist
 							style="width:100%;" style="margin-top:20px;">
 							<tr align="center" height="26px">
@@ -79,6 +80,7 @@ body{
 								</tr>
 							</c:forEach>
 						</table>
+						</div>
 						</div>
 		</div>
 		<div style="clear:both;"></div>

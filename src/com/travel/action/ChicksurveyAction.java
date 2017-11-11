@@ -2,6 +2,7 @@ package com.travel.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
@@ -34,19 +36,27 @@ public class ChicksurveyAction extends ActionSupport {
 	/**
 	 * 
 	 */
-	
-	private Chicksurvey chick = new Chicksurvey();
-	private GeneralService <Chicksurvey> chicksurService;
-	private List<Chicksurvey> chicklist;
-	
 
-	/*private UserService<User> userService;*/
+	private Chicksurvey chick = new Chicksurvey();
+	private GeneralService<Chicksurvey> chicksurService;
+	private List<Chicksurvey> chicklist;
+
+	/* private UserService<User> userService; */
 	private String errormsg;
 	private SplitPage page;
 	private InputStream inputStream;
 	private String beginstr;
 	private String endstr;
 	private String exportname;
+
+	private String baohuzhan;
+	private String xiaodiming;
+	private String jianceren;
+	private String shengjingleixing;
+	
+	private String maptype;
+	private String mapstr;
+
 	public ChicksurveyAction() {
 
 	}
@@ -56,11 +66,10 @@ public class ChicksurveyAction extends ActionSupport {
 		return ServletActionContext.getRequest().getParameter(key);
 	}
 
-
-	/*@JSON(serialize = false)
-	public UserService<User> getUserService() {
-		return userService;
-	}*/
+	/*
+	 * @JSON(serialize = false) public UserService<User> getUserService() {
+	 * return userService; }
+	 */
 
 	public Chicksurvey getChick() {
 		return chick;
@@ -70,9 +79,6 @@ public class ChicksurveyAction extends ActionSupport {
 		this.chick = chick;
 	}
 
-	
-
-
 	public List<Chicksurvey> getChicklist() {
 		return this.chicklist;
 	}
@@ -81,9 +87,10 @@ public class ChicksurveyAction extends ActionSupport {
 		this.chicklist = chicklist;
 	}
 
-	/*public void setUserService(UserService<User> userService) {
-		this.userService = userService;
-	}*/
+	/*
+	 * public void setUserService(UserService<User> userService) {
+	 * this.userService = userService; }
+	 */
 
 	public String getErrormsg() {
 		return errormsg;
@@ -122,7 +129,7 @@ public class ChicksurveyAction extends ActionSupport {
 		}
 		// System.out.println(this);
 	}
-	
+
 	public String save() {
 		if (chick.getId() == null) {
 			return add();
@@ -151,7 +158,7 @@ public class ChicksurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	@JSON(serialize = false)
 	public GeneralService<Chicksurvey> getChicksurService() {
 		return chicksurService;
@@ -160,10 +167,11 @@ public class ChicksurveyAction extends ActionSupport {
 	public void setChicksurService(GeneralService<Chicksurvey> chicksurService) {
 		this.chicksurService = chicksurService;
 	}
-	
-	public String querylist(){
+
+	public String querylist() {
 		try {
-			this.chicklist=this.chicksurService.getObjectList(Chicksurvey.class);
+			this.chicklist = this.chicksurService
+					.getObjectList(Chicksurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -172,7 +180,7 @@ public class ChicksurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String querypagelist() {
 		int pagesize = 10;
 		int pagenum = 1;
@@ -183,7 +191,7 @@ public class ChicksurveyAction extends ActionSupport {
 		Timestamp begindate;// 开始日期
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (getParam("begindate") != null) {
-			this.beginstr=getParam("begindate");
+			this.beginstr = getParam("begindate");
 			String beginstr = getParam("begindate") + " 0:00:00";
 			begindate = Timestamp.valueOf(beginstr);
 		} else {
@@ -192,17 +200,42 @@ public class ChicksurveyAction extends ActionSupport {
 		}
 		Timestamp enddate;// 结束日期
 		if (getParam("enddate") != null) {
-			this.endstr=getParam("enddate");
+			this.endstr = getParam("enddate");
 			String endstr = getParam("enddate") + " 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		} else {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 保护站
+		String p1 = "";// 保护站
+		if (getParam("baohuzhan") != null) {
+			p1 = getParam("baohuzhan");
+			this.baohuzhan = p1;
+		}
+		// 小地名
+		String p2 = "";// 小地名
+		if (getParam("xiaodiming") != null) {
+			p2 = getParam("xiaodiming");
+			this.xiaodiming = p2;
+		}
+		// 监测人
+		String p3 = "";// 监测人
+		if (getParam("jianceren") != null) {
+			p3 = getParam("jianceren");
+			this.jianceren = p3;
+		}
+		// 生境类型
+		String p4 = "";// 生境类型
+		if (getParam("shengjingleixing") != null) {
+			p4 = getParam("shengjingleixing");
+			this.shengjingleixing = p4;
+		}
 		try {
 			this.chicklist = this.chicksurService.getChickListPage(begindate,
-					enddate, pagesize, pagenum);
-			int num = this.chicksurService.getChickCount(begindate, enddate);
+					enddate, p1, p2, p3, p4, pagesize, pagenum);
+			int num = this.chicksurService.getChickCount(begindate, enddate,
+					p1, p2, p3, p4);
 			page = new SplitPage(num, pagesize);
 			page.setCurrentPage(pagenum);
 
@@ -233,26 +266,50 @@ public class ChicksurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 保护站
+		String p1 = "";// 保护站
+		if (getParam("baohuzhan") != null) {
+			p1 = getParam("baohuzhan");
+			this.baohuzhan = p1;
+		}
+		// 小地名
+		String p2 = "";// 小地名
+		if (getParam("xiaodiming") != null) {
+			p2 = getParam("xiaodiming");
+			this.xiaodiming = p2;
+		}
+		// 监测人
+		String p3 = "";// 监测人
+		if (getParam("jianceren") != null) {
+			p3 = getParam("jianceren");
+			this.jianceren = p3;
+		}
+		// 生境类型
+		String p4 = "";// 生境类型
+		if (getParam("shengjingleixing") != null) {
+			p4 = getParam("shengjingleixing");
+			this.shengjingleixing = p4;
+		}
 		try {
 			this.chicklist = this.chicksurService.getChickList(begindate,
-					enddate);
+					enddate, p1, p2, p3, p4);
 			String str = "id,保护区,保护站,小地名,天气,填表时间,监测人,样线号,记录号,实体数量,实体行为,实体年龄,生境类型,尸体数量,尸体简述,粪便数量,坡位,坡度,坡向,海拔高度,经度,纬度,备注\r\n";
 			for (int i = 0; i < this.chicklist.size(); i++) {
 				Chicksurvey an = chicklist.get(i);
 				str += an.getId() + "," + an.getBaohuqu() + ","
-						+ an.getBaohuzhan() + ","+ an.getXiaodiming() + ","
-						+ an.getTianqi() + ","+ an.getDatestr() + ","
-						+ an.getJianceren() + ","+ an.getYangxianhao() + ","
-						+ an.getJiluhao() + ","+ an.getShitishuliang() + ","
-						+ an.getShitixingwei() + ","+ an.getShitinianling() + ","
-						+ an.getShengjingleixing() + ","+ an.getBodyjianshu() + ","
-						+ an.getBodyjianshu() + ","+ an.getFenbianshuliang() + ","
-						+ an.getPowei() + ","+ an.getPodu() + ","
-						+ an.getPoxiang() + ","+ an.getHeight() + ","
-						+ an.getJingdu() + "," + an.getWeidu() + "," 
-						+ an.getBeizhu()+"\r\n";
+						+ an.getBaohuzhan() + "," + an.getXiaodiming() + ","
+						+ an.getTianqi() + "," + an.getDatestr() + ","
+						+ an.getJianceren() + "," + an.getYangxianhao() + ","
+						+ an.getJiluhao() + "," + an.getShitishuliang() + ","
+						+ an.getShitixingwei() + "," + an.getShitinianling()
+						+ "," + an.getShengjingleixing() + ","
+						+ an.getBodyjianshu() + "," + an.getBodyjianshu() + ","
+						+ an.getFenbianshuliang() + "," + an.getPowei() + ","
+						+ an.getPodu() + "," + an.getPoxiang() + ","
+						+ an.getHeight() + "," + an.getJingdu() + ","
+						+ an.getWeidu() + "," + an.getBeizhu() + "\r\n";
 			}
-            this.inputStream=new ByteArrayInputStream(str.getBytes());
+			this.inputStream = new ByteArrayInputStream(str.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 			setErrormsg("出错。" + e.getMessage());
@@ -260,7 +317,7 @@ public class ChicksurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String showmap() throws Exception {
 		// 时间
 		Timestamp begindate;// 开始日期
@@ -280,9 +337,37 @@ public class ChicksurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 保护站
+		String p1 = "";// 保护站
+		if (getParam("baohuzhan") != null) {
+			p1 = getParam("baohuzhan");
+			this.baohuzhan = p1;
+		}
+		// 小地名
+		String p2 = "";// 小地名
+		if (getParam("xiaodiming") != null) {
+			p2 = getParam("xiaodiming");
+			this.xiaodiming = p2;
+		}
+		// 监测人
+		String p3 = "";// 监测人
+		if (getParam("jianceren") != null) {
+			p3 = getParam("jianceren");
+			this.jianceren = p3;
+		}
+		// 生境类型
+		String p4 = "";// 生境类型
+		if (getParam("shengjingleixing") != null) {
+			p4 = getParam("shengjingleixing");
+			this.shengjingleixing = p4;
+		}
 		try {
-			this.chicklist = this.chicksurService.getChickList(begindate,
-					enddate);
+			List<Chicksurvey> datalist = this.chicksurService.getChickList(begindate,
+					enddate,p1,p2,p3,p4);
+			StringWriter swr = new StringWriter();
+			ObjectMapper objMapper = new ObjectMapper();
+			objMapper.writeValue(swr, datalist);
+			this.setMapstr(swr.toString());
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -325,13 +410,63 @@ public class ChicksurveyAction extends ActionSupport {
 	}
 
 	public String getExportname() throws UnsupportedEncodingException {
-		String timestr=new java.text.SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		exportname=timestr+"褐马鸡种群监测.txt";
-		this.exportname =  new String(exportname.getBytes("utf-8"),"ISO8859-1");
+		String timestr = new java.text.SimpleDateFormat("yyyyMMddhhmmss")
+				.format(new Date());
+		exportname = timestr + "褐马鸡种群监测.txt";
+		this.exportname = new String(exportname.getBytes("utf-8"), "ISO8859-1");
 		return exportname;
 	}
 
 	public void setExportname(String exportname) {
 		this.exportname = exportname;
 	}
+
+	public String getBaohuzhan() {
+		return baohuzhan;
+	}
+
+	public void setBaohuzhan(String baohuzhan) {
+		this.baohuzhan = baohuzhan;
+	}
+
+	public String getXiaodiming() {
+		return xiaodiming;
+	}
+
+	public void setXiaodiming(String xiaodiming) {
+		this.xiaodiming = xiaodiming;
+	}
+
+	public String getJianceren() {
+		return jianceren;
+	}
+
+	public void setJianceren(String jianceren) {
+		this.jianceren = jianceren;
+	}
+
+	public String getShengjingleixing() {
+		return shengjingleixing;
+	}
+
+	public void setShengjingleixing(String shengjingleixing) {
+		this.shengjingleixing = shengjingleixing;
+	}
+
+	public String getMaptype() {
+		return "1";
+	}
+
+	public void setMaptype(String maptype) {
+		this.maptype = maptype;
+	}
+
+	public String getMapstr() {
+		return mapstr;
+	}
+
+	public void setMapstr(String mapstr) {
+		this.mapstr = mapstr;
+	}
+
 }

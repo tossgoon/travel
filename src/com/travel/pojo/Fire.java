@@ -30,6 +30,7 @@ public class Fire implements java.io.Serializable {
 	private double level;
 	private String levelstr;
 	private String daystr;
+	private String leveldetail;
 
 	// Constructors
 
@@ -183,18 +184,23 @@ public class Fire implements java.io.Serializable {
 				- this.parame;
 		if (htz <= 25) {
 			levelstr = "一级";
+			leveldetail = "一级/没有危险/不能燃烧/不能蔓延";
 			level=1;
 		} else if (htz <= 50) {
 			levelstr = "二级";
+			leveldetail = "二级/低度危险/难以燃烧/难以蔓延";
 			level=2;
 		} else if (htz <= 72) {
 			levelstr = "三级";
+			leveldetail = "三级/中度危险/较易燃烧/较易蔓延";
 			level=3;
 		} else if (htz <= 90) {
 			levelstr = "四级";
+			leveldetail = "四级/高度危险/容易燃烧/容易蔓延";
 			level=4;
 		} else {
 			levelstr = "五级";
+			leveldetail = "五级/极度危险/极易燃烧/极易蔓延";
 			level=5;
 		}
 	}
@@ -205,6 +211,14 @@ public class Fire implements java.io.Serializable {
 
 	public void setLevelstr(String levelstr) {
 		this.levelstr = levelstr;
+	}
+
+	public String getLeveldetail() {
+		return leveldetail;
+	}
+
+	public void setLeveldetail(String leveldetail) {
+		this.leveldetail = leveldetail;
 	}
 
 }

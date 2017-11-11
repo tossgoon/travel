@@ -57,26 +57,42 @@ body {
 	</div>
 		<div class="contentstyle">
 		<div class="maincontent">
-			<div class="leftpanel" style="border-right:1px solid #111111;">
+			<div class="leftpanel">
 				<ul>
-					<li><a href="<%=contextPath%>/survey/chickedit.jsp" target="_blank">褐马鸡种群状况 </a></li>
-					<li><a href="<%=contextPath%>/survey/cameraedit.jsp" target="_blank"> 红外相机监测状况</a></li>
+				<c:if test="${usertype==0}">
+					<li><a href="<%=contextPath%>/survey/chickedit.jsp">褐马鸡种群状况 </a></li>
+					<li><a href="<%=contextPath%>/survey/cameraedit.jsp"> 红外相机监测状况</a></li>
+				</c:if>
 					<li class="activeli"><a href="javascript:void(0)">野生动物监测状况</a></li>
-					<li><a href="<%=contextPath%>/survey/plantedit.jsp" target="_blank">森林植物群落监测 </a></li>
-					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp" target="_blank">动植物重要信息 </a></li>
-					<li><a href="<%=contextPath%>/survey/protectedit.jsp" target="_blank">保护区巡护记录 </a></li>
-					<li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1" target="_blank">网络硬盘</a></li>
-					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2" target="_blank">巡护图片</a></li>
-					<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
+				<c:if test="${usertype==0}">
+					<li><a href="<%=contextPath%>/survey/plantedit.jsp">森林植物群落监测 </a></li>
+					<li><a href="<%=contextPath%>/survey/importinfoedit.jsp">动植物重要信息 </a></li>
+					<li><a href="<%=contextPath%>/survey/protectedit.jsp">保护区巡护记录 </a></li>
+					<%-- <li><a href="<%=contextPath%>/survey/surveymap.jsp" target="_blank">监测数据分布图 </a></li> --%>
+				</c:if>
+				
+				<c:if test="${usertype==1}">
+				  		<li><a href="<%=contextPath%>/survey/querychickpage.action">褐马鸡监测查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/querycamerapage.action"> 红外相机监测查询</a></li>
+						<li><a href="<%=contextPath%>/survey/queryanimalpage.action">野生动物监测查询</a></li>
+						<li><a href="<%=contextPath%>/survey/queryplantpage.action" >森林植物群落查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/queryimportpage.action">动植物信息查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/queryprotectpage.action" >保护区巡护查询 </a></li>
+				</c:if>
+				
+				
+					
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=1">网络硬盘</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
 				</ul>
 			</div>
-			<div class="rightpanel" style="border:none;">
+			<div class="rightpanel" >
 			   <div style="width:100%;margin-top:80px;">
 			   <h3>野生动物监测状况</h3>
 			   <hr>
 			    <form  id="formAnimal" style="margin:0 auto;">
-										<div class="container" style="width:80%;">
+										<div class="container" style="width:90%;">
 											<div class="row">
 												<div class="col-md-2">
 													<span>ID</span>
@@ -203,16 +219,13 @@ body {
 										</div>
 									</form>
 			   </div>
-					<div style="margin-top:10px;">
-							
-							<a href="<%=contextPath%>/survey/animalsuredit.jsp"
-								class="btn btn-default">新增数据</a>
-							<button type="button" id="btnsave" class="btn btn-primary"
-								onclick="SaveAnimal()">保存数据</button>
-							<button type="button" id="btndel" onclick="DeleteAnimal()"
-								class="btn btn-warning">删除数据</button>
-							<a href="<%=contextPath%>/survey/queryanimalpage.action" target="_blank"
-								class="btn btn-success">数据查询</a>
+					<div style="margin-top:10px;margin-bottom:10px;">
+							<a href="<%=contextPath%>/survey/animalsuredit.jsp"	class="btn btn-default">新增数据</a>
+							<button type="button" id="btnsave" class="btn btn-primary"	onclick="SaveAnimal()">保存数据</button>
+							<c:if test="${usertype==1}">
+							<button type="button" id="btndel" onclick="DeleteAnimal()"	class="btn btn-warning">删除数据</button>
+							</c:if>
+							<a href="<%=contextPath%>/survey/queryanimalpage.action" target="_blank"	class="btn btn-success">数据查询</a>
 						
 					</div>
 			</div>
@@ -220,8 +233,8 @@ body {
 		</div>
 	</div>
 	<%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>//includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
@@ -243,6 +256,10 @@ body {
 		}
 		
 		function SaveAnimal() {
+			/* if ($("#id").val() != null && $("#id").val() != ""&&"${usertype}"=="0"){
+				   alert("无编辑权限，请联系数据管理员。");
+				   return;
+				} */			
 			if($("#jingdu").val()==null||$("#jingdu").val()==""){
 				alert("经度不能为空");
 				return;
@@ -273,9 +290,10 @@ body {
 			});
 		}
 		function DeleteAnimal() {
-			if ($("#animalid").val() != null && $("#animalid").val() != "") {
+			if (confirm("是否删除?")) {
+			if ($("#id").val() != null && $("#id").val() != "") {
 				$.ajax({
-					url : contextPath+'/survey/deleteanimal.action?id=' + $("#animalid").val(),
+					url : contextPath+'/survey/deleteanimal.action?id=' + $("#id").val(),
 					type : 'POST',
 					// 提交数据给Action传入数据
 					//data : {userid:delUserid},
@@ -296,6 +314,7 @@ body {
 					}
 				});
 			}
+			}
 		}
 		
 		$(function() {
@@ -312,6 +331,10 @@ body {
 			});
 			if($("#id").val()==null||$("#id").val()==""){
 				$('.form_date').datetimepicker("setValue");
+			}
+			//
+			if ($("#id").val() != null && $("#id").val() != ""&&"${usertype}"=="0"){
+				$("#btnsave").hide();
 			}
 		});
 	</script>

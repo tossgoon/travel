@@ -54,7 +54,7 @@ th{
 				<li><a href="<%=contextPath%>/user/querypage.action">用户管理</a></li>
 				<li  class="activeli"><a href="javascript:void(0)">通知公告</a></li>
 				<li><a href="<%=contextPath%>/dept/querylist.action">部门管理</a></li>
-				<li><a href="<%=contextPath%>/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
+				<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
 			</ul>
 		</div>
 		<div class="rightpanel" style="height:500px;">

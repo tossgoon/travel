@@ -6,7 +6,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String contextPath = request.getContextPath() + "/";
+	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,12 +24,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-table.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.css" />
-<link rel="stylesheet" href="<%=contextPath%>includes/css/oastyle.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-table.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/css/oastyle.css" />
 <%-- <link rel="stylesheet" href="<%=contextPath%>includes/js/JQuery_zTree_v3.2/css/zTreeStyle/zTreeStyle.css" /> --%>
-<link rel="stylesheet" href="<%=contextPath%>includes/js/jquery-treeview/jquery.treeview.css" />
+<link rel="stylesheet" href="<%=contextPath%>/includes/js/jquery-treeview/jquery.treeview.css" />
 </head>
 <style type="text/css">
 body{
@@ -47,15 +47,31 @@ text-align:center;
    <div class="toptool">
 			<span>当前位置：OA系统&gt;&gt;网络硬盘
 			</span> 
-			<a style="float:right;margin-right:20px;"href="/travel/visitor/first.action">返回首页</a>
+			<a style="float:right;margin-right:20px;"href="<%=contextPath%>/visitor/first.action">返回首页</a>
 	</div>
 	<div class="contentstyle">
 		<div class="maincontent">
 			<div class="leftpanel" >
 				<ul>
+				    <c:if test="${usertype==1}">
+						<li><a href="<%=contextPath%>/survey/querychickpage.action">褐马鸡监测查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/querycamerapage.action"> 红外相机监测查询</a></li>
+						<li><a href="<%=contextPath%>/survey/queryanimalpage.action">野生动物监测查询</a></li>
+						<li><a href="<%=contextPath%>/survey/queryplantpage.action" >森林植物群落查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/queryimportpage.action">动植物信息查询 </a></li>
+						<li><a href="<%=contextPath%>/survey/queryprotectpage.action" >保护区巡护查询 </a></li>
+					</c:if>
+					<c:if test="${usertype==0}">
+						<li><a href="<%=contextPath%>/survey/chickedit.jsp"	>褐马鸡种群状况 </a></li>
+						<li><a href="<%=contextPath%>/survey/cameraedit.jsp"> 红外相机监测状况</a></li>
+						<li><a href="<%=contextPath%>/survey/animalsuredit.jsp">野生动物监测状况</a></li>
+						<li><a href="<%=contextPath%>/survey/plantedit.jsp">森林植物群落监测 </a></li>
+						<li><a href="<%=contextPath%>/survey/importinfoedit.jsp">动植物重要信息 </a></li>
+						<li><a href="<%=contextPath%>/survey/protectedit.jsp">保护区巡护记录 </a></li>
+					</c:if>
 					<li class="activeli"><a href="javascript:void(0)">网络硬盘</a></li>
-					<li><a href="/travel/oa/queryfolderlist.action?ptype=2" target="_blank">巡护图片</a></li>
-					<li><a href="/travel/user/queryuinfo.action" target="_blank">个人账户管理</a></li>
+					<li><a href="<%=contextPath%>/oa/queryfolderlist.action?ptype=2">巡护图片</a></li>
+					<li><a href="<%=contextPath%>/user/queryuinfo.action">个人账户管理</a></li>
 				</ul>
 			</div>
 			<div class="rightpanel" style="padding-top:30px;">
@@ -133,12 +149,12 @@ text-align:center;
 		</div>
 	</div>
     <%@ include file="/portal/footmodal.jsp"%>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/JQuery_zTree_v3.2/js/jquery.ztree.core-3.2.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/jquery-treeview/jquery.treeview.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="<%=contextPath%>includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/JQuery_zTree_v3.2/js/jquery.ztree.core-3.2.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/jquery-treeview/jquery.treeview.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=contextPath%>/includes/js/bootstrap/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="<%=contextPath%>/includes/js/webuploader-0.1.5/webuploader.min.js"></script>	
 	<script type="text/javascript">
 	var folderid='';
 	var foldername='';
@@ -164,10 +180,10 @@ text-align:center;
 	});
 	function NewFile(){
 		if(folderid!=null&&folderid!=undefined&&folderid!=""){
-			document.getElementById("newfile").href="/travel/oa/querydiskfile.action?ptype=1&folderid="+folderid;
+			document.getElementById("newfile").href="<%=contextPath%>/oa/querydiskfile.action?ptype=1&folderid="+folderid;
 		}
 		else{
-			document.getElementById("newfile").href="/travel/oa/querydiskfile.action?ptype=1";
+			document.getElementById("newfile").href="<%=contextPath%>/oa/querydiskfile.action?ptype=1";
 		}
 	}
 	function folderclick(li){
@@ -178,7 +194,7 @@ text-align:center;
 		$("#currentfoldertext").html("当前目录:"+foldername);
 		//查询该文件夹下的文件列表
 		$.ajax({
-			url : '/travel/oa/querydiskfilelist.action',
+			url : '<%=contextPath%>/oa/querydiskfilelist.action',
 			type : 'GET',
 			// 提交数据给Action传入数据
 			data : {
@@ -235,7 +251,7 @@ text-align:center;
 			currentpagenum=totalpagenum;
 		}
 		$.ajax({
-			url : '/travel/oa/querydiskfilelist.action',
+			url : '<%=contextPath%>/oa/querydiskfilelist.action',
 			type : 'GET',
 			// 提交数据给Action传入数据
 			data : {
@@ -274,7 +290,7 @@ text-align:center;
 			+ "<td  style='text-align:center;'>" + diskfile.uploaddateStr + "</td>" 
 			+ "<td  style='text-align:center;'>"
 			+ "<a href='"+diskfile.filepath+"' download='"+diskfile.filerealname+"' >下载</a>&nbsp;&nbsp;&nbsp;&nbsp;" 
-			+ "<a target='_blank' href='/travel/oa/querydiskfile.action?ptype=1&id="+diskfile.id+"'>查看</a>"+
+			+ "<a target='_blank' href='<%=contextPath%>/oa/querydiskfile.action?ptype=1&id="+diskfile.id+"'>查看</a>"+
 					"</td></tr>";
 	    return row;
 	}
@@ -300,7 +316,7 @@ text-align:center;
 			cfolderid=folderid;
 		}
 		$.ajax({
-				url : '/travel/oa/savefolder.action',
+				url : '<%=contextPath%>/oa/savefolder.action',
 				type : 'POST',
 				// 提交数据给Action传入数据
 				data : {

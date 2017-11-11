@@ -137,7 +137,7 @@ td >span{
 												</td>
 											</tr>
 											<tr>
-												<td><span style="color:#FF3030;">生物及非生物物候季节特征1(*)</span></td>
+												<td><span>生物及非生物物候季节特征</span></td>
 												<td colspan="3">
 												<s:select class="form-control" id="fireother" name="fire.other"  label="选择"
 													list="#{'20.0':'全部绿草覆盖（草木生长期）/90%以上积雪覆盖(积雪期)'
@@ -167,7 +167,7 @@ td >span{
 											<tr>
 												<td  colspan="2"></td>
 												<td><span>森林火险天气等级</span></td>
-												<td colspan="3"><s:textfield class="form-control  input-sm" id="firelevel" name="fire.levelstr"    readonly="true"></s:textfield></td>
+												<td colspan="3"><s:textfield class="form-control  input-sm" id="firelevel" name="fire.leveldetail"    readonly="true"></s:textfield></td>
 											</tr>
 										</tbody>
 									</table>

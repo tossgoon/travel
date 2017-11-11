@@ -171,11 +171,11 @@
 		      <param name="actionName">querypage</param>
 		      <param name="namespace">/user</param>
 		    </result> 
-		    <result name="normal" type="redirectAction">
-		      <param name="actionName">querynotifysend</param>
-		      <param name="namespace">/oa</param>
+		    <result name="datamanage" type="redirectAction">
+		      <param name="actionName">querychickpage</param>
+		      <param name="namespace">/survey</param>
 		    </result>
-		    <result name="datamanage">
+		    <result name="normal">
 		      /survey/chickedit.jsp
 		    </result>  
 		</action>
@@ -408,7 +408,7 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="showanimallist" class="animalAct" method="showmap">
-			<result name="success" type="json"></result>
+			<result name="success">/survey/surveymap.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 		<action name="savecamera" class="cameraAct" method="save">
@@ -441,7 +441,7 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="showcameralist" class="cameraAct" method="showmap">
-			<result name="success" type="json"></result>
+			<result name="success">/survey/surveymap.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 		
@@ -475,7 +475,7 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="showchicklist" class="chickAct" method="showmap">
-			<result name="success" type="json"></result>
+			<result name="success">/survey/surveymap.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 		
@@ -509,7 +509,7 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="showimportlist" class="importinfoAct" method="showmap">
-			<result name="success" type="json"></result>
+			<result name="success">/survey/surveymap.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 		<action name="saveplant" class="plantAct" method="save">
@@ -542,7 +542,7 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="showplantlist" class="plantAct" method="showmap">
-			<result name="success" type="json"></result>
+			<result name="success">/survey/surveymap.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 		<action name="saveprotect" class="protectAct" method="save">
@@ -575,7 +575,7 @@
 			<result name="error" type="json"></result>
 		</action>
 		<action name="showprotectlist" class="protectAct" method="showmap">
-			<result name="success" type="json"></result>
+			<result name="success">/survey/surveymap.jsp</result>
 			<result name="error" type="json"></result>
 		</action>
 	</package>

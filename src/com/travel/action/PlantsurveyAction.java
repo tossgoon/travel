@@ -2,6 +2,7 @@ package com.travel.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.base.MD5Util;
 import com.opensymphony.xwork2.ActionContext;
@@ -30,21 +32,25 @@ import com.travel.service.UserService;
 
 public class PlantsurveyAction extends ActionSupport {
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4036052768545591769L;
 	private Plantsurvey plantsurvey = new Plantsurvey();
-	private GeneralService <Plantsurvey> plantService;
+	private GeneralService<Plantsurvey> plantService;
 	private List<Plantsurvey> plantlist;
-	/*private UserService<User> userService;*/
+	/* private UserService<User> userService; */
 	private String errormsg;
 	private SplitPage page;
 	private InputStream inputStream;
 	private String beginstr;
 	private String endstr;
 	private String exportname;
+	private String maptype;
+	private String mapstr;
+	private String qunximing;
+	private String shuzhongming;
+
 	public PlantsurveyAction() {
 
 	}
@@ -54,11 +60,10 @@ public class PlantsurveyAction extends ActionSupport {
 		return ServletActionContext.getRequest().getParameter(key);
 	}
 
-
-	/*@JSON(serialize = false)
-	public UserService<User> getUserService() {
-		return userService;
-	}*/
+	/*
+	 * @JSON(serialize = false) public UserService<User> getUserService() {
+	 * return userService; }
+	 */
 
 	public Plantsurvey getPlantsurvey() {
 		return plantsurvey;
@@ -82,12 +87,13 @@ public class PlantsurveyAction extends ActionSupport {
 	}
 
 	public void setPlantlist(List<Plantsurvey> chicklist) {
-		this.plantlist= chicklist;
+		this.plantlist = chicklist;
 	}
 
-	/*public void setUserService(UserService<User> userService) {
-		this.userService = userService;
-	}*/
+	/*
+	 * public void setUserService(UserService<User> userService) {
+	 * this.userService = userService; }
+	 */
 
 	public String getErrormsg() {
 		return errormsg;
@@ -126,7 +132,7 @@ public class PlantsurveyAction extends ActionSupport {
 		}
 		// System.out.println(this);
 	}
-	
+
 	public String save() {
 		if (plantsurvey.getId() == null) {
 			return add();
@@ -155,10 +161,10 @@ public class PlantsurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	public String querylist(){
+
+	public String querylist() {
 		try {
-			this.plantlist=this.plantService.getObjectList(Plantsurvey.class);
+			this.plantlist = this.plantService.getObjectList(Plantsurvey.class);
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,7 +173,7 @@ public class PlantsurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String querypagelist() {
 		int pagesize = 10;
 		int pagenum = 1;
@@ -178,7 +184,7 @@ public class PlantsurveyAction extends ActionSupport {
 		Timestamp begindate;// 开始日期
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (getParam("begindate") != null) {
-			this.beginstr=getParam("begindate");
+			this.beginstr = getParam("begindate");
 			String beginstr = getParam("begindate") + " 0:00:00";
 			begindate = Timestamp.valueOf(beginstr);
 		} else {
@@ -187,17 +193,31 @@ public class PlantsurveyAction extends ActionSupport {
 		}
 		Timestamp enddate;// 结束日期
 		if (getParam("enddate") != null) {
-			this.endstr=getParam("enddate");
+			this.endstr = getParam("enddate");
 			String endstr = getParam("enddate") + " 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		} else {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 群系名
+		String p1 = "";
+		if (getParam("p1") != null) {
+			p1 = getParam("p1");
+			this.qunximing = p1;
+		}
+		// 树种名
+		String p2 = "";
+		if (getParam("p2") != null) {
+			p2 = getParam("p2");
+			this.shuzhongming = p2;
+		}
+
 		try {
 			this.plantlist = this.plantService.getPlantListPage(begindate,
-					enddate, pagesize, pagenum);
-			int num = this.plantService.getPlantCount(begindate, enddate);
+					enddate, p1, p2, pagesize, pagenum);
+			int num = this.plantService.getPlantCount(begindate, enddate, p1,
+					p2);
 			page = new SplitPage(num, pagesize);
 			page.setCurrentPage(pagenum);
 
@@ -228,25 +248,37 @@ public class PlantsurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 群系名
+		String p1 = "";
+		if (getParam("p1") != null) {
+			p1 = getParam("p1");
+			this.qunximing = p1;
+		}
+		// 树种名
+		String p2 = "";
+		if (getParam("p2") != null) {
+			p2 = getParam("p2");
+			this.shuzhongming = p2;
+		}
 		try {
-			this.plantlist = this.plantService.getPlantList(begindate,
-					enddate);
+			this.plantlist = this.plantService.getPlantList(begindate, enddate,
+					p1, p2);
 			String str = "id,样方号,经度,纬度,填表时间,监测人,坡位,坡度,坡向,海拔高度,郁闭度,群系名称,树种名,标本编号,高度,胸径,东西冠幅,南北冠幅,均值,备注\r\n";
 			for (int i = 0; i < this.plantlist.size(); i++) {
 				Plantsurvey an = plantlist.get(i);
 				str += an.getId() + "," + an.getYangfanghao() + ","
-						+ an.getJingdu() + ","+ an.getWeidu() + ","
-						+ an.getDatestr() + ","+ an.getJianceren() + ","
-						+ an.getPowei() + ","+ an.getPodu() + ","
-						+ an.getPoxiang() + ","+ an.getHeight() + ","
-						+ an.getYubidu() + ","+ an.getQunximingcheng() + ","
-						+ an.getShuzhongming() + ","+ an.getShuzhongming() + ","
-						+ an.getBiaobenbianhao() + ","+ an.getGaodu() + ","
-						+ an.getXiongjing() + ","+ an.getDongxiguanfu() + ","
-						+ an.getNanbeiguanfu() + ","+ an.getJunzhi() + ","
-						+ an.getBeizhu()+"\r\n";
+						+ an.getJingdu() + "," + an.getWeidu() + ","
+						+ an.getDatestr() + "," + an.getJianceren() + ","
+						+ an.getPowei() + "," + an.getPodu() + ","
+						+ an.getPoxiang() + "," + an.getHeight() + ","
+						+ an.getYubidu() + "," + an.getQunximingcheng() + ","
+						+ an.getShuzhongming() + "," + an.getShuzhongming()
+						+ "," + an.getBiaobenbianhao() + "," + an.getGaodu()
+						+ "," + an.getXiongjing() + "," + an.getDongxiguanfu()
+						+ "," + an.getNanbeiguanfu() + "," + an.getJunzhi()
+						+ "," + an.getBeizhu() + "\r\n";
 			}
-            this.inputStream=new ByteArrayInputStream(str.getBytes());
+			this.inputStream = new ByteArrayInputStream(str.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 			setErrormsg("出错。" + e.getMessage());
@@ -254,7 +286,7 @@ public class PlantsurveyAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	public String showmap() throws Exception {
 		// 时间
 		Timestamp begindate;// 开始日期
@@ -274,9 +306,25 @@ public class PlantsurveyAction extends ActionSupport {
 			String endstr = "3999-12-12 23:59:59";
 			enddate = Timestamp.valueOf(endstr);
 		}
+		// 群系名
+		String p1 = "";
+		if (getParam("p1") != null) {
+			p1 = getParam("p1");
+			this.qunximing = p1;
+		}
+		// 树种名
+		String p2 = "";
+		if (getParam("p2") != null) {
+			p2 = getParam("p2");
+			this.shuzhongming = p2;
+		}
 		try {
-			this.plantlist = this.plantService.getPlantList(begindate,
-					enddate);
+			List<Plantsurvey> datalist = this.plantService.getPlantList(
+					begindate, enddate, p1, p2);
+			StringWriter swr = new StringWriter();
+			ObjectMapper objMapper = new ObjectMapper();
+			objMapper.writeValue(swr, datalist);
+			this.setMapstr(swr.toString());
 			setErrormsg("0");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -319,14 +367,47 @@ public class PlantsurveyAction extends ActionSupport {
 	}
 
 	public String getExportname() throws UnsupportedEncodingException {
-		String timestr=new java.text.SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		exportname=timestr+"森林植物群落监测.txt";
-		this.exportname =  new String(exportname.getBytes("utf-8"),"ISO8859-1");
+		String timestr = new java.text.SimpleDateFormat("yyyyMMddhhmmss")
+				.format(new Date());
+		exportname = timestr + "森林植物群落监测.txt";
+		this.exportname = new String(exportname.getBytes("utf-8"), "ISO8859-1");
 		return exportname;
 	}
 
 	public void setExportname(String exportname) {
 		this.exportname = exportname;
 	}
-	
+
+	public String getMaptype() {
+		return "4";
+	}
+
+	public void setMaptype(String maptype) {
+		this.maptype = maptype;
+	}
+
+	public String getMapstr() {
+		return mapstr;
+	}
+
+	public void setMapstr(String mapstr) {
+		this.mapstr = mapstr;
+	}
+
+	public String getQunximing() {
+		return qunximing;
+	}
+
+	public void setQunximing(String qunximing) {
+		this.qunximing = qunximing;
+	}
+
+	public String getShuzhongming() {
+		return shuzhongming;
+	}
+
+	public void setShuzhongming(String shuzhongming) {
+		this.shuzhongming = shuzhongming;
+	}
+
 }
